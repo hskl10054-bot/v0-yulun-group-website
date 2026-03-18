@@ -7,8 +7,8 @@ const _notoSansTC = Noto_Sans_TC({ subsets: ["latin"], weight: ["300", "400", "5
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: '裕綸室內裝修有限公司｜打造有溫度的生活空間',
-  description: '裕綸集團（Yulun Group）旗下的「空房子室內設計」成立於台中，專注於住宅與商業空間的整體規劃。品牌核心理念是拒絕複製，強調從屋主的生活習慣與夢想出發，打造獨一無二的空間故事。具備 8 年品牌經驗與超過 200 個完成案例，並提供從設計、軟裝到工程統籌的一條龍服務。',
+  title: '裕綸集團 Yulun Group｜職人建築，穩健基石，構築空間的永續價值',
+  description: '裕綸集團深耕台中多年，以「空房子室內設計」注入空間美學，並由「裕綸室內裝修」提供專業嚴謹的工程保障，結合「同齊咖啡」場域連結生活溫度。我們提供從設計到工程的一站式整合服務，以穩健的經營與職人精神，為每一位客戶守護家的品質。',
   generator: 'v0.app',
   icons: {
     icon: [

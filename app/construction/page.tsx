@@ -1,15 +1,14 @@
 "use client"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList, Users } from "lucide-react"
+import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList } from "lucide-react"
 import { useEffect, useRef } from "react"
 
 const services = [
-  { num: "01", icon: HardHat, name: "平面配置", desc: "空間動線規劃與格局佈局，為每個空間量身打造最佳配置方案。" },
-  { num: "02", icon: Wrench, name: "立面設計", desc: "牆面造型、收納櫃體及視覺美感設計，兼顧功能與美學。" },
-  { num: "03", icon: ClipboardList, name: "材料挑選", desc: "各式建材、面料與色調的專業建議，確保每個選擇都恰如其分。" },
-  { num: "04", icon: ShieldCheck, name: "全室裝修施工", desc: "由集團旗下的「裕綸室內裝修工程」負責，確保設計圖紙完美落地。" },
-  { num: "05", icon: FileText, name: "舊屋翻新", desc: "包含老屋的結構改良與現代美學注入，讓老房子重新散發獨特魅力。" },
-  { num: "06", icon: Users, name: "工程監管", desc: "專業的工地現場統籌與進度管控，確保施工品質與進度如期。" },
+  { num: "01", icon: HardHat, name: "拆除與結構加強工程", desc: "安全拆除既有隔間與裝修，並依需求進行結構補強，為新設計奠定穩固基礎。" },
+  { num: "02", icon: Wrench, name: "專業水電系統配置", desc: "專業水電技師負責管線配置、插座規劃、衛浴設備安裝，符合建築法規與安全標準。" },
+  { num: "03", icon: ClipboardList, name: "高標準防水隔音工程", desc: "採用高規格防水工法與隔音材料，確保居住品質與空間結構的長期耐久。" },
+  { num: "04", icon: ShieldCheck, name: "木作與細部木裝工程", desc: "系統櫃、天花板、木地板等木作項目，材料嚴選、工法精準，打造精緻的空間細節。" },
+  { num: "05", icon: FileText, name: "系統家具安裝與整合", desc: "系統櫃體與家具的精準安裝，整合空間機能與美學，提供完整的收納解決方案。" },
 ]
 
 const projects = [
@@ -87,10 +86,10 @@ export default function ConstructionPage() {
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
           <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "2rem" }}>Taichung Construction Engineering</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.2rem, 5.5vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem" }}>
-            打造<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>有溫度的</em><br />生活空間
+            匠心傳承<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>穩健工程</em><br />構築世代安居
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300 }}>
-            裕綸集團（空房子室內設計）提供從諮詢、設計到施工的一站式服務。其核心理念在於「不做複製品」，強調根據屋主的生活習慣、個性與夢想，將空間轉化為具備溫度的生活語彙。
+            裕綸裝修擁有政府核可專業施工證照，秉持標準化 SOP 工程管理。我們重視隱蔽工程細節，從水電配置、防水工法到結構強化，皆由具備資深執照的職人團隊把關。2年保固，安心無憂。
           </p>
           <a ref={addRef(3)} href="#projects" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
             查看施工案例 <ArrowRight size={14} />
@@ -187,7 +186,7 @@ export default function ConstructionPage() {
         <div style={{ background: "#F0EBE3", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Contact</p>
           <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>免費丈量<br />估價諮詢</h2>
-          {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週日  08:00 — 24:00"],["保固","2年保固"]].map(([label, val]) => (
+          {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週六  09:00 — 18:00"]].map(([label, val]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "0.4rem" }}>{label}</p>
               <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520" }}>{val}</p>
@@ -216,9 +215,9 @@ export default function ConstructionPage() {
       {/* FOOTER */}
       <footer style={{ background: "#1A1510", padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
         <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>裕綸室內裝修</span>
-        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 裕綸室內裝修有限公司</p>
+        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 裕綸室內裝修・裕綸集團</p>
         <div style={{ display: "flex", gap: "2rem" }}>
-          <a href="https://www.instagram.com/human_design.space/" target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase" }}>Instagram</a>
+          <a href="/" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase" }}>裕綸集團</a>
         </div>
       </footer>
     </div>

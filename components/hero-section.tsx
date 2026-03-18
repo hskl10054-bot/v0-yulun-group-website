@@ -9,7 +9,7 @@ export function HeroSection() {
       {/* Background Image */}
       <Image
         src="/images/hero-bg.jpg"
-        alt="裕綸室內裝修有限公司作品"
+        alt="裕綸集團作品"
         fill
         className="object-cover"
         priority
@@ -22,19 +22,19 @@ export function HeroSection() {
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
         <div className="flex flex-col items-center gap-2">
           <span className="text-sm font-light tracking-[0.4em] uppercase text-[#D4C5B2]">
-            Since 2019
+            Yulun Group
           </span>
           <div className="my-4 h-px w-16 bg-[#6B4E31]" />
         </div>
         <h1 className="text-4xl font-bold tracking-wider text-[#FAFAF8] md:text-6xl lg:text-7xl">
-          {"裕綸室內裝修"}
+          {"裕綸集團"}
         </h1>
         <p className="text-lg font-light tracking-[0.2em] text-[#D4C5B2] md:text-xl lg:text-2xl">
           Yulun Group
         </p>
         <div className="my-2 h-px w-24 bg-[#6B4E31]" />
         <p className="max-w-2xl text-base font-light leading-relaxed tracking-wide text-[#FAFAF8]/80 md:text-lg">
-          {"打造有溫度的生活空間"}
+          {"職人建築，穩健基石，構築空間的永續價值。"}
         </p>
       </div>
 
