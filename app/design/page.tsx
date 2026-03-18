@@ -19,13 +19,6 @@ const portfolios = [
   { title: "老屋翻新案", type: "舊屋改造・2023", bg: "from-[#D0C4B0] to-[#A8987E]" },
 ]
 
-const team = [
-  { name: "陳○○", role: "創辦人・主設計師", bg: "from-[#C8BAA8] to-[#9A8878]" },
-  { name: "林○○", role: "資深設計師", bg: "from-[#B8A898] to-[#8A7868]" },
-  { name: "張○○", role: "空間規劃師", bg: "from-[#D4C8B8] to-[#A89880]" },
-  { name: "王○○", role: "軟裝陳設師", bg: "from-[#BEAE9E] to-[#90806E]" },
-]
-
 const testimonials = [
   { quote: "從第一次諮詢到完工，整個過程都讓我感受到設計師對細節的堅持。現在每天回到家都像是回到一個懂我的地方。", name: "李小姐", info: "台中北區・三房兩廳・2024" },
   { quote: "我只是說了幾個關鍵字，設計師就把我腦海裡模糊的想像變成了真實的空間。太神奇了。", name: "黃先生", info: "台中西區・老屋翻新・2023" },
@@ -63,7 +56,6 @@ export default function DesignPage() {
         .service-card:hover { border-color: #B5956A !important; background: #F5F0E8 !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
         .portfolio-item:hover .portfolio-bg { transform: scale(1.04) !important; }
-        .team-card:hover .avatar-bg { transform: scale(1.03) !important; }
         .cta-link:hover { color: #B5956A !important; border-color: #B5956A !important; }
         .back-link:hover { color: #B5956A !important; }
         .form-input { background: transparent; border: none; border-bottom: 0.5px solid rgba(255,255,255,0.2); padding: 0.7rem 0; width: 100%; font-family: 'Josefin Sans',sans-serif; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1em; color: #FAF8F4; outline: none; transition: border-color 0.3s; }
@@ -162,23 +154,6 @@ export default function DesignPage() {
                 <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", marginBottom: "0.3rem" }}>{p.title}</h3>
                 <p style={{ fontSize: "0.65rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase" }}>{p.type}</p>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section id="team" style={{ padding: "8rem 6rem", background: "#FAF8F4" }}>
-        <p ref={addRef(14)} style={{ ...fadeStyle, fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Our Team</p>
-        <h2 ref={addRef(15)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, marginBottom: "4rem" }}>設計團隊</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "2rem" }}>
-          {team.map((m, i) => (
-            <div key={m.name} className="team-card" ref={addRef(16 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.12}s`, textAlign: "center" }}>
-              <div style={{ width: "100%", aspectRatio: "3/4", marginBottom: "1.5rem", overflow: "hidden" }}>
-                <div className={`avatar-bg bg-gradient-to-br ${m.bg} w-full h-full`} style={{ transition: "transform 0.5s" }} />
-              </div>
-              <p className="serif" style={{ fontSize: "1.2rem", fontWeight: 400, marginBottom: "0.3rem" }}>{m.name}</p>
-              <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", color: "#8C8479", textTransform: "uppercase" }}>{m.role}</p>
             </div>
           ))}
         </div>
