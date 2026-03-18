@@ -122,7 +122,7 @@ export default function CafePage() {
           <Clock size={16} style={{ color: "#6B4E31" }} />
           <div>
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#6B4E31", marginBottom: "0.4rem" }}>營業時間</p>
-            <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520" }}>週一至週日  08:00 — 24:00</p>
+            <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520" }}>週一至週日  09:00 — 18:00</p>
           </div>
         </div>
       </section>
