@@ -12,11 +12,11 @@ const services = [
 ]
 
 const portfolios = [
-  { title: "台中・純白宅", type: "住宅設計・2024", image: "/images/design/portfolio/design-work-01.jpg" },
-  { title: "侘寂風書房", type: "局部設計・2024", image: "/images/design/portfolio/design-work-02.jpg" },
-  { title: "輕工業咖啡廳", type: "商業空間・2023", image: "/images/design/portfolio/design-work-03.jpg" },
-  { title: "北歐極簡宅", type: "住宅設計・2023", image: "/images/design/portfolio/design-work-04.jpg" },
-  { title: "老屋翻新案", type: "舊屋改造・2023", image: "/images/design/portfolio/design-work-05.jpg" },
+  { title: "現代簡約｜光感餐廚", image: "/images/design/portfolio/design-work-01.jpg" },
+  { title: "暖色侘寂｜圓弧玄關", image: "/images/design/portfolio/design-work-02.jpg" },
+  { title: "輕奢現代｜石紋客餐廳", image: "/images/design/portfolio/design-work-03.jpg" },
+  { title: "極簡北歐｜純白入戶", image: "/images/design/portfolio/design-work-04.jpg" },
+  { title: "日式和風｜日光臥榻", image: "/images/design/portfolio/design-work-05.jpg" },
 ]
 
 const testimonials = [
@@ -150,8 +150,7 @@ export default function DesignPage() {
             <div key={p.title} className="portfolio-item" style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined }}>
               <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
               <div className="portfolio-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,25,20,0.7) 0%, transparent 60%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem", opacity: 0, transition: "opacity 0.4s" }}>
-                <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", marginBottom: "0.3rem" }}>{p.title}</h3>
-                <p style={{ fontSize: "0.65rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase" }}>{p.type}</p>
+                <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff" }}>{p.title}</h3>
               </div>
             </div>
           ))}
