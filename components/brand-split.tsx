@@ -9,7 +9,7 @@ interface BrandCardProps {
 
 function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href }: BrandCardProps) {
   return (
-    <a href={href} className="group relative flex min-h-[400px] flex-1 cursor-pointer items-center justify-center overflow-hidden md:min-h-[600px]">
+    <a href={href} className="group relative flex min-h-[400px] flex-1 cursor-pointer items-center justify-center overflow-hidden bg-[#6B4E31] md:min-h-[600px]">
       <Image src={imageSrc} alt={imageAlt} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" quality={85} />
       <div className="absolute inset-0 bg-[#2F2F2F]/60 transition-colors duration-500 group-hover:bg-[#2F2F2F]/40" />
       <div className="relative z-10 flex flex-col items-center gap-4 px-6 text-center">
@@ -28,8 +28,9 @@ function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href }: B
 export function BrandSplit() {
   return (
     <section id="brands" className="flex flex-col md:flex-row">
-      <BrandCard title="空房子室內設計" subtitle="Interior Design" description="為你的空間注入魔法 — 空房開門，幸福進門。用心打磨每一個細節，確保每一個空間都能符合使用需求。" imageSrc="/images/design-brand.jpg" imageAlt="空房子室內設計" href="/design" />
-      <BrandCard title="裕綸室內裝修工程" subtitle="Construction Engineering" description="打造有溫度的生活空間 — 從諮詢、設計到施工的一站式服務，不做複製品，將空間轉化為具備溫度的生活語彙。" imageSrc="/images/construction-brand.jpg" imageAlt="裕綸室內裝修工程" href="/construction" />
+      <BrandCard title="空房子室內設計" subtitle="Interior Design" description="為你的空間注入魔法 — 空房開門，幸福進門。透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。" imageSrc="/images/design-brand.jpg" imageAlt="空房子室內設計" href="/design" />
+      <BrandCard title="裕綸室內裝修" subtitle="Construction Engineering" description="匠心傳承，穩健工程，構築世代安居。標準化 SOP 工程管理，讓美學建立在穩固且安全的結構之上。" imageSrc="/images/construction-brand.jpg" imageAlt="裕綸室內裝修" href="/construction" />
+      <BrandCard title="同齊咖啡" subtitle="Café" description="一杯咖啡，千種連結。自家烘焙精品咖啡豆，不限時深夜咖啡，創造生活中最溫暖的交匯點。" imageSrc="/images/cafe-brand.jpg" imageAlt="同齊咖啡" href="/cafe" />
     </section>
   )
 }

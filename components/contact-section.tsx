@@ -6,7 +6,7 @@ export function ContactSection() {
     <section id="contact" className="grid md:grid-cols-2">
       <div className="flex flex-col justify-center bg-[#F5F0E8] px-12 py-16 md:px-16 md:py-20">
         <span className="mb-3 text-xs font-light tracking-[0.4em] uppercase text-[#B5956A]">Contact Us</span>
-        <h2 className="mb-10 text-3xl font-bold tracking-wider text-[#2F2F2F] md:text-4xl">聯絡我們</h2>
+        <h2 className="mb-10 text-3xl font-bold tracking-wider text-[#2F2F2F] md:text-4xl">聯絡裕綸集團</h2>
         <div className="flex flex-col gap-7">
           {[
             { icon: MapPin, label: "地址", value: "台中市北屯區瀋陽北路73號" },

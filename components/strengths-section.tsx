@@ -32,7 +32,7 @@ export function StrengthsSection() {
           </h2>
           <div className="h-px w-16 bg-[#6B4E31]" />
           <p className="max-w-lg text-sm font-light leading-relaxed text-[#6B6B6B]">
-            {"拒絕複製，從屋主的生活習慣與夢想出發，打造有溫度的生活空間"}
+            {"以穩健的經營與職人精神，為每一位客戶守護家的品質"}
           </p>
         </div>
 

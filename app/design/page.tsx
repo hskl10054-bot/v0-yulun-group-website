@@ -4,12 +4,11 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import { useEffect, useRef } from "react"
 
 const services = [
-  { num: "01", name: "全屋設計規劃", desc: "從平面配置、立面設計到材料挑選，提供完整住宅空間設計服務，每一個細節精確符合你的生活需求。" },
-  { num: "02", name: "商業空間設計", desc: "咖啡廳、辦公室、品牌門市等商業空間，以品牌精神為核心，設計吸引人且具功能性的商業環境。" },
-  { num: "03", name: "軟裝陳設搭配", desc: "家具挑選、燈光配置、藝術品與植栽搭配，用軟裝語彙讓硬體設計更有生命力。" },
-  { num: "04", name: "舊屋翻新改造", desc: "保留空間記憶的同時，注入現代設計語彙。舊屋新生，讓老房子重新散發獨特魅力。" },
-  { num: "05", name: "工程統籌監管", desc: "與裕綸室內裝修工程合作，一條龍服務從設計到施工完整管控，確保設計圖紙完美落地。" },
-  { num: "06", name: "設計諮詢顧問", desc: "針對已有初步想法的屋主，提供專業設計建議與方向引導，協助找到最適合的設計語言。" },
+  { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
+  { num: "02", name: "居家住宅室內設計", desc: "從平面配置、立面設計到材料挑選，以人為本的空間美學，為每個家注入獨特靈魂。" },
+  { num: "03", name: "老屋翻新空間重整", desc: "保留空間記憶的同時，注入現代設計語彙。舊屋新生，讓老房子重新散發獨特魅力。" },
+  { num: "04", name: "商業空間美學配置", desc: "咖啡廳、辦公室、品牌門市等商業空間，以品牌精神為核心，設計吸引人且具功能性的環境。" },
+  { num: "05", name: "軟裝設計與風格諮詢", desc: "家具挑選、燈光配置、藝術品與植栽搭配，用軟裝語彙讓硬體設計更有生命力。" },
 ]
 
 const portfolios = [
@@ -76,7 +75,7 @@ export default function DesignPage() {
       {/* NAV */}
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.5rem 4rem", background: "rgba(250,248,244,0.92)", backdropFilter: "blur(12px)", borderBottom: "0.5px solid #E8E3DA" }}>
         <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C8479", textDecoration: "none", transition: "color 0.3s" }}>
-          <ArrowLeft size={14} /> 裕綸室內裝修有限公司
+          <ArrowLeft size={14} /> 裕綸集團
         </Link>
         <span className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>空房子・室內設計</span>
         <a href="#contact" style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#B5956A", textDecoration: "none" }}>預約諮詢</a>
@@ -90,7 +89,7 @@ export default function DesignPage() {
             為你的空間<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>注入魔法</em>
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300 }}>
-            空房開門，幸福進門。我們相信，每個家都有自己的故事，用心打磨每一個細節，確保每一個空間都能符合使用需求。
+            空房開門，幸福進門。我們相信空間不只是鋼筋水泥，更是承載幸福的容器。當魔法注入空間，家便開始講述屬於你的幸福故事。
           </p>
           <a ref={addRef(3)} href="#portfolio" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
             探索作品集 <ArrowRight size={14} />
@@ -113,7 +112,7 @@ export default function DesignPage() {
           <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1.5rem" }}>About Us</p>
           <h2 ref={addRef(5)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "2rem" }}>我們是誰</h2>
           <p ref={addRef(6)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2.1, color: "#8C8479", marginBottom: "3rem", fontWeight: 300 }}>
-            我們的品牌創始於對設計充滿熱情的「老屋魔法師」，從不同的領域轉行，品牌總監以無比的熱忱和專業，建立了空房子設計。我們相信，每個家都有自己的故事，用心打磨每一個細節，確保每一個空間都能符合使用需求。
+            空房子設計致力於打破格局束縛，以人為本，透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。我們不做複製品，每一個案子都從屋主的生活習慣、個性與夢想出發，打造獨一無二的空間故事。
           </p>
           <div ref={addRef(7)} style={{ ...fadeStyle, transitionDelay: "0.45s", display: "flex", gap: "3rem" }}>
             {[["150+","完成案例"],["8","年品牌經驗"],["98%","客戶滿意度"]].map(([num, label]) => (
@@ -234,11 +233,9 @@ export default function DesignPage() {
       {/* FOOTER */}
       <footer style={{ background: "#1A1510", padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
         <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>空房子室內設計</span>
-        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 空房子室內設計・裕綸室內裝修有限公司</p>
+        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 空房子室內設計・裕綸集團</p>
         <div style={{ display: "flex", gap: "2rem" }}>
-          {[{name:"Instagram",href:"https://www.instagram.com/human_design.space/"}].map(s => (
-            <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase", transition: "color 0.3s" }}>{s.name}</a>
-          ))}
+          <a href="/" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase", transition: "color 0.3s" }}>裕綸集團</a>
         </div>
       </footer>
     </div>

@@ -7,7 +7,7 @@ export function SiteFooter() {
         {/* Top Section */}
         <div className="mb-12 flex flex-col items-center gap-4 text-center">
           <h3 className="text-2xl font-bold tracking-wider text-[#FAFAF8] md:text-3xl">
-            {"裕綸室內裝修有限公司"}
+            {"裕綸集團"}
           </h3>
           <p className="text-sm font-light tracking-[0.15em] text-[#D4C5B2]">
             Yulun Group
@@ -35,25 +35,17 @@ export function SiteFooter() {
             </p>
           </div>
 
-          {/* Email & Social */}
-          <div className="flex flex-col items-center gap-4 text-center">
+          {/* Email */}
+          <div className="flex flex-col items-center gap-3 text-center">
             <Mail className="h-5 w-5 text-[#6B4E31]" />
-            <div className="flex flex-col gap-2">
+            <p className="text-sm font-light leading-relaxed">
               <a
                 href="mailto:yulun83417215@gmail.com"
-                className="text-sm font-light transition-colors hover:text-[#6B4E31]"
+                className="transition-colors hover:text-[#6B4E31]"
               >
                 {"yulun83417215@gmail.com"}
               </a>
-              <a
-                href="https://www.instagram.com/human_design.space/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-light transition-colors hover:text-[#6B4E31]"
-              >
-                {"Instagram @human_design.space"}
-              </a>
-            </div>
+            </p>
           </div>
         </div>
 
@@ -62,7 +54,7 @@ export function SiteFooter() {
 
         {/* Copyright */}
         <p className="text-center text-xs font-light tracking-wide text-[#FAFAF8]/40">
-          {"© 2026 裕綸室內裝修有限公司 Yulun Group. All Rights Reserved."}
+          {"© 2026 裕綸集團 Yulun Group. All Rights Reserved."}
         </p>
       </div>
     </footer>
