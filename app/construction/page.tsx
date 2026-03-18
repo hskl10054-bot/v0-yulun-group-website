@@ -4,12 +4,12 @@ import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, Clipboar
 import { useEffect, useRef } from "react"
 
 const services = [
-  { num: "01", icon: HardHat, name: "全室裝修工程", desc: "從拆除、泥作、水電、木作到油漆，提供完整的室內裝修施工服務，一手包辦所有工程項目。" },
-  { num: "02", icon: Wrench, name: "水電工程", desc: "專業水電技師負責管線配置、插座規劃、衛浴設備安裝，符合建築法規與安全標準。" },
-  { num: "03", icon: ClipboardList, name: "泥作工程", desc: "磁磚鋪設、防水工程、砌磚隔間，精準施工確保空間結構的穩固與耐久。" },
-  { num: "04", icon: ShieldCheck, name: "木作工程", desc: "系統櫃、天花板、木地板等木作項目，材料嚴選、工法精準，打造精緻的空間細節。" },
-  { num: "05", icon: FileText, name: "工程監管", desc: "專屬工程監管人員全程駐場，確保施工品質、進度如期，業主隨時可查看施工日誌。" },
-  { num: "06", icon: Users, name: "設計施工整合", desc: "與空房子室內設計深度合作，設計圖到施工一條龍，減少溝通落差，確保完美落地。" },
+  { num: "01", icon: HardHat, name: "全室裝修施工", desc: "由集團旗下的「裕綸室內裝修工程」負責，確保設計圖紙完美落地。" },
+  { num: "02", icon: Wrench, name: "舊屋翻新", desc: "包含老屋的結構改良與現代美學注入，讓老房子煥然一新。" },
+  { num: "03", icon: ClipboardList, name: "商業空間施工", desc: "針對咖啡廳、辦公室、品牌門市的功能性施工，打造吸引人且實用的商業環境。" },
+  { num: "04", icon: ShieldCheck, name: "工程監管", desc: "專業的工地現場統籌與進度管控，確保施工品質與進度如期完成。" },
+  { num: "05", icon: FileText, name: "設計規劃", desc: "平面配置、立面設計、材料挑選、軟裝陳設，提供完整的空間設計規劃服務。" },
+  { num: "06", icon: Users, name: "設計施工整合", desc: "與空房子室內設計深度合作，從諮詢、設計到施工的一站式（一條龍）服務。" },
 ]
 
 const projects = [
@@ -90,7 +90,7 @@ export default function ConstructionPage() {
             精準施工<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>守護每一吋</em><br />空間品質
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300 }}>
-            自有專業工班、合法施工證照、透明逐項報價。從拆除到完工，每一個環節都嚴格把關，讓你的空間改造安心無憂。
+            裕綸集團（空房子室內設計）提供從諮詢、設計到施工的一站式服務。核心理念在於「不做複製品」，根據屋主的生活習慣、個性與夢想，將空間轉化為具備溫度的生活語彙。2年保固，安心無憂。
           </p>
           <a ref={addRef(3)} href="#projects" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
             查看施工案例 <ArrowRight size={14} />
@@ -187,7 +187,7 @@ export default function ConstructionPage() {
         <div style={{ background: "#F0EBE3", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Contact</p>
           <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>免費丈量<br />估價諮詢</h2>
-          {[["地址","台灣台中市 ○○區○○路○○號"],["電話","04 - XXXX - XXXX"],["Email","hello@yulungroup.com.tw"],["營業時間","週一至週六  09:00 — 18:00"]].map(([label, val]) => (
+          {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週六  09:00 — 18:00"]].map(([label, val]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "0.4rem" }}>{label}</p>
               <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520" }}>{val}</p>
@@ -215,11 +215,11 @@ export default function ConstructionPage() {
 
       {/* FOOTER */}
       <footer style={{ background: "#1A1510", padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
-        <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>裕綸室內裝修工程</span>
-        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 裕綸室內裝修工程・裕綸集團</p>
+        <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>裕綸室內裝修有限公司</span>
+        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 裕綸室內裝修有限公司・裕綸集團</p>
         <div style={{ display: "flex", gap: "2rem" }}>
-          {["Instagram","Facebook","LINE"].map(s => (
-            <a key={s} href="#" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase" }}>{s}</a>
+          {[{name:"Instagram",url:"https://www.instagram.com/human_design.space/"}].map(s => (
+            <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase" }}>{s.name}</a>
           ))}
         </div>
       </footer>

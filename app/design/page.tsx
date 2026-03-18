@@ -87,10 +87,10 @@ export default function DesignPage() {
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
           <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "2rem" }}>Taichung Interior Design Studio</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.5rem, 6vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem" }}>
-            打造<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>有溫度的</em><br />生活空間
+            空房開門<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>幸福</em><br />進門
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300 }}>
-            我們相信，一個好的家，不只是美麗的視覺，更是生活方式的延伸。每一個空房子，都等待著屬於它的故事。
+            為你的空間注入魔法——我們相信，每個家都有自己的故事，用心打磨每一個細節，確保每一個空間都能符合使用需求。
           </p>
           <a ref={addRef(3)} href="#portfolio" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
             探索作品集 <ArrowRight size={14} />
@@ -113,10 +113,10 @@ export default function DesignPage() {
           <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1.5rem" }}>About Us</p>
           <h2 ref={addRef(5)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "2rem" }}>我們是誰</h2>
           <p ref={addRef(6)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2.1, color: "#8C8479", marginBottom: "3rem", fontWeight: 300 }}>
-            空房子室內設計成立於台中，多年來專注於住宅與商業空間的整體規劃設計。我們不做複製品，每一個案子都從屋主的生活習慣、個性與夢想出發，打造獨一無二的空間故事。
+            我們的品牌創始於對設計充滿熱情的「老屋魔法師」，從不同的領域轉行，品牌總監以無比的熱忱和專業，建立了空房子設計。我們相信，每個家都有自己的故事，用心打磨每一個細節，確保每一個空間都能符合使用需求。
           </p>
           <div ref={addRef(7)} style={{ ...fadeStyle, transitionDelay: "0.45s", display: "flex", gap: "3rem" }}>
-            {[["200+","完成案例"],["8","年品牌經驗"],["98%","客戶滿意度"]].map(([num, label]) => (
+            {[["150+","完成案例"],["8","年品牌經驗"],["98%","客戶滿意度"]].map(([num, label]) => (
               <div key={label}>
                 <span className="serif" style={{ fontSize: "2.5rem", fontWeight: 300, color: "#2A2520", display: "block" }}>{num}</span>
                 <span style={{ fontSize: "0.65rem", letterSpacing: "0.2em", color: "#8C8479", textTransform: "uppercase" }}>{label}</span>
@@ -205,7 +205,7 @@ export default function DesignPage() {
         <div style={{ background: "#F5F0E8", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Contact</p>
           <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>開始你的<br />空間對話</h2>
-          {[["地址","台灣台中市 ○○區○○路○○號"],["電話","04 - XXXX - XXXX"],["Email","hello@konghouse.com.tw"],["營業時間","週一至週六  10:00 — 18:00"]].map(([label, val]) => (
+          {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週六  10:00 — 18:00"]].map(([label, val]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.4rem" }}>{label}</p>
               <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520" }}>{val}</p>
@@ -234,10 +234,10 @@ export default function DesignPage() {
       {/* FOOTER */}
       <footer style={{ background: "#1A1510", padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
         <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>空房子室內設計</span>
-        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 Kong House Design・裕綸集團</p>
+        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 空房子室內設計・裕綸室內裝修有限公司</p>
         <div style={{ display: "flex", gap: "2rem" }}>
-          {["Instagram","Facebook","LINE"].map(s => (
-            <a key={s} href="#" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase", transition: "color 0.3s" }}>{s}</a>
+          {[{name:"Instagram",url:"https://www.instagram.com/human_design.space/"}].map(s => (
+            <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase", transition: "color 0.3s" }}>{s.name}</a>
           ))}
         </div>
       </footer>
