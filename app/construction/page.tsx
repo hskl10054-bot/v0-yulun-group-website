@@ -12,11 +12,11 @@ const services = [
 ]
 
 const projects = [
-  { title: "北區三房全室翻新", type: "全室裝修・2024", image: "/images/construction/portfolio/construction-project-01.jpg", span2: true },
-  { title: "西屯商辦裝修", type: "商業空間・2024", image: "/images/construction/portfolio/construction-project-02.jpg", span2: false },
-  { title: "南區老公寓改造", type: "舊屋翻新・2023", image: "/images/construction/portfolio/construction-project-03.jpg", span2: false },
-  { title: "精品衛浴工程", type: "局部工程・2023", image: "/images/construction/portfolio/construction-project-04.jpg", span2: false },
-  { title: "大里透天厝裝修", type: "全室裝修・2023", image: "/images/construction/portfolio/construction-project-05.jpg", span2: false },
+  { title: "精準裁切，構築空間", type: "全室裝修・2025", image: "/images/construction/portfolio/construction-project-01.jpg", span2: true },
+  { title: "設計落地：現場監工", type: "商業空間・2025", image: "/images/construction/portfolio/construction-project-02.jpg", span2: false },
+  { title: "泥作整平，空間基石", type: "舊屋翻新・2025", image: "/images/construction/portfolio/construction-project-03.jpg", span2: false },
+  { title: "專業電工紀實", type: "局部工程・2024", image: "/images/construction/portfolio/construction-project-04.jpg", span2: false },
+  { title: "嚴謹的高空作業", type: "全室裝修・2025", image: "/images/construction/portfolio/construction-project-05.jpg", span2: false },
 ]
 
 const strengths = [
@@ -156,9 +156,8 @@ export default function ConstructionPage() {
           {projects.map((p, i) => (
             <div key={p.title} className="portfolio-item" style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined }}>
               <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
-              <div className="portfolio-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,25,20,0.7) 0%, transparent 60%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem", opacity: 0, transition: "opacity 0.4s" }}>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,25,20,0.6) 0%, transparent 50%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem" }}>
                 <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", marginBottom: "0.3rem" }}>{p.title}</h3>
-                <p style={{ fontSize: "0.65rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase" }}>{p.type}</p>
               </div>
             </div>
           ))}
