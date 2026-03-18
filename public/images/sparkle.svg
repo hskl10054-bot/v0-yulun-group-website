@@ -1,10 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
-  <polygon points="100,100 92,10 108,10" fill="#D4A0A0"/>
-  <polygon points="100,100 155,20 165,35" fill="#D4A0A0"/>
-  <polygon points="100,100 195,88 195,112" fill="#D4A0A0"/>
-  <polygon points="100,100 165,165 155,180" fill="#D4A0A0"/>
-  <polygon points="100,100 108,190 92,190" fill="#D4A0A0"/>
-  <polygon points="100,100 35,165 45,180" fill="#D4A0A0"/>
-  <polygon points="100,100 5,112 5,88" fill="#D4A0A0"/>
-  <polygon points="100,100 45,20 35,35" fill="#D4A0A0"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
+  <!-- 8-pointed asymmetric starburst matching original design -->
+  <polygon points="
+    130,105
+    120,15
+    140,105
+    195,30
+    145,110
+    295,95
+    145,120
+    200,195
+    135,125
+    140,215
+    125,125
+    55,190
+    120,115
+    15,120
+    125,108
+    60,30
+  " fill="#D4A0A0"/>
 </svg>
