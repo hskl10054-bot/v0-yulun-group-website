@@ -78,7 +78,7 @@ export default function DesignPage() {
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
           <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "2rem" }}>Taichung Interior Design Studio</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.5rem, 6vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem" }}>
-            為你的空間<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>注入魔法</em>
+            為你的空間<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em style={{ fontStyle: "italic", color: "#8C8479" }}>注入魔法</em><svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginLeft: "0.15rem" }}><polygon points="38,8 42,38 40,38, 36,8" fill="#D4A0A0" /><polygon points="62,18 44,40 42,38 58,15" fill="#D4A0A0" /><polygon points="99,35 44,42 44,40 95,32" fill="#D4A0A0" /><polygon points="68,72 44,44 46,42 70,68" fill="#D4A0A0" /><polygon points="48,92 42,46 44,46 50,88" fill="#D4A0A0" /><polygon points="22,78 40,46 42,46 26,75" fill="#D4A0A0" /><polygon points="5,55 40,44 40,46 8,58" fill="#D4A0A0" /><polygon points="18,20 40,40 38,42 15,24" fill="#D4A0A0" /></svg></span>
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300 }}>
             空房開門，幸福進門。我們相信空間不只是鋼筋水泥，更是承載幸福的容器。當魔法注入空間，家便開始講述屬於你的幸福故事。
