@@ -1,13 +1,14 @@
 "use client"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
 const works = [
-  { title: "台中・純白宅", type: "空房子室內設計・2024", color: "#C8BAA8", colorTo: "#9A8878", span2: true },
-  { title: "輕工業咖啡廳", type: "空房子室內設計・2023", color: "#B8A898", colorTo: "#8A7868", span2: false },
-  { title: "北歐極簡宅", type: "空房子室內設計・2023", color: "#C4B89F", colorTo: "#9E8E7A", span2: false },
-  { title: "精品辦公室", type: "裕綸裝修工程・2024", color: "#8A7A68", colorTo: "#6A5C4C", span2: false },
-  { title: "老屋翻新案", type: "裕綸裝修工程・2023", color: "#D0C4B0", colorTo: "#A8987E", span2: false },
+  { title: "台中・純白宅", type: "空房子室內設計・2024", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
+  { title: "輕工業咖啡廳", type: "空房子室內設計・2023", image: "/images/home/portfolio/home-portfolio-02.JPG", span2: false },
+  { title: "北歐極簡宅", type: "空房子室內設計・2023", image: "/images/home/portfolio/home-portfolio-03.JPG", span2: false },
+  { title: "精品辦公室", type: "裕綸裝修工程・2024", image: "/images/home/portfolio/home-portfolio-04.jpg", span2: false },
+  { title: "老屋翻新案", type: "裕綸裝修工程・2023", image: "/images/home/portfolio/home-portfolio-05.jpg", span2: false },
 ]
 
 export function PortfolioPreview() {
@@ -26,7 +27,7 @@ export function PortfolioPreview() {
         <div className="grid grid-cols-3 gap-0.5" style={{ gridTemplateRows: "260px 260px" }}>
           {works.map((w, i) => (
             <div key={w.title} className="group relative cursor-pointer overflow-hidden" style={{ gridRow: i === 0 ? "span 2" : undefined }}>
-              <div className="h-full w-full transition-transform duration-700 group-hover:scale-105" style={{ background: `linear-gradient(135deg, ${w.color} 0%, ${w.colorTo} 100%)` }} />
+              <Image src={w.image} alt={w.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
                 <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{w.title}</h3>

@@ -95,9 +95,8 @@ export default function ConstructionPage() {
             查看施工案例 <ArrowRight size={14} />
           </a>
         </div>
-        <div style={{ background: "#8A7A68", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "1rem" }}>
-          <span className="serif" style={{ fontSize: "5rem", color: "rgba(255,255,255,0.25)" }}>⬡</span>
-          <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}>Hero Image</p>
+        <div style={{ position: "relative", overflow: "hidden" }}>
+          <img src="/images/construction/hero/construction-hero.jpg" alt="裕綸室內裝修" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
         </div>
       </section>
 

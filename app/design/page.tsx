@@ -87,9 +87,8 @@ export default function DesignPage() {
             探索作品集 <ArrowRight size={14} />
           </a>
         </div>
-        <div style={{ background: "#D4C9B8", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "1rem" }}>
-          <span className="serif" style={{ fontSize: "5rem", color: "rgba(255,255,255,0.35)" }}>◻</span>
-          <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", color: "rgba(255,255,255,0.45)", textTransform: "uppercase" }}>Hero Image</p>
+        <div style={{ position: "relative", overflow: "hidden" }}>
+          <img src="/images/design/hero/design-hero.jpg" alt="空房子室內設計" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
         </div>
       </section>
 
