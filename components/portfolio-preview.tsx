@@ -3,11 +3,11 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 const works = [
-  { title: "台中・純白宅", type: "空房子室內設計・2024", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
-  { title: "輕工業咖啡廳", type: "空房子室內設計・2023", image: "/images/home/portfolio/home-portfolio-02.JPG", span2: false },
-  { title: "北歐極簡宅", type: "空房子室內設計・2023", image: "/images/home/portfolio/home-portfolio-03.JPG", span2: false },
-  { title: "精品辦公室", type: "裕綸裝修工程・2024", image: "/images/home/portfolio/home-portfolio-04.jpg", span2: false },
-  { title: "老屋翻新案", type: "裕綸裝修工程・2023", image: "/images/home/portfolio/home-portfolio-05.jpg", span2: false },
+  { title: "同齊咖吡 西區精忠店", type: "空房子室內設計・2025", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
+  { title: "壹偲OnlyEase酵素保健茶飲", type: "空房子室內設計・2025", image: "/images/home/portfolio/home-portfolio-02.JPG", span2: false },
+  { title: "勝麗交響曲", type: "空房子室內設計・2025", image: "/images/home/portfolio/home-portfolio-03.JPG", span2: false },
+  { title: "清水聯馥悅", type: "裕綸裝修工程・2024", image: "/images/home/portfolio/home-portfolio-04.jpg", span2: false },
+  { title: "居家住宅室內設計", type: "裕綸裝修工程・2025", image: "/images/home/portfolio/home-portfolio-05.jpg", span2: false },
 ]
 
 export function PortfolioPreview() {
