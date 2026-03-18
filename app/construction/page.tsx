@@ -12,11 +12,11 @@ const services = [
 ]
 
 const projects = [
-  { title: "北區三房全室翻新", type: "全室裝修・2024", image: "/images/construction/portfolio/construction-project-01.jpg", span2: true },
-  { title: "西屯商辦裝修", type: "商業空間・2024", image: "/images/construction/portfolio/construction-project-02.jpg", span2: false },
-  { title: "南區老公寓改造", type: "舊屋翻新・2023", image: "/images/construction/portfolio/construction-project-03.jpg", span2: false },
-  { title: "精品衛浴工程", type: "局部工程・2023", image: "/images/construction/portfolio/construction-project-04.jpg", span2: false },
-  { title: "大里透天厝裝修", type: "全室裝修・2023", image: "/images/construction/portfolio/construction-project-05.jpg", span2: false },
+  { title: "精準裁切，構築空間", type: "全室裝修・2024", image: "/images/construction/portfolio/construction-project-01.jpg", span2: true },
+  { title: "設計落地：現場監工", type: "商業空間・2024", image: "/images/construction/portfolio/construction-project-02.jpg", span2: false },
+  { title: "泥作整平，空間基石", type: "舊屋翻新・2023", image: "/images/construction/portfolio/construction-project-03.jpg", span2: false },
+  { title: "嚴謹的高空作業", type: "局部工程・2023", image: "/images/construction/portfolio/construction-project-04.jpg", span2: false },
+  { title: "專業電工紀實", type: "全室裝修・2023", image: "/images/construction/portfolio/construction-project-05.jpg", span2: false },
 ]
 
 const strengths = [
