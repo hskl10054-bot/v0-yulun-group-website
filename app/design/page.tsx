@@ -12,11 +12,11 @@ const services = [
 ]
 
 const portfolios = [
-  { title: "台中・純白宅", type: "住宅設計・2024", bg: "from-[#C8BAA8] to-[#9A8878]" },
-  { title: "侘寂風書房", type: "局部設計・2024", bg: "from-[#B8A898] to-[#8A7868]" },
-  { title: "輕工業咖啡廳", type: "商業空間・2023", bg: "from-[#C4B89F] to-[#9E8E7A]" },
-  { title: "北歐極簡宅", type: "住宅設計・2023", bg: "from-[#8A7A68] to-[#6A5C4C]" },
-  { title: "老屋翻新案", type: "舊屋改造・2023", bg: "from-[#D0C4B0] to-[#A8987E]" },
+  { title: "台中・純白宅", type: "住宅設計・2024", image: "/images/design/portfolio/design-work-01.jpg" },
+  { title: "侘寂風書房", type: "局部設計・2024", image: "/images/design/portfolio/design-work-02.jpg" },
+  { title: "輕工業咖啡廳", type: "商業空間・2023", image: "/images/design/portfolio/design-work-03.jpg" },
+  { title: "北歐極簡宅", type: "住宅設計・2023", image: "/images/design/portfolio/design-work-04.jpg" },
+  { title: "老屋翻新案", type: "舊屋改造・2023", image: "/images/design/portfolio/design-work-05.jpg" },
 ]
 
 const testimonials = [
@@ -148,7 +148,7 @@ export default function DesignPage() {
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gridTemplateRows: "300px 300px", gap: "2px" }}>
           {portfolios.map((p, i) => (
             <div key={p.title} className="portfolio-item" style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined }}>
-              <div className={`portfolio-bg bg-gradient-to-br ${p.bg} w-full h-full`} style={{ transition: "transform 0.6s ease" }} />
+              <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
               <div className="portfolio-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,25,20,0.7) 0%, transparent 60%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem", opacity: 0, transition: "opacity 0.4s" }}>
                 <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", marginBottom: "0.3rem" }}>{p.title}</h3>
                 <p style={{ fontSize: "0.65rem", letterSpacing: "0.25em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase" }}>{p.type}</p>
