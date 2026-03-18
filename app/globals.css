@@ -90,3 +90,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+::selection {
+  background-color: #E0FD3D;
+  color: #2F2F2F;
+}
+
+::-moz-selection {
+  background-color: #E0FD3D;
+  color: #2F2F2F;
+}
