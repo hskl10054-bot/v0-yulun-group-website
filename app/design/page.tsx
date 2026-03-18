@@ -160,15 +160,15 @@ export default function DesignPage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section style={{ padding: "8rem 6rem", background: "#2A2520" }}>
+      <section style={{ padding: "8rem 6rem", background: "#F5F0E8" }}>
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Testimonials</p>
-        <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, color: "#FAF8F4", marginBottom: "4rem" }}>客戶怎麼說</h2>
+        <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, color: "#2A2520", marginBottom: "4rem" }}>客戶怎麼說</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
           {testimonials.map((t, i) => (
-            <div key={t.name} ref={addRef(20 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "2.5rem", border: "0.5px solid rgba(255,255,255,0.1)" }}>
-              <p className="serif" style={{ fontSize: "1rem", fontStyle: "italic", color: "rgba(250,248,244,0.8)", lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300 }}>「{t.quote}」</p>
+            <div key={t.name} ref={addRef(20 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "2.5rem", border: "0.5px solid #E8E3DA" }}>
+              <p className="serif" style={{ fontSize: "1rem", fontStyle: "italic", color: "#2A2520", lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300 }}>「{t.quote}」</p>
               <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#B5956A" }}>{t.name}</p>
-              <p style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.3)", marginTop: "0.3rem", letterSpacing: "0.1em" }}>{t.info}</p>
+              <p style={{ fontSize: "0.65rem", color: "#8C8479", marginTop: "0.3rem", letterSpacing: "0.1em" }}>{t.info}</p>
             </div>
           ))}
         </div>
