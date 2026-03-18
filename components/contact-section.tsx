@@ -9,10 +9,10 @@ export function ContactSection() {
         <h2 className="mb-10 text-3xl font-bold tracking-wider text-[#2F2F2F] md:text-4xl">聯絡裕綸集團</h2>
         <div className="flex flex-col gap-7">
           {[
-            { icon: MapPin, label: "地址", value: "台灣台中市 ○○區○○路○○號" },
-            { icon: Phone, label: "電話", value: "04 - XXXX - XXXX" },
-            { icon: Mail, label: "Email", value: "hello@yulungroup.com.tw" },
-            { icon: Clock, label: "營業時間", value: "週一至週六  10:00 — 18:00" },
+            { icon: MapPin, label: "地址", value: "台中市北屯區瀋陽北路73號" },
+            { icon: Phone, label: "電話", value: "04-2247-9068" },
+            { icon: Mail, label: "Email", value: "yulun83417215@gmail.com" },
+            { icon: Clock, label: "營業時間", value: "週一至週日  08:00 — 24:00" },
           ].map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex items-start gap-4">
               <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[#6B4E31]" />

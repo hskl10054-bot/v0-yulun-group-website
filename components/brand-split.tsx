@@ -28,8 +28,8 @@ function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href }: B
 export function BrandSplit() {
   return (
     <section id="brands" className="flex flex-col md:flex-row">
-      <BrandCard title="空房子室內設計" subtitle="Interior Design" description="空間靈魂、美學規劃、機能設計 — 以人為本的空間美學，為每個家注入獨特靈魂。" imageSrc="/images/design-brand.jpg" imageAlt="空房子室內設計" href="/design" />
-      <BrandCard title="裕綸室內裝修工程" subtitle="Construction Engineering" description="精準施工、品質控管、專業證照 — 嚴謹工法與透明流程，守護每一吋空間品質。" imageSrc="/images/construction-brand.jpg" imageAlt="裕綸室內裝修工程" href="/construction" />
+      <BrandCard title="空房子室內設計" subtitle="Interior Design" description="為你的空間注入魔法 — 空房開門，幸福進門。每個家都有自己的故事，用心打磨每一個細節。" imageSrc="/images/design-brand.jpg" imageAlt="空房子室內設計" href="/design" />
+      <BrandCard title="裕綸室內裝修" subtitle="Construction Engineering" description="打造有溫度的生活空間 — 從諮詢、設計到施工的一站式服務，不做複製品。" imageSrc="/images/construction-brand.jpg" imageAlt="裕綸室內裝修" href="/construction" />
     </section>
   )
 }
