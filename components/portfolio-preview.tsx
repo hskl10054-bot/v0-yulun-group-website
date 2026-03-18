@@ -3,11 +3,11 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 const works = [
-  { title: "同齊咖吡 西區精忠店", type: "空房子室內設計・2025", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
-  { title: "壹偲OnlyEase酵素保健茶飲", type: "空房子室內設計・2025", image: "/images/home/portfolio/home-portfolio-02.JPG", span2: false },
-  { title: "勝麗交響曲", type: "空房子室內設計・2025", image: "/images/home/portfolio/home-portfolio-03.JPG", span2: false },
-  { title: "清水聯馥悅", type: "裕綸裝修工程・2024", image: "/images/home/portfolio/home-portfolio-04.jpg", span2: false },
-  { title: "居家住宅室內設計", type: "裕綸裝修工程・2025", image: "/images/home/portfolio/home-portfolio-05.jpg", span2: false },
+  { title: "同齊咖吡 西區精忠店", type: "2025", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
+  { title: "壹偲OnlyEase酵素保健茶飲", type: "2025", image: "/images/home/portfolio/home-portfolio-02.JPG", span2: false },
+  { title: "勝麗交響曲", type: "2025", image: "/images/home/portfolio/home-portfolio-03.JPG", span2: false },
+  { title: "清水聯馥悅", type: "2024", image: "/images/home/portfolio/home-portfolio-04.jpg", span2: false },
+  { title: "居家住宅室內設計", type: "2025", image: "/images/home/portfolio/home-portfolio-05.jpg", span2: false },
 ]
 
 export function PortfolioPreview() {
