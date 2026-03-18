@@ -12,7 +12,7 @@ export function ContactSection() {
             { icon: MapPin, label: "地址", value: "台中市北屯區瀋陽北路73號" },
             { icon: Phone, label: "電話", value: "04-2247-9068" },
             { icon: Mail, label: "Email", value: "yulun83417215@gmail.com" },
-            { icon: Clock, label: "營業時間", value: "週一至週日  09:00 — 18:00" },
+            { icon: Clock, label: "營業時間", value: "週一至週五  09:00 — 18:00" },
           ].map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex items-start gap-4">
               <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[#6B4E31]" />
