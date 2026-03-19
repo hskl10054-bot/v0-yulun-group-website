@@ -92,7 +92,8 @@ export function HomeNavbar() {
                 fontWeight: 700,
                 letterSpacing: "0.35em",
                 color: atTop ? "#FAFAF8" : "#2F2F2F",
-                transition: "color 0.3s, font-size 0.3s",
+                textShadow: atTop ? "0 2px 8px rgba(0,0,0,0.5)" : "none",
+                transition: "color 0.3s, font-size 0.3s, text-shadow 0.3s",
                 ...getContentStyle(content, "hero", "title", "home"),
               }}
             >
