@@ -133,7 +133,7 @@ export default function DesignPage() {
 
       {/* ABOUT */}
       <section className="resp-hero" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "70vh" }}>
-        <div className="resp-hero-text" style={{ background: "linear-gradient(135deg, #C4B5A0 0%, #A89880 50%, #BFB09A 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: "6rem 5rem" }}>
+        <div className="resp-hero-text" style={{ background: "linear-gradient(160deg, #D4C4AE 0%, #BFB09A 40%, #9A8870 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: "6rem 5rem" }}>
           <blockquote className="serif" style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.9)", lineHeight: 1.8, letterSpacing: "0.08em", textAlign: "center" }}>
             「空間是無聲的語言，<br />設計是讓它開口說話。」
           </blockquote>
