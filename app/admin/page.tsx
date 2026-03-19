@@ -47,7 +47,6 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
 
   const handleFile = useCallback(async (file: File) => {
     if (!file.type.startsWith("image/")) return
-    // Show local preview immediately
     const localUrl = URL.createObjectURL(file)
     setPreview(localUrl)
     setUploading(true)
@@ -79,35 +78,79 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
     if (file) handleFile(file)
   }, [handleFile])
 
+  const hasImage = !!preview
+
   return (
     <div className="space-y-2">
-      {label && <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</label>}
+      {label && (
+        <div className="flex items-center gap-2">
+          <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</label>
+          {hasImage ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-600">
+              <Check className="h-3 w-3" /> 已上傳
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-0.5 text-[10px] font-medium text-red-500">
+              <X className="h-3 w-3" /> 尚未上傳
+            </span>
+          )}
+        </div>
+      )}
       <div
-        className={`relative border-2 border-dashed rounded-lg transition-colors cursor-pointer ${dragOver ? "border-amber-500 bg-amber-50" : "border-gray-200 hover:border-gray-300"}`}
+        className={`relative border-2 border-dashed rounded-xl transition-colors cursor-pointer overflow-hidden ${
+          dragOver ? "border-amber-500 bg-amber-50" : hasImage ? "border-emerald-200 hover:border-emerald-300" : "border-red-200 hover:border-red-300 bg-red-50/30"
+        }`}
         onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
         onClick={() => fileRef.current?.click()}
       >
         {uploading && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-white/80">
+          <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-white/80">
             <Loader2 className="h-6 w-6 animate-spin text-amber-600" />
             <span className="ml-2 text-sm text-amber-700">上傳中...</span>
           </div>
         )}
         {preview ? (
           <div className="relative group">
-            <img src={preview} alt="Preview" className="w-full h-48 object-cover rounded-lg" />
-            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
-              <Upload className="h-5 w-5 text-white" />
-              <span className="text-white text-sm">更換圖片</span>
+            {/* Full image preview — no cropping */}
+            <div className="bg-[#f5f5f5] p-2">
+              <img
+                src={preview}
+                alt="Preview"
+                className="w-full rounded-lg"
+                style={{ maxHeight: "400px", objectFit: "contain" }}
+              />
+            </div>
+            {/* Image info bar */}
+            <div className="flex items-center justify-between bg-white px-4 py-2.5 border-t border-gray-100">
+              <div className="flex items-center gap-2 text-xs text-gray-500">
+                <ImageIcon className="h-3.5 w-3.5" />
+                <span className="truncate max-w-[200px]">{preview.startsWith("http") ? new URL(preview).pathname.split("/").pop() : preview.split("/").pop()}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] text-gray-400 uppercase tracking-wider">點擊更換</span>
+                <Upload className="h-3.5 w-3.5 text-gray-400" />
+              </div>
+            </div>
+            {/* Hover overlay */}
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl flex items-center justify-center gap-3">
+              <div className="bg-white/90 rounded-lg px-4 py-2.5 flex items-center gap-2 shadow-lg">
+                <Upload className="h-4 w-4 text-amber-700" />
+                <span className="text-sm font-medium text-amber-700">更換圖片</span>
+              </div>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-12 gap-2 text-gray-400">
-            <ImageIcon className="h-10 w-10" />
-            <p className="text-sm">拖拉圖片或點擊上傳</p>
-            <p className="text-xs text-gray-300">上傳至 Cloudinary</p>
+          <div className="flex flex-col items-center justify-center py-16 gap-3">
+            <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+              <ImageIcon className="h-8 w-8 text-red-400" />
+            </div>
+            <div className="text-center">
+              <p className="text-sm font-medium text-gray-600">此區塊尚未設定圖片</p>
+              <p className="text-xs text-gray-400 mt-1">拖拉圖片到此處，或點擊上傳</p>
+              <p className="text-[10px] text-gray-300 mt-0.5">支援 JPG, PNG, WebP｜上傳至 Cloudinary</p>
+            </div>
           </div>
         )}
       </div>
