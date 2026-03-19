@@ -24,7 +24,11 @@ const defaultStrengths = [
 
 const defaultIcons = [HardHat, ShieldCheck, FileText]
 
-export function StrengthsSection() {
+interface StrengthsSectionProps {
+  colors: Record<string, string>
+}
+
+export function StrengthsSection({ colors }: StrengthsSectionProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const { content, listItems } = useCmsData("home")
 
@@ -39,18 +43,18 @@ export function StrengthsSection() {
     : defaultStrengths.map((s, i) => ({ ...s, sortOrder: i + 1 }))
 
   return (
-    <section className="bg-[#FAFAF8] py-24 md:py-32">
+    <section className="py-24 md:py-32" style={{ backgroundColor: colors.strengths_bg }}>
       <div className="mx-auto max-w-5xl px-6">
         {/* Section Header */}
         <div className="mb-16 flex flex-col items-center gap-4 text-center md:mb-20">
-          <span className="text-xs font-light tracking-[0.3em] uppercase text-[#6B4E31]">
+          <span className="text-xs font-light tracking-[0.3em] uppercase" style={{ color: colors.strengths_accent }}>
             Our Strengths
           </span>
-          <h2 className="text-3xl font-bold tracking-wider text-[#2F2F2F] md:text-4xl">
+          <h2 className="text-3xl font-bold tracking-wider md:text-4xl" style={{ color: colors.strengths_heading }}>
             {"集團實力"}
           </h2>
-          <div className="h-px w-16 bg-[#6B4E31]" />
-          <p className="max-w-lg text-sm font-light leading-relaxed text-[#6B6B6B]">
+          <div className="h-px w-16" style={{ backgroundColor: colors.strengths_accent }} />
+          <p className="max-w-lg text-sm font-light leading-relaxed" style={{ color: colors.strengths_text }}>
             {"以穩健的經營與職人精神，為每一位客戶守護家的品質"}
           </p>
         </div>
@@ -63,34 +67,67 @@ export function StrengthsSection() {
               <div
                 key={strength.title}
                 onClick={() => setActiveIndex(isActive ? null : index)}
-                className={`group flex flex-col items-center gap-6 border px-8 py-12 text-center transition-all duration-500 ${
-                  isActive
-                    ? "border-[#6B4E31] bg-[#6B4E31] shadow-lg"
-                    : "border-[#E5E0DB] bg-[#FFFFFF] hover:border-[#6B4E31] hover:bg-[#6B4E31] hover:shadow-lg"
-                }`}
+                className="group flex flex-col items-center gap-6 border px-8 py-12 text-center transition-all duration-500"
+                style={{
+                  borderColor: isActive ? colors.strengths_accent : colors.strengths_card_border,
+                  backgroundColor: isActive ? colors.strengths_accent : colors.strengths_card_bg,
+                  boxShadow: isActive ? "0 10px 15px -3px rgba(0,0,0,0.1)" : undefined,
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.borderColor = colors.strengths_accent
+                    e.currentTarget.style.backgroundColor = colors.strengths_accent
+                    e.currentTarget.style.boxShadow = "0 10px 15px -3px rgba(0,0,0,0.1)"
+                    const title = e.currentTarget.querySelector("[data-strength-title]") as HTMLElement
+                    const desc = e.currentTarget.querySelector("[data-strength-desc]") as HTMLElement
+                    const iconBox = e.currentTarget.querySelector("[data-strength-icon-box]") as HTMLElement
+                    if (title) title.style.color = colors.strengths_bg
+                    if (desc) { desc.style.color = colors.strengths_bg; desc.style.opacity = "0.8" }
+                    if (iconBox) { iconBox.style.borderColor = `${colors.strengths_bg}66`; iconBox.style.backgroundColor = colors.strengths_bg }
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.borderColor = colors.strengths_card_border
+                    e.currentTarget.style.backgroundColor = colors.strengths_card_bg
+                    e.currentTarget.style.boxShadow = "none"
+                    const title = e.currentTarget.querySelector("[data-strength-title]") as HTMLElement
+                    const desc = e.currentTarget.querySelector("[data-strength-desc]") as HTMLElement
+                    const iconBox = e.currentTarget.querySelector("[data-strength-icon-box]") as HTMLElement
+                    if (title) title.style.color = colors.strengths_heading
+                    if (desc) { desc.style.color = colors.strengths_text; desc.style.opacity = "1" }
+                    if (iconBox) { iconBox.style.borderColor = colors.strengths_card_border; iconBox.style.backgroundColor = "" }
+                  }
+                }}
               >
                 <div
-                  className={`flex h-16 w-16 items-center justify-center border transition-colors duration-500 ${
-                    isActive
-                      ? "border-[#FAFAF8]/40 bg-[#FAFAF8]"
-                      : "border-[#E5E0DB] group-hover:border-[#FAFAF8]/40 group-hover:bg-[#FAFAF8]"
-                  }`}
+                  data-strength-icon-box
+                  className="flex h-16 w-16 items-center justify-center border transition-colors duration-500"
+                  style={{
+                    borderColor: isActive ? `${colors.strengths_bg}66` : colors.strengths_card_border,
+                    backgroundColor: isActive ? colors.strengths_bg : undefined,
+                  }}
                 >
-                  <strength.icon className="h-7 w-7 text-[#6B4E31] transition-colors duration-500" />
+                  <strength.icon className="h-7 w-7 transition-colors duration-500" style={{ color: colors.strengths_icon }} />
                 </div>
                 <h3
-                  className={`text-xl font-bold tracking-wider transition-colors duration-500 ${
-                    isActive ? "text-[#FAFAF8]" : "text-[#2F2F2F] group-hover:text-[#FAFAF8]"
-                  }`}
-                  style={getListItemStyle(content, "strengths", strength.sortOrder, "title", "home")}
+                  data-strength-title
+                  className="text-xl font-bold tracking-wider transition-colors duration-500"
+                  style={{
+                    color: isActive ? colors.strengths_bg : colors.strengths_heading,
+                    ...getListItemStyle(content, "strengths", strength.sortOrder, "title", "home"),
+                  }}
                 >
                   {strength.title}
                 </h3>
                 <p
-                  className={`text-sm font-light leading-relaxed transition-colors duration-500 ${
-                    isActive ? "text-[#FAFAF8]/80" : "text-[#6B6B6B] group-hover:text-[#FAFAF8]/80"
-                  }`}
-                  style={getListItemStyle(content, "strengths", strength.sortOrder, "description", "home")}
+                  data-strength-desc
+                  className="text-sm font-light leading-relaxed transition-colors duration-500"
+                  style={{
+                    color: isActive ? colors.strengths_bg : colors.strengths_text,
+                    opacity: isActive ? 0.8 : 1,
+                    ...getListItemStyle(content, "strengths", strength.sortOrder, "description", "home"),
+                  }}
                 >
                   {strength.description}
                 </p>

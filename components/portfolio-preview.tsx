@@ -12,7 +12,11 @@ const defaultWorks = [
   { title: "居家住宅室內設計", type: "2025", image: "/images/home/portfolio/home-portfolio-05.jpg", span2: false },
 ]
 
-export function PortfolioPreview() {
+interface PortfolioPreviewProps {
+  colors: Record<string, string>
+}
+
+export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const { content, listItems, images } = useCmsData("home")
 
@@ -28,14 +32,14 @@ export function PortfolioPreview() {
     : defaultWorks.map((w, i) => ({ ...w, sortOrder: i + 1 }))
 
   return (
-    <section className="bg-[#F5F0E8] py-24">
+    <section className="py-24" style={{ backgroundColor: colors.portfolio_bg }}>
       <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-10 flex items-end justify-between border-b border-[#E5E0DB] pb-6">
+        <div className="mb-10 flex items-end justify-between border-b pb-6" style={{ borderColor: colors.strengths_card_border }}>
           <div>
-            <span className="mb-2 block text-xs font-light tracking-[0.4em] uppercase text-[#B5956A]">Portfolio</span>
-            <h2 className="text-3xl font-bold tracking-wider text-[#2F2F2F] md:text-4xl">精選作品</h2>
+            <span className="mb-2 block text-xs font-light tracking-[0.4em] uppercase" style={{ color: colors.portfolio_accent }}>Portfolio</span>
+            <h2 className="text-3xl font-bold tracking-wider md:text-4xl" style={{ color: colors.portfolio_heading }}>精選作品</h2>
           </div>
-          <Link href="/design" className="group flex items-center gap-2 text-xs tracking-[0.2em] uppercase text-[#6B4E31] transition-colors hover:text-[#2F2F2F]">
+          <Link href="/design" className="group flex items-center gap-2 text-xs tracking-[0.2em] uppercase transition-colors" style={{ color: colors.portfolio_accent }}>
             更多作品 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
