@@ -36,12 +36,6 @@ export function HeroSection({ colors }: HeroSectionProps) {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-sm font-light tracking-[0.4em] uppercase" style={{ color: colors.hero_text, ...getContentStyle(content, "hero", "subtitle", "home") }}>
-            {subtitle}
-          </span>
-          <div className="my-4 h-px w-16" style={{ backgroundColor: colors.hero_accent }} />
-        </div>
         <h1 className="text-4xl font-bold tracking-wider md:text-6xl lg:text-7xl" style={{ color: colors.hero_heading, ...getContentStyle(content, "hero", "title", "home") }}>
           {title}
         </h1>
