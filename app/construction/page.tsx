@@ -218,7 +218,7 @@ export default function ConstructionPage() {
           {services.map((s, i) => (
             <div key={s.num} className="service-card" ref={addRef(9 + i)} style={{ ...fadeStyle, transitionDelay: `${(i % 3) * 0.15}s`, padding: "2.5rem", border: "0.5px solid #E8E3DA", transition: "border-color 0.3s, background 0.3s" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginBottom: "1.5rem" }}>
-                <span className="serif" style={{ fontSize: "0.75rem", color: "#8A7A68" }}>{s.num}</span>
+                <span className="serif" style={{ fontSize: "0.75rem", color: "#8A7A68", ...getListItemStyle(content, "services", s.sortOrder, "subtitle", "construction") }}>{s.num}</span>
                 <s.icon size={16} style={{ color: "#8A7A68" }} />
               </div>
               <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "services", s.sortOrder, "title", "construction") }}>{s.name}</h3>
