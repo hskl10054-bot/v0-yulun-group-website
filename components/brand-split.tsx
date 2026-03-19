@@ -24,7 +24,7 @@ function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href, tit
         <h2 className="text-2xl font-bold tracking-wider md:text-3xl lg:text-4xl" style={{ color: colors.brands_heading, ...titleStyle }}>{title}</h2>
         <div className="h-px w-12 transition-all duration-500 group-hover:w-20" style={{ backgroundColor: colors.brands_accent }} />
         <p className="max-w-xs text-sm font-light leading-relaxed md:text-base" style={{ color: colors.brands_text, opacity: 0.7, ...descriptionStyle }}>{description}</p>
-        <div className="mt-4 flex items-center gap-2 px-6 py-3 text-sm tracking-widest transition-all duration-500" style={{ borderWidth: "1px", borderStyle: "solid", borderColor: `${colors.brands_heading}4D`, color: colors.brands_heading }}>
+        <div className="mt-4 flex items-center gap-2 px-6 py-3 text-sm tracking-widest transition-all duration-500 group-hover:border-[#B5956A] group-hover:bg-[#B5956A] group-hover:text-[#2A2520]" style={{ borderWidth: "1px", borderStyle: "solid", borderColor: `${colors.brands_heading}4D`, color: colors.brands_heading }}>
           進入品牌官網 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>
       </div>
