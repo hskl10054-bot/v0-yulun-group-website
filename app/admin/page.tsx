@@ -8,6 +8,8 @@ import {
   Type, ChevronDown, Palette
 } from "lucide-react"
 
+import { getDefaultContentFont, getDefaultListFont } from "@/lib/default-fonts"
+
 // ─── Default Colors Per Page (pre-fill from current site) ────────
 const DEFAULT_COLORS: Record<string, Record<string, string>> = {
   home: {
@@ -495,6 +497,25 @@ export default function AdminPage() {
     // Fallback to default colors for color section
     if (section === "colors") {
       return DEFAULT_COLORS[activePage]?.[key] || ""
+    }
+    // Fallback to default fonts for font style keys
+    if (key.endsWith("_font_size") || key.endsWith("_font_family")) {
+      const prop = key.endsWith("_font_size") ? "fontSize" : "fontFamily"
+      // Content field fonts: section="hero", key="title_font_size"
+      const fieldKey = key.replace(/_font_size$/, "").replace(/_font_family$/, "")
+      // Check if this is a list item style: section="services_styles", key="item_1_title_font_size"
+      if (section.endsWith("_styles")) {
+        const sectionKey = section.replace(/_styles$/, "")
+        const match = fieldKey.match(/^item_\d+_(.+)$/)
+        if (match) {
+          const field = match[1]
+          const defaults = getDefaultListFont(activePage, sectionKey, field)
+          return defaults[prop] || ""
+        }
+      } else {
+        const defaults = getDefaultContentFont(activePage, section, fieldKey)
+        return defaults[prop] || ""
+      }
     }
     return ""
   }
@@ -1120,15 +1141,25 @@ const FONT_FAMILIES = [
 const FONT_SIZES = [
   { value: "", label: "預設" },
   { value: "0.625rem", label: "10px (極小)" },
+  { value: "0.65rem", label: "10.4px" },
+  { value: "0.7rem", label: "11.2px" },
   { value: "0.75rem", label: "12px (小)" },
+  { value: "0.82rem", label: "13.1px" },
   { value: "0.875rem", label: "14px" },
+  { value: "0.88rem", label: "14.1px" },
   { value: "1rem", label: "16px (內文)" },
+  { value: "1.05rem", label: "16.8px" },
   { value: "1.125rem", label: "18px" },
   { value: "1.25rem", label: "20px" },
+  { value: "1.275rem", label: "20.4px" },
+  { value: "1.3rem", label: "20.8px" },
+  { value: "1.4rem", label: "22.4px" },
   { value: "1.5rem", label: "24px (小標)" },
   { value: "1.75rem", label: "28px" },
   { value: "2rem", label: "32px (標題)" },
+  { value: "2.49rem", label: "39.8px" },
   { value: "2.5rem", label: "40px" },
+  { value: "2.8rem", label: "44.8px" },
   { value: "3rem", label: "48px (大標)" },
   { value: "3.5rem", label: "56px" },
   { value: "4rem", label: "64px (超大)" },

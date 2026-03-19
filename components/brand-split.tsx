@@ -62,9 +62,9 @@ export function BrandSplit() {
           imageSrc={card.imageSrc}
           imageAlt={card.title}
           href={card.href}
-          titleStyle={getListItemStyle(content, "brand_cards", card.sortOrder, "title")}
-          subtitleStyle={getListItemStyle(content, "brand_cards", card.sortOrder, "subtitle")}
-          descriptionStyle={getListItemStyle(content, "brand_cards", card.sortOrder, "description")}
+          titleStyle={getListItemStyle(content, "brand_cards", card.sortOrder, "title", "home")}
+          subtitleStyle={getListItemStyle(content, "brand_cards", card.sortOrder, "subtitle", "home")}
+          descriptionStyle={getListItemStyle(content, "brand_cards", card.sortOrder, "description", "home")}
         />
       ))}
     </section>

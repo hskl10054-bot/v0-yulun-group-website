@@ -160,11 +160,11 @@ export default function DesignPage() {
       {/* HERO */}
       <section className="resp-hero" style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", paddingTop: "5rem" }}>
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
-          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "1.275rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "2rem", ...getContentStyle(content, "hero", "en_subtitle") }}>{heroEnSubtitle}</p>
-          <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.5rem, 6vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem", ...getContentStyle(content, "hero", "title") }}>
-            {heroTitle || "為你的空間"}<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em style={{ fontStyle: "italic", color: "#8C8479", ...getContentStyle(content, "hero", "title_italic") }}>{heroTitleItalic || "注入魔法"}</em><img src="/images/sparkle.svg" alt="" width={80} height={80} style={{ flexShrink: 0, marginLeft: "0.1rem" }} /></span>
+          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "1.275rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "2rem", ...getContentStyle(content,"hero", "en_subtitle", "design") }}>{heroEnSubtitle}</p>
+          <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.5rem, 6vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem", ...getContentStyle(content,"hero", "title", "design") }}>
+            {heroTitle || "為你的空間"}<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em style={{ fontStyle: "italic", color: "#8C8479", ...getContentStyle(content,"hero", "title_italic", "design") }}>{heroTitleItalic || "注入魔法"}</em><img src="/images/sparkle.svg" alt="" width={80} height={80} style={{ flexShrink: 0, marginLeft: "0.1rem" }} /></span>
           </h1>
-          <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content, "hero", "description") }}>
+          <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content,"hero", "description", "design") }}>
             {heroDesc || "空房開門，幸福進門。我們相信空間不只是鋼筋水泥，更是承載幸福的容器。當魔法注入空間，家便開始講述屬於你的幸福故事。"}
           </p>
           <a ref={addRef(3)} href="#portfolio" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
@@ -179,14 +179,14 @@ export default function DesignPage() {
       {/* ABOUT */}
       <section className="resp-hero" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "70vh" }}>
         <div className="resp-hero-text" style={{ background: "linear-gradient(160deg, #D4C4AE 0%, #BFB09A 40%, #9A8870 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: "6rem 5rem" }}>
-          <blockquote className="serif" style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.9)", lineHeight: 1.8, letterSpacing: "0.08em", textAlign: "center", ...getContentStyle(content, "about", "quote") }}>
+          <blockquote className="serif" style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.9)", lineHeight: 1.8, letterSpacing: "0.08em", textAlign: "center", ...getContentStyle(content,"about", "quote", "design") }}>
             {aboutQuote ? `「${aboutQuote}」` : "「空間是無聲的語言，\n設計是讓它開口說話。」"}
           </blockquote>
         </div>
         <div className="resp-contact-left" style={{ background: "#F5F0E8", padding: "6rem 5rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1.5rem" }}>About Us</p>
           <h2 ref={addRef(5)} className="serif resp-heading" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "2rem" }}>我們是誰</h2>
-          <p ref={addRef(6)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2.1, color: "#8C8479", marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content, "about", "description") }}>
+          <p ref={addRef(6)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2.1, color: "#8C8479", marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content,"about", "description", "design") }}>
             {aboutDesc || "空房子設計致力於打破格局束縛，以人為本，透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。我們不做複製品，每一個案子都從屋主的生活習慣、個性與夢想出發，打造獨一無二的空間故事。"}
           </p>
           <div ref={addRef(7)} className="resp-stats" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "flex", gap: "3rem" }}>
@@ -212,9 +212,9 @@ export default function DesignPage() {
         <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.5rem" }}>
           {services.map((s, i) => (
             <div key={s.num} className="service-card" ref={addRef(8 + i)} style={{ ...fadeStyle, transitionDelay: `${(i % 3) * 0.15}s`, padding: "2.5rem", border: "0.5px solid #E8E3DA", transition: "border-color 0.3s, background 0.3s", cursor: "default" }}>
-              <span style={{ fontSize: "2.49rem", color: "#B5956A", marginBottom: "1.5rem", display: "block", fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "services", s.sortOrder, "subtitle") }}>{s.num}</span>
-              <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "services", s.sortOrder, "title") }}>{s.name}</h3>
-              <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300, ...getListItemStyle(content, "services", s.sortOrder, "description") }}>{s.desc}</p>
+              <span style={{ fontSize: "2.49rem", color: "#B5956A", marginBottom: "1.5rem", display: "block", fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "services", s.sortOrder, "subtitle", "design") }}>{s.num}</span>
+              <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "services", s.sortOrder, "title", "design") }}>{s.name}</h3>
+              <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300, ...getListItemStyle(content, "services", s.sortOrder, "description", "design") }}>{s.desc}</p>
             </div>
           ))}
         </div>
@@ -234,7 +234,7 @@ export default function DesignPage() {
             <div key={p.title} className="portfolio-item" style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined }}>
               <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
               <div className="portfolio-overlay" style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,25,20,0.7) 0%, transparent 60%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem", opacity: 0, transition: "opacity 0.4s" }}>
-                <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", ...getListItemStyle(content, "portfolio", p.sortOrder, "title") }}>{p.title}</h3>
+                <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", ...getListItemStyle(content, "portfolio", p.sortOrder, "title", "design") }}>{p.title}</h3>
               </div>
             </div>
           ))}
@@ -248,9 +248,9 @@ export default function DesignPage() {
         <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
           {testimonials.map((t, i) => (
             <div key={t.name} ref={addRef(20 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "2.5rem", border: "0.5px solid #E8E3DA" }}>
-              <p className="serif" style={{ fontSize: "1rem", fontStyle: "italic", color: "#2A2520", lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300, ...getListItemStyle(content, "testimonials", t.sortOrder, "description") }}>「{t.quote}」</p>
-              <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#B5956A", ...getListItemStyle(content, "testimonials", t.sortOrder, "title") }}>{t.name}</p>
-              <p style={{ fontSize: "0.65rem", color: "#8C8479", marginTop: "0.3rem", letterSpacing: "0.1em", ...getListItemStyle(content, "testimonials", t.sortOrder, "subtitle") }}>{t.info}</p>
+              <p className="serif" style={{ fontSize: "1rem", fontStyle: "italic", color: "#2A2520", lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300, ...getListItemStyle(content, "testimonials", t.sortOrder, "description", "design") }}>「{t.quote}」</p>
+              <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#B5956A", ...getListItemStyle(content, "testimonials", t.sortOrder, "title", "design") }}>{t.name}</p>
+              <p style={{ fontSize: "0.65rem", color: "#8C8479", marginTop: "0.3rem", letterSpacing: "0.1em", ...getListItemStyle(content, "testimonials", t.sortOrder, "subtitle", "design") }}>{t.info}</p>
             </div>
           ))}
         </div>
@@ -264,7 +264,7 @@ export default function DesignPage() {
           {[["地址",contactAddress,"address"],["電話",contactPhone,"phone"],["Email",contactEmail,"email"],["營業時間",contactHours,"hours"]].map(([label, val, key]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.4rem" }}>{label}</p>
-              <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520", ...getContentStyle(content, "contact", key) }}>{val}</p>
+              <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520", ...getContentStyle(content, "contact", key, "design") }}>{val}</p>
             </div>
           ))}
         </div>

@@ -61,7 +61,7 @@ export function PortfolioPreview() {
                   }`}
                 >
                   <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
-                  <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "portfolio", w.sortOrder, "title") }}>{w.title}</h3>
+                  <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "portfolio", w.sortOrder, "title", "home") }}>{w.title}</h3>
                 </div>
               </div>
             )

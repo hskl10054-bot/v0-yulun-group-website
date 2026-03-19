@@ -82,7 +82,7 @@ export function StrengthsSection() {
                   className={`text-xl font-bold tracking-wider transition-colors duration-500 ${
                     isActive ? "text-[#FAFAF8]" : "text-[#2F2F2F] group-hover:text-[#FAFAF8]"
                   }`}
-                  style={getListItemStyle(content, "strengths", strength.sortOrder, "title")}
+                  style={getListItemStyle(content, "strengths", strength.sortOrder, "title", "home")}
                 >
                   {strength.title}
                 </h3>
@@ -90,7 +90,7 @@ export function StrengthsSection() {
                   className={`text-sm font-light leading-relaxed transition-colors duration-500 ${
                     isActive ? "text-[#FAFAF8]/80" : "text-[#6B6B6B] group-hover:text-[#FAFAF8]/80"
                   }`}
-                  style={getListItemStyle(content, "strengths", strength.sortOrder, "description")}
+                  style={getListItemStyle(content, "strengths", strength.sortOrder, "description", "home")}
                 >
                   {strength.description}
                 </p>
