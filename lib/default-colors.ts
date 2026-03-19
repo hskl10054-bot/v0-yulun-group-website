@@ -31,7 +31,7 @@ export const DEFAULT_COLORS: Record<string, Record<string, string>> = {
     services_bg: "#FAF8F4", services_heading: "#2A2520", services_text: "#8C8479",
     services_accent: "#8A7A68", services_card_border: "#E8E3DA",
     portfolio_bg: "#F0EBE3", portfolio_heading: "#2A2520", portfolio_accent: "#8A7A68", portfolio_overlay: "rgba(30,25,20,0.6)",
-    testimonials_bg: "#F0EBE3", testimonials_heading: "#2A2520", testimonials_text: "#2A2520",
+    testimonials_bg: "#EFEFEF", testimonials_heading: "#2A2520", testimonials_text: "#2A2520",
     testimonials_card_border: "#DDD7CE", testimonials_accent: "#8A7A68",
     contact_bg: "#FFFFFF", contact_heading: "#2A2520", contact_text: "#8C8479",
     contact_accent: "#8A7A68", contact_btn_bg: "#8A7A68", contact_btn_text: "#FAF8F4",
