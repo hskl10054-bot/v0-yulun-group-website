@@ -1,0 +1,165 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { Menu, X } from "lucide-react"
+
+export function HomeNavbar() {
+  const [hidden, setHidden] = useState(false)
+  const [atTop, setAtTop] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    let lastY = window.scrollY
+    const onScroll = () => {
+      const y = window.scrollY
+      setAtTop(y < 10)
+      setHidden(y > lastY && y > 80)
+      lastY = y
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  return (
+    <>
+      <nav
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          transform: hidden ? "translateY(-100%)" : "translateY(0)",
+          transition: "transform 0.4s ease, background 0.3s ease, box-shadow 0.3s ease",
+          background: atTop ? "transparent" : "rgba(255,255,255,0.95)",
+          backdropFilter: atTop ? "none" : "blur(12px)",
+          boxShadow: atTop ? "none" : "0 1px 0 rgba(0,0,0,0.06)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "1.2rem 3rem",
+            maxWidth: 1400,
+            margin: "0 auto",
+          }}
+        >
+          {/* Left - Contact */}
+          <a
+            href="#contact"
+            style={{
+              fontSize: "0.65rem",
+              letterSpacing: "0.3em",
+              textTransform: "uppercase",
+              color: atTop ? "#FAFAF8" : "#2F2F2F",
+              textDecoration: "none",
+              transition: "color 0.3s",
+              fontWeight: 400,
+            }}
+          >
+            Contact
+          </a>
+
+          {/* Center - Logo */}
+          <Link
+            href="/"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textDecoration: "none",
+              gap: "0.15rem",
+            }}
+          >
+            <span
+              style={{
+                fontSize: "1.1rem",
+                fontWeight: 700,
+                letterSpacing: "0.35em",
+                color: atTop ? "#FAFAF8" : "#2F2F2F",
+                transition: "color 0.3s",
+              }}
+            >
+              裕 綸 集 團
+            </span>
+            <span
+              style={{
+                fontSize: "0.55rem",
+                letterSpacing: "0.25em",
+                textTransform: "uppercase",
+                color: atTop ? "rgba(250,250,248,0.6)" : "#8C8479",
+                transition: "color 0.3s",
+                fontWeight: 300,
+              }}
+            >
+              Yulun Group
+            </span>
+          </Link>
+
+          {/* Right - Hamburger Menu */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "0.25rem",
+              color: atTop ? "#FAFAF8" : "#2F2F2F",
+              transition: "color 0.3s",
+            }}
+            aria-label="選單"
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Fullscreen Menu Overlay */}
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          zIndex: 99,
+          background: "rgba(26,21,16,0.95)",
+          backdropFilter: "blur(8px)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "2.5rem",
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "auto" : "none",
+          transition: "opacity 0.4s ease",
+        }}
+      >
+        {[
+          { label: "首頁", href: "/" },
+          { label: "空房子室內設計", href: "/design" },
+          { label: "裕綸室內裝修", href: "/construction" },
+          { label: "聯絡我們", href: "#contact" },
+        ].map((item) => (
+          <Link
+            key={item.label}
+            href={item.href}
+            onClick={() => setMenuOpen(false)}
+            style={{
+              fontSize: "1.4rem",
+              fontWeight: 300,
+              letterSpacing: "0.2em",
+              color: "#FAFAF8",
+              textDecoration: "none",
+              transition: "opacity 0.3s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.6")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
+    </>
+  )
+}
