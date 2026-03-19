@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getSupabaseAdmin } from "@/lib/supabase"
 
+export const dynamic = "force-dynamic"
+
 // GET /api/content?page=home
 export async function GET(req: NextRequest) {
   const page = req.nextUrl.searchParams.get("page")
@@ -11,7 +13,9 @@ export async function GET(req: NextRequest) {
 
   const { data, error } = await query
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json(data)
+  return NextResponse.json(data, {
+    headers: { "Cache-Control": "no-store, no-cache, must-revalidate" },
+  })
 }
 
 // PUT /api/content — upsert a single key-value
