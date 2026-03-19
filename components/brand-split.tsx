@@ -17,7 +17,7 @@ function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href }: B
         <h2 className="text-2xl font-bold tracking-wider text-[#FAFAF8] md:text-3xl lg:text-4xl">{title}</h2>
         <div className="h-px w-12 bg-[#6B4E31] transition-all duration-500 group-hover:w-20" />
         <p className="max-w-xs text-sm font-light leading-relaxed text-[#FAFAF8]/70 md:text-base">{description}</p>
-        <div className="mt-4 flex items-center gap-2 border border-[#FAFAF8]/30 px-6 py-3 text-sm tracking-widest text-[#FAFAF8] transition-all duration-500 group-hover:border-[#6B4E31] group-hover:bg-[#6B4E31]">
+        <div className="mt-4 flex items-center gap-2 border border-[#FAFAF8]/30 px-6 py-3 text-sm tracking-widest text-[#FAFAF8] transition-all duration-500 group-hover:border-[#B5956A] group-hover:bg-[#B5956A] group-hover:text-[#2A2520]">
           進入品牌官網 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>
       </div>
