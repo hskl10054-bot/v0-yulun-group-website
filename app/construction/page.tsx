@@ -169,11 +169,11 @@ export default function ConstructionPage() {
       {/* HERO */}
       <section className="resp-hero" style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", paddingTop: "5rem" }}>
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
-          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "2rem", ...getContentStyle(content, "hero", "en_subtitle") }}>{heroEnSubtitle}</p>
-          <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.2rem, 5.5vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem", ...getContentStyle(content, "hero", "title") }}>
-            {heroTitle}<br /><em style={{ fontStyle: "italic", color: "#8C8479", ...getContentStyle(content, "hero", "title_line2") }}>{heroTitleLine2}</em><br /><span style={getContentStyle(content, "hero", "title_line3")}>{heroTitleLine3}</span>
+          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "2rem", ...getContentStyle(content, "hero", "en_subtitle", "construction") }}>{heroEnSubtitle}</p>
+          <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.2rem, 5.5vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem", ...getContentStyle(content, "hero", "title", "construction") }}>
+            {heroTitle}<br /><em style={{ fontStyle: "italic", color: "#8C8479", ...getContentStyle(content, "hero", "title_line2", "construction") }}>{heroTitleLine2}</em><br /><span style={getContentStyle(content, "hero", "title_line3", "construction")}>{heroTitleLine3}</span>
           </h1>
-          <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content, "hero", "description") }}>
+          <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content, "hero", "description", "construction") }}>
             {heroDesc || "裕綸裝修擁有政府核可專業施工證照，秉持標準化 SOP 工程管理。我們重視隱蔽工程細節，從水電配置、防水工法到結構強化，皆由具備資深執照的職人團隊把關。2年保固，安心無憂。"}
           </p>
           <a ref={addRef(3)} href="#projects" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
@@ -197,8 +197,8 @@ export default function ConstructionPage() {
                 <div className="strength-icon" style={{ width: 64, height: 64, border: "0.5px solid #D8D0C8", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem", transition: "background 0.4s, border-color 0.4s" }}>
                   <s.icon size={28} style={{ color: "#8A7A68", transition: "color 0.4s" }} />
                 </div>
-                <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "strengths", s.sortOrder, "title") }}>{s.title}</h3>
-                <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300, ...getListItemStyle(content, "strengths", s.sortOrder, "description") }}>{s.desc}</p>
+                <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "strengths", s.sortOrder, "title", "construction") }}>{s.title}</h3>
+                <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300, ...getListItemStyle(content, "strengths", s.sortOrder, "description", "construction") }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -221,8 +221,8 @@ export default function ConstructionPage() {
                 <span className="serif" style={{ fontSize: "0.75rem", color: "#8A7A68" }}>{s.num}</span>
                 <s.icon size={16} style={{ color: "#8A7A68" }} />
               </div>
-              <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "services", s.sortOrder, "title") }}>{s.name}</h3>
-              <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300, ...getListItemStyle(content, "services", s.sortOrder, "description") }}>{s.desc}</p>
+              <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "services", s.sortOrder, "title", "construction") }}>{s.name}</h3>
+              <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300, ...getListItemStyle(content, "services", s.sortOrder, "description", "construction") }}>{s.desc}</p>
             </div>
           ))}
         </div>
@@ -242,7 +242,7 @@ export default function ConstructionPage() {
             <div key={p.title} className="portfolio-item" style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined }}>
               <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,25,20,0.6) 0%, transparent 50%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem" }}>
-                <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", marginBottom: "0.3rem", ...getListItemStyle(content, "portfolio", p.sortOrder, "title") }}>{p.title}</h3>
+                <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", marginBottom: "0.3rem", ...getListItemStyle(content, "portfolio", p.sortOrder, "title", "construction") }}>{p.title}</h3>
               </div>
             </div>
           ))}
@@ -256,9 +256,9 @@ export default function ConstructionPage() {
         <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
           {testimonials.map((t, i) => (
             <div key={t.name} ref={addRef(15 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "2.5rem", border: "0.5px solid #DDD7CE" }}>
-              <p className="serif" style={{ fontSize: "1rem", fontStyle: "italic", color: "#2A2520", lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300, ...getListItemStyle(content, "testimonials", t.sortOrder, "description") }}>「{t.quote}」</p>
-              <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8A7A68", ...getListItemStyle(content, "testimonials", t.sortOrder, "title") }}>{t.name}</p>
-              <p style={{ fontSize: "0.65rem", color: "#8C8479", marginTop: "0.3rem", letterSpacing: "0.1em", ...getListItemStyle(content, "testimonials", t.sortOrder, "subtitle") }}>{t.info}</p>
+              <p className="serif" style={{ fontSize: "1rem", fontStyle: "italic", color: "#2A2520", lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300, ...getListItemStyle(content, "testimonials", t.sortOrder, "description", "construction") }}>「{t.quote}」</p>
+              <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8A7A68", ...getListItemStyle(content, "testimonials", t.sortOrder, "title", "construction") }}>{t.name}</p>
+              <p style={{ fontSize: "0.65rem", color: "#8C8479", marginTop: "0.3rem", letterSpacing: "0.1em", ...getListItemStyle(content, "testimonials", t.sortOrder, "subtitle", "construction") }}>{t.info}</p>
             </div>
           ))}
         </div>
@@ -272,7 +272,7 @@ export default function ConstructionPage() {
           {[["地址",contactAddress,"address"],["電話",contactPhone,"phone"],["Email",contactEmail,"email"],["營業時間",contactHours,"hours"]].map(([label, val, key]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "0.4rem" }}>{label}</p>
-              <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520", ...getContentStyle(content, "contact", key) }}>{val}</p>
+              <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520", ...getContentStyle(content, "contact", key, "construction") }}>{val}</p>
             </div>
           ))}
         </div>

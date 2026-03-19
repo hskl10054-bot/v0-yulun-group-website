@@ -18,7 +18,7 @@ export function ContactSection() {
         {[["地址",address,"address"],["電話",phone,"phone"],["Email",email,"email"],["營業時間",hours,"hours"]].map(([label, val, key]) => (
           <div key={label} style={{ marginBottom: "2rem" }}>
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.4rem" }}>{label}</p>
-            <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520", ...getContentStyle(content, "contact", key) }}>{val}</p>
+            <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520", ...getContentStyle(content, "contact", key, "home") }}>{val}</p>
           </div>
         ))}
       </div>
