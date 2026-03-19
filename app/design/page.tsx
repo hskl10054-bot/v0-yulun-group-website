@@ -61,7 +61,7 @@ export default function DesignPage() {
         }
         .cta-link:hover { color: #B5956A !important; border-color: #B5956A !important; }
         .back-link:hover { color: #B5956A !important; }
-        .form-input { background: transparent; border: none; border-bottom: 0.5px solid rgba(255,255,255,0.2); padding: 0.7rem 0; width: 100%; font-family: 'Josefin Sans',sans-serif; font-size: 0.85rem; font-weight: 300; letter-spacing: 0.1em; color: #FAF8F4; outline: none; transition: border-color 0.3s; }
+        .form-input { background: transparent; border: none; border-bottom: 0.5px solid rgba(255,255,255,0.2); padding: 0.7rem 0; width: 100%; font-family: 'Cormorant Garamond','Noto Serif TC',serif; font-size: 1.05rem; font-weight: 300; letter-spacing: 0.1em; color: #FAF8F4; outline: none; transition: border-color 0.3s; }
         .form-input:focus { border-bottom-color: #B5956A; }
         .form-input::placeholder { color: rgba(255,255,255,0.3); }
         textarea.form-input { resize: none; height: 90px; }
