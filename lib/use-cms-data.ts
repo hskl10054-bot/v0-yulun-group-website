@@ -73,21 +73,19 @@ export function getImageUrl(images: ImageRow[], section: string, sortOrder: numb
   return images.find((i) => i.section === section && i.sort_order === sortOrder)?.url || ""
 }
 
-// For overlay keys, extract the alpha from the default rgba value.
-// If CMS stores a plain hex (e.g. #2F2F2F), convert it back to rgba with the original alpha.
-function applyOverlayAlpha(key: string, cmsValue: string, defaultValue: string): string {
-  if (!key.includes("overlay")) return cmsValue
-  // Already has alpha (rgba/hsla) — use as-is
-  if (cmsValue.startsWith("rgba") || cmsValue.startsWith("hsla")) return cmsValue
-  // Extract alpha from default rgba value
-  const match = defaultValue.match(/rgba?\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*,\s*([\d.]+)\s*\)/)
-  const alpha = match ? match[1] : "0.7"
+// Convert overlay hex color + separate opacity value into rgba
+function buildOverlayRgba(hexOrRgba: string, opacity: number): string {
+  // If already rgba, replace the alpha portion
+  const rgbaMatch = hexOrRgba.match(/rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)/)
+  if (rgbaMatch) {
+    return `rgba(${rgbaMatch[1]},${rgbaMatch[2]},${rgbaMatch[3]},${opacity})`
+  }
   // Convert hex to rgba
-  const hex = cmsValue.replace("#", "")
+  const hex = hexOrRgba.replace("#", "")
   const r = parseInt(hex.substring(0, 2), 16)
   const g = parseInt(hex.substring(2, 4), 16)
   const b = parseInt(hex.substring(4, 6), 16)
-  return `rgba(${r},${g},${b},${alpha})`
+  return `rgba(${r},${g},${b},${opacity})`
 }
 
 // Helper: get all resolved colors for a page (CMS overrides + defaults)
@@ -97,7 +95,16 @@ export function usePageColors(content: ContentRow[], page: string): Record<strin
     const result: Record<string, string> = { ...defaults }
     for (const key of Object.keys(defaults)) {
       const cmsValue = getContentValue(content, "colors", key)
-      if (cmsValue) result[key] = applyOverlayAlpha(key, cmsValue, defaults[key])
+      if (cmsValue) result[key] = cmsValue
+    }
+    // Rebuild overlay colors using separate opacity values
+    for (const key of Object.keys(defaults)) {
+      if (key.endsWith("_overlay") && !key.endsWith("_overlay_opacity")) {
+        const opacityKey = `${key}_opacity`
+        const opacityStr = result[opacityKey] || defaults[opacityKey] || "50"
+        const opacity = Math.min(100, Math.max(0, parseInt(opacityStr, 10))) / 100
+        result[key] = buildOverlayRgba(result[key], opacity)
+      }
     }
     return result
   }, [content, page])

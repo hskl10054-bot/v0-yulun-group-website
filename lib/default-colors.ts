@@ -1,8 +1,8 @@
 // Shared default color values — used by both admin and frontend
 export const DEFAULT_COLORS: Record<string, Record<string, string>> = {
   home: {
-    hero_bg: "#2F2F2F", hero_heading: "#FAFAF8", hero_text: "#D4C5B2", hero_accent: "#6B4E31", hero_overlay: "rgba(47,47,47,0.7)",
-    brands_overlay: "rgba(47,47,47,0.6)", brands_heading: "#FAFAF8", brands_text: "#FAFAF8", brands_accent: "#6B4E31",
+    hero_bg: "#2F2F2F", hero_heading: "#FAFAF8", hero_text: "#D4C5B2", hero_accent: "#6B4E31", hero_overlay: "rgba(47,47,47,0.5)", hero_overlay_opacity: "50",
+    brands_overlay: "rgba(47,47,47,0.5)", brands_overlay_opacity: "50", brands_heading: "#FAFAF8", brands_text: "#FAFAF8", brands_accent: "#6B4E31",
     strengths_bg: "#FAFAF8", strengths_heading: "#2F2F2F", strengths_text: "#6B6B6B", strengths_accent: "#6B4E31",
     strengths_card_bg: "#FFFFFF", strengths_card_border: "#E5E0DB", strengths_icon: "#6B4E31",
     portfolio_bg: "#F5F0E8", portfolio_heading: "#2F2F2F", portfolio_accent: "#B5956A",
@@ -17,7 +17,7 @@ export const DEFAULT_COLORS: Record<string, Record<string, string>> = {
     about_bg: "#F5F0E8", about_heading: "#2A2520", about_text: "#8C8479", about_accent: "#B5956A",
     services_bg: "#FAF8F4", services_heading: "#2A2520", services_text: "#8C8479",
     services_accent: "#B5956A", services_card_border: "#E8E3DA",
-    portfolio_bg: "#F5F0E8", portfolio_heading: "#2A2520", portfolio_accent: "#B5956A", portfolio_overlay: "rgba(30,25,20,0.7)",
+    portfolio_bg: "#F5F0E8", portfolio_heading: "#2A2520", portfolio_accent: "#B5956A", portfolio_overlay: "rgba(30,25,20,0.5)", portfolio_overlay_opacity: "50",
     testimonials_bg: "#F5F0E8", testimonials_heading: "#2A2520", testimonials_text: "#2A2520",
     testimonials_card_border: "#E8E3DA", testimonials_accent: "#B5956A",
     contact_bg: "#FFFFFF", contact_heading: "#2A2520", contact_text: "#8C8479",
@@ -30,7 +30,7 @@ export const DEFAULT_COLORS: Record<string, Record<string, string>> = {
     strengths_card_bg: "#FFFFFF", strengths_card_border: "#D8D0C8", strengths_icon: "#8A7A68",
     services_bg: "#FAF8F4", services_heading: "#2A2520", services_text: "#8C8479",
     services_accent: "#8A7A68", services_card_border: "#E8E3DA",
-    portfolio_bg: "#F0EBE3", portfolio_heading: "#2A2520", portfolio_accent: "#8A7A68", portfolio_overlay: "rgba(30,25,20,0.6)",
+    portfolio_bg: "#F0EBE3", portfolio_heading: "#2A2520", portfolio_accent: "#8A7A68", portfolio_overlay: "rgba(30,25,20,0.5)", portfolio_overlay_opacity: "50",
     testimonials_bg: "#F0EBE3", testimonials_heading: "#2A2520", testimonials_text: "#2A2520",
     testimonials_card_border: "#DDD7CE", testimonials_accent: "#8A7A68",
     contact_bg: "#FFFFFF", contact_heading: "#2A2520", contact_text: "#8C8479",

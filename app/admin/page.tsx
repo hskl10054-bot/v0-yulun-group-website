@@ -1360,6 +1360,30 @@ function ColorSection({ sections, getContent, setContentValue }: {
                   />
                 ))}
               </div>
+              {/* Overlay opacity sliders */}
+              {sec.fields.filter((f) => f.key === "overlay").map(() => {
+                const opKey = `${sec.key}_overlay_opacity`
+                const opVal = getContent("colors", opKey) || "50"
+                return (
+                  <div key={opKey} className="space-y-1.5 mt-2">
+                    <label className="block text-[10px] font-medium text-gray-400 uppercase tracking-wider">
+                      遮罩不透明度 — {opVal}%
+                    </label>
+                    <div className="flex items-center gap-3">
+                      <span className="text-[10px] text-gray-400 w-4">0</span>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={opVal}
+                        onChange={(e) => setContentValue("colors", opKey, e.target.value)}
+                        className="flex-1 h-1.5 accent-amber-500 cursor-pointer"
+                      />
+                      <span className="text-[10px] text-gray-400 w-6">100</span>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           ))}
         </div>
