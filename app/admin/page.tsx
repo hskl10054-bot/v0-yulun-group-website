@@ -8,6 +8,55 @@ import {
   Type, ChevronDown, Palette
 } from "lucide-react"
 
+// ─── Default Colors Per Page (pre-fill from current site) ────────
+const DEFAULT_COLORS: Record<string, Record<string, string>> = {
+  home: {
+    hero_bg: "#2F2F2F", hero_heading: "#FAFAF8", hero_text: "#D4C5B2", hero_accent: "#6B4E31", hero_overlay: "rgba(47,47,47,0.7)",
+    brands_overlay: "rgba(47,47,47,0.6)", brands_heading: "#FAFAF8", brands_text: "#FAFAF8", brands_accent: "#6B4E31",
+    strengths_bg: "#FAFAF8", strengths_heading: "#2F2F2F", strengths_text: "#6B6B6B", strengths_accent: "#6B4E31",
+    strengths_card_bg: "#FFFFFF", strengths_card_border: "#E5E0DB", strengths_icon: "#6B4E31",
+    portfolio_bg: "#F5F0E8", portfolio_heading: "#2F2F2F", portfolio_accent: "#B5956A",
+    testimonials_bg: "#F5F0E8", testimonials_heading: "#2F2F2F", testimonials_text: "#2F2F2F",
+    testimonials_card_border: "#E8E3DA", testimonials_accent: "#B5956A",
+    contact_bg: "#FFFFFF", contact_heading: "#2F2F2F", contact_text: "#8C8479",
+    contact_accent: "#B5956A", contact_btn_bg: "#6B4E31", contact_btn_text: "#FAFAF8",
+    footer_bg: "#1A1510", footer_text: "#FAFAF8", footer_accent: "#6B4E31",
+  },
+  design: {
+    hero_bg: "#FAF8F4", hero_heading: "#2A2520", hero_text: "#8C8479", hero_accent: "#B5956A",
+    about_bg: "#F5F0E8", about_heading: "#2A2520", about_text: "#8C8479", about_accent: "#B5956A",
+    services_bg: "#FAF8F4", services_heading: "#2A2520", services_text: "#8C8479",
+    services_accent: "#B5956A", services_card_border: "#E8E3DA",
+    portfolio_bg: "#F5F0E8", portfolio_heading: "#2A2520", portfolio_accent: "#B5956A", portfolio_overlay: "rgba(30,25,20,0.7)",
+    testimonials_bg: "#F5F0E8", testimonials_heading: "#2A2520", testimonials_text: "#2A2520",
+    testimonials_card_border: "#E8E3DA", testimonials_accent: "#B5956A",
+    contact_bg: "#FFFFFF", contact_heading: "#2A2520", contact_text: "#8C8479",
+    contact_accent: "#B5956A", contact_btn_bg: "#B5956A", contact_btn_text: "#FAF8F4",
+    footer_bg: "#1A1510", footer_text: "#FAFAF8",
+  },
+  construction: {
+    hero_bg: "#FAF8F4", hero_heading: "#2A2520", hero_text: "#8C8479", hero_accent: "#8A7A68",
+    strengths_bg: "#F0EBE3", strengths_heading: "#2A2520", strengths_text: "#8C8479",
+    strengths_card_bg: "#FFFFFF", strengths_card_border: "#D8D0C8", strengths_icon: "#8A7A68",
+    services_bg: "#FAF8F4", services_heading: "#2A2520", services_text: "#8C8479",
+    services_accent: "#8A7A68", services_card_border: "#E8E3DA",
+    portfolio_bg: "#F0EBE3", portfolio_heading: "#2A2520", portfolio_accent: "#8A7A68", portfolio_overlay: "rgba(30,25,20,0.6)",
+    testimonials_bg: "#F0EBE3", testimonials_heading: "#2A2520", testimonials_text: "#2A2520",
+    testimonials_card_border: "#DDD7CE", testimonials_accent: "#8A7A68",
+    contact_bg: "#FFFFFF", contact_heading: "#2A2520", contact_text: "#8C8479",
+    contact_accent: "#8A7A68", contact_btn_bg: "#8A7A68", contact_btn_text: "#FAF8F4",
+    footer_bg: "#1A1510", footer_text: "#FAFAF8",
+  },
+  cafe: {
+    hero_bg: "#FAF8F4", hero_heading: "#2A2520", hero_text: "#8C8479", hero_accent: "#6B4E31",
+    features_bg: "#F5F0E8", features_heading: "#2A2520", features_text: "#8C8479",
+    features_card_bg: "#FFFFFF", features_card_border: "#D8D0C8", features_icon: "#6B4E31",
+    stores_bg: "#FAF8F4", stores_heading: "#2A2520", stores_text: "#8C8479",
+    stores_accent: "#6B4E31", stores_card_border: "#E8E3DA",
+    footer_bg: "#1A1510", footer_text: "#FAFAF8",
+  },
+}
+
 // ─── Brand Color Palette ─────────────────────────────────────────
 const BRAND_PALETTE = [
   { value: "#2F2F2F", label: "深炭灰", group: "主色" },
@@ -442,7 +491,12 @@ export default function AdminPage() {
     const dirty = dirtyContent.find((c) => c.section === section && c.key === key)
     if (dirty) return dirty.value
     const row = content.find((c) => c.page === activePage && c.section === section && c.key === key)
-    return row?.value || ""
+    if (row?.value) return row.value
+    // Fallback to default colors for color section
+    if (section === "colors") {
+      return DEFAULT_COLORS[activePage]?.[key] || ""
+    }
+    return ""
   }
 
   const setContentValue = (section: string, key: string, value: string) => {
