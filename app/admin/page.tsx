@@ -34,14 +34,50 @@ async function api<T>(url: string, opts?: RequestInit): Promise<T> {
 
 // ─── Sub-Components ──────────────────────────────────────────────
 
-function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label }: {
+const ASPECT_RATIOS = [
+  { value: "", label: "原始比例" },
+  { value: "1/1", label: "1:1 正方形" },
+  { value: "4/3", label: "4:3" },
+  { value: "3/2", label: "3:2" },
+  { value: "16/9", label: "16:9 寬螢幕" },
+  { value: "21/9", label: "21:9 超寬" },
+  { value: "3/4", label: "3:4 直式" },
+  { value: "2/3", label: "2:3 直式" },
+  { value: "9/16", label: "9:16 直式" },
+]
+
+const OBJECT_FITS = [
+  { value: "cover", label: "填滿裁切 (Cover)" },
+  { value: "contain", label: "完整顯示 (Contain)" },
+  { value: "fill", label: "拉伸填滿 (Fill)" },
+  { value: "none", label: "原始尺寸 (None)" },
+]
+
+const OBJECT_POSITIONS = [
+  { value: "center", label: "置中" },
+  { value: "top", label: "靠上" },
+  { value: "bottom", label: "靠下" },
+  { value: "left", label: "靠左" },
+  { value: "right", label: "靠右" },
+  { value: "top left", label: "左上" },
+  { value: "top right", label: "右上" },
+  { value: "bottom left", label: "左下" },
+  { value: "bottom right", label: "右下" },
+]
+
+function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label,
+  aspectRatio, objectFit, objectPosition, onAspectRatioChange, onObjectFitChange, onObjectPositionChange
+}: {
   currentImage: string; onUpload: (url: string) => void
   page: string; section: string; sortOrder: number; label?: string
+  aspectRatio?: string; objectFit?: string; objectPosition?: string
+  onAspectRatioChange?: (v: string) => void; onObjectFitChange?: (v: string) => void; onObjectPositionChange?: (v: string) => void
 }) {
   const fileRef = useRef<HTMLInputElement>(null)
   const [dragOver, setDragOver] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [preview, setPreview] = useState(currentImage)
+  const [showSettings, setShowSettings] = useState(false)
 
   useEffect(() => { setPreview(currentImage) }, [currentImage])
 
@@ -79,6 +115,11 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
   }, [handleFile])
 
   const hasImage = !!preview
+  const hasSettings = onAspectRatioChange && onObjectFitChange && onObjectPositionChange
+  const activeRatio = aspectRatio || ""
+  const activeFit = objectFit || "cover"
+  const activePos = objectPosition || "center"
+  const hasCustomSettings = activeRatio || activeFit !== "cover" || activePos !== "center"
 
   return (
     <div className="space-y-2">
@@ -113,7 +154,7 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
         )}
         {preview ? (
           <div className="relative group">
-            {/* Full image preview — no cropping */}
+            {/* Full image preview */}
             <div className="bg-[#f5f5f5] p-2">
               <img
                 src={preview}
@@ -122,6 +163,25 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
                 style={{ maxHeight: "400px", objectFit: "contain" }}
               />
             </div>
+            {/* Simulated display preview */}
+            {hasCustomSettings && (
+              <div className="border-t border-gray-100 bg-gray-50 px-4 py-3">
+                <p className="text-[10px] text-gray-400 uppercase tracking-wider mb-2">前台顯示預覽</p>
+                <div className="bg-[#e8e3da] rounded-lg overflow-hidden mx-auto" style={{ maxWidth: "100%", aspectRatio: activeRatio || "auto", maxHeight: "200px" }}>
+                  <img
+                    src={preview}
+                    alt="Display preview"
+                    className="w-full h-full rounded-lg"
+                    style={{
+                      objectFit: (activeFit as React.CSSProperties["objectFit"]) || "cover",
+                      objectPosition: activePos || "center",
+                      aspectRatio: activeRatio || "auto",
+                      maxHeight: "200px",
+                    }}
+                  />
+                </div>
+              </div>
+            )}
             {/* Image info bar */}
             <div className="flex items-center justify-between bg-white px-4 py-2.5 border-t border-gray-100">
               <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -155,6 +215,55 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
         )}
       </div>
       <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleChange} />
+
+      {/* Display settings panel */}
+      {hasImage && hasSettings && (
+        <div>
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs transition-colors ${
+              hasCustomSettings ? "bg-amber-50 text-amber-700" : "text-gray-400 hover:text-gray-600 hover:bg-gray-50"
+            }`}
+          >
+            <ImageIcon className="h-3.5 w-3.5" />
+            <span>顯示設定</span>
+            {hasCustomSettings && <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />}
+            <ChevronDown className={`h-3 w-3 transition-transform ${showSettings ? "rotate-180" : ""}`} />
+          </button>
+          {showSettings && (
+            <div className="mt-2 p-4 rounded-xl bg-gray-50 border border-gray-100 space-y-4">
+              <div className="grid grid-cols-3 gap-3">
+                <div className="space-y-1.5">
+                  <label className="block text-[10px] font-medium text-gray-400 uppercase tracking-wider">顯示比例</label>
+                  <select value={activeRatio} onChange={(e) => onAspectRatioChange(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-white px-2.5 py-2 text-xs text-gray-700 outline-none focus:border-amber-400">
+                    {ASPECT_RATIOS.map((r) => <option key={r.value} value={r.value}>{r.label}</option>)}
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="block text-[10px] font-medium text-gray-400 uppercase tracking-wider">填充模式</label>
+                  <select value={activeFit} onChange={(e) => onObjectFitChange(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-white px-2.5 py-2 text-xs text-gray-700 outline-none focus:border-amber-400">
+                    {OBJECT_FITS.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="block text-[10px] font-medium text-gray-400 uppercase tracking-wider">對齊位置</label>
+                  <select value={activePos} onChange={(e) => onObjectPositionChange(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 bg-white px-2.5 py-2 text-xs text-gray-700 outline-none focus:border-amber-400">
+                    {OBJECT_POSITIONS.map((p) => <option key={p.value} value={p.value}>{p.label}</option>)}
+                  </select>
+                </div>
+              </div>
+              <p className="text-[10px] text-gray-400 leading-relaxed">
+                <strong>填滿裁切</strong>：圖片填滿區域，超出部分裁切。
+                <strong>完整顯示</strong>：完整顯示圖片，可能有留白。
+                <strong>對齊位置</strong>：裁切時保留的焦點位置。
+              </p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -318,6 +427,16 @@ export default function AdminPage() {
     return images.filter((i) => i.page === activePage && i.section === section).sort((a, b) => a.sort_order - b.sort_order)
   }
 
+  // Helper to generate image display setting props for ImageUploader
+  const imageDisplayProps = (section: string, sortOrder: number = 1) => ({
+    aspectRatio: getContent(`${section}_img`, `${sortOrder}_aspect_ratio`),
+    objectFit: getContent(`${section}_img`, `${sortOrder}_object_fit`),
+    objectPosition: getContent(`${section}_img`, `${sortOrder}_object_position`),
+    onAspectRatioChange: (v: string) => setContentValue(`${section}_img`, `${sortOrder}_aspect_ratio`, v),
+    onObjectFitChange: (v: string) => setContentValue(`${section}_img`, `${sortOrder}_object_fit`, v),
+    onObjectPositionChange: (v: string) => setContentValue(`${section}_img`, `${sortOrder}_object_position`, v),
+  })
+
   // ─── Save All Changes ───────────────────────────────────────
   const handleSave = async () => {
     setSaving(true)
@@ -446,6 +565,7 @@ export default function AdminPage() {
                   page={activePage}
                   section={imgSection}
                   sortOrder={item.sort_order}
+                  {...imageDisplayProps(imgSection, item.sort_order)}
                 />
               )}
             </Card>
@@ -466,7 +586,7 @@ export default function AdminPage() {
           { key: "title", label: "主標題" },
           { key: "slogan", label: "標語", type: "textarea" },
         ])}
-        <ImageUploader label="背景圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="home" section="hero" sortOrder={1} />
+        <ImageUploader label="背景圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="home" section="hero" sortOrder={1} {...imageDisplayProps("hero")} />
       </Section>
 
       {renderListSection("brand_cards", "品牌卡片", "Brand Cards", [
@@ -478,8 +598,8 @@ export default function AdminPage() {
 
       {/* Brand Card Images */}
       <Section title="品牌卡片圖片" subtitle="Brand Card Images">
-        <ImageUploader label="空房子設計 — 卡片圖片" currentImage={getImageUrl("brand_design")} onUpload={() => fetchData()} page="home" section="brand_design" sortOrder={1} />
-        <ImageUploader label="裕綸裝修 — 卡片圖片" currentImage={getImageUrl("brand_construction")} onUpload={() => fetchData()} page="home" section="brand_construction" sortOrder={1} />
+        <ImageUploader label="空房子設計 — 卡片圖片" currentImage={getImageUrl("brand_design")} onUpload={() => fetchData()} page="home" section="brand_design" sortOrder={1} {...imageDisplayProps("brand_design")} />
+        <ImageUploader label="裕綸裝修 — 卡片圖片" currentImage={getImageUrl("brand_construction")} onUpload={() => fetchData()} page="home" section="brand_construction" sortOrder={1} {...imageDisplayProps("brand_construction")} />
       </Section>
 
       {renderListSection("strengths", "集團實力", "Strengths", [
@@ -518,7 +638,7 @@ export default function AdminPage() {
           { key: "title_italic", label: "斜體標題" },
           { key: "description", label: "說明文字", type: "textarea" },
         ])}
-        <ImageUploader label="Hero 圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="design" section="hero" sortOrder={1} />
+        <ImageUploader label="Hero 圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="design" section="hero" sortOrder={1} {...imageDisplayProps("hero")} />
       </Section>
 
       <Section title="關於我們" subtitle="About">
@@ -576,7 +696,7 @@ export default function AdminPage() {
           { key: "title_line3", label: "主標題第三行" },
           { key: "description", label: "說明文字", type: "textarea" },
         ])}
-        <ImageUploader label="Hero 圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="construction" section="hero" sortOrder={1} />
+        <ImageUploader label="Hero 圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="construction" section="hero" sortOrder={1} {...imageDisplayProps("hero")} />
       </Section>
 
       {renderListSection("strengths", "我們的優勢", "Strengths", [
@@ -620,7 +740,7 @@ export default function AdminPage() {
           { key: "title_italic", label: "斜體標題" },
           { key: "description", label: "說明文字", type: "textarea" },
         ])}
-        <ImageUploader label="Hero 圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="cafe" section="hero" sortOrder={1} />
+        <ImageUploader label="Hero 圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="cafe" section="hero" sortOrder={1} {...imageDisplayProps("hero")} />
       </Section>
 
       {renderListSection("features", "品牌特色", "Features", [
