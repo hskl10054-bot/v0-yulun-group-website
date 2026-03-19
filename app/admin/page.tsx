@@ -552,7 +552,9 @@ export default function AdminPage() {
           return (
             <Card key={item.id || `new-${idx}`} onDelete={() => deleteListItem(item)}>
               {fields.length > 1 && fields.some((f) => f.span) ? (
-                <div className={`grid gap-4 ${fields.filter((f) => f.span).length > 0 ? "grid-cols-[1fr_2fr]" : ""}`}>
+                <div className="grid gap-4" style={{
+                  gridTemplateColumns: fields.filter((f) => f.span).map((f) => f.span === "short" ? "80px" : "1fr").join(" ")
+                }}>
                   {fields.filter((f) => f.span).map(renderField)}
                 </div>
               ) : null}
@@ -661,6 +663,7 @@ export default function AdminPage() {
       </Section>
 
       {renderListSection("services", "服務項目", "Services", [
+        { field: "subtitle", label: "編號", span: "short" },
         { field: "title", label: "服務名稱" },
         { field: "description", label: "描述", type: "textarea" },
       ], "新增服務")}
@@ -705,6 +708,7 @@ export default function AdminPage() {
       ], "新增優勢")}
 
       {renderListSection("services", "服務項目", "Services", [
+        { field: "subtitle", label: "編號", span: "short" },
         { field: "title", label: "服務名稱" },
         { field: "description", label: "描述", type: "textarea" },
       ], "新增服務")}
