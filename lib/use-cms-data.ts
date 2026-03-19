@@ -69,3 +69,25 @@ export function getListItemsBySection(listItems: ListItem[], section: string): L
 export function getImageUrl(images: ImageRow[], section: string, sortOrder: number = 1): string {
   return images.find((i) => i.section === section && i.sort_order === sortOrder)?.url || ""
 }
+
+// Helper: get inline style for a content field (font size + font family)
+// Admin stores: section="{section}", key="{key}_font_size" / "{key}_font_family"
+export function getContentStyle(content: ContentRow[], section: string, key: string): React.CSSProperties {
+  const fontSize = getContentValue(content, section, `${key}_font_size`)
+  const fontFamily = getContentValue(content, section, `${key}_font_family`)
+  const style: React.CSSProperties = {}
+  if (fontSize) style.fontSize = fontSize
+  if (fontFamily) style.fontFamily = fontFamily
+  return style
+}
+
+// Helper: get inline style for a list item field
+// Admin stores: section="{sectionKey}_styles", key="item_{sortOrder}_{field}_font_size" / "item_{sortOrder}_{field}_font_family"
+export function getListItemStyle(content: ContentRow[], sectionKey: string, sortOrder: number, field: string): React.CSSProperties {
+  const fontSize = getContentValue(content, `${sectionKey}_styles`, `item_${sortOrder}_${field}_font_size`)
+  const fontFamily = getContentValue(content, `${sectionKey}_styles`, `item_${sortOrder}_${field}_font_family`)
+  const style: React.CSSProperties = {}
+  if (fontSize) style.fontSize = fontSize
+  if (fontFamily) style.fontFamily = fontFamily
+  return style
+}

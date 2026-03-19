@@ -1,6 +1,6 @@
 "use client"
 
-import { useCmsData, getContentValue } from "@/lib/use-cms-data"
+import { useCmsData, getContentValue, getContentStyle } from "@/lib/use-cms-data"
 
 export function ContactSection() {
   const { content } = useCmsData("home")
@@ -15,10 +15,10 @@ export function ContactSection() {
       <div className="resp-contact-left flex flex-col justify-start" style={{ background: "#FFFFFF", padding: "6rem" }}>
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Contact</p>
         <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>聯絡裕綸集團</h2>
-        {[["地址",address],["電話",phone],["Email",email],["營業時間",hours]].map(([label, val]) => (
+        {[["地址",address,"address"],["電話",phone,"phone"],["Email",email,"email"],["營業時間",hours,"hours"]].map(([label, val, key]) => (
           <div key={label} style={{ marginBottom: "2rem" }}>
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.4rem" }}>{label}</p>
-            <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520" }}>{val}</p>
+            <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520", ...getContentStyle(content, "contact", key) }}>{val}</p>
           </div>
         ))}
       </div>
