@@ -12,10 +12,10 @@ export default function Home() {
   const { content, loading } = useCmsData("home")
   const colors = usePageColors(content, "home")
 
-  if (loading) return <main className="min-h-screen" />
-
   return (
-    <main>
+    <main
+      className={`transition-opacity duration-700 ease-in-out ${loading ? "opacity-0" : "opacity-100"}`}
+    >
       <HeroSection colors={colors} />
       <BrandSplit colors={colors} />
       <StrengthsSection colors={colors} />
