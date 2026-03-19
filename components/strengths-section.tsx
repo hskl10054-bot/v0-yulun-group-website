@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { HardHat, ShieldCheck, FileText } from "lucide-react"
-import { useCmsData, getListItemsBySection } from "@/lib/use-cms-data"
+import { useCmsData, getListItemsBySection, getListItemStyle } from "@/lib/use-cms-data"
 
 const defaultStrengths = [
   {
@@ -26,7 +26,7 @@ const defaultIcons = [HardHat, ShieldCheck, FileText]
 
 export function StrengthsSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
-  const { listItems } = useCmsData("home")
+  const { content, listItems } = useCmsData("home")
 
   const cmsStrengths = getListItemsBySection(listItems, "strengths")
   const strengths = cmsStrengths.length > 0
@@ -34,8 +34,9 @@ export function StrengthsSection() {
         icon: defaultIcons[i % defaultIcons.length],
         title: li.title,
         description: li.description,
+        sortOrder: li.sort_order,
       }))
-    : defaultStrengths
+    : defaultStrengths.map((s, i) => ({ ...s, sortOrder: i + 1 }))
 
   return (
     <section className="bg-[#FAFAF8] py-24 md:py-32">
@@ -81,6 +82,7 @@ export function StrengthsSection() {
                   className={`text-xl font-bold tracking-wider transition-colors duration-500 ${
                     isActive ? "text-[#FAFAF8]" : "text-[#2F2F2F] group-hover:text-[#FAFAF8]"
                   }`}
+                  style={getListItemStyle(content, "strengths", strength.sortOrder, "title")}
                 >
                   {strength.title}
                 </h3>
@@ -88,6 +90,7 @@ export function StrengthsSection() {
                   className={`text-sm font-light leading-relaxed transition-colors duration-500 ${
                     isActive ? "text-[#FAFAF8]/80" : "text-[#6B6B6B] group-hover:text-[#FAFAF8]/80"
                   }`}
+                  style={getListItemStyle(content, "strengths", strength.sortOrder, "description")}
                 >
                   {strength.description}
                 </p>

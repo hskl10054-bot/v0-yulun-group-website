@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { ChevronDown } from "lucide-react"
-import { useCmsData, getContentValue, getImageUrl } from "@/lib/use-cms-data"
+import { useCmsData, getContentValue, getImageUrl, getContentStyle } from "@/lib/use-cms-data"
 
 export function HeroSection() {
   const { content, images } = useCmsData("home")
@@ -33,19 +33,19 @@ export function HeroSection() {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm font-light tracking-[0.4em] uppercase text-[#D4C5B2]">
+          <span className="text-sm font-light tracking-[0.4em] uppercase text-[#D4C5B2]" style={getContentStyle(content, "hero", "subtitle")}>
             {subtitle}
           </span>
           <div className="my-4 h-px w-16 bg-[#6B4E31]" />
         </div>
-        <h1 className="text-4xl font-bold tracking-wider text-[#FAFAF8] md:text-6xl lg:text-7xl">
+        <h1 className="text-4xl font-bold tracking-wider text-[#FAFAF8] md:text-6xl lg:text-7xl" style={getContentStyle(content, "hero", "title")}>
           {title}
         </h1>
         <p className="text-lg font-light tracking-[0.2em] text-[#D4C5B2] md:text-xl lg:text-2xl">
           Yulun Group
         </p>
         <div className="my-2 h-px w-24 bg-[#6B4E31]" />
-        <p className="max-w-2xl text-base font-light leading-relaxed tracking-wide text-[#FAFAF8]/80 md:text-lg">
+        <p className="max-w-2xl text-base font-light leading-relaxed tracking-wide text-[#FAFAF8]/80 md:text-lg" style={getContentStyle(content, "hero", "slogan")}>
           {slogan}
         </p>
       </div>

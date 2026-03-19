@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { useCmsData, getListItemsBySection, getImageUrl } from "@/lib/use-cms-data"
+import { useCmsData, getListItemsBySection, getImageUrl, getListItemStyle } from "@/lib/use-cms-data"
 
 const defaultWorks = [
   { title: "同齊咖吡 西區精忠店", type: "2025", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
@@ -14,7 +14,7 @@ const defaultWorks = [
 
 export function PortfolioPreview() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
-  const { listItems, images } = useCmsData("home")
+  const { content, listItems, images } = useCmsData("home")
 
   const cmsPortfolio = getListItemsBySection(listItems, "portfolio")
   const works = cmsPortfolio.length > 0
@@ -23,8 +23,9 @@ export function PortfolioPreview() {
         type: li.subtitle,
         image: getImageUrl(images, "portfolio", li.sort_order) || `/images/home/portfolio/home-portfolio-0${li.sort_order}.jpg`,
         span2: i === 0,
+        sortOrder: li.sort_order,
       }))
-    : defaultWorks
+    : defaultWorks.map((w, i) => ({ ...w, sortOrder: i + 1 }))
 
   return (
     <section className="bg-[#F5F0E8] py-24">
@@ -60,7 +61,7 @@ export function PortfolioPreview() {
                   }`}
                 >
                   <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
-                  <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{w.title}</h3>
+                  <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "portfolio", w.sortOrder, "title") }}>{w.title}</h3>
                 </div>
               </div>
             )
