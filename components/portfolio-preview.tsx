@@ -23,9 +23,9 @@ export function PortfolioPreview() {
             更多作品 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
-        <div className="grid grid-cols-3 gap-0.5" style={{ gridTemplateRows: "260px 260px" }}>
+        <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 md:grid-cols-3 md:[grid-template-rows:260px_260px]">
           {works.map((w, i) => (
-            <div key={w.title} className="group relative cursor-pointer overflow-hidden" style={{ gridRow: i === 0 ? "span 2" : undefined }}>
+            <div key={w.title} className={`group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`}>
               <img src={w.image} alt={w.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
