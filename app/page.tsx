@@ -9,8 +9,10 @@ import { ContactSection } from "@/components/contact-section"
 import { useCmsData, usePageColors } from "@/lib/use-cms-data"
 
 export default function Home() {
-  const { content } = useCmsData("home")
+  const { content, loading } = useCmsData("home")
   const colors = usePageColors(content, "home")
+
+  if (loading) return <main className="min-h-screen" />
 
   return (
     <main>
