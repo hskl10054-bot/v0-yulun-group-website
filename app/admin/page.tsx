@@ -59,6 +59,82 @@ const DEFAULT_COLORS: Record<string, Record<string, string>> = {
   },
 }
 
+// ─── Default List Items Per Page (pre-fill from current site) ────
+type DefaultListItem = { title: string; subtitle: string; description: string; extra: string }
+const DEFAULT_LIST_ITEMS: Record<string, Record<string, DefaultListItem[]>> = {
+  home: {
+    brand_cards: [
+      { title: "空房子室內設計", subtitle: "Interior Design", description: "為你的空間注入魔法 — 空房開門，幸福進門。透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。", extra: "/design" },
+      { title: "裕綸室內裝修", subtitle: "Construction Engineering", description: "匠心傳承，穩健工程，構築世代安居。標準化 SOP 工程管理，讓美學建立在穩固且安全的結構之上。", extra: "/construction" },
+    ],
+    strengths: [
+      { title: "自有工班", subtitle: "", description: "擁有專屬施工團隊，確保品質與進度全程掌控，減少外包風險。", extra: "" },
+      { title: "專業執照", subtitle: "", description: "持有政府核定之室內裝修專業技術人員證照，合法合規、安心保障。", extra: "" },
+      { title: "透明報價", subtitle: "", description: "逐項清單式報價，無隱藏費用，讓每一分預算都花在刀口上。", extra: "" },
+    ],
+    portfolio: [
+      { title: "同齊咖吡 西區精忠店", subtitle: "2025", description: "", extra: "" },
+      { title: "壹偲OnlyEase酵素保健茶飲", subtitle: "2025", description: "", extra: "" },
+      { title: "勝麗交響曲", subtitle: "2025", description: "", extra: "" },
+      { title: "清水聯馥悅", subtitle: "2024", description: "", extra: "" },
+      { title: "居家住宅室內設計", subtitle: "2025", description: "", extra: "" },
+    ],
+    testimonials: [
+      { title: "陳先生", subtitle: "全室設計+施工・台中西屯", description: "從設計到施工一條龍，省去了我很多協調的麻煩，完工後品質遠超預期。", extra: "" },
+      { title: "林太太", subtitle: "三代同堂住宅・台中北區", description: "設計師非常有耐心，把我們家人不同的需求都融合在同一個空間裡，太厲害了。", extra: "" },
+      { title: "張老闆", subtitle: "辦公室裝修・台中南區", description: "報價透明、工期準時，完全沒有追加費用的情況，這在業界真的很難得。", extra: "" },
+    ],
+  },
+  design: {
+    services: [
+      { title: "預售屋客變規劃", subtitle: "01", description: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。", extra: "" },
+      { title: "居家住宅室內設計", subtitle: "02", description: "從平面配置、立面設計到材料挑選，以人為本的空間美學，為每個家注入獨特靈魂。", extra: "" },
+      { title: "老屋翻新空間重整", subtitle: "03", description: "保留空間記憶的同時，注入現代設計語彙。舊屋新生，讓老房子重新散發獨特魅力。", extra: "" },
+      { title: "商業空間美學配置", subtitle: "04", description: "咖啡廳、辦公室、品牌門市等商業空間，以品牌精神為核心，設計吸引人且具功能性的環境。", extra: "" },
+      { title: "軟裝設計與風格諮詢", subtitle: "05", description: "家具挑選、燈光配置、藝術品與植栽搭配，用軟裝語彙讓硬體設計更有生命力。", extra: "" },
+    ],
+    portfolio: [
+      { title: "現代簡約｜光感餐廚", subtitle: "", description: "", extra: "" },
+      { title: "暖色侘寂｜圓弧玄關", subtitle: "", description: "", extra: "" },
+      { title: "輕奢現代｜石紋客餐廳", subtitle: "", description: "", extra: "" },
+      { title: "極簡北歐｜純白入戶", subtitle: "", description: "", extra: "" },
+      { title: "日式和風｜日光臥榻", subtitle: "", description: "", extra: "" },
+    ],
+    testimonials: [
+      { title: "李小姐", subtitle: "台中北區・三房兩廳・2024", description: "從第一次諮詢到完工，整個過程都讓我感受到設計師對細節的堅持。現在每天回到家都像是回到一個懂我的地方。", extra: "" },
+      { title: "黃先生", subtitle: "台中西區・老屋翻新・2023", description: "我只是說了幾個關鍵字，設計師就把我腦海裡模糊的想像變成了真實的空間。太神奇了。", extra: "" },
+      { title: "吳老闆", subtitle: "台中南區・商業空間・2023", description: "咖啡廳開幕後不斷有客人說空間很有質感，生意比預期好很多。設計真的是最值得投資的事。", extra: "" },
+    ],
+  },
+  construction: {
+    services: [
+      { title: "拆除與結構加強工程", subtitle: "01", description: "安全拆除既有隔間與裝修，並依需求進行結構補強，為新設計奠定穩固基礎。", extra: "" },
+      { title: "專業水電系統配置", subtitle: "02", description: "專業水電技師負責管線配置、插座規劃、衛浴設備安裝，符合建築法規與安全標準。", extra: "" },
+      { title: "高標準防水隔音工程", subtitle: "03", description: "採用高規格防水工法與隔音材料，確保居住品質與空間結構的長期耐久。", extra: "" },
+      { title: "木作與細部木裝工程", subtitle: "04", description: "系統櫃、天花板、木地板等木作項目，材料嚴選、工法精準，打造精緻的空間細節。", extra: "" },
+      { title: "系統家具安裝與整合", subtitle: "05", description: "系統櫃體與家具的精準安裝，整合空間機能與美學，提供完整的收納解決方案。", extra: "" },
+    ],
+    strengths: [
+      { title: "自有工班", subtitle: "", description: "不外包，全程自有專業工班施工，品質與進度完全掌控在自己手中。", extra: "" },
+      { title: "合法執照", subtitle: "", description: "持有政府核定室內裝修專業技術人員證照，合法合規施工，保障屋主權益。", extra: "" },
+      { title: "透明報價", subtitle: "", description: "逐項清單報價，無隱藏費用，每一分預算清清楚楚，讓你花得安心。", extra: "" },
+    ],
+    portfolio: [
+      { title: "精準裁切，構築空間", subtitle: "全室裝修・2025", description: "", extra: "" },
+      { title: "設計落地：現場監工", subtitle: "商業空間・2025", description: "", extra: "" },
+      { title: "泥作整平，空間基石", subtitle: "舊屋翻新・2025", description: "", extra: "" },
+      { title: "專業電工紀實", subtitle: "局部工程・2024", description: "", extra: "" },
+      { title: "嚴謹的高空作業", subtitle: "全室裝修・2025", description: "", extra: "" },
+    ],
+    testimonials: [
+      { title: "黃先生", subtitle: "全室裝修・台中北區・2024", description: "工班師傅很專業，每天收工前都會清理現場，整個工程過程完全不用擔心。", extra: "" },
+      { title: "蔡太太", subtitle: "老屋翻新・台中西屯・2023", description: "報價單寫得很詳細，哪個項目多少錢一清二楚，完工後完全沒有追加費用。", extra: "" },
+      { title: "林先生", subtitle: "商業空間・台中南區・2023", description: "工程進度比預期還快，品質也很好。監工人員很負責，有問題馬上回應。", extra: "" },
+    ],
+  },
+  cafe: {},
+}
+
 // ─── Brand Color Palette ─────────────────────────────────────────
 const BRAND_PALETTE = [
   { value: "#2F2F2F", label: "深炭灰", group: "主色" },
@@ -486,6 +562,35 @@ export default function AdminPage() {
   }, [activePage])
 
   useEffect(() => { fetchData() }, [fetchData])
+
+  // Auto-populate default list items for sections that have no DB items
+  useEffect(() => {
+    if (loading) return
+    const pageDefaults = DEFAULT_LIST_ITEMS[activePage]
+    if (!pageDefaults) return
+    const itemsToAdd: ListItem[] = []
+    for (const [section, defaults] of Object.entries(pageDefaults)) {
+      const hasDbItems = listItems.some((li) => li.page === activePage && li.section === section)
+      const hasNewItems = newListItems.some((li) => li.page === activePage && li.section === section)
+      if (!hasDbItems && !hasNewItems && defaults.length > 0) {
+        defaults.forEach((d, i) => {
+          itemsToAdd.push({
+            page: activePage,
+            section,
+            sort_order: i + 1,
+            title: d.title,
+            subtitle: d.subtitle,
+            description: d.description,
+            extra: d.extra,
+          })
+        })
+      }
+    }
+    if (itemsToAdd.length > 0) {
+      setNewListItems((prev) => [...prev, ...itemsToAdd])
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, activePage])
 
   // ─── Content Helpers ─────────────────────────────────────────
   const getContent = (section: string, key: string): string => {
