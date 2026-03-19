@@ -4,7 +4,8 @@ import { useState, useEffect, useRef, useCallback, type ChangeEvent, type DragEv
 import {
   Home, Paintbrush, Hammer, Coffee,
   Save, Plus, Trash2, Upload, X, Check,
-  ImageIcon, ChevronRight, Eye, Loader2, RefreshCw
+  ImageIcon, ChevronRight, Eye, Loader2, RefreshCw,
+  Type, ChevronDown
 } from "lucide-react"
 
 // ─── Types ───────────────────────────────────────────────────────
@@ -333,23 +334,37 @@ export default function AdminPage() {
 
   // ─── Render Helpers ──────────────────────────────────────────
 
-  const renderContentFields = (section: string, fields: { key: string; label: string; type?: "text" | "textarea" }[]) => (
+  const renderContentFields = (section: string, fields: { key: string; label: string; type?: "text" | "textarea"; withStyle?: boolean }[]) => (
     <>
-      {fields.map((f) =>
-        f.type === "textarea" ? (
-          <TextArea key={f.key} label={f.label} value={getContent(section, f.key)} onChange={(v) => setContentValue(section, f.key, v)} />
+      {fields.map((f) => {
+        const styleProps = f.withStyle !== false ? {
+          fontSize: getContent(section, `${f.key}_font_size`),
+          fontFamily: getContent(section, `${f.key}_font_family`),
+          onFontSizeChange: (v: string) => setContentValue(section, `${f.key}_font_size`, v),
+          onFontFamilyChange: (v: string) => setContentValue(section, `${f.key}_font_family`, v),
+        } : {}
+        return f.type === "textarea" ? (
+          <TextArea key={f.key} label={f.label} value={getContent(section, f.key)} onChange={(v) => setContentValue(section, f.key, v)} {...styleProps} />
         ) : (
-          <Field key={f.key} label={f.label} value={getContent(section, f.key)} onChange={(v) => setContentValue(section, f.key, v)} />
+          <Field key={f.key} label={f.label} value={getContent(section, f.key)} onChange={(v) => setContentValue(section, f.key, v)} {...styleProps} />
         )
-      )}
+      })}
     </>
   )
+
+  // Style helpers for list items — stored in page_content as "{sectionKey}_styles" section
+  const getListItemStyle = (sectionKey: string, sortOrder: number, field: string, prop: string): string => {
+    return getContent(`${sectionKey}_styles`, `item_${sortOrder}_${field}_${prop}`)
+  }
+  const setListItemStyle = (sectionKey: string, sortOrder: number, field: string, prop: string, value: string) => {
+    setContentValue(`${sectionKey}_styles`, `item_${sortOrder}_${field}_${prop}`, value)
+  }
 
   const renderListSection = (
     sectionKey: string,
     title: string,
     subtitle: string,
-    fields: { field: keyof ListItem; label: string; type?: "text" | "textarea"; span?: string }[],
+    fields: { field: keyof ListItem; label: string; type?: "text" | "textarea"; span?: string; withStyle?: boolean }[],
     addLabel: string,
     addTemplate?: Partial<ListItem>,
     options?: { withImage?: boolean; imageSection?: string },
@@ -358,38 +373,41 @@ export default function AdminPage() {
     const imgSection = options?.imageSection || sectionKey
     return (
       <Section title={title} subtitle={subtitle}>
-        {items.map((item, idx) => (
-          <Card key={item.id || `new-${idx}`} onDelete={() => deleteListItem(item)}>
-            {fields.length > 1 && fields.some((f) => f.span) ? (
-              <div className={`grid gap-4 ${fields.filter((f) => f.span).length > 0 ? "grid-cols-[1fr_2fr]" : ""}`}>
-                {fields.filter((f) => f.span).map((f) =>
-                  f.type === "textarea" ? (
-                    <TextArea key={f.field} label={f.label} value={(item[f.field] as string) || ""} onChange={(v) => updateListItemField(item, f.field, v)} />
-                  ) : (
-                    <Field key={f.field} label={f.label} value={(item[f.field] as string) || ""} onChange={(v) => updateListItemField(item, f.field, v)} />
-                  )
-                )}
-              </div>
-            ) : null}
-            {fields.filter((f) => !f.span).map((f) =>
-              f.type === "textarea" ? (
-                <TextArea key={f.field} label={f.label} value={(item[f.field] as string) || ""} onChange={(v) => updateListItemField(item, f.field, v)} />
-              ) : (
-                <Field key={f.field} label={f.label} value={(item[f.field] as string) || ""} onChange={(v) => updateListItemField(item, f.field, v)} />
-              )
-            )}
-            {options?.withImage && (
-              <ImageUploader
-                label="圖片"
-                currentImage={getImageUrl(imgSection, item.sort_order)}
-                onUpload={() => fetchData()}
-                page={activePage}
-                section={imgSection}
-                sortOrder={item.sort_order}
-              />
-            )}
-          </Card>
-        ))}
+        {items.map((item, idx) => {
+          const renderField = (f: typeof fields[0]) => {
+            const styleProps = f.withStyle !== false ? {
+              fontSize: getListItemStyle(sectionKey, item.sort_order, f.field as string, "font_size"),
+              fontFamily: getListItemStyle(sectionKey, item.sort_order, f.field as string, "font_family"),
+              onFontSizeChange: (v: string) => setListItemStyle(sectionKey, item.sort_order, f.field as string, "font_size", v),
+              onFontFamilyChange: (v: string) => setListItemStyle(sectionKey, item.sort_order, f.field as string, "font_family", v),
+            } : {}
+            return f.type === "textarea" ? (
+              <TextArea key={f.field} label={f.label} value={(item[f.field] as string) || ""} onChange={(v) => updateListItemField(item, f.field, v)} {...styleProps} />
+            ) : (
+              <Field key={f.field} label={f.label} value={(item[f.field] as string) || ""} onChange={(v) => updateListItemField(item, f.field, v)} {...styleProps} />
+            )
+          }
+          return (
+            <Card key={item.id || `new-${idx}`} onDelete={() => deleteListItem(item)}>
+              {fields.length > 1 && fields.some((f) => f.span) ? (
+                <div className={`grid gap-4 ${fields.filter((f) => f.span).length > 0 ? "grid-cols-[1fr_2fr]" : ""}`}>
+                  {fields.filter((f) => f.span).map(renderField)}
+                </div>
+              ) : null}
+              {fields.filter((f) => !f.span).map(renderField)}
+              {options?.withImage && (
+                <ImageUploader
+                  label="圖片"
+                  currentImage={getImageUrl(imgSection, item.sort_order)}
+                  onUpload={() => fetchData()}
+                  page={activePage}
+                  section={imgSection}
+                  sortOrder={item.sort_order}
+                />
+              )}
+            </Card>
+          )
+        })}
         <AddButton label={addLabel} onClick={() => addNewListItem(sectionKey, addTemplate || {})} />
       </Section>
     )
@@ -710,22 +728,119 @@ function Card({ children, onDelete }: { children: React.ReactNode; onDelete: () 
   )
 }
 
-function Field({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string }) {
+const FONT_FAMILIES = [
+  { value: "", label: "預設" },
+  { value: "'Noto Sans TC', sans-serif", label: "Noto Sans TC" },
+  { value: "'Noto Serif TC', serif", label: "Noto Serif TC" },
+  { value: "'Cormorant Garamond', serif", label: "Cormorant Garamond" },
+  { value: "'Josefin Sans', sans-serif", label: "Josefin Sans" },
+  { value: "system-ui, sans-serif", label: "System UI" },
+  { value: "'Georgia', serif", label: "Georgia" },
+  { value: "'Arial', sans-serif", label: "Arial" },
+]
+
+const FONT_SIZES = [
+  { value: "", label: "預設" },
+  { value: "0.625rem", label: "10px (極小)" },
+  { value: "0.75rem", label: "12px (小)" },
+  { value: "0.875rem", label: "14px" },
+  { value: "1rem", label: "16px (內文)" },
+  { value: "1.125rem", label: "18px" },
+  { value: "1.25rem", label: "20px" },
+  { value: "1.5rem", label: "24px (小標)" },
+  { value: "1.75rem", label: "28px" },
+  { value: "2rem", label: "32px (標題)" },
+  { value: "2.5rem", label: "40px" },
+  { value: "3rem", label: "48px (大標)" },
+  { value: "3.5rem", label: "56px" },
+  { value: "4rem", label: "64px (超大)" },
+  { value: "5rem", label: "80px" },
+]
+
+function StyleControls({ fontSize, fontFamily, onFontSizeChange, onFontFamilyChange }: {
+  fontSize: string; fontFamily: string
+  onFontSizeChange: (v: string) => void; onFontFamilyChange: (v: string) => void
+}) {
   return (
-    <div className="space-y-1.5">
-      <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</label>
-      <input type="text" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder || label}
-        className="w-full rounded-lg border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-800 placeholder:text-gray-300 outline-none transition-colors focus:border-amber-400 focus:ring-2 focus:ring-amber-100" />
+    <div className="flex gap-3 mt-2 p-3 rounded-lg bg-gray-50 border border-gray-100">
+      <div className="flex-1 space-y-1">
+        <label className="block text-[10px] font-medium text-gray-400 uppercase tracking-wider">字級</label>
+        <select value={fontSize} onChange={(e) => onFontSizeChange(e.target.value)}
+          className="w-full rounded border border-gray-200 bg-white px-2.5 py-1.5 text-xs text-gray-700 outline-none focus:border-amber-400">
+          {FONT_SIZES.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
+        </select>
+      </div>
+      <div className="flex-1 space-y-1">
+        <label className="block text-[10px] font-medium text-gray-400 uppercase tracking-wider">字體</label>
+        <select value={fontFamily} onChange={(e) => onFontFamilyChange(e.target.value)}
+          className="w-full rounded border border-gray-200 bg-white px-2.5 py-1.5 text-xs text-gray-700 outline-none focus:border-amber-400">
+          {FONT_FAMILIES.map((f) => <option key={f.value} value={f.value}>{f.label}</option>)}
+        </select>
+      </div>
     </div>
   )
 }
 
-function TextArea({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string }) {
+function Field({ label, value, onChange, placeholder, fontSize, fontFamily, onFontSizeChange, onFontFamilyChange }: {
+  label: string; value: string; onChange: (v: string) => void; placeholder?: string
+  fontSize?: string; fontFamily?: string; onFontSizeChange?: (v: string) => void; onFontFamilyChange?: (v: string) => void
+}) {
+  const [showStyle, setShowStyle] = useState(false)
+  const hasStyleControls = onFontSizeChange && onFontFamilyChange
+  const hasStyleValues = fontSize || fontFamily
+
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</label>
+      <div className="flex items-center justify-between">
+        <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</label>
+        {hasStyleControls && (
+          <button onClick={() => setShowStyle(!showStyle)}
+            className={`flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] transition-colors ${hasStyleValues ? "bg-amber-50 text-amber-600" : "text-gray-400 hover:text-gray-600"}`}
+            title="字級/字體設定">
+            <Type className="h-3 w-3" />
+            <span>Aa</span>
+            <ChevronDown className={`h-2.5 w-2.5 transition-transform ${showStyle ? "rotate-180" : ""}`} />
+          </button>
+        )}
+      </div>
+      <input type="text" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder || label}
+        style={{ fontSize: fontSize || undefined, fontFamily: fontFamily || undefined }}
+        className="w-full rounded-lg border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-800 placeholder:text-gray-300 outline-none transition-colors focus:border-amber-400 focus:ring-2 focus:ring-amber-100" />
+      {hasStyleControls && showStyle && (
+        <StyleControls fontSize={fontSize || ""} fontFamily={fontFamily || ""} onFontSizeChange={onFontSizeChange} onFontFamilyChange={onFontFamilyChange} />
+      )}
+    </div>
+  )
+}
+
+function TextArea({ label, value, onChange, placeholder, fontSize, fontFamily, onFontSizeChange, onFontFamilyChange }: {
+  label: string; value: string; onChange: (v: string) => void; placeholder?: string
+  fontSize?: string; fontFamily?: string; onFontSizeChange?: (v: string) => void; onFontFamilyChange?: (v: string) => void
+}) {
+  const [showStyle, setShowStyle] = useState(false)
+  const hasStyleControls = onFontSizeChange && onFontFamilyChange
+  const hasStyleValues = fontSize || fontFamily
+
+  return (
+    <div className="space-y-1.5">
+      <div className="flex items-center justify-between">
+        <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">{label}</label>
+        {hasStyleControls && (
+          <button onClick={() => setShowStyle(!showStyle)}
+            className={`flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] transition-colors ${hasStyleValues ? "bg-amber-50 text-amber-600" : "text-gray-400 hover:text-gray-600"}`}
+            title="字級/字體設定">
+            <Type className="h-3 w-3" />
+            <span>Aa</span>
+            <ChevronDown className={`h-2.5 w-2.5 transition-transform ${showStyle ? "rotate-180" : ""}`} />
+          </button>
+        )}
+      </div>
       <textarea value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder || label} rows={3}
+        style={{ fontSize: fontSize || undefined, fontFamily: fontFamily || undefined }}
         className="w-full rounded-lg border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-800 placeholder:text-gray-300 outline-none transition-colors focus:border-amber-400 focus:ring-2 focus:ring-amber-100 resize-none" />
+      {hasStyleControls && showStyle && (
+        <StyleControls fontSize={fontSize || ""} fontFamily={fontFamily || ""} onFontSizeChange={onFontSizeChange} onFontFamilyChange={onFontFamilyChange} />
+      )}
     </div>
   )
 }
