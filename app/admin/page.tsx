@@ -352,8 +352,10 @@ export default function AdminPage() {
     fields: { field: keyof ListItem; label: string; type?: "text" | "textarea"; span?: string }[],
     addLabel: string,
     addTemplate?: Partial<ListItem>,
+    options?: { withImage?: boolean; imageSection?: string },
   ) => {
     const items = getListItems(sectionKey)
+    const imgSection = options?.imageSection || sectionKey
     return (
       <Section title={title} subtitle={subtitle}>
         {items.map((item, idx) => (
@@ -375,6 +377,16 @@ export default function AdminPage() {
               ) : (
                 <Field key={f.field} label={f.label} value={(item[f.field] as string) || ""} onChange={(v) => updateListItemField(item, f.field, v)} />
               )
+            )}
+            {options?.withImage && (
+              <ImageUploader
+                label="圖片"
+                currentImage={getImageUrl(imgSection, item.sort_order)}
+                onUpload={() => fetchData()}
+                page={activePage}
+                section={imgSection}
+                sortOrder={item.sort_order}
+              />
             )}
           </Card>
         ))}
@@ -403,6 +415,12 @@ export default function AdminPage() {
         { field: "extra", label: "連結路徑" },
       ], "新增品牌卡片")}
 
+      {/* Brand Card Images */}
+      <Section title="品牌卡片圖片" subtitle="Brand Card Images">
+        <ImageUploader label="空房子設計 — 卡片圖片" currentImage={getImageUrl("brand_design")} onUpload={() => fetchData()} page="home" section="brand_design" sortOrder={1} />
+        <ImageUploader label="裕綸裝修 — 卡片圖片" currentImage={getImageUrl("brand_construction")} onUpload={() => fetchData()} page="home" section="brand_construction" sortOrder={1} />
+      </Section>
+
       {renderListSection("strengths", "集團實力", "Strengths", [
         { field: "title", label: "標題" },
         { field: "description", label: "描述", type: "textarea" },
@@ -411,7 +429,7 @@ export default function AdminPage() {
       {renderListSection("portfolio", "精選作品", "Portfolio", [
         { field: "title", label: "作品名稱" },
         { field: "subtitle", label: "年份" },
-      ], "新增作品")}
+      ], "新增作品", undefined, { withImage: true })}
 
       {renderListSection("testimonials", "客戶評語", "Testimonials", [
         { field: "title", label: "客戶名稱" },
@@ -468,7 +486,7 @@ export default function AdminPage() {
 
       {renderListSection("portfolio", "精選作品", "Portfolio", [
         { field: "title", label: "作品名稱" },
-      ], "新增作品")}
+      ], "新增作品", undefined, { withImage: true })}
 
       {renderListSection("testimonials", "客戶評語", "Testimonials", [
         { field: "title", label: "客戶名稱" },
@@ -513,7 +531,7 @@ export default function AdminPage() {
       {renderListSection("portfolio", "施工案例", "Projects", [
         { field: "title", label: "案例名稱" },
         { field: "subtitle", label: "案例類型" },
-      ], "新增案例")}
+      ], "新增案例", undefined, { withImage: true })}
 
       {renderListSection("testimonials", "客戶評語", "Testimonials", [
         { field: "title", label: "客戶名稱" },
