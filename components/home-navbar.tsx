@@ -3,11 +3,22 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
+import { useCmsData, getContentValue, getContentStyle } from "@/lib/use-cms-data"
 
 export function HomeNavbar() {
+  const { content } = useCmsData("home")
   const [hidden, setHidden] = useState(false)
   const [atTop, setAtTop] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [show, setShow] = useState(false)
+
+  const title = getContentValue(content, "hero", "title") || "裕綸集團"
+  const slogan = getContentValue(content, "hero", "slogan") || "職人建築，穩健基石，構築空間的永續價值。"
+
+  useEffect(() => {
+    const t = setTimeout(() => setShow(true), 100)
+    return () => clearTimeout(t)
+  }, [])
 
   useEffect(() => {
     let lastY = window.scrollY
@@ -63,7 +74,7 @@ export function HomeNavbar() {
             Contact
           </a>
 
-          {/* Center - Logo */}
+          {/* Center - Branding */}
           <Link
             href="/"
             style={{
@@ -71,23 +82,26 @@ export function HomeNavbar() {
               flexDirection: "column",
               alignItems: "center",
               textDecoration: "none",
-              gap: "0.15rem",
+              gap: "0.2rem",
             }}
           >
             <span
+              className={`transition-all duration-1000 ease-out ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
               style={{
-                fontSize: "1.1rem",
+                fontSize: atTop ? "1.3rem" : "1.1rem",
                 fontWeight: 700,
                 letterSpacing: "0.35em",
                 color: atTop ? "#FAFAF8" : "#2F2F2F",
-                transition: "color 0.3s",
+                transition: "color 0.3s, font-size 0.3s",
+                ...getContentStyle(content, "hero", "title", "home"),
               }}
             >
-              裕 綸 集 團
+              {title}
             </span>
             <span
+              className={`transition-all duration-1000 ease-out delay-200 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
               style={{
-                fontSize: "0.55rem",
+                fontSize: "0.6rem",
                 letterSpacing: "0.25em",
                 textTransform: "uppercase",
                 color: atTop ? "rgba(250,250,248,0.6)" : "#8C8479",
@@ -96,6 +110,24 @@ export function HomeNavbar() {
               }}
             >
               Yulun Group
+            </span>
+            <span
+              className={`transition-all duration-1000 ease-out delay-500 ${show ? "opacity-100" : "opacity-0"}`}
+              style={{
+                fontSize: "0.55rem",
+                letterSpacing: "0.15em",
+                color: atTop ? "rgba(250,250,248,0.5)" : "#8C8479",
+                transition: "color 0.3s",
+                fontWeight: 300,
+                marginTop: "0.15rem",
+                maxHeight: atTop ? "2rem" : "0",
+                overflow: "hidden",
+                transitionProperty: "color, max-height, opacity, margin",
+                transitionDuration: "0.3s",
+                ...getContentStyle(content, "hero", "slogan", "home"),
+              }}
+            >
+              {slogan}
             </span>
           </Link>
 
