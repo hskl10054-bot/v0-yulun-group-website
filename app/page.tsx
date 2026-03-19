@@ -1,5 +1,6 @@
 "use client"
 
+import { HomeNavbar } from "@/components/home-navbar"
 import { HeroSection } from "@/components/hero-section"
 import { BrandSplit } from "@/components/brand-split"
 import { StrengthsSection } from "@/components/strengths-section"
@@ -16,6 +17,7 @@ export default function Home() {
     <main
       className={`transition-opacity duration-700 ease-in-out ${loading ? "opacity-0" : "opacity-100"}`}
     >
+      <HomeNavbar />
       <HeroSection colors={colors} />
       <BrandSplit colors={colors} />
       <StrengthsSection colors={colors} />
