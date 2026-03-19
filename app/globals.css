@@ -91,6 +91,15 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .resp-contact { grid-template-columns: 1fr !important; min-height: auto !important; }
+  .resp-contact-left, .resp-contact-right { padding: 4rem 2.5rem !important; }
+}
+
+@media (max-width: 640px) {
+  .resp-contact-left, .resp-contact-right { padding: 3rem 1.5rem !important; }
+}
+
 ::selection {
   background-color: #EFD3D6;
   color: #2F2F2F;
