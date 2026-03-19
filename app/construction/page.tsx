@@ -61,6 +61,9 @@ export default function ConstructionPage() {
         .service-card:hover { border-color: #8A7A68 !important; background: #F0EBE3 !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
         .portfolio-item:hover .portfolio-bg { transform: scale(1.04) !important; }
+        @media (hover: none) {
+          .portfolio-overlay { opacity: 1 !important; }
+        }
         .strength-card:hover { border-color: #8A7A68 !important; }
         .strength-card:hover .strength-icon { background: #8A7A68 !important; border-color: #8A7A68 !important; }
         .strength-card:hover .strength-icon svg { color: #FAF8F4 !important; }
