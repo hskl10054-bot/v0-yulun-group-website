@@ -75,7 +75,9 @@ export default function DesignPage() {
           .resp-grid3 { grid-template-columns: repeat(2, 1fr) !important; }
           .resp-grid2 { grid-template-columns: 1fr !important; }
           .resp-portfolio { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+          .resp-portfolio > div { aspect-ratio: 4/3; position: relative !important; }
           .resp-portfolio > div:first-child { grid-row: auto !important; }
+          .resp-portfolio > div img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
           .resp-contact { grid-template-columns: 1fr !important; min-height: auto !important; }
           .resp-contact-left, .resp-contact-right { padding: 4rem 2.5rem !important; }
           .resp-footer { padding: 2rem 2.5rem !important; flex-direction: column !important; gap: 1rem !important; text-align: center !important; }
@@ -90,7 +92,7 @@ export default function DesignPage() {
           .resp-section-inner { padding: 0 1.5rem !important; }
           .resp-grid3 { grid-template-columns: 1fr !important; }
           .resp-portfolio { grid-template-columns: 1fr !important; }
-          .resp-portfolio > div { min-height: 220px !important; }
+          .resp-portfolio > div { aspect-ratio: 4/3 !important; }
           .resp-contact-left, .resp-contact-right { padding: 3rem 1.5rem !important; }
           .resp-footer { padding: 1.5rem 1.2rem !important; }
           .resp-heading { font-size: 2rem !important; }
