@@ -115,7 +115,7 @@ export default function DesignPage() {
       {/* HERO */}
       <section className="resp-hero" style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", paddingTop: "5rem" }}>
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
-          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "2rem" }}>Taichung Interior Design Studio</p>
+          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "1.275rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "2rem" }}>Taichung Interior Design Studio</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.5rem, 6vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem" }}>
             為你的空間<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em style={{ fontStyle: "italic", color: "#8C8479" }}>注入魔法</em><img src="/images/sparkle.svg" alt="" width={80} height={80} style={{ flexShrink: 0, marginLeft: "0.1rem" }} /></span>
           </h1>
@@ -139,7 +139,7 @@ export default function DesignPage() {
           </blockquote>
         </div>
         <div className="resp-contact-left" style={{ background: "#F5F0E8", padding: "6rem 5rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1.5rem" }}>About Us</p>
+          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1.5rem" }}>About Us</p>
           <h2 ref={addRef(5)} className="serif resp-heading" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "2rem" }}>我們是誰</h2>
           <p ref={addRef(6)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2.1, color: "#8C8479", marginBottom: "3rem", fontWeight: 300 }}>
             空房子設計致力於打破格局束縛，以人為本，透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。我們不做複製品，每一個案子都從屋主的生活習慣、個性與夢想出發，打造獨一無二的空間故事。
@@ -159,7 +159,7 @@ export default function DesignPage() {
       <section className="resp-section" style={{ padding: "8rem 6rem", background: "#FAF8F4" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "4rem", borderBottom: "0.5px solid #E8E3DA", paddingBottom: "2rem" }}>
           <div>
-            <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.5rem" }}>Services</p>
+            <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.5rem" }}>Services</p>
             <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300 }}>服務項目</h2>
           </div>
           <a href="#contact" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>諮詢方案 →</a>
@@ -167,7 +167,7 @@ export default function DesignPage() {
         <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.5rem" }}>
           {services.map((s, i) => (
             <div key={s.num} className="service-card" ref={addRef(8 + i)} style={{ ...fadeStyle, transitionDelay: `${(i % 3) * 0.15}s`, padding: "2.5rem", border: "0.5px solid #E8E3DA", transition: "border-color 0.3s, background 0.3s", cursor: "default" }}>
-              <span style={{ fontSize: "0.75rem", color: "#B5956A", marginBottom: "1.5rem", display: "block", fontFamily: "'Cormorant Garamond', serif" }}>{s.num}</span>
+              <span style={{ fontSize: "0.82rem", color: "#B5956A", marginBottom: "1.5rem", display: "block", fontFamily: "'Cormorant Garamond', serif" }}>{s.num}</span>
               <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem" }}>{s.name}</h3>
               <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300 }}>{s.desc}</p>
             </div>
@@ -179,7 +179,7 @@ export default function DesignPage() {
       <section id="portfolio" style={{ padding: "6rem 0", background: "#F5F0E8" }}>
         <div className="resp-section-inner" style={{ padding: "0 6rem", marginBottom: "3rem", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <div>
-            <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.5rem" }}>Portfolio</p>
+            <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.5rem" }}>Portfolio</p>
             <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300 }}>精選作品</h2>
           </div>
           <a href="#" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>查看所有案例 →</a>
@@ -198,7 +198,7 @@ export default function DesignPage() {
 
       {/* TESTIMONIALS */}
       <section className="resp-section" style={{ padding: "8rem 6rem", background: "#F5F0E8" }}>
-        <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Testimonials</p>
+        <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Testimonials</p>
         <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: "#2A2520", marginBottom: "4rem" }}>客戶怎麼說</h2>
         <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
           {testimonials.map((t, i) => (
@@ -214,7 +214,7 @@ export default function DesignPage() {
       {/* CONTACT */}
       <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
         <div className="resp-contact-left" style={{ background: "#FFFFFF", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-          <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Contact</p>
+          <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Contact</p>
           <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>開始你的<br />空間對話</h2>
           {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週五  09:00 — 18:00"]].map(([label, val]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
@@ -224,7 +224,7 @@ export default function DesignPage() {
           ))}
         </div>
         <div className="resp-contact-right" style={{ background: "#2A2520", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-          <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Send Message</p>
+          <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Send Message</p>
           <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: "#FAF8F4", marginBottom: "2.5rem" }}>預約諮詢</h2>
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["案件類型","新成屋 / 老屋翻新 / 商業空間","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
