@@ -32,10 +32,11 @@ export function useCmsData(page: string): CmsData {
     let cancelled = false
     async function fetchAll() {
       try {
+        const opts: RequestInit = { cache: "no-store" }
         const [c, l, i] = await Promise.all([
-          fetch(`/api/content?page=${page}`).then((r) => r.ok ? r.json() : []),
-          fetch(`/api/list-items?page=${page}`).then((r) => r.ok ? r.json() : []),
-          fetch(`/api/images?page=${page}`).then((r) => r.ok ? r.json() : []),
+          fetch(`/api/content?page=${page}`, opts).then((r) => r.ok ? r.json() : []),
+          fetch(`/api/list-items?page=${page}`, opts).then((r) => r.ok ? r.json() : []),
+          fetch(`/api/images?page=${page}`, opts).then((r) => r.ok ? r.json() : []),
         ])
         if (!cancelled) {
           setContent(c)
