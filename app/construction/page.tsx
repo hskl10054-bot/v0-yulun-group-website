@@ -183,7 +183,6 @@ export default function ConstructionPage() {
         </div>
         <div className="resp-hero-img" style={{ position: "relative", overflow: "hidden" }}>
           <img src={heroImg} alt="裕綸室內裝修" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
-          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.2)" }} />
         </div>
       </section>
 
