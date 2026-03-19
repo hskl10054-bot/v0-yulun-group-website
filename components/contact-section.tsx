@@ -24,12 +24,12 @@ export function ContactSection() {
           ].map(({ label, placeholder, type }) => (
             <div key={label} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-              <input type={type} placeholder={placeholder} className="w-full border-0 border-b border-white/20 bg-transparent pb-2 pt-1 text-sm font-light tracking-wide text-[#FAFAF8] placeholder:text-white/25 outline-none focus:border-[#B5956A] transition-colors" />
+              <input type={type} placeholder={placeholder} className="serif w-full border-0 border-b border-white/20 bg-transparent pb-2 pt-1 font-light tracking-wide text-[#FAFAF8] placeholder:text-white/25 outline-none focus:border-[#B5956A] transition-colors" style={{ fontSize: "1.05rem" }} />
             </div>
           ))}
           <div style={{ marginBottom: "1.5rem" }}>
             <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
-            <textarea placeholder="請簡單描述您的空間需求或想法..." rows={3} className="w-full resize-none border-0 border-b border-white/20 bg-transparent pb-2 pt-1 text-sm font-light tracking-wide text-[#FAFAF8] placeholder:text-white/25 outline-none focus:border-[#B5956A] transition-colors" />
+            <textarea placeholder="請簡單描述您的空間需求或想法..." rows={3} className="serif w-full resize-none border-0 border-b border-white/20 bg-transparent pb-2 pt-1 font-light tracking-wide text-[#FAFAF8] placeholder:text-white/25 outline-none focus:border-[#B5956A] transition-colors" style={{ fontSize: "1.05rem" }} />
           </div>
           <button style={{ marginTop: "1rem", background: "#6B4E31", color: "#FAF8F4", border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}>
             送出諮詢 →
