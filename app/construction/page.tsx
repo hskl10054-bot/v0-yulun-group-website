@@ -37,8 +37,10 @@ const defaultTestimonials = [
 ]
 
 export default function ConstructionPage() {
-  const { content, listItems, images } = useCmsData("construction")
+  const { content, listItems, images, loading } = useCmsData("construction")
   const colors = usePageColors(content, "construction")
+
+  if (loading) return <main className="min-h-screen" />
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")

@@ -27,8 +27,10 @@ const defaultTestimonials = [
 ]
 
 export default function DesignPage() {
-  const { content, listItems, images } = useCmsData("design")
+  const { content, listItems, images, loading } = useCmsData("design")
   const colors = usePageColors(content, "design")
+
+  if (loading) return <main className="min-h-screen" />
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
