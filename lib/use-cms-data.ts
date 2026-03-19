@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getDefaultContentFont, getDefaultListFont } from "@/lib/default-fonts"
 
 interface ContentRow {
   id?: number; page: string; section: string; key: string; value: string
@@ -73,29 +72,23 @@ export function getImageUrl(images: ImageRow[], section: string, sortOrder: numb
 }
 
 // Helper: get inline style for a content field (font size + font family)
-// Falls back to DEFAULT_CONTENT_FONTS if no CMS value is set
-export function getContentStyle(content: ContentRow[], section: string, key: string, page?: string): React.CSSProperties {
+// Only applies CMS overrides — frontend inline styles are the base defaults
+export function getContentStyle(content: ContentRow[], section: string, key: string, _page?: string): React.CSSProperties {
   const fontSize = getContentValue(content, section, `${key}_font_size`)
   const fontFamily = getContentValue(content, section, `${key}_font_family`)
-  const defaults = page ? getDefaultContentFont(page, section, key) : {}
   const style: React.CSSProperties = {}
-  const finalFontSize = fontSize || defaults.fontSize
-  const finalFontFamily = fontFamily || defaults.fontFamily
-  if (finalFontSize) style.fontSize = finalFontSize
-  if (finalFontFamily) style.fontFamily = finalFontFamily
+  if (fontSize) style.fontSize = fontSize
+  if (fontFamily) style.fontFamily = fontFamily
   return style
 }
 
 // Helper: get inline style for a list item field
-// Falls back to DEFAULT_LIST_FONTS if no CMS value is set
-export function getListItemStyle(content: ContentRow[], sectionKey: string, sortOrder: number, field: string, page?: string): React.CSSProperties {
+// Only applies CMS overrides — frontend inline styles are the base defaults
+export function getListItemStyle(content: ContentRow[], sectionKey: string, sortOrder: number, field: string, _page?: string): React.CSSProperties {
   const fontSize = getContentValue(content, `${sectionKey}_styles`, `item_${sortOrder}_${field}_font_size`)
   const fontFamily = getContentValue(content, `${sectionKey}_styles`, `item_${sortOrder}_${field}_font_family`)
-  const defaults = page ? getDefaultListFont(page, sectionKey, field) : {}
   const style: React.CSSProperties = {}
-  const finalFontSize = fontSize || defaults.fontSize
-  const finalFontFamily = fontFamily || defaults.fontFamily
-  if (finalFontSize) style.fontSize = finalFontSize
-  if (finalFontFamily) style.fontFamily = finalFontFamily
+  if (fontSize) style.fontSize = fontSize
+  if (fontFamily) style.fontFamily = fontFamily
   return style
 }
