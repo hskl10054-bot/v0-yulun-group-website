@@ -1,6 +1,3 @@
-"use client"
-
-import { useState } from "react"
 import { HardHat, ShieldCheck, FileText } from "lucide-react"
 
 const strengths = [
@@ -22,8 +19,6 @@ const strengths = [
 ]
 
 export function StrengthsSection() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
-
   return (
     <section className="bg-[#FAFAF8] py-24 md:py-32">
       <div className="mx-auto max-w-5xl px-6">
@@ -43,50 +38,22 @@ export function StrengthsSection() {
 
         {/* Strengths Grid */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
-          {strengths.map((strength, index) => {
-            const isActive = activeIndex === index
-            return (
-              <div
-                key={strength.title}
-                onClick={() => setActiveIndex(isActive ? null : index)}
-                className={`group flex cursor-pointer flex-col items-center gap-6 border px-8 py-12 text-center transition-all duration-500 ${
-                  isActive
-                    ? "border-[#6B4E31] bg-[#6B4E31] shadow-lg"
-                    : "border-[#E5E0DB] bg-[#FFFFFF] hover:border-[#6B4E31]/30 hover:shadow-lg"
-                }`}
-              >
-                <div
-                  className={`flex h-16 w-16 items-center justify-center border transition-colors duration-500 ${
-                    isActive
-                      ? "border-[#FAFAF8]/40 bg-[#FAFAF8]"
-                      : "border-[#E5E0DB] group-hover:border-[#6B4E31] group-hover:bg-[#6B4E31]"
-                  }`}
-                >
-                  <strength.icon
-                    className={`h-7 w-7 transition-colors duration-500 ${
-                      isActive
-                        ? "text-[#6B4E31]"
-                        : "text-[#6B4E31] group-hover:text-[#FAFAF8]"
-                    }`}
-                  />
-                </div>
-                <h3
-                  className={`text-xl font-bold tracking-wider transition-colors duration-500 ${
-                    isActive ? "text-[#FAFAF8]" : "text-[#2F2F2F]"
-                  }`}
-                >
-                  {strength.title}
-                </h3>
-                <p
-                  className={`text-sm font-light leading-relaxed transition-colors duration-500 ${
-                    isActive ? "text-[#FAFAF8]/80" : "text-[#6B6B6B]"
-                  }`}
-                >
-                  {strength.description}
-                </p>
+          {strengths.map((strength) => (
+            <div
+              key={strength.title}
+              className="group flex flex-col items-center gap-6 border border-[#E5E0DB] bg-[#FFFFFF] px-8 py-12 text-center transition-all duration-500 hover:border-[#6B4E31] hover:bg-[#6B4E31] hover:shadow-lg"
+            >
+              <div className="flex h-16 w-16 items-center justify-center border border-[#E5E0DB] transition-colors duration-500 group-hover:border-[#FAFAF8]/40 group-hover:bg-[#FAFAF8]">
+                <strength.icon className="h-7 w-7 text-[#6B4E31] transition-colors duration-500" />
               </div>
-            )
-          })}
+              <h3 className="text-xl font-bold tracking-wider text-[#2F2F2F] transition-colors duration-500 group-hover:text-[#FAFAF8]">
+                {strength.title}
+              </h3>
+              <p className="text-sm font-light leading-relaxed text-[#6B6B6B] transition-colors duration-500 group-hover:text-[#FAFAF8]/80">
+                {strength.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
