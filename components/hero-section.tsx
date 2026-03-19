@@ -26,7 +26,7 @@ export function HeroSection({ colors }: HeroSectionProps) {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
       {/* Background Image with slow zoom */}
-      <div className={`absolute inset-0 transition-transform duration-[2000ms] ease-out ${show ? "scale-100" : "scale-110"}`}>
+      <div className={`absolute inset-0 transition-transform duration-[2000ms] ease-out ${show ? "scale-100" : "scale-110"}`} style={{ position: "relative" }}>
         {bgImage.startsWith("http") ? (
           <img src={bgImage} alt="裕綸集團作品" className="w-full h-full object-cover" />
         ) : (
