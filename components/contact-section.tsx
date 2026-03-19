@@ -37,12 +37,12 @@ export function ContactSection({ colors }: ContactSectionProps) {
           ].map(({ label, placeholder, type }) => (
             <div key={label} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-              <input type={type} placeholder={placeholder} className="serif w-full border-0 border-b border-white/20 bg-transparent pb-2 pt-1 font-light tracking-wide placeholder:text-white/25 outline-none transition-colors" style={{ fontSize: "1.05rem", color: colors.footer_text, borderBottomColor: "rgba(255,255,255,0.2)" }} />
+              <input type={type} placeholder={placeholder} className="serif w-full bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none transition-colors" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", paddingBottom: "0.5rem", paddingTop: "0.25rem" }} />
             </div>
           ))}
           <div style={{ marginBottom: "1.5rem" }}>
             <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
-            <textarea placeholder="請簡單描述您的空間需求或想法..." rows={3} className="serif w-full resize-none border-0 border-b border-white/20 bg-transparent pb-2 pt-1 font-light tracking-wide placeholder:text-white/25 outline-none transition-colors" style={{ fontSize: "1.05rem", color: colors.footer_text, borderBottomColor: "rgba(255,255,255,0.2)" }} />
+            <textarea placeholder="請簡單描述您的空間需求或想法..." rows={3} className="serif w-full resize-none bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none transition-colors" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", borderBottom: "1px solid rgba(255,255,255,0.2)", paddingBottom: "0.5rem", paddingTop: "0.25rem" }} />
           </div>
           <button style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}>
             送出諮詢 →
