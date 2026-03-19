@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList } from "lucide-react"
 import { useEffect, useRef } from "react"
-import { useCmsData, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
+import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
 
 const iconMap: Record<string, typeof HardHat> = { HardHat, ShieldCheck, FileText, Wrench, ClipboardList }
 const defaultIcons = [HardHat, Wrench, ClipboardList, ShieldCheck, FileText]
@@ -38,6 +38,7 @@ const defaultTestimonials = [
 
 export default function ConstructionPage() {
   const { content, listItems, images } = useCmsData("construction")
+  const colors = usePageColors(content, "construction")
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
@@ -100,25 +101,25 @@ export default function ConstructionPage() {
   const addRef = (i: number) => (el: HTMLElement | null) => { fadeRefs.current[i] = el }
 
   return (
-    <div style={{ fontFamily: "'Josefin Sans', sans-serif", background: "#FAF8F4", color: "#2A2520", letterSpacing: "0.05em" }}>
+    <div style={{ fontFamily: "'Josefin Sans', sans-serif", background: colors.hero_bg, color: colors.hero_heading, letterSpacing: "0.05em" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+TC:wght@300;400&family=Josefin+Sans:wght@200;300;400&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         .serif { font-family: 'Cormorant Garamond', serif; }
         .noto { font-family: 'Noto Serif TC', serif; }
-        .service-card:hover { border-color: #8A7A68 !important; background: #F0EBE3 !important; }
+        .service-card:hover { border-color: ${colors.services_accent} !important; background: ${colors.strengths_bg} !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
         .portfolio-item:hover .portfolio-bg { transform: scale(1.04) !important; }
         @media (hover: none) {
           .portfolio-overlay { opacity: 1 !important; }
         }
-        .strength-card:hover { border-color: #8A7A68 !important; }
-        .strength-card:hover .strength-icon { background: #8A7A68 !important; border-color: #8A7A68 !important; }
-        .strength-card:hover .strength-icon svg { color: #FAF8F4 !important; }
-        .back-link:hover { color: #8A7A68 !important; }
-        .cta-link:hover { color: #8A7A68 !important; border-color: #8A7A68 !important; }
-        .form-input { background: transparent; border: none; border-bottom: 0.5px solid rgba(255,255,255,0.2); padding: 0.7rem 0; width: 100%; font-family: 'Cormorant Garamond','Noto Serif TC',serif; font-size: 1.05rem; font-weight: 300; letter-spacing: 0.1em; color: #FAF8F4; outline: none; transition: border-color 0.3s; }
-        .form-input:focus { border-bottom-color: #8A7A68; }
+        .strength-card:hover { border-color: ${colors.strengths_icon} !important; }
+        .strength-card:hover .strength-icon { background: ${colors.strengths_icon} !important; border-color: ${colors.strengths_icon} !important; }
+        .strength-card:hover .strength-icon svg { color: ${colors.hero_bg} !important; }
+        .back-link:hover { color: ${colors.hero_accent} !important; }
+        .cta-link:hover { color: ${colors.hero_accent} !important; border-color: ${colors.hero_accent} !important; }
+        .form-input { background: transparent; border: none; border-bottom: 0.5px solid rgba(255,255,255,0.2); padding: 0.7rem 0; width: 100%; font-family: 'Cormorant Garamond','Noto Serif TC',serif; font-size: 1.05rem; font-weight: 300; letter-spacing: 0.1em; color: ${colors.contact_btn_text}; outline: none; transition: border-color 0.3s; }
+        .form-input:focus { border-bottom-color: ${colors.contact_accent}; }
         .form-input::placeholder { color: rgba(255,255,255,0.3); }
         textarea.form-input { resize: none; height: 90px; }
 
@@ -158,25 +159,25 @@ export default function ConstructionPage() {
       `}</style>
 
       {/* NAV */}
-      <nav className="resp-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.5rem 4rem", background: "rgba(250,248,244,0.92)", backdropFilter: "blur(12px)", borderBottom: "0.5px solid #E8E3DA" }}>
-        <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C8479", textDecoration: "none", transition: "color 0.3s" }}>
+      <nav className="resp-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.5rem 4rem", background: "rgba(250,248,244,0.92)", backdropFilter: "blur(12px)", borderBottom: `0.5px solid ${colors.services_card_border}` }}>
+        <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: colors.hero_text, textDecoration: "none", transition: "color 0.3s" }}>
           <ArrowLeft size={14} /> 裕綸集團
         </Link>
-        <span className="serif resp-nav-brand" style={{ fontSize: "1.3rem", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>裕綸・室內裝修</span>
-        <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#8A7A68", textDecoration: "none" }}>免費估價</a>
+        <span className="serif resp-nav-brand" style={{ fontSize: "1.3rem", fontWeight: 300, letterSpacing: "0.15em", color: colors.hero_heading }}>裕綸・室內裝修</span>
+        <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>免費估價</a>
       </nav>
 
       {/* HERO */}
       <section className="resp-hero" style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", paddingTop: "5rem" }}>
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
-          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "2rem", ...getContentStyle(content, "hero", "en_subtitle", "construction") }}>{heroEnSubtitle}</p>
+          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.hero_accent, marginBottom: "2rem", ...getContentStyle(content, "hero", "en_subtitle", "construction") }}>{heroEnSubtitle}</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.2rem, 5.5vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem", ...getContentStyle(content, "hero", "title", "construction") }}>
-            {heroTitle}<br /><em style={{ fontStyle: "italic", color: "#8C8479", ...getContentStyle(content, "hero", "title_line2", "construction") }}>{heroTitleLine2}</em><br /><span style={getContentStyle(content, "hero", "title_line3", "construction")}>{heroTitleLine3}</span>
+            {heroTitle}<br /><em style={{ fontStyle: "italic", color: colors.hero_text, ...getContentStyle(content, "hero", "title_line2", "construction") }}>{heroTitleLine2}</em><br /><span style={getContentStyle(content, "hero", "title_line3", "construction")}>{heroTitleLine3}</span>
           </h1>
-          <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content, "hero", "description", "construction") }}>
+          <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: colors.hero_text, maxWidth: 380, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content, "hero", "description", "construction") }}>
             {heroDesc || "裕綸裝修擁有政府核可專業施工證照，秉持標準化 SOP 工程管理。我們重視隱蔽工程細節，從水電配置、防水工法到結構強化，皆由具備資深執照的職人團隊把關。2年保固，安心無憂。"}
           </p>
-          <a ref={addRef(3)} href="#projects" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
+          <a ref={addRef(3)} href="#projects" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_heading, textDecoration: "none", borderBottom: `1px solid ${colors.hero_heading}`, paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
             查看施工案例 <ArrowRight size={14} />
           </a>
         </div>
@@ -186,19 +187,19 @@ export default function ConstructionPage() {
       </section>
 
       {/* STRENGTHS */}
-      <section className="resp-section" style={{ padding: "8rem 6rem", background: "#F0EBE3" }}>
+      <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.strengths_bg }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Our Strengths</p>
-          <h2 ref={addRef(5)} className="serif resp-heading" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, marginBottom: "1.5rem" }}>為什麼選擇我們</h2>
-          <div style={{ width: 48, height: 1, background: "#8A7A68", margin: "0 auto 4rem" }} />
+          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.strengths_icon, marginBottom: "1rem" }}>Our Strengths</p>
+          <h2 ref={addRef(5)} className="serif resp-heading" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, marginBottom: "1.5rem", color: colors.strengths_heading }}>為什麼選擇我們</h2>
+          <div style={{ width: 48, height: 1, background: colors.strengths_icon, margin: "0 auto 4rem" }} />
           <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
             {strengths.map((s, i) => (
-              <div key={s.title} className="strength-card" ref={addRef(6 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "3rem 2rem", border: "0.5px solid #D8D0C8", background: "#fff", transition: "border-color 0.4s", textAlign: "center" }}>
-                <div className="strength-icon" style={{ width: 64, height: 64, border: "0.5px solid #D8D0C8", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem", transition: "background 0.4s, border-color 0.4s" }}>
-                  <s.icon size={28} style={{ color: "#8A7A68", transition: "color 0.4s" }} />
+              <div key={s.title} className="strength-card" ref={addRef(6 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "3rem 2rem", border: `0.5px solid ${colors.strengths_card_border}`, background: colors.strengths_card_bg, transition: "border-color 0.4s", textAlign: "center" }}>
+                <div className="strength-icon" style={{ width: 64, height: 64, border: `0.5px solid ${colors.strengths_card_border}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem", transition: "background 0.4s, border-color 0.4s" }}>
+                  <s.icon size={28} style={{ color: colors.strengths_icon, transition: "color 0.4s" }} />
                 </div>
                 <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "strengths", s.sortOrder, "title", "construction") }}>{s.title}</h3>
-                <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300, ...getListItemStyle(content, "strengths", s.sortOrder, "description", "construction") }}>{s.desc}</p>
+                <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: colors.strengths_text, fontWeight: 300, ...getListItemStyle(content, "strengths", s.sortOrder, "description", "construction") }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -206,42 +207,42 @@ export default function ConstructionPage() {
       </section>
 
       {/* SERVICES */}
-      <section className="resp-section" style={{ padding: "8rem 6rem", background: "#FAF8F4" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "4rem", borderBottom: "0.5px solid #E8E3DA", paddingBottom: "2rem" }}>
+      <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.services_bg }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "4rem", borderBottom: `0.5px solid ${colors.services_card_border}`, paddingBottom: "2rem" }}>
           <div>
-            <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "0.5rem" }}>Services</p>
-            <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300 }}>服務項目</h2>
+            <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.services_accent, marginBottom: "0.5rem" }}>Services</p>
+            <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.services_heading }}>服務項目</h2>
           </div>
-          <a href="#contact" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>免費估價 →</a>
+          <a href="#contact" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.services_heading, textDecoration: "none", borderBottom: `1px solid ${colors.services_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>免費估價 →</a>
         </div>
         <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.5rem" }}>
           {services.map((s, i) => (
-            <div key={s.num} className="service-card" ref={addRef(9 + i)} style={{ ...fadeStyle, transitionDelay: `${(i % 3) * 0.15}s`, padding: "2.5rem", border: "0.5px solid #E8E3DA", transition: "border-color 0.3s, background 0.3s" }}>
+            <div key={s.num} className="service-card" ref={addRef(9 + i)} style={{ ...fadeStyle, transitionDelay: `${(i % 3) * 0.15}s`, padding: "2.5rem", border: `0.5px solid ${colors.services_card_border}`, transition: "border-color 0.3s, background 0.3s" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginBottom: "1.5rem" }}>
-                <span className="serif" style={{ fontSize: "0.75rem", color: "#8A7A68", ...getListItemStyle(content, "services", s.sortOrder, "subtitle", "construction") }}>{s.num}</span>
-                <s.icon size={16} style={{ color: "#8A7A68" }} />
+                <span className="serif" style={{ fontSize: "0.75rem", color: colors.services_accent, ...getListItemStyle(content, "services", s.sortOrder, "subtitle", "construction") }}>{s.num}</span>
+                <s.icon size={16} style={{ color: colors.services_accent }} />
               </div>
               <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "services", s.sortOrder, "title", "construction") }}>{s.name}</h3>
-              <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: "#8C8479", fontWeight: 300, ...getListItemStyle(content, "services", s.sortOrder, "description", "construction") }}>{s.desc}</p>
+              <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: colors.services_text, fontWeight: 300, ...getListItemStyle(content, "services", s.sortOrder, "description", "construction") }}>{s.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" style={{ padding: "6rem 0", background: "#F0EBE3" }}>
+      <section id="projects" style={{ padding: "6rem 0", background: colors.portfolio_bg }}>
         <div className="resp-section-inner" style={{ padding: "0 6rem", marginBottom: "3rem", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <div>
-            <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "0.5rem" }}>Projects</p>
-            <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300 }}>施工案例</h2>
+            <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.portfolio_accent, marginBottom: "0.5rem" }}>Projects</p>
+            <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.portfolio_heading }}>施工案例</h2>
           </div>
-          <a href="#contact" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>索取更多案例 →</a>
+          <a href="#contact" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.portfolio_heading, textDecoration: "none", borderBottom: `1px solid ${colors.portfolio_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>索取更多案例 →</a>
         </div>
         <div className="resp-portfolio" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gridTemplateRows: "300px 300px", gap: "2px" }}>
           {projects.map((p, i) => (
             <div key={p.title} className="portfolio-item" style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined }}>
               <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(30,25,20,0.6) 0%, transparent 50%)", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem" }}>
+              <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${colors.portfolio_overlay} 0%, transparent 50%)`, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem" }}>
                 <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", marginBottom: "0.3rem", ...getListItemStyle(content, "portfolio", p.sortOrder, "title", "construction") }}>{p.title}</h3>
               </div>
             </div>
@@ -250,15 +251,15 @@ export default function ConstructionPage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="resp-section" style={{ padding: "8rem 6rem", background: "#F0EBE3" }}>
-        <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Testimonials</p>
-        <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: "#2A2520", marginBottom: "4rem" }}>客戶怎麼說</h2>
+      <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.testimonials_bg }}>
+        <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.testimonials_accent, marginBottom: "1rem" }}>Testimonials</p>
+        <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.testimonials_heading, marginBottom: "4rem" }}>客戶怎麼說</h2>
         <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
           {testimonials.map((t, i) => (
-            <div key={t.name} ref={addRef(15 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "2.5rem", border: "0.5px solid #DDD7CE" }}>
-              <p className="serif" style={{ fontSize: "1rem", fontStyle: "italic", color: "#2A2520", lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300, ...getListItemStyle(content, "testimonials", t.sortOrder, "description", "construction") }}>「{t.quote}」</p>
-              <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8A7A68", ...getListItemStyle(content, "testimonials", t.sortOrder, "title", "construction") }}>{t.name}</p>
-              <p style={{ fontSize: "0.65rem", color: "#8C8479", marginTop: "0.3rem", letterSpacing: "0.1em", ...getListItemStyle(content, "testimonials", t.sortOrder, "subtitle", "construction") }}>{t.info}</p>
+            <div key={t.name} ref={addRef(15 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "2.5rem", border: `0.5px solid ${colors.testimonials_card_border}` }}>
+              <p className="serif" style={{ fontSize: "1rem", fontStyle: "italic", color: colors.testimonials_text, lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300, ...getListItemStyle(content, "testimonials", t.sortOrder, "description", "construction") }}>「{t.quote}」</p>
+              <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: colors.testimonials_accent, ...getListItemStyle(content, "testimonials", t.sortOrder, "title", "construction") }}>{t.name}</p>
+              <p style={{ fontSize: "0.65rem", color: colors.testimonials_text, marginTop: "0.3rem", letterSpacing: "0.1em", ...getListItemStyle(content, "testimonials", t.sortOrder, "subtitle", "construction") }}>{t.info}</p>
             </div>
           ))}
         </div>
@@ -266,19 +267,19 @@ export default function ConstructionPage() {
 
       {/* CONTACT */}
       <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-        <div className="resp-contact-left" style={{ background: "#FFFFFF", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-          <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Contact</p>
-          <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>免費丈量<br />估價諮詢</h2>
+        <div className="resp-contact-left" style={{ background: colors.contact_bg, padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+          <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Contact</p>
+          <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem", color: colors.contact_heading }}>免費丈量<br />估價諮詢</h2>
           {[["地址",contactAddress,"address"],["電話",contactPhone,"phone"],["Email",contactEmail,"email"],["營業時間",contactHours,"hours"]].map(([label, val, key]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
-              <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "0.4rem" }}>{label}</p>
-              <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520", ...getContentStyle(content, "contact", key, "construction") }}>{val}</p>
+              <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
+              <p className="serif" style={{ fontSize: "1.05rem", color: colors.contact_heading, ...getContentStyle(content, "contact", key, "construction") }}>{val}</p>
             </div>
           ))}
         </div>
-        <div className="resp-contact-right" style={{ background: "#2A2520", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-          <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Free Estimate</p>
-          <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: "#FAF8F4", marginBottom: "2.5rem" }}>申請估價</h2>
+        <div className="resp-contact-right" style={{ background: colors.contact_heading, padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+          <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Free Estimate</p>
+          <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.contact_btn_text, marginBottom: "2.5rem" }}>申請估價</h2>
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["工程類型","全室裝修 / 局部工程 / 商業空間","text"],["坪數（選填）","例：30坪","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
@@ -289,14 +290,14 @@ export default function ConstructionPage() {
             <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>工程說明</label>
             <textarea placeholder="請簡單描述您的裝修需求..." className="form-input" />
           </div>
-          <button style={{ marginTop: "1rem", background: "#8A7A68", color: "#FAF8F4", border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}>
+          <button style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}>
             送出申請 →
           </button>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="resp-footer" style={{ background: "#1A1510", padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
+      <footer className="resp-footer" style={{ background: colors.footer_bg, padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
         <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>裕綸室內裝修</span>
         <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 裕綸室內裝修・裕綸集團</p>
         <div style={{ display: "flex", gap: "2rem" }}>

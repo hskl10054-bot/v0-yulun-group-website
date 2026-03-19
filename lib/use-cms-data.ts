@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
+import { DEFAULT_COLORS } from "@/lib/default-colors"
 
 interface ContentRow {
   id?: number; page: string; section: string; key: string; value: string
@@ -69,6 +70,19 @@ export function getListItemsBySection(listItems: ListItem[], section: string): L
 // Helper: get image URL by section and sort order
 export function getImageUrl(images: ImageRow[], section: string, sortOrder: number = 1): string {
   return images.find((i) => i.section === section && i.sort_order === sortOrder)?.url || ""
+}
+
+// Helper: get all resolved colors for a page (CMS overrides + defaults)
+export function usePageColors(content: ContentRow[], page: string): Record<string, string> {
+  return useMemo(() => {
+    const defaults = DEFAULT_COLORS[page] || {}
+    const result: Record<string, string> = { ...defaults }
+    for (const key of Object.keys(defaults)) {
+      const cmsValue = getContentValue(content, "colors", key)
+      if (cmsValue) result[key] = cmsValue
+    }
+    return result
+  }, [content, page])
 }
 
 // Helper: get inline style for a content field (font size + font family)
