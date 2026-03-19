@@ -1,4 +1,5 @@
 "use client"
+import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -11,6 +12,8 @@ const works = [
 ]
 
 export function PortfolioPreview() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
   return (
     <section className="bg-[#F5F0E8] py-24">
       <div className="mx-auto max-w-6xl px-6">
@@ -24,15 +27,32 @@ export function PortfolioPreview() {
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 md:grid-cols-3 md:[grid-template-rows:260px_260px]">
-          {works.map((w, i) => (
-            <div key={w.title} className={`group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`}>
-              <img src={w.image} alt={w.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 opacity-100 md:opacity-0 transition-opacity duration-300 md:group-hover:opacity-100">
-                <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
-                <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{w.title}</h3>
+          {works.map((w, i) => {
+            const isActive = activeIndex === i
+            return (
+              <div
+                key={w.title}
+                onClick={() => setActiveIndex(isActive ? null : i)}
+                className={`group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`}
+              >
+                <img
+                  src={w.image}
+                  alt={w.title}
+                  className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
+                    isActive ? "scale-105" : ""
+                  }`}
+                />
+                <div
+                  className={`absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 transition-opacity duration-300 ${
+                    isActive ? "opacity-100" : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
+                  }`}
+                >
+                  <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
+                  <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{w.title}</h3>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
