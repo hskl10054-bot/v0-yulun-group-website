@@ -5,8 +5,108 @@ import {
   Home, Paintbrush, Hammer, Coffee,
   Save, Plus, Trash2, Upload, X, Check,
   ImageIcon, ChevronRight, Eye, Loader2, RefreshCw,
-  Type, ChevronDown
+  Type, ChevronDown, Palette
 } from "lucide-react"
+
+// ─── Brand Color Palette ─────────────────────────────────────────
+const BRAND_PALETTE = [
+  { value: "#2F2F2F", label: "深炭灰", group: "主色" },
+  { value: "#2A2520", label: "深棕黑", group: "主色" },
+  { value: "#1A1510", label: "極深棕", group: "主色" },
+  { value: "#6B4E31", label: "暖胡桃", group: "強調色" },
+  { value: "#8A7A68", label: "煙灰棕", group: "強調色" },
+  { value: "#B5956A", label: "金沙色", group: "強調色" },
+  { value: "#8C8479", label: "石灰色", group: "輔助色" },
+  { value: "#6B6B6B", label: "中灰色", group: "輔助色" },
+  { value: "#D4C5B2", label: "淺駝色", group: "輔助色" },
+  { value: "#FAFAF8", label: "暖白色", group: "背景色" },
+  { value: "#F5F0E8", label: "淺米色", group: "背景色" },
+  { value: "#F0EBE3", label: "亞麻色", group: "背景色" },
+  { value: "#E8E3DA", label: "淺沙色", group: "背景色" },
+  { value: "#E5E0DB", label: "淺灰棕", group: "背景色" },
+  { value: "#FFFFFF", label: "純白色", group: "背景色" },
+  { value: "#D8D0C8", label: "霧灰色", group: "邊框色" },
+  { value: "#BFB09A", label: "奶茶色", group: "特殊色" },
+  { value: "#000000", label: "純黑色", group: "特殊色" },
+]
+
+function ColorPicker({ value, onChange, label }: {
+  value: string; onChange: (v: string) => void; label: string
+}) {
+  const [open, setOpen] = useState(false)
+  const current = value || ""
+  const groups = [...new Set(BRAND_PALETTE.map((c) => c.group))]
+
+  return (
+    <div className="space-y-1.5">
+      <label className="block text-[10px] font-medium text-gray-400 uppercase tracking-wider">{label}</label>
+      <div className="flex items-center gap-2">
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs text-gray-700 hover:border-gray-300 transition-colors"
+        >
+          <div
+            className="w-5 h-5 rounded border border-gray-200 shrink-0"
+            style={{ background: current || "linear-gradient(135deg, #fff 45%, #e5e5e5 45%, #e5e5e5 55%, #fff 55%)" }}
+          />
+          <span>{current || "預設"}</span>
+          <ChevronDown className={`h-3 w-3 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`} />
+        </button>
+        {current && (
+          <button onClick={() => onChange("")} className="text-[10px] text-gray-400 hover:text-red-500 transition-colors">清除</button>
+        )}
+      </div>
+      {open && (
+        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-lg space-y-3">
+          {groups.map((group) => (
+            <div key={group}>
+              <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">{group}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {BRAND_PALETTE.filter((c) => c.group === group).map((c) => (
+                  <button
+                    key={c.value}
+                    onClick={() => { onChange(c.value); setOpen(false) }}
+                    className={`group/swatch relative w-8 h-8 rounded-lg border-2 transition-all hover:scale-110 ${
+                      current === c.value ? "border-amber-500 ring-2 ring-amber-200" : "border-gray-200 hover:border-gray-400"
+                    }`}
+                    style={{ background: c.value }}
+                    title={`${c.label} (${c.value})`}
+                  >
+                    {current === c.value && (
+                      <Check className={`absolute inset-0 m-auto h-3.5 w-3.5 ${
+                        ["#FFFFFF", "#FAFAF8", "#F5F0E8", "#F0EBE3", "#E8E3DA", "#E5E0DB", "#D8D0C8", "#D4C5B2"].includes(c.value)
+                          ? "text-gray-600" : "text-white"
+                      }`} />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+          {/* Custom color input */}
+          <div className="border-t border-gray-100 pt-3">
+            <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-1.5">自訂色碼</p>
+            <div className="flex items-center gap-2">
+              <input
+                type="color"
+                value={current || "#FFFFFF"}
+                onChange={(e) => onChange(e.target.value)}
+                className="w-8 h-8 rounded border border-gray-200 cursor-pointer"
+              />
+              <input
+                type="text"
+                value={current}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder="#RRGGBB"
+                className="flex-1 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5 text-xs text-gray-700 outline-none focus:border-amber-400"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 // ─── Types ───────────────────────────────────────────────────────
 interface ContentRow {
@@ -578,10 +678,41 @@ export default function AdminPage() {
     )
   }
 
+  // ─── Color Settings Renderer ─────────────────────────────────
+  const renderColorSection = (sections: { key: string; label: string; fields: { key: string; label: string }[] }[]) => (
+    <ColorSection sections={sections} getContent={getContent} setContentValue={setContentValue} />
+  )
+
+  // Color field definitions per page
+  const colorFields = {
+    bg: { key: "bg", label: "背景色" },
+    text: { key: "text", label: "文字色" },
+    heading: { key: "heading", label: "標題色" },
+    accent: { key: "accent", label: "強調色" },
+    border: { key: "border", label: "邊框色" },
+    subtitle: { key: "subtitle_color", label: "副標題色" },
+    card_bg: { key: "card_bg", label: "卡片背景" },
+    card_border: { key: "card_border", label: "卡片邊框" },
+    btn_bg: { key: "btn_bg", label: "按鈕背景" },
+    btn_text: { key: "btn_text", label: "按鈕文字" },
+    overlay: { key: "overlay", label: "遮罩色" },
+    icon: { key: "icon", label: "圖示色" },
+  }
+
   // ─── Page Renderers ──────────────────────────────────────────
 
   const renderHomePage = () => (
     <div className="space-y-10">
+      {renderColorSection([
+        { key: "hero", label: "首頁橫幅 Hero", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent, colorFields.overlay] },
+        { key: "brands", label: "品牌卡片 Brand Cards", fields: [colorFields.overlay, colorFields.heading, colorFields.text, colorFields.accent] },
+        { key: "strengths", label: "集團實力 Strengths", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent, colorFields.card_bg, colorFields.card_border, colorFields.icon] },
+        { key: "portfolio", label: "精選作品 Portfolio", fields: [colorFields.bg, colorFields.heading, colorFields.accent] },
+        { key: "testimonials", label: "客戶評語 Testimonials", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.card_border, colorFields.accent] },
+        { key: "contact", label: "聯絡資訊 Contact", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent, colorFields.btn_bg, colorFields.btn_text] },
+        { key: "footer", label: "頁尾 Footer", fields: [colorFields.bg, colorFields.text, colorFields.accent] },
+      ])}
+
       <Section title="首頁橫幅" subtitle="Hero Section">
         {renderContentFields("hero", [
           { key: "subtitle", label: "副標題（英文）" },
@@ -633,6 +764,15 @@ export default function AdminPage() {
 
   const renderDesignPage = () => (
     <div className="space-y-10">
+      {renderColorSection([
+        { key: "hero", label: "首頁橫幅 Hero", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent] },
+        { key: "about", label: "關於我們 About", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent] },
+        { key: "services", label: "服務項目 Services", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent, colorFields.card_border] },
+        { key: "portfolio", label: "精選作品 Portfolio", fields: [colorFields.bg, colorFields.heading, colorFields.accent, colorFields.overlay] },
+        { key: "testimonials", label: "客戶評語 Testimonials", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.card_border, colorFields.accent] },
+        { key: "contact", label: "聯絡區域 Contact", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent, colorFields.btn_bg, colorFields.btn_text] },
+        { key: "footer", label: "頁尾 Footer", fields: [colorFields.bg, colorFields.text] },
+      ])}
       <Section title="首頁橫幅" subtitle="Hero">
         {renderContentFields("hero", [
           { key: "en_subtitle", label: "英文副標題" },
@@ -691,6 +831,16 @@ export default function AdminPage() {
 
   const renderConstructionPage = () => (
     <div className="space-y-10">
+      {renderColorSection([
+        { key: "hero", label: "首頁橫幅 Hero", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent] },
+        { key: "strengths", label: "優勢 Strengths", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.card_bg, colorFields.card_border, colorFields.icon] },
+        { key: "services", label: "服務項目 Services", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent, colorFields.card_border] },
+        { key: "portfolio", label: "施工案例 Projects", fields: [colorFields.bg, colorFields.heading, colorFields.accent, colorFields.overlay] },
+        { key: "testimonials", label: "客戶評語 Testimonials", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.card_border, colorFields.accent] },
+        { key: "contact", label: "聯絡區域 Contact", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent, colorFields.btn_bg, colorFields.btn_text] },
+        { key: "footer", label: "頁尾 Footer", fields: [colorFields.bg, colorFields.text] },
+      ])}
+
       <Section title="首頁橫幅" subtitle="Hero">
         {renderContentFields("hero", [
           { key: "en_subtitle", label: "英文副標題" },
@@ -737,6 +887,13 @@ export default function AdminPage() {
 
   const renderCafePage = () => (
     <div className="space-y-10">
+      {renderColorSection([
+        { key: "hero", label: "首頁橫幅 Hero", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent] },
+        { key: "features", label: "品牌特色 Features", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.card_bg, colorFields.card_border, colorFields.icon] },
+        { key: "stores", label: "門市資訊 Stores", fields: [colorFields.bg, colorFields.heading, colorFields.text, colorFields.accent, colorFields.card_border] },
+        { key: "footer", label: "頁尾 Footer", fields: [colorFields.bg, colorFields.text] },
+      ])}
+
       <Section title="首頁橫幅" subtitle="Hero">
         {renderContentFields("hero", [
           { key: "en_subtitle", label: "英文副標題" },
@@ -1007,6 +1164,63 @@ function TextArea({ label, value, onChange, placeholder, fontSize, fontFamily, o
         className="w-full rounded-lg border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-800 placeholder:text-gray-300 outline-none transition-colors focus:border-amber-400 focus:ring-2 focus:ring-amber-100 resize-none" />
       {hasStyleControls && showStyle && (
         <StyleControls fontSize={fontSize || ""} fontFamily={fontFamily || ""} onFontSizeChange={onFontSizeChange} onFontFamilyChange={onFontFamilyChange} />
+      )}
+    </div>
+  )
+}
+
+function ColorSection({ sections, getContent, setContentValue }: {
+  sections: { key: string; label: string; fields: { key: string; label: string }[] }[]
+  getContent: (section: string, key: string) => string
+  setContentValue: (section: string, key: string, value: string) => void
+}) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors rounded-xl"
+      >
+        <div className="flex items-center gap-3">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-amber-100 to-amber-50">
+            <Palette className="h-4 w-4 text-amber-700" />
+          </div>
+          <div>
+            <h2 className="text-base font-semibold text-gray-800">色彩設定</h2>
+            <p className="text-xs text-gray-400 mt-0.5">Color Settings — 依品牌色票調整各區塊顏色</p>
+          </div>
+        </div>
+        <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`} />
+      </button>
+      {open && (
+        <div className="border-t border-gray-100 px-6 py-5 space-y-6">
+          <div className="rounded-lg bg-gray-50 p-4">
+            <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-3">品牌色票</p>
+            <div className="flex flex-wrap gap-2">
+              {BRAND_PALETTE.map((c) => (
+                <div key={c.value} className="flex flex-col items-center gap-1">
+                  <div className="w-8 h-8 rounded-lg border border-gray-200 shadow-sm" style={{ background: c.value }} title={c.label} />
+                  <span className="text-[8px] text-gray-400">{c.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          {sections.map((sec) => (
+            <div key={sec.key} className="space-y-3">
+              <p className="text-xs font-semibold text-gray-600 border-b border-gray-100 pb-2">{sec.label}</p>
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                {sec.fields.map((f) => (
+                  <ColorPicker
+                    key={f.key}
+                    label={f.label}
+                    value={getContent("colors", `${sec.key}_${f.key}`)}
+                    onChange={(v) => setContentValue("colors", `${sec.key}_${f.key}`, v)}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   )
