@@ -217,8 +217,8 @@ export default function ConstructionPage() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "70vh" }}>
-        <div className="resp-contact-left" style={{ background: "#FFFFFF", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+        <div className="resp-contact-left" style={{ background: "#FFFFFF", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Contact</p>
           <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>免費丈量<br />估價諮詢</h2>
           {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週五  09:00 — 18:00"]].map(([label, val]) => (
@@ -228,7 +228,7 @@ export default function ConstructionPage() {
             </div>
           ))}
         </div>
-        <div className="resp-contact-right" style={{ background: "#2A2520", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        <div className="resp-contact-right" style={{ background: "#2A2520", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Free Estimate</p>
           <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: "#FAF8F4", marginBottom: "2.5rem" }}>申請估價</h2>
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["工程類型","全室裝修 / 局部工程 / 商業空間","text"],["坪數（選填）","例：30坪","text"]].map(([label, ph, type]) => (

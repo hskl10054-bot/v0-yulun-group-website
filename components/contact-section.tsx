@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react"
 export function ContactSection() {
   return (
     <section id="contact" className="grid md:grid-cols-2">
-      <div className="flex flex-col justify-center bg-white px-12 py-16 md:px-16 md:py-20">
+      <div className="flex flex-col justify-start bg-white px-12 py-16 md:px-16 md:py-20">
         <span className="mb-3 text-xs font-light tracking-[0.4em] uppercase text-[#B5956A]">Contact Us</span>
         <h2 className="mb-10 text-3xl font-bold tracking-wider text-[#2F2F2F] md:text-4xl">聯絡裕綸集團</h2>
         <div className="flex flex-col gap-7">
@@ -24,7 +24,7 @@ export function ContactSection() {
           ))}
         </div>
       </div>
-      <div className="flex flex-col justify-center bg-[#2F2F2F] px-12 py-16 md:px-16 md:py-20">
+      <div className="flex flex-col justify-start bg-[#2F2F2F] px-12 py-16 md:px-16 md:py-20">
         <span className="mb-3 text-xs font-light tracking-[0.4em] uppercase text-[#B5956A]">Send Message</span>
         <h2 className="mb-8 text-3xl font-bold tracking-wider text-[#FAFAF8] md:text-4xl">預約諮詢</h2>
         <div className="flex flex-col gap-5">
