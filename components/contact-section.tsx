@@ -2,8 +2,8 @@
 
 export function ContactSection() {
   return (
-    <section id="contact" className="grid md:grid-cols-2">
-      <div className="flex flex-col justify-start bg-white px-12 py-16 md:px-16 md:py-20">
+    <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <div className="resp-contact-left flex flex-col justify-start" style={{ background: "#FFFFFF", padding: "6rem" }}>
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Contact</p>
         <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>聯絡裕綸集團</h2>
         {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週五  09:00 — 18:00"]].map(([label, val]) => (
@@ -13,7 +13,7 @@ export function ContactSection() {
           </div>
         ))}
       </div>
-      <div className="flex flex-col justify-start bg-[#2F2F2F] px-12 py-16 md:px-16 md:py-20">
+      <div className="resp-contact-right flex flex-col justify-start" style={{ background: "#2A2520", padding: "6rem" }}>
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Send Message</p>
         <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, color: "#FAF8F4", marginBottom: "2.5rem" }}>預約諮詢</h2>
         <div className="flex flex-col gap-5">
