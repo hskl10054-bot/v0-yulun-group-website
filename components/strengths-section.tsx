@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import { HardHat, ShieldCheck, FileText } from "lucide-react"
+import { useCmsData, getListItemsBySection } from "@/lib/use-cms-data"
 
-const strengths = [
+const defaultStrengths = [
   {
     icon: HardHat,
     title: "自有工班",
@@ -21,8 +22,20 @@ const strengths = [
   },
 ]
 
+const defaultIcons = [HardHat, ShieldCheck, FileText]
+
 export function StrengthsSection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const { listItems } = useCmsData("home")
+
+  const cmsStrengths = getListItemsBySection(listItems, "strengths")
+  const strengths = cmsStrengths.length > 0
+    ? cmsStrengths.map((li, i) => ({
+        icon: defaultIcons[i % defaultIcons.length],
+        title: li.title,
+        description: li.description,
+      }))
+    : defaultStrengths
 
   return (
     <section className="bg-[#FAFAF8] py-24 md:py-32">

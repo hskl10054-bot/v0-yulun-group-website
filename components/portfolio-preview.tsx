@@ -2,8 +2,9 @@
 import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
+import { useCmsData, getListItemsBySection, getImageUrl } from "@/lib/use-cms-data"
 
-const works = [
+const defaultWorks = [
   { title: "同齊咖吡 西區精忠店", type: "2025", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
   { title: "壹偲OnlyEase酵素保健茶飲", type: "2025", image: "/images/home/portfolio/home-portfolio-02.JPG", span2: false },
   { title: "勝麗交響曲", type: "2025", image: "/images/home/portfolio/home-portfolio-03.JPG", span2: false },
@@ -13,6 +14,17 @@ const works = [
 
 export function PortfolioPreview() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const { listItems, images } = useCmsData("home")
+
+  const cmsPortfolio = getListItemsBySection(listItems, "portfolio")
+  const works = cmsPortfolio.length > 0
+    ? cmsPortfolio.map((li, i) => ({
+        title: li.title,
+        type: li.subtitle,
+        image: getImageUrl(images, "portfolio", li.sort_order) || `/images/home/portfolio/home-portfolio-0${li.sort_order}.jpg`,
+        span2: i === 0,
+      }))
+    : defaultWorks
 
   return (
     <section className="bg-[#F5F0E8] py-24">

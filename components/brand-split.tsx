@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { useCmsData, getListItemsBySection, getImageUrl } from "@/lib/use-cms-data"
 
 interface BrandCardProps {
   title: string; subtitle: string; description: string
@@ -10,7 +11,11 @@ interface BrandCardProps {
 function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href }: BrandCardProps) {
   return (
     <a href={href} className="group relative flex min-h-[400px] flex-1 cursor-pointer items-center justify-center overflow-hidden bg-[#6B4E31] md:min-h-[600px]">
-      <Image src={imageSrc} alt={imageAlt} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" quality={85} />
+      {imageSrc.startsWith("http") ? (
+        <img src={imageSrc} alt={imageAlt} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
+      ) : (
+        <Image src={imageSrc} alt={imageAlt} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" quality={85} />
+      )}
       <div className="absolute inset-0 bg-[#2F2F2F]/60 transition-colors duration-500 group-hover:bg-[#2F2F2F]/40" />
       <div className="relative z-10 flex flex-col items-center gap-4 px-6 text-center">
         <span className="text-xs font-light tracking-[0.3em] uppercase text-[#D4C5B2]">{subtitle}</span>
@@ -25,11 +30,30 @@ function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href }: B
   )
 }
 
+const defaultCards = [
+  { title: "空房子室內設計", subtitle: "Interior Design", description: "為你的空間注入魔法 — 空房開門，幸福進門。透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。", imageSrc: "/images/design-brand.jpg", href: "/design" },
+  { title: "裕綸室內裝修", subtitle: "Construction Engineering", description: "匠心傳承，穩健工程，構築世代安居。標準化 SOP 工程管理，讓美學建立在穩固且安全的結構之上。", imageSrc: "/images/construction-brand.jpg", href: "/construction" },
+]
+
 export function BrandSplit() {
+  const { listItems, images } = useCmsData("home")
+
+  const cmsCards = getListItemsBySection(listItems, "brand_cards")
+  const cards = cmsCards.length > 0
+    ? cmsCards.map((li, i) => ({
+        title: li.title,
+        subtitle: li.subtitle,
+        description: li.description,
+        imageSrc: getImageUrl(images, i === 0 ? "brand_design" : "brand_construction") || defaultCards[i]?.imageSrc || "/images/design-brand.jpg",
+        href: li.extra || defaultCards[i]?.href || "/",
+      }))
+    : defaultCards
+
   return (
     <section id="brands" className="flex flex-col md:flex-row">
-      <BrandCard title="空房子室內設計" subtitle="Interior Design" description="為你的空間注入魔法 — 空房開門，幸福進門。透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。" imageSrc="/images/design-brand.jpg" imageAlt="空房子室內設計" href="/design" />
-      <BrandCard title="裕綸室內裝修" subtitle="Construction Engineering" description="匠心傳承，穩健工程，構築世代安居。標準化 SOP 工程管理，讓美學建立在穩固且安全的結構之上。" imageSrc="/images/construction-brand.jpg" imageAlt="裕綸室內裝修" href="/construction" />
+      {cards.map((card) => (
+        <BrandCard key={card.title} title={card.title} subtitle={card.subtitle} description={card.description} imageSrc={card.imageSrc} imageAlt={card.title} href={card.href} />
+      ))}
     </section>
   )
 }

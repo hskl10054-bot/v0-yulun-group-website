@@ -2,8 +2,9 @@
 import Link from "next/link"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { useEffect, useRef } from "react"
+import { useCmsData, getContentValue, getListItemsBySection, getImageUrl } from "@/lib/use-cms-data"
 
-const services = [
+const defaultServices = [
   { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
   { num: "02", name: "居家住宅室內設計", desc: "從平面配置、立面設計到材料挑選，以人為本的空間美學，為每個家注入獨特靈魂。" },
   { num: "03", name: "老屋翻新空間重整", desc: "保留空間記憶的同時，注入現代設計語彙。舊屋新生，讓老房子重新散發獨特魅力。" },
@@ -11,7 +12,7 @@ const services = [
   { num: "05", name: "軟裝設計與風格諮詢", desc: "家具挑選、燈光配置、藝術品與植栽搭配，用軟裝語彙讓硬體設計更有生命力。" },
 ]
 
-const portfolios = [
+const defaultPortfolios = [
   { title: "現代簡約｜光感餐廚", image: "/images/design/portfolio/design-work-01.jpg" },
   { title: "暖色侘寂｜圓弧玄關", image: "/images/design/portfolio/design-work-02.jpg" },
   { title: "輕奢現代｜石紋客餐廳", image: "/images/design/portfolio/design-work-03.jpg" },
@@ -19,13 +20,48 @@ const portfolios = [
   { title: "日式和風｜日光臥榻", image: "/images/design/portfolio/design-work-05.jpg" },
 ]
 
-const testimonials = [
+const defaultTestimonials = [
   { quote: "從第一次諮詢到完工，整個過程都讓我感受到設計師對細節的堅持。現在每天回到家都像是回到一個懂我的地方。", name: "李小姐", info: "台中北區・三房兩廳・2024" },
   { quote: "我只是說了幾個關鍵字，設計師就把我腦海裡模糊的想像變成了真實的空間。太神奇了。", name: "黃先生", info: "台中西區・老屋翻新・2023" },
   { quote: "咖啡廳開幕後不斷有客人說空間很有質感，生意比預期好很多。設計真的是最值得投資的事。", name: "吳老闆", info: "台中南區・商業空間・2023" },
 ]
 
 export default function DesignPage() {
+  const { content, listItems, images } = useCmsData("design")
+
+  // Services from CMS or fallback
+  const cmsServices = getListItemsBySection(listItems, "services")
+  const services = cmsServices.length > 0
+    ? cmsServices.map((li) => ({ num: li.subtitle || String(li.sort_order).padStart(2, "0"), name: li.title, desc: li.description }))
+    : defaultServices
+
+  // Portfolios from CMS or fallback
+  const cmsPortfolios = getListItemsBySection(listItems, "portfolio")
+  const portfolios = cmsPortfolios.length > 0
+    ? cmsPortfolios.map((li) => ({
+        title: li.title,
+        image: getImageUrl(images, "portfolio", li.sort_order) || `/images/design/portfolio/design-work-0${li.sort_order}.jpg`,
+      }))
+    : defaultPortfolios
+
+  // Testimonials from CMS or fallback
+  const cmsTestimonials = getListItemsBySection(listItems, "testimonials")
+  const testimonials = cmsTestimonials.length > 0
+    ? cmsTestimonials.map((li) => ({ quote: li.description, name: li.title, info: li.subtitle }))
+    : defaultTestimonials
+
+  // Content from CMS
+  const heroImg = getImageUrl(images, "hero") || "/images/design/hero/design-hero.jpg"
+  const heroEnSubtitle = getContentValue(content, "hero", "en_subtitle") || "Taichung Interior Design Studio"
+  const heroTitle = getContentValue(content, "hero", "title")
+  const heroTitleItalic = getContentValue(content, "hero", "title_italic")
+  const heroDesc = getContentValue(content, "hero", "description")
+  const aboutQuote = getContentValue(content, "hero", "quote") || getContentValue(content, "about", "quote")
+  const aboutDesc = getContentValue(content, "about", "description")
+  const contactAddress = getContentValue(content, "contact", "address") || "台中市北屯區瀋陽北路73號"
+  const contactPhone = getContentValue(content, "contact", "phone") || "04-2247-9068"
+  const contactEmail = getContentValue(content, "contact", "email") || "yulun83417215@gmail.com"
+  const contactHours = getContentValue(content, "contact", "hours") || "週一至週五  09:00 — 18:00"
   const fadeRefs = useRef<(HTMLElement | null)[]>([])
 
   useEffect(() => {
@@ -115,19 +151,19 @@ export default function DesignPage() {
       {/* HERO */}
       <section className="resp-hero" style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", paddingTop: "5rem" }}>
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
-          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "1.275rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "2rem" }}>Taichung Interior Design Studio</p>
+          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "1.275rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "2rem" }}>{heroEnSubtitle}</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.5rem, 6vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem" }}>
-            為你的空間<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em style={{ fontStyle: "italic", color: "#8C8479" }}>注入魔法</em><img src="/images/sparkle.svg" alt="" width={80} height={80} style={{ flexShrink: 0, marginLeft: "0.1rem" }} /></span>
+            {heroTitle || "為你的空間"}<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em style={{ fontStyle: "italic", color: "#8C8479" }}>{heroTitleItalic || "注入魔法"}</em><img src="/images/sparkle.svg" alt="" width={80} height={80} style={{ flexShrink: 0, marginLeft: "0.1rem" }} /></span>
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300 }}>
-            空房開門，幸福進門。我們相信空間不只是鋼筋水泥，更是承載幸福的容器。當魔法注入空間，家便開始講述屬於你的幸福故事。
+            {heroDesc || "空房開門，幸福進門。我們相信空間不只是鋼筋水泥，更是承載幸福的容器。當魔法注入空間，家便開始講述屬於你的幸福故事。"}
           </p>
           <a ref={addRef(3)} href="#portfolio" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
             探索作品集 <ArrowRight size={14} />
           </a>
         </div>
         <div className="resp-hero-img" style={{ position: "relative", overflow: "hidden" }}>
-          <img src="/images/design/hero/design-hero.jpg" alt="空房子室內設計" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
+          <img src={heroImg} alt="空房子室內設計" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
         </div>
       </section>
 
@@ -135,14 +171,14 @@ export default function DesignPage() {
       <section className="resp-hero" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "70vh" }}>
         <div className="resp-hero-text" style={{ background: "linear-gradient(160deg, #D4C4AE 0%, #BFB09A 40%, #9A8870 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: "6rem 5rem" }}>
           <blockquote className="serif" style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.9)", lineHeight: 1.8, letterSpacing: "0.08em", textAlign: "center" }}>
-            「空間是無聲的語言，<br />設計是讓它開口說話。」
+            {aboutQuote ? `「${aboutQuote}」` : "「空間是無聲的語言，\n設計是讓它開口說話。」"}
           </blockquote>
         </div>
         <div className="resp-contact-left" style={{ background: "#F5F0E8", padding: "6rem 5rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1.5rem" }}>About Us</p>
           <h2 ref={addRef(5)} className="serif resp-heading" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "2rem" }}>我們是誰</h2>
           <p ref={addRef(6)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2.1, color: "#8C8479", marginBottom: "3rem", fontWeight: 300 }}>
-            空房子設計致力於打破格局束縛，以人為本，透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。我們不做複製品，每一個案子都從屋主的生活習慣、個性與夢想出發，打造獨一無二的空間故事。
+            {aboutDesc || "空房子設計致力於打破格局束縛，以人為本，透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。我們不做複製品，每一個案子都從屋主的生活習慣、個性與夢想出發，打造獨一無二的空間故事。"}
           </p>
           <div ref={addRef(7)} className="resp-stats" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "flex", gap: "3rem" }}>
             {[["150+","完成案例"],["8","年品牌經驗"],["98%","客戶滿意度"]].map(([num, label]) => (
@@ -216,7 +252,7 @@ export default function DesignPage() {
         <div className="resp-contact-left" style={{ background: "#FFFFFF", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
           <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Contact</p>
           <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>開始你的<br />空間對話</h2>
-          {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週五  09:00 — 18:00"]].map(([label, val]) => (
+          {[["地址",contactAddress],["電話",contactPhone],["Email",contactEmail],["營業時間",contactHours]].map(([label, val]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "0.4rem" }}>{label}</p>
               <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520" }}>{val}</p>
