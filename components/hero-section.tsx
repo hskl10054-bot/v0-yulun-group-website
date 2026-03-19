@@ -33,9 +33,6 @@ export function HeroSection({ colors }: HeroSectionProps) {
           <img src={bgImage} alt="裕綸集團作品" className="w-full h-full object-cover" />
         )}
       </div>
-      {/* Dark Overlay */}
-      <div className="absolute inset-0" style={{ backgroundColor: colors.hero_overlay }} />
-
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
         <h1
