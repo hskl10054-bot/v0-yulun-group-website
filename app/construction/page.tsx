@@ -2,8 +2,13 @@
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList } from "lucide-react"
 import { useEffect, useRef } from "react"
+import { useCmsData, getContentValue, getListItemsBySection, getImageUrl } from "@/lib/use-cms-data"
 
-const services = [
+const iconMap: Record<string, typeof HardHat> = { HardHat, ShieldCheck, FileText, Wrench, ClipboardList }
+const defaultIcons = [HardHat, Wrench, ClipboardList, ShieldCheck, FileText]
+const strengthDefaultIcons = [HardHat, ShieldCheck, FileText]
+
+const defaultServices = [
   { num: "01", icon: HardHat, name: "拆除與結構加強工程", desc: "安全拆除既有隔間與裝修，並依需求進行結構補強，為新設計奠定穩固基礎。" },
   { num: "02", icon: Wrench, name: "專業水電系統配置", desc: "專業水電技師負責管線配置、插座規劃、衛浴設備安裝，符合建築法規與安全標準。" },
   { num: "03", icon: ClipboardList, name: "高標準防水隔音工程", desc: "採用高規格防水工法與隔音材料，確保居住品質與空間結構的長期耐久。" },
@@ -11,7 +16,7 @@ const services = [
   { num: "05", icon: FileText, name: "系統家具安裝與整合", desc: "系統櫃體與家具的精準安裝，整合空間機能與美學，提供完整的收納解決方案。" },
 ]
 
-const projects = [
+const defaultProjects = [
   { title: "精準裁切，構築空間", type: "全室裝修・2025", image: "/images/construction/portfolio/construction-project-01.jpg", span2: true },
   { title: "設計落地：現場監工", type: "商業空間・2025", image: "/images/construction/portfolio/construction-project-02.jpg", span2: false },
   { title: "泥作整平，空間基石", type: "舊屋翻新・2025", image: "/images/construction/portfolio/construction-project-03.jpg", span2: false },
@@ -19,19 +24,61 @@ const projects = [
   { title: "嚴謹的高空作業", type: "全室裝修・2025", image: "/images/construction/portfolio/construction-project-05.jpg", span2: false },
 ]
 
-const strengths = [
+const defaultStrengths = [
   { icon: HardHat, title: "自有工班", desc: "不外包，全程自有專業工班施工，品質與進度完全掌控在自己手中。" },
   { icon: ShieldCheck, title: "合法執照", desc: "持有政府核定室內裝修專業技術人員證照，合法合規施工，保障屋主權益。" },
   { icon: FileText, title: "透明報價", desc: "逐項清單報價，無隱藏費用，每一分預算清清楚楚，讓你花得安心。" },
 ]
 
-const testimonials = [
+const defaultTestimonials = [
   { quote: "工班師傅很專業，每天收工前都會清理現場，整個工程過程完全不用擔心。", name: "黃先生", info: "全室裝修・台中北區・2024" },
   { quote: "報價單寫得很詳細，哪個項目多少錢一清二楚，完工後完全沒有追加費用。", name: "蔡太太", info: "老屋翻新・台中西屯・2023" },
   { quote: "工程進度比預期還快，品質也很好。監工人員很負責，有問題馬上回應。", name: "林先生", info: "商業空間・台中南區・2023" },
 ]
 
 export default function ConstructionPage() {
+  const { content, listItems, images } = useCmsData("construction")
+
+  // Services from CMS or fallback
+  const cmsServices = getListItemsBySection(listItems, "services")
+  const services = cmsServices.length > 0
+    ? cmsServices.map((li, i) => ({ num: li.subtitle || String(li.sort_order).padStart(2, "0"), icon: defaultIcons[i % defaultIcons.length], name: li.title, desc: li.description }))
+    : defaultServices
+
+  // Projects from CMS or fallback
+  const cmsProjects = getListItemsBySection(listItems, "portfolio")
+  const projects = cmsProjects.length > 0
+    ? cmsProjects.map((li, i) => ({
+        title: li.title,
+        type: li.subtitle,
+        image: getImageUrl(images, "portfolio", li.sort_order) || `/images/construction/portfolio/construction-project-0${li.sort_order}.jpg`,
+        span2: i === 0,
+      }))
+    : defaultProjects
+
+  // Strengths from CMS or fallback
+  const cmsStrengths = getListItemsBySection(listItems, "strengths")
+  const strengths = cmsStrengths.length > 0
+    ? cmsStrengths.map((li, i) => ({ icon: strengthDefaultIcons[i % strengthDefaultIcons.length], title: li.title, desc: li.description }))
+    : defaultStrengths
+
+  // Testimonials from CMS or fallback
+  const cmsTestimonials = getListItemsBySection(listItems, "testimonials")
+  const testimonials = cmsTestimonials.length > 0
+    ? cmsTestimonials.map((li) => ({ quote: li.description, name: li.title, info: li.subtitle }))
+    : defaultTestimonials
+
+  // Content from CMS
+  const heroImg = getImageUrl(images, "hero") || "/images/construction/hero/construction-hero.jpg"
+  const heroEnSubtitle = getContentValue(content, "hero", "en_subtitle") || "Taichung Construction Engineering"
+  const heroTitle = getContentValue(content, "hero", "title") || "匠心傳承"
+  const heroTitleLine2 = getContentValue(content, "hero", "title_line2") || "穩健工程"
+  const heroTitleLine3 = getContentValue(content, "hero", "title_line3") || "構築世代安居"
+  const heroDesc = getContentValue(content, "hero", "description")
+  const contactAddress = getContentValue(content, "contact", "address") || "台中市北屯區瀋陽北路73號"
+  const contactPhone = getContentValue(content, "contact", "phone") || "04-2247-9068"
+  const contactEmail = getContentValue(content, "contact", "email") || "yulun83417215@gmail.com"
+  const contactHours = getContentValue(content, "contact", "hours") || "週一至週五  09:00 — 18:00"
   const fadeRefs = useRef<(HTMLElement | null)[]>([])
 
   useEffect(() => {
@@ -121,19 +168,19 @@ export default function ConstructionPage() {
       {/* HERO */}
       <section className="resp-hero" style={{ minHeight: "100vh", display: "grid", gridTemplateColumns: "1fr 1fr", paddingTop: "5rem" }}>
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
-          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "2rem" }}>Taichung Construction Engineering</p>
+          <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "2rem" }}>{heroEnSubtitle}</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.2rem, 5.5vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem" }}>
-            匠心傳承<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>穩健工程</em><br />構築世代安居
+            {heroTitle}<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>{heroTitleLine2}</em><br />{heroTitleLine3}
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 380, marginBottom: "3rem", fontWeight: 300 }}>
-            裕綸裝修擁有政府核可專業施工證照，秉持標準化 SOP 工程管理。我們重視隱蔽工程細節，從水電配置、防水工法到結構強化，皆由具備資深執照的職人團隊把關。2年保固，安心無憂。
+            {heroDesc || "裕綸裝修擁有政府核可專業施工證照，秉持標準化 SOP 工程管理。我們重視隱蔽工程細節，從水電配置、防水工法到結構強化，皆由具備資深執照的職人團隊把關。2年保固，安心無憂。"}
           </p>
           <a ref={addRef(3)} href="#projects" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
             查看施工案例 <ArrowRight size={14} />
           </a>
         </div>
         <div className="resp-hero-img" style={{ position: "relative", overflow: "hidden" }}>
-          <img src="/images/construction/hero/construction-hero.jpg" alt="裕綸室內裝修" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
+          <img src={heroImg} alt="裕綸室內裝修" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
         </div>
       </section>
 
@@ -221,7 +268,7 @@ export default function ConstructionPage() {
         <div className="resp-contact-left" style={{ background: "#FFFFFF", padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "1rem" }}>Contact</p>
           <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>免費丈量<br />估價諮詢</h2>
-          {[["地址","台中市北屯區瀋陽北路73號"],["電話","04-2247-9068"],["Email","yulun83417215@gmail.com"],["營業時間","週一至週五  09:00 — 18:00"]].map(([label, val]) => (
+          {[["地址",contactAddress],["電話",contactPhone],["Email",contactEmail],["營業時間",contactHours]].map(([label, val]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#8A7A68", marginBottom: "0.4rem" }}>{label}</p>
               <p className="serif" style={{ fontSize: "1.05rem", color: "#2A2520" }}>{val}</p>
