@@ -49,12 +49,12 @@ export function HomeNavbar() {
         }}
       >
         <div
+          className="px-4 md:px-12"
           style={{
             position: "relative",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "0 3rem",
             maxWidth: 1400,
             margin: "0 auto",
             minHeight: atTop ? "33vh" : "auto",
@@ -66,9 +66,9 @@ export function HomeNavbar() {
           {/* Left - Contact */}
           <a
             href="#contact"
+            className="left-4 md:left-12"
             style={{
               position: "absolute",
-              left: "3rem",
               fontSize: "0.65rem",
               letterSpacing: "0.3em",
               textTransform: "uppercase",
@@ -93,9 +93,9 @@ export function HomeNavbar() {
             }}
           >
             <span
-              className={`transition-all duration-1000 ease-out ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
+              className={`transition-all duration-1000 ease-out text-lg md:text-xl ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
               style={{
-                fontSize: atTop ? "1.3rem" : "1.1rem",
+                fontSize: atTop ? undefined : "1.1rem",
                 fontWeight: 700,
                 letterSpacing: "0.35em",
                 color: atTop ? "#FAFAF8" : "#2F2F2F",
@@ -107,9 +107,8 @@ export function HomeNavbar() {
               {title}
             </span>
             <span
-              className={`transition-all duration-1000 ease-out delay-200 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
+              className={`transition-all duration-1000 ease-out delay-200 text-[0.5rem] md:text-[0.6rem] ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
               style={{
-                fontSize: "0.6rem",
                 letterSpacing: "0.25em",
                 textTransform: "uppercase",
                 color: atTop ? "rgba(250,250,248,0.6)" : "#8C8479",
@@ -120,9 +119,8 @@ export function HomeNavbar() {
               Yulun Group
             </span>
             <span
-              className={`transition-all duration-1000 ease-out delay-500 ${show ? "opacity-100" : "opacity-0"}`}
+              className={`transition-all duration-1000 ease-out delay-500 text-[0.45rem] md:text-[0.55rem] ${show ? "opacity-100" : "opacity-0"}`}
               style={{
-                fontSize: "0.55rem",
                 letterSpacing: "0.15em",
                 color: atTop ? "rgba(250,250,248,0.5)" : "#8C8479",
                 transition: "color 1.5s",
@@ -142,9 +140,9 @@ export function HomeNavbar() {
           {/* Right - Hamburger Menu */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
+            className="right-4 md:right-12"
             style={{
               position: "absolute",
-              right: "3rem",
               background: "none",
               border: "none",
               cursor: "pointer",
