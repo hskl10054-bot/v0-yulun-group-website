@@ -42,7 +42,7 @@ export function HomeNavbar() {
           right: 0,
           zIndex: 100,
           transform: hidden ? "translateY(-100%)" : "translateY(0)",
-          transition: "transform 0.8s ease, background 0.8s ease, box-shadow 0.8s ease",
+          transition: "transform 1.8s ease, background 1.8s ease, box-shadow 1.8s ease",
           background: atTop ? "transparent" : "rgba(255,255,255,0.95)",
           backdropFilter: atTop ? "none" : "blur(12px)",
           boxShadow: atTop ? "none" : "0 1px 0 rgba(0,0,0,0.06)",
@@ -59,7 +59,7 @@ export function HomeNavbar() {
             minHeight: atTop ? "33vh" : "auto",
             paddingTop: atTop ? "0" : "1.6rem",
             paddingBottom: atTop ? "0" : "1.6rem",
-            transition: "min-height 1s ease, padding 1s ease",
+            transition: "min-height 2s ease-in-out, padding 2s ease-in-out",
           }}
         >
           {/* Left - Contact */}
@@ -97,7 +97,7 @@ export function HomeNavbar() {
                 letterSpacing: "0.35em",
                 color: atTop ? "#FAFAF8" : "#2F2F2F",
                 textShadow: atTop ? "0 2px 8px rgba(0,0,0,0.5)" : "none",
-                transition: "color 0.8s, font-size 0.8s, text-shadow 0.8s",
+                transition: "color 1.5s, font-size 1.5s, text-shadow 1.5s",
                 ...getContentStyle(content, "hero", "title", "home"),
               }}
             >
@@ -110,7 +110,7 @@ export function HomeNavbar() {
                 letterSpacing: "0.25em",
                 textTransform: "uppercase",
                 color: atTop ? "rgba(250,250,248,0.6)" : "#8C8479",
-                transition: "color 0.8s",
+                transition: "color 1.5s",
                 fontWeight: 300,
               }}
             >
@@ -122,13 +122,13 @@ export function HomeNavbar() {
                 fontSize: "0.55rem",
                 letterSpacing: "0.15em",
                 color: atTop ? "rgba(250,250,248,0.5)" : "#8C8479",
-                transition: "color 0.8s",
+                transition: "color 1.5s",
                 fontWeight: 300,
                 marginTop: "0.15rem",
                 maxHeight: atTop ? "2rem" : "0",
                 overflow: "hidden",
                 transitionProperty: "color, max-height, opacity, margin",
-                transitionDuration: "0.8s",
+                transitionDuration: "1.5s",
                 ...getContentStyle(content, "hero", "slogan", "home"),
               }}
             >
