@@ -58,8 +58,8 @@ export function HomeNavbar() {
             maxWidth: 1400,
             margin: "0 auto",
             minHeight: atTop ? "33vh" : "auto",
-            paddingTop: atTop ? "0" : "0.7rem",
-            paddingBottom: atTop ? "0" : "0.7rem",
+            paddingTop: atTop ? "0" : "1.6rem",
+            paddingBottom: atTop ? "0" : "1.6rem",
             transition: "min-height 2s ease-in-out, padding 2s ease-in-out",
           }}
         >
@@ -96,7 +96,7 @@ export function HomeNavbar() {
             <span
               className={`home-nav-title transition-all duration-1000 ease-out ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
               style={{
-                fontSize: atTop ? "1.3rem" : "0.95rem",
+                fontSize: atTop ? "1.3rem" : "1.1rem",
                 fontWeight: 700,
                 letterSpacing: "0.35em",
                 color: atTop ? "#FAFAF8" : "#2F2F2F",
