@@ -42,26 +42,34 @@ export function HomeNavbar() {
           right: 0,
           zIndex: 100,
           transform: hidden ? "translateY(-100%)" : "translateY(0)",
-          transition: "transform 0.4s ease, background 0.3s ease, box-shadow 0.3s ease",
+          transition: "transform 1.8s ease, background 1.8s ease, box-shadow 1.8s ease",
           background: atTop ? "transparent" : "rgba(255,255,255,0.95)",
           backdropFilter: atTop ? "none" : "blur(12px)",
           boxShadow: atTop ? "none" : "0 1px 0 rgba(0,0,0,0.06)",
         }}
       >
         <div
+          className="home-nav-container px-[1.2rem] md:px-[3rem]"
           style={{
+            position: "relative",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            padding: "1.2rem 3rem",
+            justifyContent: "center",
             maxWidth: 1400,
             margin: "0 auto",
+            minHeight: atTop ? "33vh" : "auto",
+            paddingTop: atTop ? "0" : "1.6rem",
+            paddingBottom: atTop ? "0" : "1.6rem",
+            transition: "min-height 2s ease-in-out, padding 2s ease-in-out",
           }}
         >
           {/* Left - Contact */}
           <a
             href="#contact"
+            className="home-nav-contact hidden md:block"
             style={{
+              position: "absolute",
+              left: "3rem",
               fontSize: "0.65rem",
               letterSpacing: "0.3em",
               textTransform: "uppercase",
@@ -86,45 +94,45 @@ export function HomeNavbar() {
             }}
           >
             <span
-              className={`transition-all duration-1000 ease-out ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
+              className={`home-nav-title transition-all duration-1000 ease-out ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
               style={{
                 fontSize: atTop ? "1.3rem" : "1.1rem",
                 fontWeight: 700,
                 letterSpacing: "0.35em",
                 color: atTop ? "#FAFAF8" : "#2F2F2F",
                 textShadow: atTop ? "0 2px 8px rgba(0,0,0,0.5)" : "none",
-                transition: "color 0.3s, font-size 0.3s, text-shadow 0.3s",
+                transition: "color 1.5s, font-size 1.5s, text-shadow 1.5s",
                 ...getContentStyle(content, "hero", "title", "home"),
               }}
             >
               {title}
             </span>
             <span
-              className={`transition-all duration-1000 ease-out delay-200 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
+              className={`home-nav-subtitle transition-all duration-1000 ease-out delay-200 ${show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}
               style={{
                 fontSize: "0.6rem",
                 letterSpacing: "0.25em",
                 textTransform: "uppercase",
                 color: atTop ? "rgba(250,250,248,0.6)" : "#8C8479",
-                transition: "color 0.3s",
+                transition: "color 1.5s",
                 fontWeight: 300,
               }}
             >
               Yulun Group
             </span>
             <span
-              className={`transition-all duration-1000 ease-out delay-500 ${show ? "opacity-100" : "opacity-0"}`}
+              className={`home-nav-slogan transition-all duration-1000 ease-out delay-500 ${show ? "opacity-100" : "opacity-0"}`}
               style={{
                 fontSize: "0.55rem",
                 letterSpacing: "0.15em",
                 color: atTop ? "rgba(250,250,248,0.5)" : "#8C8479",
-                transition: "color 0.3s",
+                transition: "color 1.5s",
                 fontWeight: 300,
                 marginTop: "0.15rem",
                 maxHeight: atTop ? "2rem" : "0",
                 overflow: "hidden",
                 transitionProperty: "color, max-height, opacity, margin",
-                transitionDuration: "0.3s",
+                transitionDuration: "1.5s",
                 ...getContentStyle(content, "hero", "slogan", "home"),
               }}
             >
@@ -135,7 +143,9 @@ export function HomeNavbar() {
           {/* Right - Hamburger Menu */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
+            className="home-nav-menu-btn right-[1.2rem] md:right-[3rem]"
             style={{
+              position: "absolute",
               background: "none",
               border: "none",
               cursor: "pointer",

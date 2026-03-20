@@ -100,6 +100,33 @@
   .resp-contact-left, .resp-contact-right { padding: 3rem 1.5rem !important; }
 }
 
+/* Home navbar mobile adjustments */
+@media (max-width: 768px) {
+  .home-nav-container {
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+  }
+  .home-nav-contact {
+    display: none !important;
+  }
+  .home-nav-menu-btn {
+    right: 1.2rem !important;
+    top: 1.5rem !important;
+  }
+  .home-nav-title {
+    font-size: 1.6rem !important;
+    letter-spacing: 0.3em !important;
+  }
+  .home-nav-subtitle {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.2em !important;
+  }
+  .home-nav-slogan {
+    font-size: 0.5rem !important;
+    letter-spacing: 0.1em !important;
+  }
+}
+
 ::selection {
   background-color: #EFD3D6;
   color: #2F2F2F;
