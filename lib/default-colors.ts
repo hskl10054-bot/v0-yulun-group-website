@@ -6,7 +6,7 @@ export const DEFAULT_COLORS: Record<string, Record<string, string>> = {
     strengths_bg: "#FAFAF8", strengths_heading: "#2F2F2F", strengths_text: "#6B6B6B", strengths_accent: "#6B4E31",
     strengths_card_bg: "#FFFFFF", strengths_card_border: "#E5E0DB", strengths_icon: "#6B4E31",
     portfolio_bg: "#C0BEBB", portfolio_heading: "#2F2F2F", portfolio_accent: "#B5956A",
-    testimonials_bg: "#F5F0E8", testimonials_heading: "#2F2F2F", testimonials_text: "#2F2F2F",
+    testimonials_bg: "#C0BEBB", testimonials_heading: "#2F2F2F", testimonials_text: "#2F2F2F",
     testimonials_card_border: "#E8E3DA", testimonials_accent: "#B5956A",
     contact_bg: "#FFFFFF", contact_heading: "#2F2F2F", contact_text: "#8C8479",
     contact_accent: "#B5956A", contact_btn_bg: "#6B4E31", contact_btn_text: "#FAFAF8",
