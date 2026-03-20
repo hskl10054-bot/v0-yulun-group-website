@@ -49,13 +49,12 @@ export function HomeNavbar() {
         }}
       >
         <div
-          className="home-nav-container"
+          className="home-nav-container px-[1.2rem] md:px-[3rem]"
           style={{
             position: "relative",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "0 3rem",
             maxWidth: 1400,
             margin: "0 auto",
             minHeight: atTop ? "33vh" : "auto",
@@ -67,7 +66,7 @@ export function HomeNavbar() {
           {/* Left - Contact */}
           <a
             href="#contact"
-            className="home-nav-contact"
+            className="home-nav-contact hidden md:block"
             style={{
               position: "absolute",
               left: "3rem",
@@ -144,10 +143,9 @@ export function HomeNavbar() {
           {/* Right - Hamburger Menu */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="home-nav-menu-btn"
+            className="home-nav-menu-btn right-[1.2rem] md:right-[3rem]"
             style={{
               position: "absolute",
-              right: "3rem",
               background: "none",
               border: "none",
               cursor: "pointer",
