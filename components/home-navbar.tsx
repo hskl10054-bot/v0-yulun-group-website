@@ -53,7 +53,7 @@ export function HomeNavbar() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "1.2rem 3rem",
+            padding: "1.6rem 3rem",
             maxWidth: 1400,
             margin: "0 auto",
           }}
