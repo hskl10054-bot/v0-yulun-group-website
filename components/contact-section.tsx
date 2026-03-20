@@ -41,9 +41,9 @@ export function ContactSection({ colors }: ContactSectionProps) {
               <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0", width: "100%" }} />
             </div>
           ))}
-          <div className="w-full" style={{ marginBottom: "1.5rem" }}>
+          <div style={{ marginBottom: "1.5rem" }}>
             <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
-            <textarea placeholder="請簡單描述您的空間需求或想法..." rows={3} className="serif w-full resize-none bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem", display: "block", borderBottom: "none", width: "100%" }} />
+            <textarea placeholder="請簡單描述您的空間需求或想法..." rows={3} className="serif w-full resize-none bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem", display: "block", borderBottom: "none", width: "100%", padding: "0", margin: "0" }} />
             <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0", width: "100%" }} />
           </div>
           <button style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}>
