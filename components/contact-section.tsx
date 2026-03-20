@@ -29,22 +29,22 @@ export function ContactSection({ colors }: ContactSectionProps) {
       <div className="resp-contact-right flex flex-col justify-start" style={{ background: colors.footer_bg, padding: "6rem" }}>
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Send Message</p>
         <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.footer_text, marginBottom: "2.5rem" }}>預約諮詢</h2>
-        <div className="flex flex-col" style={{ gap: "2.5rem" }}>
+        <div className="flex flex-col gap-5">
           {[
             { label: "姓名", placeholder: "您的大名", type: "text" },
             { label: "聯絡電話", placeholder: "0900-000-000", type: "tel" },
             { label: "有興趣的服務", placeholder: "室內設計 / 裝修工程 / 兩者皆是", type: "text" },
           ].map(({ label, placeholder, type }) => (
-            <div key={label}>
+            <div key={label} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
               <input type={type} placeholder={placeholder} className="serif w-full bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem" }} />
               <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0" }} />
             </div>
           ))}
-          <div>
+          <div className="w-full" style={{ marginBottom: "1.5rem" }}>
             <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
-            <textarea placeholder="請簡單描述您的空間需求或想法..." rows={3} className="serif w-full resize-none bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem", display: "block" }} />
-            <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0" }} />
+            <textarea placeholder="請簡單描述您的空間需求或想法..." rows={3} className="serif w-full resize-none bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem", display: "block", width: "100%" }} />
+            <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0", width: "100%" }} />
           </div>
           <button style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}>
             送出諮詢 →
