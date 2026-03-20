@@ -53,9 +53,13 @@ export function HomeNavbar() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "1.6rem 3rem",
+            padding: "0 3rem",
             maxWidth: 1400,
             margin: "0 auto",
+            minHeight: atTop ? "33vh" : "auto",
+            paddingTop: atTop ? "0" : "1.6rem",
+            paddingBottom: atTop ? "0" : "1.6rem",
+            transition: "min-height 0.4s ease, padding 0.4s ease",
           }}
         >
           {/* Left - Contact */}
