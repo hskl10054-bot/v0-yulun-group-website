@@ -114,15 +114,15 @@
     top: 1.5rem !important;
   }
   .home-nav-title {
-    font-size: 1.6rem !important;
+    font-size: 3.2rem !important;
     letter-spacing: 0.3em !important;
   }
   .home-nav-subtitle {
-    font-size: 0.5rem !important;
+    font-size: 1rem !important;
     letter-spacing: 0.2em !important;
   }
   .home-nav-slogan {
-    font-size: 0.5rem !important;
+    font-size: 1rem !important;
     letter-spacing: 0.1em !important;
   }
 }
