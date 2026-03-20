@@ -73,6 +73,13 @@ export function getImageUrl(images: ImageRow[], section: string, sortOrder: numb
   return images.find((i) => i.section === section && i.sort_order === sortOrder)?.url || ""
 }
 
+// Helper: get all images for a section, sorted by sort_order
+export function getImagesBySection(images: ImageRow[], section: string): ImageRow[] {
+  return images
+    .filter((i) => i.section === section)
+    .sort((a, b) => a.sort_order - b.sort_order)
+}
+
 // For overlay keys, extract the alpha from the default rgba value.
 // If CMS stores a plain hex (e.g. #2F2F2F), convert it back to rgba with the original alpha.
 function applyOverlayAlpha(key: string, cmsValue: string, defaultValue: string): string {

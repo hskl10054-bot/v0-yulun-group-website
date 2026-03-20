@@ -447,6 +447,116 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
   )
 }
 
+function HeroCarouselEditor({ images, onUpload, onDelete, page }: {
+  images: ImageRow[]
+  onUpload: () => void
+  onDelete: (id: number) => void
+  page: string
+}) {
+  const fileRef = useRef<HTMLInputElement>(null)
+  const [uploading, setUploading] = useState(false)
+
+  const handleFile = useCallback(async (file: File) => {
+    if (!file.type.startsWith("image/")) return
+    setUploading(true)
+    try {
+      const nextSortOrder = images.length > 0
+        ? Math.max(...images.map((img) => img.sort_order)) + 1
+        : 1
+      const fd = new FormData()
+      fd.append("file", file)
+      fd.append("page", page)
+      fd.append("section", "hero")
+      fd.append("sort_order", String(nextSortOrder))
+      fd.append("alt", "")
+      await api<{ url: string }>("/api/upload", { method: "POST", body: fd })
+      onUpload()
+    } catch {
+      // Upload failed
+    } finally {
+      setUploading(false)
+    }
+  }, [images, page, onUpload])
+
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) handleFile(file)
+    if (e.target) e.target.value = ""
+  }, [handleFile])
+
+  const handleDrop = useCallback((e: DragEvent) => {
+    e.preventDefault()
+    const file = e.dataTransfer.files[0]
+    if (file) handleFile(file)
+  }, [handleFile])
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <label className="block text-xs font-medium text-gray-500 uppercase tracking-wider">
+          輪播背景圖片（{images.length} 張）
+        </label>
+        {images.length > 1 && (
+          <span className="text-[10px] text-gray-400">自動輪播間隔 5 秒</span>
+        )}
+      </div>
+
+      {/* Existing images grid */}
+      {images.length > 0 && (
+        <div className="grid grid-cols-2 gap-3">
+          {images.map((img, idx) => (
+            <div key={img.id} className="group relative rounded-xl border border-gray-200 overflow-hidden bg-gray-50">
+              <div className="relative aspect-video">
+                <img src={img.url} alt={img.alt || `Hero ${idx + 1}`} className="w-full h-full object-cover" />
+                <div className="absolute top-2 left-2 rounded-md bg-black/60 px-2 py-0.5 text-[10px] text-white font-medium">
+                  {idx + 1} / {images.length}
+                </div>
+                <button
+                  onClick={() => { if (img.id) onDelete(img.id) }}
+                  className="absolute top-2 right-2 rounded-md bg-red-500/80 p-1.5 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                  title="刪除此圖片"
+                >
+                  <Trash2 className="h-3.5 w-3.5" />
+                </button>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-2 text-xs text-gray-500">
+                <ImageIcon className="h-3.5 w-3.5 shrink-0" />
+                <span className="truncate">{img.url.startsWith("http") ? new URL(img.url).pathname.split("/").pop() : img.url.split("/").pop()}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Add new image */}
+      <div
+        className={`border-2 border-dashed rounded-xl transition-colors cursor-pointer ${
+          uploading ? "border-amber-300 bg-amber-50/50" : "border-gray-200 hover:border-amber-300 hover:bg-amber-50/30"
+        }`}
+        onClick={() => fileRef.current?.click()}
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDrop}
+      >
+        {uploading ? (
+          <div className="flex items-center justify-center py-8 gap-2">
+            <Loader2 className="h-5 w-5 animate-spin text-amber-600" />
+            <span className="text-sm text-amber-700">上傳中...</span>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-8 gap-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
+              <Plus className="h-5 w-5 text-gray-400" />
+            </div>
+            <p className="text-sm text-gray-500">新增輪播圖片</p>
+            <p className="text-[10px] text-gray-300">拖拉圖片到此處，或點擊上傳 — JPG, PNG, WebP</p>
+          </div>
+        )}
+      </div>
+      <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleChange} />
+    </div>
+  )
+}
+
 function Toast({ message, type, onClose }: { message: string; type: ToastType; onClose: () => void }) {
   const bg = type === "success" ? "bg-emerald-600" : "bg-red-600"
   return (
@@ -851,7 +961,20 @@ export default function AdminPage() {
           { key: "title", label: "主標題" },
           { key: "slogan", label: "標語", type: "textarea" },
         ])}
-        <ImageUploader label="背景圖片" currentImage={getImageUrl("hero")} onUpload={() => fetchData()} page="home" section="hero" sortOrder={1} {...imageDisplayProps("hero")} />
+        <HeroCarouselEditor
+          images={getImagesBySection("hero")}
+          onUpload={() => fetchData()}
+          onDelete={async (id) => {
+            try {
+              await api(`/api/upload?id=${id}`, { method: "DELETE" })
+              showToast("圖片已刪除")
+              await fetchData()
+            } catch (e) {
+              showToast(`刪除失敗：${e instanceof Error ? e.message : "未知錯誤"}`, "error")
+            }
+          }}
+          page="home"
+        />
       </Section>
 
       {renderListSection("brand_cards", "品牌卡片", "Brand Cards", [
