@@ -50,9 +50,10 @@ export function HomeNavbar() {
       >
         <div
           style={{
+            position: "relative",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
+            justifyContent: "center",
             padding: "0 3rem",
             maxWidth: 1400,
             margin: "0 auto",
@@ -66,6 +67,8 @@ export function HomeNavbar() {
           <a
             href="#contact"
             style={{
+              position: "absolute",
+              left: "3rem",
               fontSize: "0.65rem",
               letterSpacing: "0.3em",
               textTransform: "uppercase",
@@ -140,6 +143,8 @@ export function HomeNavbar() {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
+              position: "absolute",
+              right: "3rem",
               background: "none",
               border: "none",
               cursor: "pointer",
