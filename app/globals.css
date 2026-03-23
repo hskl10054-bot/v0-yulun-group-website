@@ -127,6 +127,16 @@
   }
 }
 
+/* Sparkle twinkling animation */
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.7) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(15deg); }
+}
+
+.sparkle-twinkle {
+  animation: sparkle-twinkle 2.5s ease-in-out infinite;
+}
+
 ::selection {
   background-color: #EFD3D6;
   color: #2F2F2F;
