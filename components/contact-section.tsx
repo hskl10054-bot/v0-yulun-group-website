@@ -42,6 +42,19 @@ export function ContactSection({ colors }: ContactSectionProps) {
             )}
           </div>
         ))}
+          {/* Google Maps Embed */}
+          <div style={{ marginTop: "1rem", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
+            <iframe
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+              width="100%"
+              height="220"
+              style={{ border: 0, display: "block" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="裕綸集團 — 台中市北屯區瀋陽北路73號"
+            />
+          </div>
       </div>
       <div className="resp-contact-right flex flex-col justify-start" style={{ background: colors.footer_bg, padding: "6rem" }}>
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Send Message</p>

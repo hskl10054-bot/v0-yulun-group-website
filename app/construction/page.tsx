@@ -293,6 +293,19 @@ export default function ConstructionPage() {
               )}
             </div>
           ))}
+          {/* Google Maps Embed */}
+          <div style={{ marginTop: "1rem", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
+            <iframe
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(contactAddress)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+              width="100%"
+              height="220"
+              style={{ border: 0, display: "block" }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="裕綸室內裝修 — 台中市北屯區瀋陽北路73號"
+            />
+          </div>
         </div>
         <div className="resp-contact-right" style={{ background: colors.contact_heading, padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Free Estimate</p>
