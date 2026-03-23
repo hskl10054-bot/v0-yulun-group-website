@@ -267,7 +267,7 @@ export default function DesignPage() {
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
               {key === "address" ? (
                 <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(val)}`}
+                  href="https://maps.app.goo.gl/Ya3FoWUXz36Rh5vj6"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="serif inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity"
