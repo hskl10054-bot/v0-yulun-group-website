@@ -1,5 +1,5 @@
 // Google Apps Script Web App URL — replace with your deployed URL
-const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL"
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAj4xIhPOLFOzEBFzOHkmpNk6VejfsD8Cq_4ckhja-ubWufXyxrZ2Wfp-2ALre5T5y/exec"
 
 // Redirect URL after successful submission — replace with your pricing website URL
 const REDIRECT_URL = "YOUR_PRICING_WEBSITE_URL"
