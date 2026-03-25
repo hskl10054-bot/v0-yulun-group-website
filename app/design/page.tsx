@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
+import { formatPhone } from "@/lib/utils"
 
 const defaultServices = [
   { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
@@ -309,7 +310,7 @@ export default function DesignPage() {
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["案件類型","新成屋 / 老屋翻新 / 商業空間","text"],["預算金額","例如：100萬 — 300萬","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-              <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => setFormData(prev => ({ ...prev, [String(label)]: e.target.value }))} className="form-input" />
+              <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => { const val = String(label) === "聯絡電話" ? formatPhone(e.target.value) : e.target.value; setFormData(prev => ({ ...prev, [String(label)]: val })) }} className="form-input" />
             </div>
           ))}
           <div style={{ marginBottom: "1.5rem" }}>

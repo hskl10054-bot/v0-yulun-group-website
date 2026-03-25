@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useCmsData, getContentValue, getContentStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
+import { formatPhone } from "@/lib/utils"
 
 interface ContactSectionProps {
   colors: Record<string, string>
@@ -23,7 +24,7 @@ function ContactForm({ colors }: { colors: Record<string, string> }) {
       ].map(({ label, placeholder, type }) => (
         <div key={label} style={{ marginBottom: "1.5rem" }}>
           <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-          <input type={type} placeholder={placeholder} value={formData[label] || ""} onChange={(e) => setFormData(prev => ({ ...prev, [label]: e.target.value }))} className="serif w-full bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem" }} />
+          <input type={type} placeholder={placeholder} value={formData[label] || ""} onChange={(e) => { const val = label === "聯絡電話" ? formatPhone(e.target.value) : e.target.value; setFormData(prev => ({ ...prev, [label]: val })) }} className="serif w-full bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem" }} />
           <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0", width: "100%" }} />
         </div>
       ))}

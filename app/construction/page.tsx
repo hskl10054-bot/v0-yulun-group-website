@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, Clipboar
 import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
+import { formatPhone } from "@/lib/utils"
 
 const iconMap: Record<string, typeof HardHat> = { HardHat, ShieldCheck, FileText, Wrench, ClipboardList }
 const defaultIcons = [HardHat, Wrench, ClipboardList, ShieldCheck, FileText]
@@ -317,7 +318,7 @@ export default function ConstructionPage() {
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["工程類型","全室裝修 / 局部工程 / 商業空間","text"],["坪數（選填）","例：30坪","text"],["預算金額","例如：100萬 — 300萬","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-              <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => setFormData(prev => ({ ...prev, [String(label)]: e.target.value }))} className="form-input" />
+              <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => { const val = String(label) === "聯絡電話" ? formatPhone(e.target.value) : e.target.value; setFormData(prev => ({ ...prev, [String(label)]: val })) }} className="form-input" />
             </div>
           ))}
           <div style={{ marginBottom: "1.5rem" }}>
