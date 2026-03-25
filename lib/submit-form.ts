@@ -2,7 +2,7 @@
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAj4xIhPOLFOzEBFzOHkmpNk6VejfsD8Cq_4ckhja-ubWufXyxrZ2Wfp-2ALre5T5y/exec"
 
 // Redirect URL after successful submission — replace with your pricing website URL
-const REDIRECT_URL = ""
+const REDIRECT_URL = "https://proquote-website.vercel.app/"
 
 interface FormData {
   [key: string]: string
