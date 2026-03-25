@@ -42,6 +42,7 @@ export default function ConstructionPage() {
   const colors = usePageColors(content, "construction")
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
@@ -327,10 +328,15 @@ export default function ConstructionPage() {
             disabled={submitting}
             onClick={async () => {
               setSubmitting(true)
-              try { await submitForm(formData, "裝修工程") } catch { setSubmitting(false) }
+              try {
+                await submitForm(formData, "裝修工程")
+                setSubmitted(true)
+                setFormData({})
+              } catch { /* ignore */ }
+              setSubmitting(false)
             }}
             style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: submitting ? "not-allowed" : "pointer", width: "fit-content", opacity: submitting ? 0.6 : 1 }}>
-            {submitting ? "送出中..." : "立即報價 →"}
+            {submitting ? "送出中..." : submitted ? "已送出 ✓" : "立即報價 →"}
           </button>
         </div>
       </section>

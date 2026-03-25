@@ -12,6 +12,7 @@ export function ContactSection({ colors }: ContactSectionProps) {
   const { content } = useCmsData("home")
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const address = getContentValue(content, "contact", "address") || "台中市北屯區瀋陽北路73號"
   const phone = getContentValue(content, "contact", "phone") || "04-2247-9068"
@@ -85,10 +86,15 @@ export function ContactSection({ colors }: ContactSectionProps) {
             disabled={submitting}
             onClick={async () => {
               setSubmitting(true)
-              try { await submitForm(formData, "首頁") } catch { setSubmitting(false) }
+              try {
+                await submitForm(formData, "首頁")
+                setSubmitted(true)
+                setFormData({})
+              } catch { /* ignore */ }
+              setSubmitting(false)
             }}
             style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: submitting ? "not-allowed" : "pointer", width: "fit-content", opacity: submitting ? 0.6 : 1 }}>
-            {submitting ? "送出中..." : "立即報價 →"}
+            {submitting ? "送出中..." : submitted ? "已送出 ✓" : "立即報價 →"}
           </button>
         </div>
       </div>
