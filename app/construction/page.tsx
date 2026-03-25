@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
+import { PortfolioModal } from "@/components/portfolio-modal"
 
 const iconMap: Record<string, typeof HardHat> = { HardHat, ShieldCheck, FileText, Wrench, ClipboardList }
 const defaultIcons = [HardHat, Wrench, ClipboardList, ShieldCheck, FileText]
@@ -44,6 +45,7 @@ export default function ConstructionPage() {
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [selectedProject, setSelectedProject] = useState<{ title: string; type: string; image: string; sortOrder: number } | null>(null)
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
@@ -245,7 +247,7 @@ export default function ConstructionPage() {
         </div>
         <div className="resp-portfolio" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gridTemplateRows: "300px 300px", gap: "2px" }}>
           {projects.map((p, i) => (
-            <div key={p.title} className="portfolio-item" style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined }}>
+            <div key={p.title} className="portfolio-item" onClick={() => setSelectedProject(p)} style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined, cursor: "pointer" }}>
               <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
               <div style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${colors.portfolio_overlay} 0%, transparent 50%)`, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem" }}>
                 <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", marginBottom: "0.3rem", ...getListItemStyle(content, "portfolio", p.sortOrder, "title", "construction") }}>{p.title}</h3>
@@ -254,6 +256,18 @@ export default function ConstructionPage() {
           ))}
         </div>
       </section>
+
+      {selectedProject && (
+        <PortfolioModal
+          isOpen={true}
+          onClose={() => setSelectedProject(null)}
+          title={selectedProject.title}
+          subtitle={selectedProject.type}
+          coverImage={selectedProject.image}
+          page="construction"
+          sortOrder={selectedProject.sortOrder}
+        />
+      )}
 
       {/* TESTIMONIALS */}
       <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.testimonials_bg }}>
