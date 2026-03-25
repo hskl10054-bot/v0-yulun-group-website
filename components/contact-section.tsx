@@ -64,6 +64,7 @@ export function ContactSection({ colors }: ContactSectionProps) {
             { label: "姓名", placeholder: "您的大名", type: "text" },
             { label: "聯絡電話", placeholder: "0900-000-000", type: "tel" },
             { label: "有興趣的服務", placeholder: "室內設計 / 裝修工程 / 兩者皆是", type: "text" },
+            { label: "預算金額", placeholder: "例如：100萬 — 300萬", type: "text" },
           ].map(({ label, placeholder, type }) => (
             <div key={label} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
