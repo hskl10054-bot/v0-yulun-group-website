@@ -14,7 +14,7 @@ export async function submitForm(data: FormData, source: string): Promise<"succe
   await fetch(GOOGLE_SCRIPT_URL, {
     method: "POST",
     mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "text/plain" },
     body: JSON.stringify(payload),
   })
 
