@@ -3,6 +3,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useCmsData, getListItemsBySection, getImageUrl, getListItemStyle } from "@/lib/use-cms-data"
+import { PortfolioModal } from "./portfolio-modal"
 
 const defaultWorks = [
   { title: "同齊咖吡 西區精忠店", type: "2025", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
@@ -17,7 +18,7 @@ interface PortfolioPreviewProps {
 }
 
 export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [selectedWork, setSelectedWork] = useState<{ title: string; type: string; image: string; sortOrder: number } | null>(null)
   const { content, listItems, images } = useCmsData("home")
 
   const cmsPortfolio = getListItemsBySection(listItems, "portfolio")
@@ -44,34 +45,37 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 md:grid-cols-3 md:[grid-template-rows:260px_260px]">
-          {works.map((w, i) => {
-            const isActive = activeIndex === i
-            return (
-              <div
-                key={w.title}
-                onClick={() => setActiveIndex(isActive ? null : i)}
-                className={`group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`}
-              >
-                <img
-                  src={w.image}
-                  alt={w.title}
-                  className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${
-                    isActive ? "scale-105" : ""
-                  }`}
-                />
-                <div
-                  className={`absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 transition-opacity duration-300 ${
-                    isActive ? "opacity-100" : "opacity-100 md:opacity-0 md:group-hover:opacity-100"
-                  }`}
-                >
-                  <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
-                  <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "portfolio", w.sortOrder, "title", "home") }}>{w.title}</h3>
-                </div>
+          {works.map((w, i) => (
+            <div
+              key={w.title}
+              onClick={() => setSelectedWork(w)}
+              className={`group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`}
+            >
+              <img
+                src={w.image}
+                alt={w.title}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100">
+                <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
+                <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "portfolio", w.sortOrder, "title", "home") }}>{w.title}</h3>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </div>
+
+      {selectedWork && (
+        <PortfolioModal
+          isOpen={true}
+          onClose={() => setSelectedWork(null)}
+          title={selectedWork.title}
+          subtitle={selectedWork.type}
+          coverImage={selectedWork.image}
+          page="home"
+          sortOrder={selectedWork.sortOrder}
+        />
+      )}
     </section>
   )
 }
