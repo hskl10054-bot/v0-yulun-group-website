@@ -1,8 +1,9 @@
 "use client"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList } from "lucide-react"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
+import { submitForm } from "@/lib/submit-form"
 
 const iconMap: Record<string, typeof HardHat> = { HardHat, ShieldCheck, FileText, Wrench, ClipboardList }
 const defaultIcons = [HardHat, Wrench, ClipboardList, ShieldCheck, FileText]
@@ -39,6 +40,8 @@ const defaultTestimonials = [
 export default function ConstructionPage() {
   const { content, listItems, images, loading } = useCmsData("construction")
   const colors = usePageColors(content, "construction")
+  const [formData, setFormData] = useState<Record<string, string>>({})
+  const [submitting, setSubmitting] = useState(false)
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
@@ -313,15 +316,21 @@ export default function ConstructionPage() {
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["工程類型","全室裝修 / 局部工程 / 商業空間","text"],["坪數（選填）","例：30坪","text"],["預算金額","例如：100萬 — 300萬","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-              <input type={String(type)} placeholder={String(ph)} className="form-input" />
+              <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => setFormData(prev => ({ ...prev, [String(label)]: e.target.value }))} className="form-input" />
             </div>
           ))}
           <div style={{ marginBottom: "1.5rem" }}>
             <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>工程說明</label>
-            <textarea placeholder="請簡單描述您的裝修需求..." className="form-input" />
+            <textarea placeholder="請簡單描述您的裝修需求..." value={formData["工程說明"] || ""} onChange={(e) => setFormData(prev => ({ ...prev, "工程說明": e.target.value }))} className="form-input" />
           </div>
-          <button style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}>
-            送出申請 →
+          <button
+            disabled={submitting}
+            onClick={async () => {
+              setSubmitting(true)
+              try { await submitForm(formData, "裝修工程") } catch { setSubmitting(false) }
+            }}
+            style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: submitting ? "not-allowed" : "pointer", width: "fit-content", opacity: submitting ? 0.6 : 1 }}>
+            {submitting ? "送出中..." : "立即報價 →"}
           </button>
         </div>
       </section>

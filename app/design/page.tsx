@@ -1,8 +1,9 @@
 "use client"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
+import { submitForm } from "@/lib/submit-form"
 
 const defaultServices = [
   { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
@@ -29,6 +30,8 @@ const defaultTestimonials = [
 export default function DesignPage() {
   const { content, listItems, images, loading } = useCmsData("design")
   const colors = usePageColors(content, "design")
+  const [formData, setFormData] = useState<Record<string, string>>({})
+  const [submitting, setSubmitting] = useState(false)
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
@@ -305,15 +308,21 @@ export default function DesignPage() {
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["案件類型","新成屋 / 老屋翻新 / 商業空間","text"],["預算金額","例如：100萬 — 300萬","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-              <input type={String(type)} placeholder={String(ph)} className="form-input" />
+              <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => setFormData(prev => ({ ...prev, [String(label)]: e.target.value }))} className="form-input" />
             </div>
           ))}
           <div style={{ marginBottom: "1.5rem" }}>
             <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
-            <textarea placeholder="簡單描述您的空間與想法..." className="form-input" />
+            <textarea placeholder="簡單描述您的空間與想法..." value={formData["需求說明"] || ""} onChange={(e) => setFormData(prev => ({ ...prev, "需求說明": e.target.value }))} className="form-input" />
           </div>
-          <button style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}>
-            送出諮詢 →
+          <button
+            disabled={submitting}
+            onClick={async () => {
+              setSubmitting(true)
+              try { await submitForm(formData, "室內設計") } catch { setSubmitting(false) }
+            }}
+            style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: submitting ? "not-allowed" : "pointer", width: "fit-content", opacity: submitting ? 0.6 : 1 }}>
+            {submitting ? "送出中..." : "立即報價 →"}
           </button>
         </div>
       </section>
