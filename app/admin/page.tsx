@@ -10,6 +10,8 @@ import {
 
 import { getDefaultContentFont, getDefaultListFont } from "@/lib/default-fonts"
 import { DEFAULT_COLORS } from "@/lib/default-colors"
+import { getSupabaseClient } from "@/lib/supabase"
+import { uploadToCloudinary } from "@/lib/cloudinary-upload"
 
 // ─── Default List Items Per Page (pre-fill from current site) ────
 type DefaultListItem = { title: string; subtitle: string; description: string; extra: string }
@@ -201,14 +203,17 @@ interface ImageRow {
 type PageKey = "home" | "design" | "construction" | "cafe"
 type ToastType = "success" | "error"
 
-// ─── API helpers ─────────────────────────────────────────────────
-async function api<T>(url: string, opts?: RequestInit): Promise<T> {
-  const res = await fetch(url, opts)
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}))
-    throw new Error(body.error || `API error ${res.status}`)
-  }
-  return res.json()
+// ─── Supabase helpers ────────────────────────────────────────────
+async function uploadAndInsertImage(file: File, page: string, section: string, sortOrder: number, alt = ""): Promise<{ url: string; id: number }> {
+  const url = await uploadToCloudinary(file, `yulun-cms/${page}/${section}`)
+  const supabase = getSupabaseClient()
+  const { data, error } = await supabase
+    .from("images")
+    .insert({ page, section, url, alt, sort_order: sortOrder })
+    .select()
+    .single()
+  if (error) throw new Error(error.message)
+  return { url, id: data.id }
 }
 
 // ─── Sub-Components ──────────────────────────────────────────────
@@ -266,15 +271,9 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
     setPreview(localUrl)
     setUploading(true)
     try {
-      const fd = new FormData()
-      fd.append("file", file)
-      fd.append("page", page)
-      fd.append("section", section)
-      fd.append("sort_order", String(sortOrder))
-      fd.append("alt", "")
-      const result = await api<{ url: string }>("/api/upload", { method: "POST", body: fd })
-      setPreview(result.url)
-      onUpload(result.url)
+      const { url } = await uploadAndInsertImage(file, page, section, sortOrder)
+      setPreview(url)
+      onUpload(url)
     } catch {
       setPreview(currentImage)
     } finally {
@@ -463,13 +462,7 @@ function HeroCarouselEditor({ images, onUpload, onDelete, page }: {
       const nextSortOrder = images.length > 0
         ? Math.max(...images.map((img) => img.sort_order)) + 1
         : 1
-      const fd = new FormData()
-      fd.append("file", file)
-      fd.append("page", page)
-      fd.append("section", "hero")
-      fd.append("sort_order", String(nextSortOrder))
-      fd.append("alt", "")
-      await api<{ url: string }>("/api/upload", { method: "POST", body: fd })
+      await uploadAndInsertImage(file, page, "hero", nextSortOrder)
       onUpload()
     } catch {
       // Upload failed
@@ -604,14 +597,18 @@ export default function AdminPage() {
   const fetchData = useCallback(async () => {
     setLoading(true)
     try {
+      const supabase = getSupabaseClient()
       const [c, l, i] = await Promise.all([
-        api<ContentRow[]>(`/api/content?page=${activePage}`),
-        api<ListItem[]>(`/api/list-items?page=${activePage}`),
-        api<ImageRow[]>(`/api/images?page=${activePage}`),
+        supabase.from("page_content").select("*").eq("page", activePage),
+        supabase.from("list_items").select("*").eq("page", activePage).order("sort_order"),
+        supabase.from("images").select("*").eq("page", activePage).order("sort_order"),
       ])
-      setContent(c)
-      setListItems(l)
-      setImages(i)
+      if (c.error) throw new Error(c.error.message)
+      if (l.error) throw new Error(l.error.message)
+      if (i.error) throw new Error(i.error.message)
+      setContent(c.data || [])
+      setListItems(l.data || [])
+      setImages(i.data || [])
       setDirtyContent([])
       setDirtyListItems(new Map())
       setNewListItems([])
@@ -783,49 +780,45 @@ export default function AdminPage() {
   const handleSave = async () => {
     setSaving(true)
     try {
-      const promises: Promise<unknown>[] = []
+      const supabase = getSupabaseClient()
+      const throwIfError = (e: { message: string } | null) => { if (e) throw new Error(e.message) }
 
-      // Save dirty content
-      if (dirtyContent.length > 0) {
-        promises.push(
-          api("/api/content", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ items: dirtyContent }),
-          })
-        )
+      // Bulk upsert dirty content (one row at a time, mirroring the previous API)
+      for (const item of dirtyContent) {
+        const { page, section, key, value } = item
+        const { data: existing, error: selErr } = await supabase
+          .from("page_content")
+          .select("id")
+          .eq("page", page).eq("section", section).eq("key", key)
+          .maybeSingle()
+        throwIfError(selErr)
+        if (existing) {
+          throwIfError((await supabase.from("page_content")
+            .update({ value, updated_at: new Date().toISOString() })
+            .eq("id", existing.id)).error)
+        } else {
+          throwIfError((await supabase.from("page_content").insert({ page, section, key, value })).error)
+        }
       }
 
-      // Save dirty list items (updates)
+      // Updates
       for (const [id, updates] of dirtyListItems) {
-        promises.push(
-          api("/api/list-items", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id, ...updates }),
-          })
-        )
+        throwIfError((await supabase.from("list_items")
+          .update({ ...updates, updated_at: new Date().toISOString() })
+          .eq("id", id)).error)
       }
 
-      // Save new list items
-      for (const item of newListItems) {
-        promises.push(
-          api("/api/list-items", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(item),
-          })
-        )
+      // Inserts
+      if (newListItems.length > 0) {
+        throwIfError((await supabase.from("list_items").insert(newListItems)).error)
       }
 
-      // Delete list items
-      for (const id of deletedListItemIds) {
-        promises.push(api(`/api/list-items?id=${id}`, { method: "DELETE" }))
+      // Deletes
+      if (deletedListItemIds.length > 0) {
+        throwIfError((await supabase.from("list_items").delete().in("id", deletedListItemIds)).error)
       }
 
-      await Promise.all(promises)
       showToast("儲存成功！內容已更新至資料庫。")
-      // Refresh data
       await fetchData()
     } catch (e) {
       showToast(`儲存失敗：${e instanceof Error ? e.message : "未知錯誤"}`, "error")
@@ -966,7 +959,9 @@ export default function AdminPage() {
           onUpload={() => fetchData()}
           onDelete={async (id) => {
             try {
-              await api(`/api/upload?id=${id}`, { method: "DELETE" })
+              const supabase = getSupabaseClient()
+              const { error } = await supabase.from("images").delete().eq("id", id)
+              if (error) throw new Error(error.message)
               showToast("圖片已刪除")
               await fetchData()
             } catch (e) {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react"
 import { DEFAULT_COLORS } from "@/lib/default-colors"
+import { getSupabaseClient } from "@/lib/supabase"
 
 interface ContentRow {
   id?: number; page: string; section: string; key: string; value: string
@@ -32,16 +33,16 @@ export function useCmsData(page: string): CmsData {
     let cancelled = false
     async function fetchAll() {
       try {
-        const opts: RequestInit = { cache: "no-store" }
+        const supabase = getSupabaseClient()
         const [c, l, i] = await Promise.all([
-          fetch(`/api/content?page=${page}`, opts).then((r) => r.ok ? r.json() : []),
-          fetch(`/api/list-items?page=${page}`, opts).then((r) => r.ok ? r.json() : []),
-          fetch(`/api/images?page=${page}`, opts).then((r) => r.ok ? r.json() : []),
+          supabase.from("page_content").select("*").eq("page", page),
+          supabase.from("list_items").select("*").eq("page", page).order("sort_order"),
+          supabase.from("images").select("*").eq("page", page).order("sort_order"),
         ])
         if (!cancelled) {
-          setContent(c)
-          setListItems(l)
-          setImages(i)
+          setContent(c.data || [])
+          setListItems(l.data || [])
+          setImages(i.data || [])
         }
       } catch {
         // Silently fail — fallback to defaults
