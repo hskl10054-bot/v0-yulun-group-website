@@ -13,6 +13,7 @@ export function HomeNavbar() {
   const [show, setShow] = useState(false)
 
   const title = getContentValue(content, "hero", "title") || "裕綸集團"
+  const subtitle = getContentValue(content, "hero", "subtitle") || "Yulun Group"
   const slogan = getContentValue(content, "hero", "slogan") || "職人建築，穩健基石，構築空間的永續價值。"
 
   useEffect(() => {
@@ -116,9 +117,10 @@ export function HomeNavbar() {
                 color: atTop ? "rgba(250,250,248,0.6)" : "#8C8479",
                 transition: "color 1.5s",
                 fontWeight: 300,
+                ...getContentStyle(content, "hero", "subtitle", "home"),
               }}
             >
-              Yulun Group
+              {subtitle}
             </span>
             <span
               className={`home-nav-slogan transition-all duration-1000 ease-out delay-500 ${show ? "opacity-100" : "opacity-0"}`}
