@@ -10,6 +10,7 @@ import {
 
 import { getDefaultContentFont, getDefaultListFont } from "@/lib/default-fonts"
 import { DEFAULT_COLORS } from "@/lib/default-colors"
+import { WorksAdmin } from "@/components/admin/works-admin"
 
 // ─── Default List Items Per Page (pre-fill from current site) ────
 type DefaultListItem = { title: string; subtitle: string; description: string; extra: string }
@@ -198,7 +199,7 @@ interface ListItem {
 interface ImageRow {
   id?: number; page: string; section: string; url: string; alt: string; sort_order: number
 }
-type PageKey = "home" | "design" | "construction" | "cafe"
+type PageKey = "home" | "design" | "construction" | "cafe" | "works"
 type ToastType = "success" | "error"
 
 // ─── API helpers ─────────────────────────────────────────────────
@@ -577,6 +578,7 @@ const pageNav: { key: PageKey; label: string; icon: typeof Home }[] = [
   { key: "design", label: "空房子設計", icon: Paintbrush },
   { key: "construction", label: "裕綸裝修", icon: Hammer },
   { key: "cafe", label: "同齊咖啡", icon: Coffee },
+  { key: "works", label: "案例作品", icon: ImageIcon },
 ]
 
 export default function AdminPage() {
@@ -1191,6 +1193,7 @@ export default function AdminPage() {
       case "design": return renderDesignPage()
       case "construction": return renderConstructionPage()
       case "cafe": return renderCafePage()
+      case "works": return <WorksAdmin />
     }
   }
 
@@ -1251,20 +1254,26 @@ export default function AdminPage() {
             <p className="text-xs text-gray-400">編輯頁面內容</p>
           </div>
           <div className="flex items-center gap-3">
-            {hasDirtyChanges && (
-              <span className="rounded-full bg-amber-50 px-3 py-1 text-xs text-amber-700 font-medium">
-                有未儲存的變更
-              </span>
+            {activePage === "works" ? (
+              <span className="text-xs text-gray-400">案例在下方各自「儲存」</span>
+            ) : (
+              <>
+                {hasDirtyChanges && (
+                  <span className="rounded-full bg-amber-50 px-3 py-1 text-xs text-amber-700 font-medium">
+                    有未儲存的變更
+                  </span>
+                )}
+                <button onClick={fetchData} className="rounded-lg border border-gray-200 p-2 text-gray-400 hover:text-gray-600 transition-colors" title="重新載入">
+                  <RefreshCw className="h-4 w-4" />
+                </button>
+                <button onClick={handleSave} disabled={saving}
+                  className="flex items-center gap-2 rounded-lg bg-amber-700 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-amber-800 disabled:opacity-60"
+                >
+                  {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+                  {saving ? "儲存中..." : "儲存變更"}
+                </button>
+              </>
             )}
-            <button onClick={fetchData} className="rounded-lg border border-gray-200 p-2 text-gray-400 hover:text-gray-600 transition-colors" title="重新載入">
-              <RefreshCw className="h-4 w-4" />
-            </button>
-            <button onClick={handleSave} disabled={saving}
-              className="flex items-center gap-2 rounded-lg bg-amber-700 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-amber-800 disabled:opacity-60"
-            >
-              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-              {saving ? "儲存中..." : "儲存變更"}
-            </button>
           </div>
         </header>
 

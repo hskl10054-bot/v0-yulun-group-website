@@ -1,13 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { KfzShell } from "@/components/kfz-shell";
-import { CASES, CATS, slugify } from "@/data/cases";
+import { RESIDENTIAL, COMMERCIAL } from "@/data/cases";
+import { useWorksData, slugify } from "@/lib/use-works-data";
 
 export default function WorksIndexPage() {
+  const { cases } = useWorksData();
   const [filter, setFilter] = useState("全部");
+
+  // Categories present in the data, in a stable order.
+  const cats = useMemo(() => {
+    const present = new Set(cases.map((c) => c.cat));
+    return ["全部", ...[RESIDENTIAL, COMMERCIAL].filter((c) => present.has(c))];
+  }, [cases]);
 
   return (
     <KfzShell>
@@ -19,7 +27,7 @@ export default function WorksIndexPage() {
         </section>
 
         <div className="filter">
-          {CATS.map((c) => (
+          {cats.map((c) => (
             <button key={c} className={filter === c ? "on" : ""} onClick={() => setFilter(c)}>
               {c}
             </button>
@@ -27,7 +35,7 @@ export default function WorksIndexPage() {
         </div>
 
         <div className="works-grid">
-          {CASES.map((c) => {
+          {cases.map((c) => {
             if (filter !== "全部" && c.cat !== filter) return null;
             const todo = !c.hero;
             const slug = slugify(c.enName);

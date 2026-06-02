@@ -3,15 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { KfzShell } from "@/components/kfz-shell";
-import { CASES, TODO, caseSlugs, getCaseBySlug } from "@/data/cases";
+import { TODO } from "@/data/cases";
+import { getCaseBySlugServer } from "@/lib/works-server";
 
-export function generateStaticParams() {
-  return caseSlugs.map((slug) => ({ slug }));
-}
+// Read fresh from the CMS on each request so backend edits show immediately.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const c = getCaseBySlug(slug);
+  const c = await getCaseBySlugServer(slug);
   if (!c) return { title: "案例｜空房子室內設計" };
   return {
     title: `${c.zhName} ${c.enName}｜空房子室內設計`,
@@ -27,7 +27,7 @@ function Txt({ v }: { v: string }) {
 
 export default async function CaseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const c = getCaseBySlug(slug);
+  const c = await getCaseBySlugServer(slug);
   if (!c) notFound();
 
   const hasGallery = c.gallery && c.gallery.length > 0;
