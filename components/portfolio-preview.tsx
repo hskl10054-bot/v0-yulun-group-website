@@ -39,7 +39,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
             <span className="mb-2 block text-xs font-light tracking-[0.4em] uppercase" style={{ color: colors.portfolio_accent }}>Portfolio</span>
             <h2 className="text-3xl font-bold tracking-wider md:text-4xl" style={{ color: colors.portfolio_heading }}>精選作品</h2>
           </div>
-          <Link href="/design" className="group flex items-center gap-2 text-xs tracking-[0.2em] uppercase transition-colors" style={{ color: colors.portfolio_accent }}>
+          <Link href="/works" className="group flex items-center gap-2 text-xs tracking-[0.2em] uppercase transition-colors" style={{ color: colors.portfolio_accent }}>
             更多作品 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
