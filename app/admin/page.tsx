@@ -10,8 +10,7 @@ import {
 
 import { getDefaultContentFont, getDefaultListFont } from "@/lib/default-fonts"
 import { DEFAULT_COLORS } from "@/lib/default-colors"
-import { getSupabaseClient } from "@/lib/supabase"
-import { uploadToCloudinary } from "@/lib/cloudinary-upload"
+import { WorksAdmin } from "@/components/admin/works-admin"
 
 // ─── Default List Items Per Page (pre-fill from current site) ────
 type DefaultListItem = { title: string; subtitle: string; description: string; extra: string }
@@ -200,20 +199,17 @@ interface ListItem {
 interface ImageRow {
   id?: number; page: string; section: string; url: string; alt: string; sort_order: number
 }
-type PageKey = "home" | "design" | "construction" | "cafe"
+type PageKey = "home" | "design" | "construction" | "cafe" | "works"
 type ToastType = "success" | "error"
 
-// ─── Supabase helpers ────────────────────────────────────────────
-async function uploadAndInsertImage(file: File, page: string, section: string, sortOrder: number, alt = ""): Promise<{ url: string; id: number }> {
-  const url = await uploadToCloudinary(file, `yulun-cms/${page}/${section}`)
-  const supabase = getSupabaseClient()
-  const { data, error } = await supabase
-    .from("images")
-    .insert({ page, section, url, alt, sort_order: sortOrder })
-    .select()
-    .single()
-  if (error) throw new Error(error.message)
-  return { url, id: data.id }
+// ─── API helpers ─────────────────────────────────────────────────
+async function api<T>(url: string, opts?: RequestInit): Promise<T> {
+  const res = await fetch(url, opts)
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}))
+    throw new Error(body.error || `API error ${res.status}`)
+  }
+  return res.json()
 }
 
 // ─── Sub-Components ──────────────────────────────────────────────
@@ -271,9 +267,15 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
     setPreview(localUrl)
     setUploading(true)
     try {
-      const { url } = await uploadAndInsertImage(file, page, section, sortOrder)
-      setPreview(url)
-      onUpload(url)
+      const fd = new FormData()
+      fd.append("file", file)
+      fd.append("page", page)
+      fd.append("section", section)
+      fd.append("sort_order", String(sortOrder))
+      fd.append("alt", "")
+      const result = await api<{ url: string }>("/api/upload", { method: "POST", body: fd })
+      setPreview(result.url)
+      onUpload(result.url)
     } catch {
       setPreview(currentImage)
     } finally {
@@ -462,7 +464,13 @@ function HeroCarouselEditor({ images, onUpload, onDelete, page }: {
       const nextSortOrder = images.length > 0
         ? Math.max(...images.map((img) => img.sort_order)) + 1
         : 1
-      await uploadAndInsertImage(file, page, "hero", nextSortOrder)
+      const fd = new FormData()
+      fd.append("file", file)
+      fd.append("page", page)
+      fd.append("section", "hero")
+      fd.append("sort_order", String(nextSortOrder))
+      fd.append("alt", "")
+      await api<{ url: string }>("/api/upload", { method: "POST", body: fd })
       onUpload()
     } catch {
       // Upload failed
@@ -570,6 +578,7 @@ const pageNav: { key: PageKey; label: string; icon: typeof Home }[] = [
   { key: "design", label: "空房子設計", icon: Paintbrush },
   { key: "construction", label: "裕綸裝修", icon: Hammer },
   { key: "cafe", label: "同齊咖啡", icon: Coffee },
+  { key: "works", label: "案例作品", icon: ImageIcon },
 ]
 
 export default function AdminPage() {
@@ -597,18 +606,14 @@ export default function AdminPage() {
   const fetchData = useCallback(async () => {
     setLoading(true)
     try {
-      const supabase = getSupabaseClient()
       const [c, l, i] = await Promise.all([
-        supabase.from("page_content").select("*").eq("page", activePage),
-        supabase.from("list_items").select("*").eq("page", activePage).order("sort_order"),
-        supabase.from("images").select("*").eq("page", activePage).order("sort_order"),
+        api<ContentRow[]>(`/api/content?page=${activePage}`),
+        api<ListItem[]>(`/api/list-items?page=${activePage}`),
+        api<ImageRow[]>(`/api/images?page=${activePage}`),
       ])
-      if (c.error) throw new Error(c.error.message)
-      if (l.error) throw new Error(l.error.message)
-      if (i.error) throw new Error(i.error.message)
-      setContent(c.data || [])
-      setListItems(l.data || [])
-      setImages(i.data || [])
+      setContent(c)
+      setListItems(l)
+      setImages(i)
       setDirtyContent([])
       setDirtyListItems(new Map())
       setNewListItems([])
@@ -780,45 +785,49 @@ export default function AdminPage() {
   const handleSave = async () => {
     setSaving(true)
     try {
-      const supabase = getSupabaseClient()
-      const throwIfError = (e: { message: string } | null) => { if (e) throw new Error(e.message) }
+      const promises: Promise<unknown>[] = []
 
-      // Bulk upsert dirty content (one row at a time, mirroring the previous API)
-      for (const item of dirtyContent) {
-        const { page, section, key, value } = item
-        const { data: existing, error: selErr } = await supabase
-          .from("page_content")
-          .select("id")
-          .eq("page", page).eq("section", section).eq("key", key)
-          .maybeSingle()
-        throwIfError(selErr)
-        if (existing) {
-          throwIfError((await supabase.from("page_content")
-            .update({ value, updated_at: new Date().toISOString() })
-            .eq("id", existing.id)).error)
-        } else {
-          throwIfError((await supabase.from("page_content").insert({ page, section, key, value })).error)
-        }
+      // Save dirty content
+      if (dirtyContent.length > 0) {
+        promises.push(
+          api("/api/content", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ items: dirtyContent }),
+          })
+        )
       }
 
-      // Updates
+      // Save dirty list items (updates)
       for (const [id, updates] of dirtyListItems) {
-        throwIfError((await supabase.from("list_items")
-          .update({ ...updates, updated_at: new Date().toISOString() })
-          .eq("id", id)).error)
+        promises.push(
+          api("/api/list-items", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id, ...updates }),
+          })
+        )
       }
 
-      // Inserts
-      if (newListItems.length > 0) {
-        throwIfError((await supabase.from("list_items").insert(newListItems)).error)
+      // Save new list items
+      for (const item of newListItems) {
+        promises.push(
+          api("/api/list-items", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(item),
+          })
+        )
       }
 
-      // Deletes
-      if (deletedListItemIds.length > 0) {
-        throwIfError((await supabase.from("list_items").delete().in("id", deletedListItemIds)).error)
+      // Delete list items
+      for (const id of deletedListItemIds) {
+        promises.push(api(`/api/list-items?id=${id}`, { method: "DELETE" }))
       }
 
+      await Promise.all(promises)
       showToast("儲存成功！內容已更新至資料庫。")
+      // Refresh data
       await fetchData()
     } catch (e) {
       showToast(`儲存失敗：${e instanceof Error ? e.message : "未知錯誤"}`, "error")
@@ -959,9 +968,7 @@ export default function AdminPage() {
           onUpload={() => fetchData()}
           onDelete={async (id) => {
             try {
-              const supabase = getSupabaseClient()
-              const { error } = await supabase.from("images").delete().eq("id", id)
-              if (error) throw new Error(error.message)
+              await api(`/api/upload?id=${id}`, { method: "DELETE" })
               showToast("圖片已刪除")
               await fetchData()
             } catch (e) {
@@ -1186,6 +1193,7 @@ export default function AdminPage() {
       case "design": return renderDesignPage()
       case "construction": return renderConstructionPage()
       case "cafe": return renderCafePage()
+      case "works": return <WorksAdmin />
     }
   }
 
@@ -1246,20 +1254,26 @@ export default function AdminPage() {
             <p className="text-xs text-gray-400">編輯頁面內容</p>
           </div>
           <div className="flex items-center gap-3">
-            {hasDirtyChanges && (
-              <span className="rounded-full bg-amber-50 px-3 py-1 text-xs text-amber-700 font-medium">
-                有未儲存的變更
-              </span>
+            {activePage === "works" ? (
+              <span className="text-xs text-gray-400">案例在下方各自「儲存」</span>
+            ) : (
+              <>
+                {hasDirtyChanges && (
+                  <span className="rounded-full bg-amber-50 px-3 py-1 text-xs text-amber-700 font-medium">
+                    有未儲存的變更
+                  </span>
+                )}
+                <button onClick={fetchData} className="rounded-lg border border-gray-200 p-2 text-gray-400 hover:text-gray-600 transition-colors" title="重新載入">
+                  <RefreshCw className="h-4 w-4" />
+                </button>
+                <button onClick={handleSave} disabled={saving}
+                  className="flex items-center gap-2 rounded-lg bg-amber-700 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-amber-800 disabled:opacity-60"
+                >
+                  {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
+                  {saving ? "儲存中..." : "儲存變更"}
+                </button>
+              </>
             )}
-            <button onClick={fetchData} className="rounded-lg border border-gray-200 p-2 text-gray-400 hover:text-gray-600 transition-colors" title="重新載入">
-              <RefreshCw className="h-4 w-4" />
-            </button>
-            <button onClick={handleSave} disabled={saving}
-              className="flex items-center gap-2 rounded-lg bg-amber-700 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-amber-800 disabled:opacity-60"
-            >
-              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
-              {saving ? "儲存中..." : "儲存變更"}
-            </button>
           </div>
         </header>
 
