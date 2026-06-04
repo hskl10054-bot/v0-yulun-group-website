@@ -235,7 +235,7 @@ export default function DesignPage() {
             <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.portfolio_accent, marginBottom: "0.5rem" }}>Portfolio</p>
             <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.portfolio_heading }}>精選作品</h2>
           </div>
-          <a href="#" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.portfolio_heading, textDecoration: "none", borderBottom: `1px solid ${colors.portfolio_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>查看所有案例 →</a>
+          <Link href="/works" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.portfolio_heading, textDecoration: "none", borderBottom: `1px solid ${colors.portfolio_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>查看所有案例 →</Link>
         </div>
         <div className="resp-portfolio" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gridTemplateRows: "300px 300px", gap: "2px" }}>
           {portfoliosWithOrder.map((p, i) => (
