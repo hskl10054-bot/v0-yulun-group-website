@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react"
 import { Plus, Trash2, Upload, Loader2, ChevronUp, ChevronDown, Save } from "lucide-react"
+import { uploadToCloudinary } from "@/lib/cloudinary-upload"
 
 const RESIDENTIAL = "住宅設計"
 const COMMERCIAL = "商業空間"
@@ -46,14 +47,7 @@ function normalize(row: Record<string, unknown>): EditCase {
 }
 
 async function uploadImage(file: File): Promise<string> {
-  const fd = new FormData()
-  fd.append("file", file)
-  const res = await fetch("/api/cases/upload", { method: "POST", body: fd })
-  if (!res.ok) {
-    const b = await res.json().catch(() => ({}))
-    throw new Error(b.error || `上傳失敗 ${res.status}`)
-  }
-  return (await res.json()).url as string
+  return uploadToCloudinary(file, "kfz-images")
 }
 
 // ─── small inputs ───────────────────────────────────────────────
