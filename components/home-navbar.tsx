@@ -182,6 +182,7 @@ export function HomeNavbar() {
           { label: "首頁", href: "/" },
           { label: "空房子室內設計", href: "/design" },
           { label: "裕綸室內裝修", href: "/construction" },
+          { label: "案例分享", href: "/works" },
           { label: "聯絡我們", href: "#contact" },
         ].map((item) => (
           <Link
