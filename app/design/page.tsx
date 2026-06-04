@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
+import { PortfolioModal } from "@/components/portfolio-modal"
 
 const defaultServices = [
   { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
@@ -34,6 +35,7 @@ export default function DesignPage() {
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [selectedPortfolio, setSelectedPortfolio] = useState<{ title: string; image: string; sortOrder: number } | null>(null)
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
@@ -237,7 +239,7 @@ export default function DesignPage() {
         </div>
         <div className="resp-portfolio" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gridTemplateRows: "300px 300px", gap: "2px" }}>
           {portfoliosWithOrder.map((p, i) => (
-            <div key={p.title} className="portfolio-item" style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined }}>
+            <div key={p.title} className="portfolio-item" onClick={() => setSelectedPortfolio(p)} style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined, cursor: "pointer" }}>
               <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
               <div className="portfolio-overlay" style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${colors.portfolio_overlay} 0%, transparent 60%)`, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem", opacity: 0, transition: "opacity 0.4s" }}>
                 <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", ...getListItemStyle(content, "portfolio", p.sortOrder, "title", "design") }}>{p.title}</h3>
@@ -246,6 +248,18 @@ export default function DesignPage() {
           ))}
         </div>
       </section>
+
+      {selectedPortfolio && (
+        <PortfolioModal
+          isOpen={true}
+          onClose={() => setSelectedPortfolio(null)}
+          title={selectedPortfolio.title}
+          subtitle=""
+          coverImage={selectedPortfolio.image}
+          page="design"
+          sortOrder={selectedPortfolio.sortOrder}
+        />
+      )}
 
       {/* TESTIMONIALS */}
       <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.testimonials_bg }}>
