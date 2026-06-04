@@ -1,24 +1,17 @@
 // Browser-side unsigned upload to Cloudinary.
-// Requires a Cloudinary unsigned upload preset (Dashboard → Settings → Upload → Add upload preset → Signing Mode: Unsigned).
-//
-// Env vars (baked at build time):
-//   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
-//   NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+// Cloud name + unsigned preset are hardcoded because Vercel env vars
+// were stuck on a wrong value and we couldn't reliably override them.
+
+const CLOUD_NAME = "dfvmjmwb7"
+const UPLOAD_PRESET = "yulun_admin"
 
 export async function uploadToCloudinary(file: File, folder: string): Promise<string> {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
-  const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
-
-  if (!cloudName || !uploadPreset) {
-    throw new Error("Cloudinary 未設定：缺少 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME 或 NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET")
-  }
-
   const fd = new FormData()
   fd.append("file", file)
-  fd.append("upload_preset", uploadPreset)
+  fd.append("upload_preset", UPLOAD_PRESET)
   fd.append("folder", folder)
 
-  const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
     method: "POST",
     body: fd,
   })
