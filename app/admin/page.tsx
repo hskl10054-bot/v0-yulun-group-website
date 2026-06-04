@@ -11,6 +11,8 @@ import {
 import { getDefaultContentFont, getDefaultListFont } from "@/lib/default-fonts"
 import { DEFAULT_COLORS } from "@/lib/default-colors"
 import { WorksAdmin } from "@/components/admin/works-admin"
+import { uploadImageRow } from "@/lib/cloudinary-upload"
+import { getSupabaseClient } from "@/lib/supabase"
 
 // ─── Default List Items Per Page (pre-fill from current site) ────
 type DefaultListItem = { title: string; subtitle: string; description: string; extra: string }
@@ -267,15 +269,9 @@ function ImageUploader({ currentImage, onUpload, page, section, sortOrder, label
     setPreview(localUrl)
     setUploading(true)
     try {
-      const fd = new FormData()
-      fd.append("file", file)
-      fd.append("page", page)
-      fd.append("section", section)
-      fd.append("sort_order", String(sortOrder))
-      fd.append("alt", "")
-      const result = await api<{ url: string }>("/api/upload", { method: "POST", body: fd })
-      setPreview(result.url)
-      onUpload(result.url)
+      const { url } = await uploadImageRow(file, page, section, sortOrder)
+      setPreview(url)
+      onUpload(url)
     } catch {
       setPreview(currentImage)
     } finally {
@@ -464,13 +460,7 @@ function HeroCarouselEditor({ images, onUpload, onDelete, page }: {
       const nextSortOrder = images.length > 0
         ? Math.max(...images.map((img) => img.sort_order)) + 1
         : 1
-      const fd = new FormData()
-      fd.append("file", file)
-      fd.append("page", page)
-      fd.append("section", "hero")
-      fd.append("sort_order", String(nextSortOrder))
-      fd.append("alt", "")
-      await api<{ url: string }>("/api/upload", { method: "POST", body: fd })
+      await uploadImageRow(file, page, "hero", nextSortOrder)
       onUpload()
     } catch {
       // Upload failed
@@ -968,7 +958,9 @@ export default function AdminPage() {
           onUpload={() => fetchData()}
           onDelete={async (id) => {
             try {
-              await api(`/api/upload?id=${id}`, { method: "DELETE" })
+              const supabase = getSupabaseClient()
+              const { error } = await supabase.from("images").delete().eq("id", id)
+              if (error) throw new Error(error.message)
               showToast("圖片已刪除")
               await fetchData()
             } catch (e) {
