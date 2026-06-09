@@ -22,11 +22,20 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
   const [selectedWork, setSelectedWork] = useState<{ title: string; type: string; image: string; sortOrder: number } | null>(null)
   const { content, listItems, images } = useCmsData("home")
 
-  // Resolve the 壹偲 OnlyEase case's real URL from the CMS case list (its slug
-  // comes from the English name). Falls back to the /works list if not found.
+  // Resolve a homepage tile to its matching /works case page. The case slug
+  // comes from its English name, so we look the case up in the live CMS list
+  // and fall back to the /works list if no match is found (never 404s).
   const { cases } = useWorksData()
-  const onlyEaseCase = cases.find((c) => /壹偲/.test(c.zhName) || /onlyease/i.test(c.enName))
-  const onlyEaseHref = onlyEaseCase ? `/works/${slugify(onlyEaseCase.enName)}` : "/works"
+  const caseHref = (title: string): string | null => {
+    const linkTo = (c: typeof cases[number] | undefined) => (c ? `/works/${slugify(c.enName)}` : "/works")
+    if (/onlyease|壹偲/i.test(title)) {
+      return linkTo(cases.find((c) => /壹偲/.test(c.zhName) || /onlyease/i.test(c.enName)))
+    }
+    if (/同齊咖吡|西區精忠/.test(title)) {
+      return linkTo(cases.find((c) => /同齊咖吡|西區精忠/.test(c.zhName) || /west\s*district/i.test(c.enName)))
+    }
+    return null
+  }
 
   const cmsPortfolio = getListItemsBySection(listItems, "portfolio")
   const works = cmsPortfolio.length > 0
@@ -53,8 +62,8 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
         </div>
         <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 md:grid-cols-3 md:[grid-template-rows:260px_260px]">
           {works.map((w, i) => {
-            // The 壹偲 OnlyEase tile links straight to its case page; others open the modal.
-            const href = /onlyease|壹偲/i.test(w.title) ? onlyEaseHref : null
+            // Tiles with a matching case page link straight to it; others open the modal.
+            const href = caseHref(w.title)
             const cls = `group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`
             const inner = (
               <>
