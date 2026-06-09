@@ -40,6 +40,9 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
     if (/居家住宅/.test(title)) {
       return linkTo(cases.find((c) => /摩卡/.test(c.zhName) || /mocha/i.test(c.enName)))
     }
+    if (/清水聯馥悅|聯馥悅/.test(title)) {
+      return linkTo(cases.find((c) => /無痕/.test(c.zhName) || /seamless/i.test(c.enName)))
+    }
     return null
   }
 
