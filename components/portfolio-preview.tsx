@@ -3,6 +3,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { useCmsData, getListItemsBySection, getImageUrl, getListItemStyle } from "@/lib/use-cms-data"
+import { useWorksData, slugify } from "@/lib/use-works-data"
 import { PortfolioModal } from "./portfolio-modal"
 
 const defaultWorks = [
@@ -20,6 +21,12 @@ interface PortfolioPreviewProps {
 export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
   const [selectedWork, setSelectedWork] = useState<{ title: string; type: string; image: string; sortOrder: number } | null>(null)
   const { content, listItems, images } = useCmsData("home")
+
+  // Resolve the 壹偲 OnlyEase case's real URL from the CMS case list (its slug
+  // comes from the English name). Falls back to the /works list if not found.
+  const { cases } = useWorksData()
+  const onlyEaseCase = cases.find((c) => /壹偲/.test(c.zhName) || /onlyease/i.test(c.enName))
+  const onlyEaseHref = onlyEaseCase ? `/works/${slugify(onlyEaseCase.enName)}` : "/works"
 
   const cmsPortfolio = getListItemsBySection(listItems, "portfolio")
   const works = cmsPortfolio.length > 0
@@ -47,7 +54,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
         <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 md:grid-cols-3 md:[grid-template-rows:260px_260px]">
           {works.map((w, i) => {
             // The 壹偲 OnlyEase tile links straight to its case page; others open the modal.
-            const href = /onlyease|壹偲/i.test(w.title) ? "/works/catalyst" : null
+            const href = /onlyease|壹偲/i.test(w.title) ? onlyEaseHref : null
             const cls = `group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`
             const inner = (
               <>
