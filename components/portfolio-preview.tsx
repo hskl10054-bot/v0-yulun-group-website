@@ -45,23 +45,29 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
           </Link>
         </div>
         <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 md:grid-cols-3 md:[grid-template-rows:260px_260px]">
-          {works.map((w, i) => (
-            <div
-              key={w.title}
-              onClick={() => setSelectedWork(w)}
-              className={`group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`}
-            >
-              <img
-                src={w.image}
-                alt={w.title}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100">
-                <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
-                <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "portfolio", w.sortOrder, "title", "home") }}>{w.title}</h3>
-              </div>
-            </div>
-          ))}
+          {works.map((w, i) => {
+            // The 壹偲 OnlyEase tile links straight to its case page; others open the modal.
+            const href = /onlyease|壹偲/i.test(w.title) ? "/works/catalyst" : null
+            const cls = `group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`
+            const inner = (
+              <>
+                <img
+                  src={w.image}
+                  alt={w.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100">
+                  <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
+                  <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "portfolio", w.sortOrder, "title", "home") }}>{w.title}</h3>
+                </div>
+              </>
+            )
+            return href ? (
+              <Link key={w.title} href={href} className={cls}>{inner}</Link>
+            ) : (
+              <div key={w.title} onClick={() => setSelectedWork(w)} className={cls}>{inner}</div>
+            )
+          })}
         </div>
       </div>
 
