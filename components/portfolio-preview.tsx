@@ -37,6 +37,9 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
     if (/勝麗交響曲|勝利交響曲/.test(title)) {
       return linkTo(cases.find((c) => /墨石/.test(c.zhName) || /smoke/i.test(c.enName)))
     }
+    if (/居家住宅/.test(title)) {
+      return linkTo(cases.find((c) => /摩卡/.test(c.zhName) || /mocha/i.test(c.enName)))
+    }
     return null
   }
 
