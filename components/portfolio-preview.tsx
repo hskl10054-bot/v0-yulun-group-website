@@ -34,6 +34,9 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
     if (/同齊咖吡|西區精忠/.test(title)) {
       return linkTo(cases.find((c) => /同齊咖吡|西區精忠/.test(c.zhName) || /west\s*district/i.test(c.enName)))
     }
+    if (/勝麗交響曲|勝利交響曲/.test(title)) {
+      return linkTo(cases.find((c) => /墨石/.test(c.zhName) || /smoke/i.test(c.enName)))
+    }
     return null
   }
 
