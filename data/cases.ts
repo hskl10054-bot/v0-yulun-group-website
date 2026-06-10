@@ -291,6 +291,18 @@ export const CASES: CaseStudy[] = [
     ],
   },
   {
+    cat: COMMERCIAL, zhName: "同齊咖吡 西區精忠店", enName: "Tongqi Coffee", tagline: "讓一杯咖啡，成為人與人的交匯點",
+    hero: "/images/home/portfolio/home-portfolio-01.jpg",
+    meta: ["商業空間", "餐飲店舖", "同齊咖啡", "台中・西區精忠街"],
+    story: "同齊咖啡相信「咖啡是空間的媒介」，連結著人與人之間的對話。這次在台中西區精忠街落腳的精忠店，要的不只是一間能喝咖啡的店，而是一個能讓人安心久待、不限時的寧靜角落——無論是商務洽公、讀書，還是好友相聚，都能在這裡找到屬於自己的時刻。",
+    problem: "精忠街是住商交雜的巷弄，店面不大，又要同時容納吧台、座位與不限時久坐的需求。如何在有限的坪數裡，做出既舒適放鬆、又能撐起精品咖啡專業感的空間，是這次設計的核心。",
+    solution: "我們以溫潤的木質與大地色鋪陳全店，呼應同齊「不限時深夜咖啡」的安定氛圍。吧台採開放式設計，讓自家烘豆與手沖的過程成為店裡的風景；座位區結合長桌與單人座，兼顧聚會與獨處。柔和的間接照明延續到深夜，搭配可彈性運用的場地，讓這裡白天是咖啡館、夜裡是讀書與聚會的空間。",
+    highlights: ["開放式吧台讓烘豆與手沖成為空間的風景，撐起精品咖啡的專業感", "木質大地色與暖光延續到深夜，呼應不限時久坐的安定氛圍"],
+    gallery: [
+      { src: "/images/home/portfolio/home-portfolio-01.jpg", caption: "西區精忠店，木質與暖光鋪陳出不限時的寧靜角落" },
+    ],
+  },
+  {
     cat: COMMERCIAL, zhName: "酵境", enName: "Catalyst", tagline: "把酵素科學，變成走得進去的空間",
     hero: "https://res.cloudinary.com/dfvmjmwb7/image/upload/kfz-images/catalyst-hero",
     meta: ["商業空間", "餐飲店舖", "壹偲 OnlyEase", "新竹竹科"],
