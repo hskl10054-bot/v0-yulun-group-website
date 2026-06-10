@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: '裕綸集團 Yulun Group｜職人建築，穩健基石，構築空間的永續價值',
   description: '裕綸集團深耕台中多年，以「空房子室內設計」注入空間美學，並由「裕綸室內裝修」提供專業嚴謹的工程保障，結合「同齊咖啡」場域連結生活溫度。我們提供從設計到工程的一站式整合服務，以穩健的經營與職人精神，為每一位客戶守護家的品質。',
   generator: 'v0.app',
+  verification: {
+    other: {
+      'facebook-domain-verification': '9wfhkv5a1qzipvbj49wjewj5vkf7zr',
+    },
+  },
   icons: {
     icon: [
       {
