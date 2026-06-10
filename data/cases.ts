@@ -304,6 +304,18 @@ export const CASES: CaseStudy[] = [
       { src: "https://res.cloudinary.com/dfvmjmwb7/image/upload/kfz-images/catalyst-3", caption: "錐形瓶、量杯盛裝飲品，延續實驗室的精密與乾淨" },
     ],
   },
+  {
+    cat: COMMERCIAL, zhName: "同齊咖吡 西區精忠店", enName: "Tongqi West District", tagline: "一杯咖啡，連結深夜裡的每一次對話",
+    hero: "/images/home/portfolio/home-portfolio-01.jpg",
+    meta: ["商業空間", "餐飲店舖", "同齊咖啡", "台中・西區"],
+    story: "同齊咖啡從花蓮起家，主打自家烘焙的精品咖啡與不限時的寧靜空間。西區精忠店落腳台中市西區精忠街，是品牌深入市區巷弄的據點。屋主希望這裡不只是喝咖啡的地方，而是讓人放慢腳步、能夠久坐工作、也能與朋友自在對話的交匯點。",
+    problem: "店面位於住宅巷弄，臨街面有限，要在不大的坪數裡同時容納吧檯作業、自烘豆陳列、單人工作座與多人聚會區，動線容易打結；又要兼顧不限時久坐的舒適與深夜時段的氛圍，照明與材質都得拿捏得剛剛好。",
+    solution: "以咖啡色與奶油白為基調，胡桃木質檯面搭配溫潤間接照明，讓空間在白天明亮、入夜後沉靜。吧檯前移整合自烘豆展示牆，讓沖煮與選豆成為一進門就感受得到的主角；座區分為靠窗單人長桌與內側聚會區，動線各自獨立、互不干擾。可彈性調整的桌椅同時支援場地租賃，讓商務洽公、讀書會與小型聚會都有合適的角落。",
+    highlights: ["吧檯與自烘豆展示牆整合，讓選豆與沖煮成為空間的主角", "單人長桌與聚會區動線分流，久坐、洽公、聚會各得其所"],
+    gallery: [
+      { src: "/images/home/portfolio/home-portfolio-01.jpg", caption: "胡桃木質檯面與間接照明，鋪陳不限時久坐的溫潤氛圍" },
+    ],
+  },
 ];
 
 const PRESENT_CATS = [...new Set(CASES.map((c) => c.cat))];
