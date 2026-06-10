@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Noto_Sans_TC, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { MetaPixel } from '@/components/analytics/meta-pixel'
+import { GoogleAnalytics } from '@/components/analytics/google-analytics'
 import './globals.css'
 
 const _notoSansTC = Noto_Sans_TC({ subsets: ["latin"], weight: ["300", "400", "500", "700", "900"] });
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         {children}
         <MetaPixel />
+        <GoogleAnalytics />
         <Analytics />
       </body>
     </html>
