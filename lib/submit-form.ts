@@ -15,5 +15,12 @@ export async function submitForm(data: FormData, source: string): Promise<"succe
     body: JSON.stringify(payload),
   })
 
+  // Report a Meta Pixel "Lead" conversion on each successful submission, tagged
+  // with the source page so leads can be attributed per form in Events Manager.
+  if (typeof window !== "undefined") {
+    const w = window as unknown as { fbq?: (...args: unknown[]) => void }
+    w.fbq?.("track", "Lead", { content_name: source })
+  }
+
   return "success"
 }
