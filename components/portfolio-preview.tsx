@@ -32,10 +32,10 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
       return linkTo(cases.find((c) => /壹偲/.test(c.zhName) || /onlyease/i.test(c.enName)))
     }
     if (/同齊咖吡|西區精忠/.test(title)) {
-      // Link to the 同齊咖吡 西區精忠店 case if it exists in the live cases list;
-      // otherwise send to the café brand page (which lists 西區精忠店) rather than
-      // the generic /works list, so the tile never lands on an unrelated case.
-      const c = cases.find((c) => /同齊咖吡|西區精忠/.test(c.zhName) || /west\s*district/i.test(c.enName))
+      // Match the 西區精忠店 case specifically — NOT the shared brand name 同齊咖吡,
+      // otherwise it would grab the first 同齊咖吡 case (e.g. 北屯旗艦店). Falls back
+      // to the café brand page if no 西區 case is found, never an unrelated case.
+      const c = cases.find((c) => /西區精忠|西區/.test(c.zhName) || /west\s*district/i.test(c.enName))
       return c ? `/works/${slugify(c.enName)}` : "/cafe"
     }
     if (/勝麗交響曲|勝利交響曲/.test(title)) {
