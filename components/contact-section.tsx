@@ -14,6 +14,27 @@ function ContactForm({ colors }: { colors: Record<string, string> }) {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
+  // After a successful submit, replace the form with a clear thank-you message.
+  if (submitted) {
+    return (
+      <div className="flex flex-col gap-5" style={{ paddingTop: "1rem" }}>
+        <div style={{ fontSize: "2.5rem", lineHeight: 1, color: colors.contact_btn_bg }}>✓</div>
+        <h3 className="serif" style={{ fontSize: "1.8rem", fontWeight: 300, color: colors.footer_text }}>已收到您的諮詢</h3>
+        <p className="serif font-light" style={{ fontSize: "1.05rem", lineHeight: 1.9, color: "rgba(255,255,255,0.6)" }}>
+          感謝您的來信，專人將於 1 個工作天內與您聯繫。<br />
+          若有急件，歡迎直撥{" "}
+          <a href="tel:+886-4-2247-9068" style={{ color: colors.footer_text, textDecoration: "underline" }}>04-2247-9068</a>。
+        </p>
+        <button
+          onClick={() => setSubmitted(false)}
+          style={{ marginTop: "0.5rem", background: "transparent", color: "rgba(255,255,255,0.45)", border: "1px solid rgba(255,255,255,0.2)", padding: "0.75rem 2rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}
+        >
+          再填一筆 →
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col gap-5">
       {[

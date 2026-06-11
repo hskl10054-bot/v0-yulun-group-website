@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail } from "lucide-react"
+import Link from "next/link"
 
 export function SiteFooter() {
   return (
@@ -53,9 +54,12 @@ export function SiteFooter() {
         <div className="mb-8 h-px w-full bg-[#FAFAF8]/10" />
 
         {/* Copyright */}
-        <p className="text-center text-xs font-light tracking-wide text-[#FAFAF8]/40">
-          {"© 2026 裕綸集團 Yulun Group. All Rights Reserved."}
-        </p>
+        <div className="flex flex-col items-center gap-2 text-center text-xs font-light tracking-wide text-[#FAFAF8]/40">
+          <p>{"© 2026 裕綸集團 Yulun Group. All Rights Reserved."}</p>
+          <Link href="/privacy" className="transition-colors hover:text-[#6B4E31]">
+            隱私權政策
+          </Link>
+        </div>
       </div>
     </footer>
   )
