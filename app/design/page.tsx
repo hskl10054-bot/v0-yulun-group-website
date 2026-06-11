@@ -6,6 +6,7 @@ import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getI
 import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
 import { PortfolioModal } from "@/components/portfolio-modal"
+import { useWorksData, slugify } from "@/lib/use-works-data"
 
 const defaultServices = [
   { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
@@ -32,6 +33,23 @@ const defaultTestimonials = [
 export default function DesignPage() {
   const { content, listItems, images, loading } = useCmsData("design")
   const colors = usePageColors(content, "design")
+
+  // Resolve a portfolio tile to its matching /works case page. Each style tile
+  // maps to a specific case (by zh/en name) looked up in the live CMS list;
+  // returns null when no case is found, so the tile keeps its lightbox.
+  const { cases } = useWorksData()
+  const caseHref = (title: string): string | null => {
+    const link = (zhRe: RegExp, enRe: RegExp) => {
+      const c = cases.find((c) => zhRe.test(c.zhName) || enRe.test(c.enName))
+      return c ? `/works/${slugify(c.enName)}` : null
+    }
+    if (/現代簡約|光感餐廚/.test(title)) return link(/木格/, /lattice/i)
+    if (/暖色侘寂|圓弧玄關/.test(title)) return link(/無痕/, /seamless/i)
+    if (/輕奢現代|石紋客餐廳/.test(title)) return link(/^曜$|曜/, /onyx/i)
+    if (/極簡北歐|純白入戶/.test(title)) return link(/常日/, /everyday/i)
+    if (/日式和風|日光臥榻/.test(title)) return link(/和風/, /wafu|japan/i)
+    return null
+  }
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -131,9 +149,9 @@ export default function DesignPage() {
           .resp-grid3 { grid-template-columns: repeat(2, 1fr) !important; }
           .resp-grid2 { grid-template-columns: 1fr !important; }
           .resp-portfolio { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
-          .resp-portfolio > div { aspect-ratio: 4/3; position: relative !important; }
-          .resp-portfolio > div:first-child { grid-row: auto !important; }
-          .resp-portfolio > div img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+          .resp-portfolio > * { aspect-ratio: 4/3; position: relative !important; }
+          .resp-portfolio > *:first-child { grid-row: auto !important; }
+          .resp-portfolio > * img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
           .resp-contact { grid-template-columns: 1fr !important; min-height: auto !important; }
           .resp-contact-left, .resp-contact-right { padding: 4rem 2.5rem !important; }
           .resp-footer { padding: 2rem 2.5rem !important; flex-direction: column !important; gap: 1rem !important; text-align: center !important; }
@@ -148,7 +166,7 @@ export default function DesignPage() {
           .resp-section-inner { padding: 0 1.5rem !important; }
           .resp-grid3 { grid-template-columns: 1fr !important; }
           .resp-portfolio { grid-template-columns: 1fr !important; }
-          .resp-portfolio > div { aspect-ratio: 4/3 !important; }
+          .resp-portfolio > * { aspect-ratio: 4/3 !important; }
           .resp-contact-left, .resp-contact-right { padding: 3rem 1.5rem !important; }
           .resp-footer { padding: 1.5rem 1.2rem !important; }
           .resp-heading { font-size: 2rem !important; }
@@ -238,14 +256,24 @@ export default function DesignPage() {
           <Link href="/works" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.portfolio_heading, textDecoration: "none", borderBottom: `1px solid ${colors.portfolio_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>查看所有案例 →</Link>
         </div>
         <div className="resp-portfolio" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gridTemplateRows: "300px 300px", gap: "2px" }}>
-          {portfoliosWithOrder.map((p, i) => (
-            <div key={p.title} className="portfolio-item" onClick={() => setSelectedPortfolio(p)} style={{ position: "relative", overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined, cursor: "pointer" }}>
-              <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
-              <div className="portfolio-overlay" style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${colors.portfolio_overlay} 0%, transparent 60%)`, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem", opacity: 0, transition: "opacity 0.4s" }}>
-                <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", ...getListItemStyle(content, "portfolio", p.sortOrder, "title", "design") }}>{p.title}</h3>
-              </div>
-            </div>
-          ))}
+          {portfoliosWithOrder.map((p, i) => {
+            // Tiles with a matching case page link straight to it; others open the lightbox.
+            const href = caseHref(p.title)
+            const itemStyle = { position: "relative" as const, overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined, cursor: "pointer" }
+            const inner = (
+              <>
+                <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
+                <div className="portfolio-overlay" style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${colors.portfolio_overlay} 0%, transparent 60%)`, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem", opacity: 0, transition: "opacity 0.4s" }}>
+                  <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", ...getListItemStyle(content, "portfolio", p.sortOrder, "title", "design") }}>{p.title}</h3>
+                </div>
+              </>
+            )
+            return href ? (
+              <Link key={p.title} href={href} className="portfolio-item" style={itemStyle}>{inner}</Link>
+            ) : (
+              <div key={p.title} className="portfolio-item" onClick={() => setSelectedPortfolio(p)} style={itemStyle}>{inner}</div>
+            )
+          })}
         </div>
       </section>
 
