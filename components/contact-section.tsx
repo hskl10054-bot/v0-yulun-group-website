@@ -21,9 +21,9 @@ function ContactForm({ colors }: { colors: Record<string, string> }) {
         <div style={{ fontSize: "2.5rem", lineHeight: 1, color: colors.contact_btn_bg }}>✓</div>
         <h3 className="serif" style={{ fontSize: "1.8rem", fontWeight: 300, color: colors.footer_text }}>已收到您的諮詢</h3>
         <p className="serif font-light" style={{ fontSize: "1.05rem", lineHeight: 1.9, color: "rgba(255,255,255,0.6)" }}>
-          感謝您的來信，專人將於 1 個工作天內與您聯繫。<br />
+          感謝您的來信，專人將於 5 個工作天內與您聯繫。<br />
           若有急件，歡迎直撥{" "}
-          <a href="tel:+886-4-2247-9068" style={{ color: colors.footer_text, textDecoration: "underline" }}>04-2247-9068</a>。
+          <a href="tel:+886-918-230-603" style={{ color: colors.footer_text, textDecoration: "underline" }}>0918-230-603</a>。
         </p>
         <button
           onClick={() => setSubmitted(false)}
