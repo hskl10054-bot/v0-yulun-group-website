@@ -2,29 +2,20 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 import { KfzStyles } from "./kfz-styles";
 
 // Wraps the 空房子室內設計 pages with the shared `.kfz` design system, a
-// sticky brand topbar, and a footer — mirroring the lightweight nav/footer
-// used by the /design and /construction brand pages.
+// fixed three-zone brand topbar (back-link / centered brand / CTA) and a
+// footer — matching the visual layout of the /design and /cafe brand pages.
 export function KfzShell({ children }: { children: ReactNode }) {
-  const pathname = usePathname() || "";
-  const isWorks = pathname.startsWith("/works");
-  const isProcess = pathname.startsWith("/process");
-
   return (
     <div className="kfz">
       <KfzStyles />
       <header className="topbar">
-        <Link href="/" className="brand">
-          <span className="en">Yulun</span>空房子室內設計
-        </Link>
-        <nav>
-          <Link href="/works" className={isWorks ? "on" : ""}>案例作品</Link>
-          <Link href="/process" className={isProcess ? "on" : ""}>合作流程</Link>
-          <Link href="/" className="home">裕綸集團</Link>
-        </nav>
+        <Link href="/" className="lead"><ArrowLeft size={14} /> 裕綸集團</Link>
+        <Link href="/works" className="brand">空房子・室內設計</Link>
+        <Link href="/design#contact" className="cta">預約諮詢</Link>
       </header>
 
       {children}

@@ -111,21 +111,20 @@ export function KfzStyles() {
     .kfz .val svg{width:26px;height:26px;color:var(--clay);flex:0 0 auto;margin-top:2px;}
     .kfz .val .vt{font-family:'Noto Serif TC';font-size:16px;margin-bottom:3px;}
     .kfz .val .vd{color:var(--muted);font-weight:300;font-size:13.5px;}
-    .kfz .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 28px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
-    .kfz .topbar .brand{font-family:'Noto Serif TC',serif;font-size:16px;letter-spacing:.06em;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;}
-    .kfz .topbar .brand .en{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--clay);letter-spacing:.18em;}
-    .kfz .topbar nav{display:flex;align-items:center;gap:6px;}
-    .kfz .topbar nav a{font-size:14px;color:var(--muted);text-decoration:none;padding:8px 14px;border-radius:999px;transition:.2s;}
-    .kfz .topbar nav a:hover{color:var(--ink);}
-    .kfz .topbar nav a.on{color:var(--ink);background:var(--paper);}
-    .kfz .topbar nav a.home{color:var(--clay);border:1px solid var(--clay-soft);}
+    .kfz .topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:1.5rem 4rem;background:rgba(250,248,244,.92);backdrop-filter:blur(12px);border-bottom:.5px solid var(--line);}
+    .kfz .topbar .lead{flex:1;display:flex;align-items:center;gap:.6rem;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;}
+    .kfz .topbar .lead:hover{color:var(--ink);}
+    .kfz .topbar .brand{font-family:'Noto Serif TC',serif;font-size:1.3rem;font-weight:300;letter-spacing:.15em;color:var(--ink);text-decoration:none;white-space:nowrap;}
+    .kfz .topbar .cta{flex:1;text-align:right;font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--clay);text-decoration:none;transition:color .3s;}
+    .kfz .topbar .cta:hover{color:var(--ink);}
     .kfz .site-foot{background:#1A1510;color:rgba(255,255,255,.6);padding:2.5rem 28px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;}
     .kfz .site-foot .serif{font-size:1.1rem;font-weight:300;letter-spacing:.15em;color:rgba(255,255,255,.45);}
     .kfz .site-foot p{font-size:.62rem;letter-spacing:.2em;color:rgba(255,255,255,.25);text-transform:uppercase;margin:0;}
     .kfz .site-foot a{font-size:.62rem;letter-spacing:.2em;color:rgba(255,255,255,.35);text-decoration:none;text-transform:uppercase;}
     @media(max-width:760px){ .kfz .services,.kfz .values{grid-template-columns:1fr 1fr;} }
     @media(max-width:480px){ .kfz .services,.kfz .values{grid-template-columns:1fr;} }
-    @media(max-width:640px){ .kfz .step{grid-template-columns:60px 1fr;gap:16px;} .kfz .works-grid{grid-template-columns:1fr;} .kfz .topbar nav a:not(.home){display:none;} }
+    @media(max-width:1024px){ .kfz .topbar{padding:1.2rem 2rem;} }
+    @media(max-width:640px){ .kfz .step{grid-template-columns:60px 1fr;gap:16px;} .kfz .works-grid{grid-template-columns:1fr;} .kfz .topbar{padding:1rem 1.2rem;} .kfz .topbar .brand{font-size:1rem;} .kfz .topbar .cta{display:none;} }
   `}</style>
   );
 }
