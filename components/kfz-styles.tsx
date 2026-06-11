@@ -114,7 +114,7 @@ export function KfzStyles() {
     .kfz .topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:1.5rem 4rem;background:rgba(250,248,244,.92);backdrop-filter:blur(12px);border-bottom:.5px solid var(--line);}
     .kfz .topbar .lead{flex:1;display:flex;align-items:center;gap:.6rem;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;}
     .kfz .topbar .lead:hover{color:var(--ink);}
-    .kfz .topbar .center-link{flex:0 0 auto;font-family:'Noto Sans TC',sans-serif;font-size:1.4rem;font-weight:500;letter-spacing:.15em;color:var(--ink);text-decoration:none;white-space:nowrap;transition:color .3s;}
+    .kfz .topbar .center-link{flex:0 0 auto;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;letter-spacing:.15em;color:var(--ink);text-decoration:none;white-space:nowrap;transition:color .3s;}
     .kfz .topbar .center-link:hover{color:var(--clay);}
     .kfz .topbar .navlinks{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:.7rem;}
     .kfz .topbar .navlinks a{font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;white-space:nowrap;}
@@ -128,7 +128,7 @@ export function KfzStyles() {
     @media(max-width:760px){ .kfz .services,.kfz .values{grid-template-columns:1fr 1fr;} }
     @media(max-width:480px){ .kfz .services,.kfz .values{grid-template-columns:1fr;} }
     @media(max-width:1024px){ .kfz .topbar{padding:1.2rem 2rem;} }
-    @media(max-width:640px){ .kfz .step{grid-template-columns:60px 1fr;gap:16px;} .kfz .works-grid{grid-template-columns:1fr;} .kfz .topbar{padding:1rem 1.2rem;} .kfz .topbar .center-link{font-size:1.15rem;letter-spacing:.1em;} .kfz .topbar .navlinks .accent,.kfz .topbar .navlinks .sep{display:none;} }
+    @media(max-width:640px){ .kfz .step{grid-template-columns:60px 1fr;gap:16px;} .kfz .works-grid{grid-template-columns:1fr;} .kfz .topbar{padding:1rem 1.2rem;} .kfz .topbar .center-link{font-size:1rem;letter-spacing:.12em;} .kfz .topbar .navlinks .accent,.kfz .topbar .navlinks .sep{display:none;} }
   `}</style>
   );
 }
