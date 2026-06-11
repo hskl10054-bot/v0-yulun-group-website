@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useCmsData, getContentValue, getContentStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
@@ -13,6 +14,27 @@ function ContactForm({ colors }: { colors: Record<string, string> }) {
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+
+  // After a successful submit, replace the form with a clear thank-you message.
+  if (submitted) {
+    return (
+      <div className="flex flex-col gap-5" style={{ paddingTop: "1rem" }}>
+        <div style={{ fontSize: "2.5rem", lineHeight: 1, color: colors.contact_btn_bg }}>✓</div>
+        <h3 className="serif" style={{ fontSize: "1.8rem", fontWeight: 300, color: colors.footer_text }}>已收到您的諮詢</h3>
+        <p className="serif font-light" style={{ fontSize: "1.05rem", lineHeight: 1.9, color: "rgba(255,255,255,0.6)" }}>
+          感謝您的來信，專人將於 5 個工作天內與您聯繫。<br />
+          若有急件，歡迎直撥{" "}
+          <a href="tel:+886-918-230-603" style={{ color: colors.footer_text, textDecoration: "underline" }}>0918-230-603</a>。
+        </p>
+        <button
+          onClick={() => setSubmitted(false)}
+          style={{ marginTop: "0.5rem", background: "transparent", color: "rgba(255,255,255,0.45)", border: "1px solid rgba(255,255,255,0.2)", padding: "0.75rem 2rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}
+        >
+          再填一筆 →
+        </button>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-5">
@@ -60,6 +82,7 @@ export function ContactSection({ colors }: ContactSectionProps) {
   const hours = getContentValue(content, "contact", "hours") || "週一至週五  09:00 — 18:00"
 
   return (
+    <>
     <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
       <div className="resp-contact-left flex flex-col justify-start" style={{ background: colors.contact_bg, padding: "6rem" }}>
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Contact</p>
@@ -107,5 +130,16 @@ export function ContactSection({ colors }: ContactSectionProps) {
         <ContactForm colors={colors} />
       </div>
     </section>
+    <footer style={{ background: colors.footer_bg, padding: "1.75rem 1.5rem" }}>
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 text-center sm:flex-row sm:justify-between">
+        <p style={{ fontSize: "0.7rem", letterSpacing: "0.05em", color: "rgba(255,255,255,0.4)" }}>
+          © 2026 裕綸集團 Yulun Group. All Rights Reserved.
+        </p>
+        <Link href="/privacy" style={{ fontSize: "0.7rem", letterSpacing: "0.05em", color: "rgba(255,255,255,0.55)", textDecoration: "none" }} className="hover:opacity-70 transition-opacity">
+          隱私權政策
+        </Link>
+      </div>
+    </footer>
+    </>
   )
 }
