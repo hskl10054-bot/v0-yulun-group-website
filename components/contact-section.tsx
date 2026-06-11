@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { useCmsData, getContentValue, getContentStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
@@ -81,6 +82,7 @@ export function ContactSection({ colors }: ContactSectionProps) {
   const hours = getContentValue(content, "contact", "hours") || "週一至週五  09:00 — 18:00"
 
   return (
+    <>
     <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
       <div className="resp-contact-left flex flex-col justify-start" style={{ background: colors.contact_bg, padding: "6rem" }}>
         <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Contact</p>
@@ -128,5 +130,16 @@ export function ContactSection({ colors }: ContactSectionProps) {
         <ContactForm colors={colors} />
       </div>
     </section>
+    <footer style={{ background: colors.footer_bg, padding: "1.75rem 1.5rem" }}>
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 text-center sm:flex-row sm:justify-between">
+        <p style={{ fontSize: "0.7rem", letterSpacing: "0.05em", color: "rgba(255,255,255,0.4)" }}>
+          © 2026 裕綸集團 Yulun Group. All Rights Reserved.
+        </p>
+        <Link href="/privacy" style={{ fontSize: "0.7rem", letterSpacing: "0.05em", color: "rgba(255,255,255,0.55)", textDecoration: "none" }} className="hover:opacity-70 transition-opacity">
+          隱私權政策
+        </Link>
+      </div>
+    </footer>
+    </>
   )
 }
