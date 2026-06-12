@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { HardHat, ShieldCheck, FileText } from "lucide-react"
 import { useCmsData, getListItemsBySection, getListItemStyle } from "@/lib/use-cms-data"
 
@@ -19,8 +20,14 @@ const defaultStrengths = [
     icon: FileText,
     title: "透明報價",
     description: "逐項清單式報價，無隱藏費用，讓每一分預算都花在刀口上。",
+    href: "/process",
   },
 ]
+
+// Map strength titles to internal links (applies to CMS-driven items too)
+const strengthLinks: Record<string, string> = {
+  透明報價: "/process",
+}
 
 const defaultIcons = [HardHat, ShieldCheck, FileText]
 
@@ -38,9 +45,10 @@ export function StrengthsSection({ colors }: StrengthsSectionProps) {
         icon: defaultIcons[i % defaultIcons.length],
         title: li.title,
         description: li.description,
+        href: strengthLinks[li.title],
         sortOrder: li.sort_order,
       }))
-    : defaultStrengths.map((s, i) => ({ ...s, sortOrder: i + 1 }))
+    : defaultStrengths.map((s, i) => ({ href: undefined, ...s, sortOrder: i + 1 }))
 
   return (
     <section className="py-24 md:py-32" style={{ backgroundColor: colors.strengths_bg }}>
@@ -63,11 +71,10 @@ export function StrengthsSection({ colors }: StrengthsSectionProps) {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-12">
           {strengths.map((strength, index) => {
             const isActive = activeIndex === index
-            return (
+            const card = (
               <div
-                key={strength.title}
-                onClick={() => setActiveIndex(isActive ? null : index)}
-                className="group flex flex-col items-center gap-6 border px-8 py-12 text-center transition-all duration-500"
+                onClick={strength.href ? undefined : () => setActiveIndex(isActive ? null : index)}
+                className="group flex h-full flex-col items-center gap-6 border px-8 py-12 text-center transition-all duration-500"
                 style={{
                   borderColor: isActive ? colors.strengths_accent : colors.strengths_card_border,
                   backgroundColor: isActive ? colors.strengths_accent : colors.strengths_card_bg,
@@ -131,6 +138,16 @@ export function StrengthsSection({ colors }: StrengthsSectionProps) {
                 >
                   {strength.description}
                 </p>
+              </div>
+            )
+
+            return strength.href ? (
+              <Link key={strength.title} href={strength.href} className="block h-full">
+                {card}
+              </Link>
+            ) : (
+              <div key={strength.title} className="h-full">
+                {card}
               </div>
             )
           })}
