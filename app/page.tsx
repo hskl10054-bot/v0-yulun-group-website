@@ -22,7 +22,17 @@ export default function Home() {
     >
       <HomeNavbar />
       <HeroSection colors={colors} />
-      <div className="h-56 bg-[#F7F4EF] md:h-72" aria-hidden="true" />
+      <section className="bg-[#F7F4EF] px-6 py-24 text-center md:py-32" aria-label="服務引言">
+        <div className="mx-auto max-w-2xl">
+          <span className="mb-4 block text-xs font-light uppercase tracking-[0.4em]" style={{ color: "#A98C78" }}>Our Services</span>
+          <h2 className="text-2xl font-light tracking-[0.12em] text-[#2F2F2F] md:text-4xl">
+            從設計到工程，一站構築理想家
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-sm font-light leading-loose text-[#6B5D4F] md:text-base">
+            空房子室內設計 × 裕綸室內裝修，從美學到工程，一站為您構築理想生活。
+          </p>
+        </div>
+      </section>
       <BrandSplit colors={colors} />
       <StrengthsSection colors={colors} />
       <PortfolioPreview colors={colors} />
