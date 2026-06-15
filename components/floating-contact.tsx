@@ -2,8 +2,8 @@
 
 // Floating "message us" button (bottom-right) so visitors who won't fill the
 // form can open Facebook Messenger and ask us directly.
-// TODO: set this to your Facebook Page Messenger link, e.g. https://m.me/yourpage
-const MESSENGER_URL = "https://m.me/"
+// Facebook Page Messenger link (page id 61564720748448 — 空房子設計).
+const MESSENGER_URL = "https://m.me/61564720748448"
 
 export function FloatingContact() {
   // Hidden until a real Messenger link is configured (avoids a dead button).
