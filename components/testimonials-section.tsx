@@ -25,7 +25,7 @@ export function TestimonialsSection({ colors }: TestimonialsSectionProps) {
       <div className="mx-auto max-w-5xl px-6">
         <div className="mb-16 flex flex-col items-center gap-3 text-center">
           <span className="text-xs font-light tracking-[0.35em] uppercase" style={{ color: colors.testimonials_accent }}>Testimonials</span>
-          <h2 className="text-3xl font-bold tracking-wider md:text-4xl" style={{ color: colors.testimonials_heading }}>客戶怎麼說</h2>
+          <h2 className="text-3xl font-light tracking-[0.18em] md:text-4xl" style={{ color: colors.testimonials_heading }}>客戶怎麼說</h2>
           <div className="h-px w-12" style={{ backgroundColor: colors.testimonials_accent }} />
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
