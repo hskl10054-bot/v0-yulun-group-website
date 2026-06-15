@@ -130,14 +130,20 @@ export function ContactSection({ colors }: ContactSectionProps) {
         <ContactForm colors={colors} />
       </div>
     </section>
-    <footer style={{ background: colors.footer_bg, padding: "1.75rem 1.5rem" }}>
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 text-center sm:flex-row sm:justify-between">
-        <p style={{ fontSize: "0.7rem", letterSpacing: "0.05em", color: "rgba(255,255,255,0.4)" }}>
-          © 2026 裕綸集團 Yulun Group. All Rights Reserved.
+    <footer style={{ background: colors.footer_bg, padding: "2.5rem 1.5rem" }}>
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 text-center">
+        <p style={{ fontSize: "0.72rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.45)" }}>
+          Copyright © 裕綸集團 Yulun Group All Rights Reserved.
         </p>
-        <Link href="/privacy" style={{ fontSize: "0.7rem", letterSpacing: "0.05em", color: "rgba(255,255,255,0.55)", textDecoration: "none" }} className="hover:opacity-70 transition-opacity">
-          隱私權政策
-        </Link>
+        <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1" style={{ fontSize: "0.72rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.4)" }}>
+          <span>台中室內設計</span>
+          <span style={{ opacity: 0.45 }}>｜</span>
+          <span>台中室內裝修</span>
+          <span style={{ opacity: 0.45 }}>｜</span>
+          <span>台中商業空間設計</span>
+          <span style={{ opacity: 0.45 }}>｜</span>
+          <Link href="/privacy" className="hover:opacity-70 transition-opacity" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>隱私權政策</Link>
+        </div>
       </div>
     </footer>
     </>
