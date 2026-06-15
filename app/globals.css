@@ -162,7 +162,5 @@
 .hero-kenburns {
   animation: heroKenburns 20s ease-out infinite alternate;
   will-change: transform;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-kenburns { animation: none; }
+  transform-origin: center;
 }
