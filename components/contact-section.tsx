@@ -85,8 +85,8 @@ export function ContactSection({ colors }: ContactSectionProps) {
     <>
     <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
       <div className="resp-contact-left flex flex-col justify-start" style={{ background: colors.contact_bg, padding: "6rem" }}>
-        <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Contact</p>
-        <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem", color: colors.contact_heading }}>聯絡裕綸集團</h2>
+        <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Contact</p>
+        <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ lineHeight: 1.2, marginBottom: "3rem", color: colors.contact_heading }}>聯絡裕綸集團</h2>
         {[["地址",address,"address"],["電話",phone,"phone"],["Email",email,"email"],["營業時間",hours,"hours"]].map(([label, val, key]) => (
           <div key={label} style={{ marginBottom: "2rem" }}>
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
@@ -125,8 +125,8 @@ export function ContactSection({ colors }: ContactSectionProps) {
           </div>
       </div>
       <div className="resp-contact-right flex flex-col justify-start" style={{ background: colors.footer_bg, padding: "6rem" }}>
-        <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Send Message</p>
-        <h2 className="serif" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.footer_text, marginBottom: "2.5rem" }}>預約諮詢</h2>
+        <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Send Message</p>
+        <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ marginBottom: "2.5rem", color: colors.footer_text }}>預約諮詢</h2>
         <ContactForm colors={colors} />
       </div>
     </section>
