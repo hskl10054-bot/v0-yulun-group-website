@@ -23,10 +23,9 @@ export function TestimonialsSection({ colors }: TestimonialsSectionProps) {
   return (
     <section className="py-24 md:py-32" style={{ backgroundColor: colors.testimonials_bg }}>
       <div className="mx-auto max-w-5xl px-6">
-        <div className="mb-16 flex flex-col items-center gap-3 text-center">
-          <span className="text-xs font-light tracking-[0.35em] uppercase" style={{ color: colors.testimonials_accent }}>Testimonials</span>
+        <div className="mb-12 border-b pb-5 md:mb-14" style={{ borderColor: colors.testimonials_card_border }}>
+          <span className="mb-2 block text-xs font-light tracking-[0.35em] uppercase" style={{ color: colors.testimonials_accent }}>Testimonials</span>
           <h2 className="text-3xl font-light tracking-[0.18em] md:text-4xl" style={{ color: colors.testimonials_heading }}>客戶怎麼說</h2>
-          <div className="h-px w-12" style={{ backgroundColor: colors.testimonials_accent }} />
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
