@@ -87,7 +87,7 @@ export function ContactSection({ colors }: ContactSectionProps) {
       <div className="resp-contact-left flex flex-col justify-start" style={{ background: colors.contact_bg, padding: "6rem" }}>
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Contact</p>
         <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ lineHeight: 1.2, marginBottom: "3rem", color: colors.contact_heading }}>聯絡裕綸集團</h2>
-        {[["地址",address,"address"],["電話",phone,"phone"],["Email",email,"email"],["營業時間",hours,"hours"]].map(([label, val, key]) => (
+        {[["地址",address,"address"],["電話",phone,"phone"],["電子郵件",email,"email"],["營業時間",hours,"hours"]].map(([label, val, key]) => (
           <div key={label} style={{ marginBottom: "2rem" }}>
             <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
             {key === "address" ? (
