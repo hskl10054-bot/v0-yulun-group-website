@@ -19,7 +19,7 @@ export function AboutSection({ colors }: AboutSectionProps) {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center md:gap-16">
           <div className="overflow-hidden rounded-sm">
             <img
-              src="/images/design-brand.jpg"
+              src="/images/about-yulun.jpg"
               alt="關於裕綸集團"
               className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
             />
