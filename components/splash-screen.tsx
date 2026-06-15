@@ -44,7 +44,7 @@ export function SplashScreen({ loading }: { loading: boolean }) {
           src="/logo-icon.png"
           alt="裕綸集團"
           onError={() => setImgError(true)}
-          className="h-28 w-28 animate-pulse md:h-32 md:w-32"
+          className="h-16 w-16 animate-pulse md:h-20 md:w-20"
           style={{ objectFit: "contain" }}
         />
       )}
