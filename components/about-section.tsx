@@ -33,7 +33,7 @@ export function AboutSection({ colors }: AboutSectionProps) {
               className="text-[0.85rem] font-light leading-[2] [text-wrap:pretty] md:text-[0.95rem]"
               style={{ color: "#5B5349", textAlign: "justify" }}
             >
-              從室內設計、裝修工程到生活場域，裕綸集團以職人精神，整合「空房子室內設計」的美學提案與「裕綸室內裝修」的專業施工，並以「同齊咖啡」連結生活的溫度。我們堅持自有工班、絕不外包，工程保固一年，從設計到完工一站到位，為每一位客戶守護家的品質。
+              從室內設計、裝修工程到生活場域，裕綸集團以職人精神，整合「空房子室內設計」的美學提案與「裕綸室內裝修」的專業施工。我們堅持自有工班、絕不外包，工程保固一年，從設計到完工一站到位，為每一位客戶守護家的品質。
             </p>
             <p className="mt-7 text-base font-medium tracking-[0.1em] md:text-lg" style={{ color: "#2F2F2F" }}>
               讓專業，成為你安心的依靠。
