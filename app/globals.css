@@ -146,3 +146,16 @@
   background-color: #EFD3D6;
   color: #2F2F2F;
 }
+
+/* Hero 主視覺：照片緩緩放大（Ken Burns） */
+@keyframes heroKenburns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.16); }
+}
+.hero-kenburns {
+  animation: heroKenburns 20s ease-out infinite alternate;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns { animation: none; }
+}

@@ -79,11 +79,11 @@ export function HeroSection({ colors }: HeroSectionProps) {
           }`}
           style={{ zIndex: 0 }}
         >
-          <div className={`w-full h-full overflow-hidden transition-transform duration-[2000ms] ease-out ${show ? "scale-100" : "scale-110"}`}>
+          <div className="w-full h-full overflow-hidden">
             <img
               src={src}
               alt={`裕綸集團作品 ${i + 1}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover hero-kenburns"
             />
           </div>
         </div>
