@@ -8,7 +8,6 @@ import { PortfolioPreview } from "@/components/portfolio-preview"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { ContactSection } from "@/components/contact-section"
 import { SplashScreen } from "@/components/splash-screen"
-import { FloatingContact } from "@/components/floating-contact"
 import { useCmsData, usePageColors } from "@/lib/use-cms-data"
 
 export default function Home() {
@@ -29,7 +28,6 @@ export default function Home() {
       <TestimonialsSection colors={colors} />
       <ContactSection colors={colors} />
     </main>
-    <FloatingContact />
     </>
   )
 }

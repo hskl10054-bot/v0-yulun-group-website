@@ -3,6 +3,7 @@ import { Noto_Sans_TC, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { MetaPixel } from '@/components/analytics/meta-pixel'
 import { GoogleAnalytics } from '@/components/analytics/google-analytics'
+import { FloatingContact } from '@/components/floating-contact'
 import './globals.css'
 
 const _notoSansTC = Noto_Sans_TC({ subsets: ["latin"], weight: ["300", "400", "500", "700", "900"] });
@@ -40,6 +41,7 @@ export default function RootLayout({
     <html lang="zh-TW">
       <body className="font-sans antialiased">
         {children}
+        <FloatingContact />
         <MetaPixel />
         <GoogleAnalytics />
         <Analytics />
