@@ -7,6 +7,7 @@ import { StrengthsSection } from "@/components/strengths-section"
 import { PortfolioPreview } from "@/components/portfolio-preview"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { ContactSection } from "@/components/contact-section"
+import { SplashScreen } from "@/components/splash-screen"
 import { useCmsData, usePageColors } from "@/lib/use-cms-data"
 
 export default function Home() {
@@ -14,6 +15,8 @@ export default function Home() {
   const colors = usePageColors(content, "home")
 
   return (
+    <>
+    <SplashScreen loading={loading} />
     <main
       className={`transition-opacity duration-700 ease-in-out ${loading ? "opacity-0" : "opacity-100"}`}
     >
@@ -25,5 +28,6 @@ export default function Home() {
       <TestimonialsSection colors={colors} />
       <ContactSection colors={colors} />
     </main>
+    </>
   )
 }
