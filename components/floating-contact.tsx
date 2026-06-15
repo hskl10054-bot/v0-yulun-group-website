@@ -34,7 +34,7 @@ export function FloatingContact() {
             <path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.19.16.14.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.98-.87c.17-.08.36-.09.54-.04 1.03.28 2.12.43 3.3.43 5.64 0 10-4.13 10-9.7C22 6.13 17.64 2 12 2zm6 7.46l-2.93 4.64c-.47.73-1.46.92-2.16.4l-2.33-1.74a.6.6 0 0 0-.72 0l-3.15 2.39c-.42.32-.97-.18-.68-.62l2.93-4.64c.47-.73 1.46-.92 2.16-.4l2.33 1.74a.6.6 0 0 0 .72 0l3.15-2.39c.42-.32.97.18.68.62z" />
           </svg>
         </span>
-        <span className="rounded-full whitespace-nowrap bg-white px-5 py-1 text-[10px] font-medium tracking-wider text-[#6B4E31] shadow-md ring-1 ring-black/5">
+        <span className="rounded-full whitespace-nowrap bg-white px-4 py-1 text-[10px] font-medium tracking-wider text-[#6B4E31] shadow-md ring-1 ring-black/5">
           線上詢問
         </span>
       </a>
@@ -52,7 +52,7 @@ export function FloatingContact() {
               <path d="M6 15l6-6 6 6" />
             </svg>
           </span>
-          <span className="rounded-full whitespace-nowrap bg-white px-5 py-1 text-[10px] font-medium tracking-[0.18em] text-[#6B4E31] shadow-md ring-1 ring-black/5">
+          <span className="rounded-full whitespace-nowrap bg-white px-4 py-1 text-[10px] font-medium tracking-[0.18em] text-[#6B4E31] shadow-md ring-1 ring-black/5">
             TOP
           </span>
         </button>
