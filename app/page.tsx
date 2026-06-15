@@ -22,7 +22,7 @@ export default function Home() {
     >
       <HomeNavbar />
       <HeroSection colors={colors} />
-      <div className="h-40 bg-[#F7F4EF] md:h-56" aria-hidden="true" />
+      <div className="h-56 bg-[#F7F4EF] md:h-72" aria-hidden="true" />
       <BrandSplit colors={colors} />
       <StrengthsSection colors={colors} />
       <PortfolioPreview colors={colors} />
