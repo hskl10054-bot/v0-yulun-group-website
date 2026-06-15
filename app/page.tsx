@@ -29,7 +29,7 @@ export default function Home() {
             從設計到工程，一站構築理想家
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-[0.82rem] font-light leading-[2] text-[#6B5D4F] [text-wrap:pretty] md:mt-5 md:text-base md:leading-loose">
-            空房子室內設計 × 裕綸室內裝修，從美學到工程，一站為您構築理想生活。
+            空房子室內設計 × 裕綸室內裝修，<br className="md:hidden" />從美學到工程，一站為您構築理想生活。
           </p>
         </div>
       </section>
