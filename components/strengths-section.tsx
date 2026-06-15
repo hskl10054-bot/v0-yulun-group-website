@@ -54,15 +54,16 @@ export function StrengthsSection({ colors }: StrengthsSectionProps) {
     <section className="py-24 md:py-32" style={{ backgroundColor: colors.strengths_bg }}>
       <div className="mx-auto max-w-5xl px-6">
         {/* Section Header */}
-        <div className="mb-16 flex flex-col items-center gap-4 text-center md:mb-20">
-          <span className="text-xs font-light tracking-[0.3em] uppercase" style={{ color: colors.strengths_accent }}>
-            Our Strengths
-          </span>
-          <h2 className="text-3xl font-bold tracking-wider md:text-4xl" style={{ color: colors.strengths_heading }}>
-            {"集團實力"}
-          </h2>
-          <div className="h-px w-16" style={{ backgroundColor: colors.strengths_accent }} />
-          <p className="max-w-lg text-sm font-light leading-relaxed" style={{ color: colors.strengths_text }}>
+        <div className="mb-12 md:mb-16">
+          <div className="border-b pb-5" style={{ borderColor: colors.strengths_card_border }}>
+            <span className="mb-2 block text-[0.65rem] font-light tracking-[0.35em] uppercase" style={{ color: colors.strengths_accent }}>
+              Our Strengths
+            </span>
+            <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ color: colors.strengths_heading }}>
+              {"集團實力"}
+            </h2>
+          </div>
+          <p className="mt-5 max-w-lg text-sm font-light leading-relaxed" style={{ color: colors.strengths_text }}>
             {"以穩健的經營與職人精神，為每一位客戶守護家的品質"}
           </p>
         </div>
