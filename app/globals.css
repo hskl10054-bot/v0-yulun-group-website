@@ -88,6 +88,13 @@
   }
   body {
     @apply bg-background text-foreground;
+    letter-spacing: 0.03em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  p {
+    line-height: 1.85;
   }
 }
 
