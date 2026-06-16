@@ -180,7 +180,7 @@ export default function DesignPage() {
           <ArrowLeft size={14} /> 裕綸集團
         </Link>
         <Link href="/design" className="resp-nav-brand" style={{ display: "flex", alignItems: "center", gap: "0.55rem", textDecoration: "none" }}>
-          <img src="/images/hds-logo.png" alt="空房子室內設計" style={{ height: "44px", width: "auto" }} />
+          <img src="/images/hds-mark.png" alt="空房子室內設計" style={{ height: "42px", width: "auto" }} />
           <span style={{ fontSize: "1.3rem", fontWeight: 300, letterSpacing: "0.15em", color: colors.hero_heading }}>空房子・室內設計</span>
         </Link>
         <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>預約諮詢</a>
