@@ -8,7 +8,14 @@ interface AboutSectionProps {
 export function AboutSection({ colors }: AboutSectionProps) {
   return (
     <section className="px-6 py-20 md:px-12 md:py-28" style={{ backgroundColor: "#F4F1EC" }}>
-      <div className="mx-auto max-w-6xl">
+      <div className="relative mx-auto max-w-6xl">
+        {/* 右下角浮水印 logo */}
+        <img
+          src="/logo-icon.png"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-0 right-0 w-20 opacity-20 md:w-28"
+        />
         {/* Section heading */}
         <div className="mb-10 border-b pb-5 md:mb-14" style={{ borderColor: "rgba(43,39,34,0.12)" }}>
           <span className="mb-2 block text-[0.65rem] font-light uppercase tracking-[0.35em]" style={{ color: "#A98C78" }}>About</span>
