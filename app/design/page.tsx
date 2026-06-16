@@ -176,14 +176,14 @@ export default function DesignPage() {
 
       {/* NAV */}
       <nav className="resp-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.5rem 4rem", background: "rgba(250,248,244,0.92)", backdropFilter: "blur(12px)", borderBottom: `0.5px solid ${colors.services_card_border}` }}>
-        <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: colors.hero_text, textDecoration: "none", transition: "color 0.3s" }}>
+        <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.85rem", letterSpacing: "0.2em", textTransform: "uppercase", color: colors.hero_text, textDecoration: "none", transition: "color 0.3s" }}>
           <ArrowLeft size={14} /> 裕綸集團
         </Link>
         <Link href="/design" className="resp-nav-brand" style={{ display: "flex", alignItems: "center", gap: "0.55rem", textDecoration: "none" }}>
           <img src="/images/hds-mark.png" alt="空房子室內設計" style={{ height: "60px", width: "auto" }} />
           <span style={{ fontSize: "1.3rem", fontWeight: 300, letterSpacing: "0.15em", color: colors.hero_heading }}>空房子・室內設計</span>
         </Link>
-        <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>預約諮詢</a>
+        <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.85rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>預約諮詢</a>
       </nav>
 
       {/* HERO */}
@@ -193,7 +193,7 @@ export default function DesignPage() {
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.5rem, 6vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem", ...getContentStyle(content,"hero", "title", "design") }}>
             {heroTitle || "為你的空間"}<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em style={{ fontStyle: "normal", color: colors.hero_text, ...getContentStyle(content,"hero", "title_italic", "design") }}>{heroTitleItalic || "注入魔法"}</em><img src="/images/sparkle.svg" alt="" width={80} height={80} className="sparkle-twinkle" style={{ flexShrink: 0, marginLeft: "0.1rem" }} /></span>
           </h1>
-          <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: colors.hero_text, maxWidth: 380, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content,"hero", "description", "design") }}>
+          <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "1.05rem", lineHeight: 2, color: colors.hero_text, maxWidth: 420, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content,"hero", "description", "design") }}>
             {heroDesc || "空房開門，幸福進門。我們相信空間不只是鋼筋水泥，更是承載幸福的容器。當魔法注入空間，家便開始講述屬於你的幸福故事。"}
           </p>
           <a ref={addRef(3)} href="#portfolio" className="cta-link" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_heading, textDecoration: "none", borderBottom: `1px solid ${colors.hero_heading}`, paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
