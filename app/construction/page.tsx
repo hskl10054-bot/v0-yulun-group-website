@@ -112,7 +112,7 @@ export default function ConstructionPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+TC:wght@300;400&family=Josefin+Sans:wght@200;300;400&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        .serif { font-family: 'Cormorant Garamond', serif; }
+        .serif { font-family: 'Cormorant Garamond', 'Noto Sans TC', sans-serif; }
         .noto { font-family: 'Noto Serif TC', serif; }
         .service-card:hover { border-color: ${colors.services_accent} !important; background: ${colors.strengths_bg} !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
@@ -179,7 +179,7 @@ export default function ConstructionPage() {
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
           <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.hero_accent, marginBottom: "2rem", ...getContentStyle(content, "hero", "en_subtitle", "construction") }}>{heroEnSubtitle}</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.2rem, 5.5vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem", ...getContentStyle(content, "hero", "title", "construction") }}>
-            {heroTitle}<br /><em style={{ fontStyle: "italic", color: colors.hero_text, ...getContentStyle(content, "hero", "title_line2", "construction") }}>{heroTitleLine2}</em><br /><span style={getContentStyle(content, "hero", "title_line3", "construction")}>{heroTitleLine3}</span>
+            {heroTitle}<br /><em style={{ fontStyle: "normal", color: colors.hero_text, ...getContentStyle(content, "hero", "title_line2", "construction") }}>{heroTitleLine2}</em><br /><span style={getContentStyle(content, "hero", "title_line3", "construction")}>{heroTitleLine3}</span>
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: colors.hero_text, maxWidth: 380, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content, "hero", "description", "construction") }}>
             {heroDesc || "裕綸裝修擁有政府核可專業施工證照，秉持標準化 SOP 工程管理。我們重視隱蔽工程細節，從水電配置、防水工法到結構強化，皆由具備資深執照的職人團隊把關。2年保固，安心無憂。"}

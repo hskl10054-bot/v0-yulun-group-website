@@ -41,7 +41,7 @@ export default function CafePage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+TC:wght@300;400&family=Josefin+Sans:wght@200;300;400&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        .serif { font-family: 'Cormorant Garamond', serif; }
+        .serif { font-family: 'Cormorant Garamond', 'Noto Sans TC', sans-serif; }
         .noto { font-family: 'Noto Serif TC', serif; }
         .store-card:hover { border-color: #6B4E31 !important; background: #F5F0E8 !important; }
         .feature-card:hover { border-color: #6B4E31 !important; }
@@ -86,7 +86,7 @@ export default function CafePage() {
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
           <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#6B4E31", marginBottom: "2rem" }}>Specialty Coffee</p>
           <h1 ref={addRef(1)} className="serif" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "clamp(3.5rem, 6vw, 5.5rem)", fontWeight: 300, lineHeight: 1.05, marginBottom: "2rem" }}>
-            一杯咖啡<br /><em style={{ fontStyle: "italic", color: "#8C8479" }}>千種連結</em>
+            一杯咖啡<br /><em style={{ fontStyle: "normal", color: "#8C8479" }}>千種連結</em>
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 400, marginBottom: "3rem", fontWeight: 300 }}>
             在同齊，咖啡是空間的媒介，連結著人與人之間的對話。我們提供自家烘焙的精品咖啡豆，並在舒適的空間中創造不限時的寧靜時刻。無論是尋求靈感的商務洽公，或是好友聚會，同齊咖啡都是你生活中最溫暖的交匯點。
