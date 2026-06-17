@@ -54,6 +54,8 @@ export default function DesignPage() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [selectedPortfolio, setSelectedPortfolio] = useState<{ title: string; image: string; sortOrder: number } | null>(null)
+  const [aboutVisible, setAboutVisible] = useState(false)
+  const aboutColRef = useRef<HTMLDivElement>(null)
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
@@ -104,7 +106,7 @@ export default function DesignPage() {
       (entries) => entries.forEach((e) => {
         if (e.isIntersecting) {
           ;(e.target as HTMLElement).style.opacity = "1"
-          ;(e.target as HTMLElement).style.transform = "none"
+          ;(e.target as HTMLElement).style.transform = "translateY(0)"
         }
       }),
       { threshold: 0.1 }
@@ -115,6 +117,17 @@ export default function DesignPage() {
 
   const fadeStyle = { opacity: 0, transform: "translateY(28px)", transition: "opacity 0.8s ease, transform 0.8s ease" }
   const addRef = (i: number) => (el: HTMLElement | null) => { fadeRefs.current[i] = el }
+
+  useEffect(() => {
+    const el = aboutColRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setAboutVisible(true); obs.disconnect() } },
+      { threshold: 0.2 },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   return (
     <div className={`transition-opacity duration-700 ease-in-out ${loading ? "opacity-0" : "opacity-100"}`} style={{ fontFamily: "'Josefin Sans', sans-serif", background: colors.hero_bg, color: colors.hero_heading, letterSpacing: "0.05em" }}>
@@ -207,8 +220,8 @@ export default function DesignPage() {
 
       {/* ABOUT */}
       <section className="resp-hero" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "70vh" }}>
-        <div className="resp-hero-text" style={{ position: "relative", display: "flex", alignItems: "flex-end", minHeight: "70vh", overflow: "hidden" }}>
-          <img ref={addRef(8)} src="/images/design-storefront.jpg" alt="空房子室內設計門市" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: 0, transform: "translateX(-60px)", transition: "opacity 1.2s ease-out, transform 1.4s cubic-bezier(.2,.7,.2,1)" }} />
+        <div ref={aboutColRef} className="resp-hero-text" style={{ position: "relative", display: "flex", alignItems: "flex-end", minHeight: "70vh", overflow: "hidden" }}>
+          <img src="/images/design-storefront.jpg" alt="空房子室內設計門市" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", opacity: aboutVisible ? 1 : 0, transform: aboutVisible ? "translateX(0)" : "translateX(-60px)", transition: "opacity 1.2s ease-out, transform 1.4s cubic-bezier(.2,.7,.2,1)" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 42%)" }} />
           <blockquote className="serif" style={{ position: "relative", width: "100%", textAlign: "center", padding: "0 2.5rem 2.5rem", fontSize: "1.05rem", fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.95)", lineHeight: 1.9, letterSpacing: "0.05em", ...getContentStyle(content,"about", "quote", "design") }}>
             {aboutQuote || "「空間是無聲的語言，設計是讓它開口說話。」"}
