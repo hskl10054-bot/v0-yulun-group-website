@@ -201,7 +201,7 @@ export default function DesignPage() {
           </a>
         </div>
         <div className="resp-hero-img" style={{ position: "relative", overflow: "hidden" }}>
-          <img src={heroImg} alt="空房子室內設計" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
+          <img src={heroImg} alt="空房子室內設計" className="hero-slide-right" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
         </div>
       </section>
 
