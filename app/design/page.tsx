@@ -54,7 +54,6 @@ export default function DesignPage() {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [selectedPortfolio, setSelectedPortfolio] = useState<{ title: string; image: string; sortOrder: number } | null>(null)
-  const [heroLoaded, setHeroLoaded] = useState(false)
 
   // Services from CMS or fallback
   const cmsServices = getListItemsBySection(listItems, "services")
@@ -202,7 +201,7 @@ export default function DesignPage() {
           </a>
         </div>
         <div className="resp-hero-img" style={{ position: "relative", overflow: "hidden" }}>
-          <img src={heroImg} alt="空房子室內設計" onLoad={() => setHeroLoaded(true)} style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, opacity: heroLoaded ? 1 : 0, transform: heroLoaded ? "translateX(0)" : "translateX(12%)", transition: "opacity 1.2s ease-out, transform 1.3s cubic-bezier(.2,.7,.2,1)" }} />
+          <img src={heroImg} alt="空房子室內設計" className="hero-kenburns" style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }} />
         </div>
       </section>
 
