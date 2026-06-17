@@ -1,11 +1,33 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
+
 interface AboutSectionProps {
   colors: Record<string, string>
 }
 
 // 關於裕綸 — left image + right text block, placed under 集團實力 on the homepage.
+// 滑到此區塊時，照片從左邊捲入滑進、文字淡入。
 export function AboutSection({ colors }: AboutSectionProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          obs.disconnect()
+        }
+      },
+      { threshold: 0.25 },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
     <section className="px-6 py-20 md:px-12 md:py-28" style={{ backgroundColor: "#F4F1EC" }}>
       <div className="relative mx-auto max-w-6xl">
@@ -23,8 +45,18 @@ export function AboutSection({ colors }: AboutSectionProps) {
         </div>
 
         {/* Content: image + text */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center md:gap-16">
-          <div className="overflow-hidden rounded-sm">
+        <div ref={ref} className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center md:gap-16">
+          {/* 照片：滑到此處時從左邊捲入 */}
+          <div
+            className="overflow-hidden rounded-sm"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateX(0)" : "translateX(-48px)",
+              clipPath: visible ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+              transition:
+                "opacity 1s ease-out, transform 1.2s cubic-bezier(.2,.7,.2,1), clip-path 1.2s cubic-bezier(.2,.7,.2,1)",
+            }}
+          >
             <img
               src="/images/about-yulun.jpg"
               alt="關於裕綸集團"
@@ -32,7 +64,14 @@ export function AboutSection({ colors }: AboutSectionProps) {
             />
           </div>
 
-          <div>
+          {/* 文字：淡入上移 */}
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(24px)",
+              transition: "opacity 1s ease-out 0.25s, transform 1s ease-out 0.25s",
+            }}
+          >
             <h3 className="mb-6 text-lg font-medium tracking-[0.08em] md:text-2xl" style={{ color: "#2F2F2F" }}>
               裕綸集團，深耕台中超過 14 年
             </h3>
