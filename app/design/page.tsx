@@ -211,7 +211,7 @@ export default function DesignPage() {
           <img src="/images/design-storefront.jpg" alt="空房子室內設計門市" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 42%)" }} />
           <blockquote className="serif" style={{ position: "relative", width: "100%", textAlign: "center", padding: "0 2.5rem 2.5rem", fontSize: "1.05rem", fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.95)", lineHeight: 1.9, letterSpacing: "0.05em", ...getContentStyle(content,"about", "quote", "design") }}>
-            {aboutQuote ? `「${aboutQuote}」` : "「空間是無聲的語言，設計是讓它開口說話。」"}
+            {aboutQuote || "「空間是無聲的語言，設計是讓它開口說話。」"}
           </blockquote>
         </div>
         <div className="resp-contact-left" style={{ background: colors.about_bg, padding: "6rem 5rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
