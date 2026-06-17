@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 import { useCmsData, getListItemsBySection, getImageUrl, getListItemStyle } from "@/lib/use-cms-data"
 
 interface BrandCardProps {
@@ -8,11 +9,12 @@ interface BrandCardProps {
   imageSrc: string; imageAlt: string; href: string
   titleStyle?: React.CSSProperties; subtitleStyle?: React.CSSProperties; descriptionStyle?: React.CSSProperties
   colors: Record<string, string>
+  index?: number; visible?: boolean
 }
 
-function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href, titleStyle, subtitleStyle, descriptionStyle, colors }: BrandCardProps) {
+function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href, titleStyle, subtitleStyle, descriptionStyle, colors, index = 0, visible = false }: BrandCardProps) {
   return (
-    <a href={href} className="group relative flex min-h-[400px] flex-1 cursor-pointer items-center justify-center overflow-hidden md:min-h-[600px]" style={{ backgroundColor: colors.brands_accent }}>
+    <a href={href} className="group relative flex min-h-[400px] flex-1 cursor-pointer items-center justify-center overflow-hidden md:min-h-[600px]" style={{ backgroundColor: colors.brands_accent, opacity: visible ? 1 : 0, clipPath: visible ? "inset(0 0 0 0)" : "inset(0 100% 0 0)", transition: "opacity 0.8s ease-out, clip-path 1s cubic-bezier(.2,.7,.2,1)", transitionDelay: `${index * 0.3}s` }}>
       {imageSrc.startsWith("http") ? (
         <img src={imageSrc} alt={imageAlt} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
       ) : (
@@ -43,6 +45,24 @@ interface BrandSplitProps {
 
 export function BrandSplit({ colors }: BrandSplitProps) {
   const { content, listItems, images } = useCmsData("home")
+  const ref = useRef<HTMLElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          obs.disconnect()
+        }
+      },
+      { threshold: 0.2 },
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   const cmsCards = getListItemsBySection(listItems, "brand_cards")
   const cards = cmsCards.length > 0
@@ -57,8 +77,8 @@ export function BrandSplit({ colors }: BrandSplitProps) {
     : defaultCards.map((c, i) => ({ ...c, sortOrder: i + 1 }))
 
   return (
-    <section id="brands" className="flex flex-col md:flex-row">
-      {cards.map((card) => (
+    <section id="brands" ref={ref} className="flex flex-col md:flex-row">
+      {cards.map((card, i) => (
         <BrandCard
           key={card.title}
           title={card.title}
@@ -71,6 +91,8 @@ export function BrandSplit({ colors }: BrandSplitProps) {
           subtitleStyle={getListItemStyle(content, "brand_cards", card.sortOrder, "subtitle", "home")}
           descriptionStyle={getListItemStyle(content, "brand_cards", card.sortOrder, "description", "home")}
           colors={colors}
+          index={i}
+          visible={visible}
         />
       ))}
     </section>
