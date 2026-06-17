@@ -207,9 +207,10 @@ export default function DesignPage() {
 
       {/* ABOUT */}
       <section className="resp-hero" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "70vh" }}>
-        <div className="resp-hero-text" style={{ background: "linear-gradient(160deg, #D4C4AE 0%, #BFB09A 40%, #9A8870 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: "6rem 5rem" }}>
-          <blockquote className="serif" style={{ fontSize: "2rem", fontWeight: 300, fontStyle: "italic", color: "rgba(255,255,255,0.9)", lineHeight: 1.8, letterSpacing: "0.08em", textAlign: "center", ...getContentStyle(content,"about", "quote", "design") }}>
-            {aboutQuote ? `「${aboutQuote}」` : "「空間是無聲的語言，\n設計是讓它開口說話。」"}
+        <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", background: colors.about_bg }}>
+          <img src="/images/design-storefront.jpg" alt="空房子室內設計門市" style={{ width: "100%", flex: 1, minHeight: 0, objectFit: "cover" }} />
+          <blockquote className="serif" style={{ fontSize: "1.05rem", fontWeight: 300, fontStyle: "italic", color: colors.about_text, lineHeight: 1.9, letterSpacing: "0.05em", textAlign: "center", padding: "2rem 2.5rem", ...getContentStyle(content,"about", "quote", "design") }}>
+            {aboutQuote ? `「${aboutQuote}」` : "「空間是無聲的語言，設計是讓它開口說話。」"}
           </blockquote>
         </div>
         <div className="resp-contact-left" style={{ background: colors.about_bg, padding: "6rem 5rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
