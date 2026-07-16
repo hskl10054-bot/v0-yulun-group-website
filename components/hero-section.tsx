@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react"
 import { ChevronDown } from "lucide-react"
-import { useCmsData, getContentValue, getImageUrl, getImagesBySection, getContentStyle } from "@/lib/use-cms-data"
+import { useCmsData, getImageUrl, getImagesBySection } from "@/lib/use-cms-data"
 
 interface HeroSectionProps {
   colors: Record<string, string>
@@ -12,7 +12,7 @@ const AUTOPLAY_INTERVAL = 5000 // 5 seconds per slide
 const FALLBACK_IMAGES = ["/images/hero-bg.jpg"]
 
 export function HeroSection({ colors }: HeroSectionProps) {
-  const { content, images } = useCmsData("home")
+  const { images } = useCmsData("home")
   const [show, setShow] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -64,10 +64,6 @@ export function HeroSection({ colors }: HeroSectionProps) {
     startAutoplay() // Reset timer
   }
 
-  const subtitle = getContentValue(content, "hero", "subtitle") || "Yulun Group"
-  const title = getContentValue(content, "hero", "title") || "裕綸集團"
-  const slogan = getContentValue(content, "hero", "slogan") || "職人建築，穩健基石，構築空間的永續價值。"
-
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
       {/* Background Images — crossfade carousel */}
@@ -88,6 +84,24 @@ export function HeroSection({ colors }: HeroSectionProps) {
           </div>
         </div>
       ))}
+
+      <div
+        className={`relative z-10 mx-auto mt-[22vh] max-w-5xl px-6 text-center transition-all duration-1000 delay-300 ${
+          show ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+        }`}
+        style={{ color: colors.hero_text, textShadow: "0 2px 18px rgba(0,0,0,0.55)" }}
+      >
+        <p className="mb-4 text-xs font-medium tracking-[0.28em] md:text-sm">
+          裕綸集團｜深耕台中超過 14 年
+        </p>
+        <h1 className="text-3xl font-semibold leading-tight tracking-[0.08em] md:text-5xl lg:text-6xl">
+          台中室內設計與裝修
+          <span className="mt-3 block">一站構築理想家</span>
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl text-sm leading-7 tracking-[0.08em] md:text-base">
+          空房子室內設計 × 裕綸室內裝修，從美學規劃到專業施工完整整合
+        </p>
+      </div>
 
       {/* Slide indicators */}
       {slideCount > 1 && (
