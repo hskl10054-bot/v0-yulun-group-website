@@ -31,9 +31,9 @@ export function HomePageClient() {
             >
               Our Services
             </span>
-            <h2 className="text-xl font-light leading-[1.7] tracking-[0.05em] text-[#2F2F2F] [text-wrap:balance] md:text-4xl md:leading-snug md:tracking-[0.12em]">
+            <h1 className="text-xl font-light leading-[1.7] tracking-[0.05em] text-[#2F2F2F] [text-wrap:balance] md:text-4xl md:leading-snug md:tracking-[0.12em]">
               台中室內設計與裝修，一站構築理想家
-            </h2>
+            </h1>
             <p className="mx-auto mt-4 max-w-xl text-[0.82rem] font-light leading-[2] text-[#6B5D4F] [text-wrap:pretty] md:mt-5 md:text-base md:leading-loose">
               空房子室內設計 × 裕綸室內裝修，<br className="md:hidden" />從美學規劃到專業施工完整整合
             </p>
