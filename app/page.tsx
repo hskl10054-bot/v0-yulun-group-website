@@ -1,6 +1,48 @@
 import type { Metadata } from "next"
 import { HomePageClient } from "@/components/home-page-client"
 
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://www.yulungroup.com/#localbusiness",
+  name: "裕綸集團",
+  alternateName: "Yulun Group",
+  url: "https://www.yulungroup.com/",
+  logo: "https://www.yulungroup.com/icon-512.png",
+  image: "https://www.yulungroup.com/images/hero-bg.jpg",
+  telephone: "+886-4-2247-9068",
+  email: "yulun83417215@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "瀋陽北路73號",
+    addressLocality: "北屯區",
+    addressRegion: "台中市",
+    addressCountry: "TW",
+  },
+  areaServed: {
+    "@type": "City",
+    name: "台中市",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "室內設計與裝修服務",
+    itemListElement: [
+      "新成屋室內設計",
+      "預售屋客變",
+      "老屋翻新",
+      "商業空間設計",
+      "室內裝修工程",
+    ].map((name) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name,
+        areaServed: "台中市",
+      },
+    })),
+  },
+}
+
 export const metadata: Metadata = {
   title: "台中室內設計公司｜設計裝修一站式、自有工班－裕綸集團",
   description:
@@ -20,5 +62,15 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  return <HomePageClient />
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema).replace(/</g, "\\u003c"),
+        }}
+      />
+      <HomePageClient />
+    </>
+  )
 }
