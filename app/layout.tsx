@@ -10,10 +10,12 @@ const _notoSansTC = Noto_Sans_TC({ subsets: ["latin"], weight: ["300", "400", "5
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.yulungroup.com'),
   title: '裕綸集團 Yulun Group',
   description: '裕綸集團｜台中室內設計與裝修的一站式服務。整合空房子室內設計、裕綸室內裝修與同齊咖啡，以職人精神為您構築理想生活空間。',
   generator: 'v0.app',
   verification: {
+    google: 'eHkHM583xYYXD8Wau3j9VH4cWoARVF0X4RblXAKR81s',
     other: {
       'facebook-domain-verification': '9wfhkv5a1qzipvbj49wjewj5vkf7zr',
     },
