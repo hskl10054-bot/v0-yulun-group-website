@@ -88,7 +88,7 @@
   }
   /* 全站字型整體微調放大（rem 為基準，等比例放大所有文字）。 */
   html {
-    font-size: 17px;
+    font-size: 18px;
   }
   body {
     @apply bg-background text-foreground;
