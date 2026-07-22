@@ -100,7 +100,7 @@ export function ContactSection({ colors }: ContactSectionProps) {
     <>
     <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
       <div className="resp-contact-left flex flex-col justify-start" style={{ background: colors.contact_bg, padding: "6rem" }}>
-        <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Contact</p>
+        <p aria-hidden="true" className="select-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", fontWeight: 600, lineHeight: 1, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(107,78,49,0.10)", marginLeft: "-2px", marginBottom: "0.35rem" }}>Contact</p>
         <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ lineHeight: 1.2, marginBottom: "3rem", color: colors.contact_heading }}>聯絡裕綸集團</h2>
         {[["地址",address,"address"],["電話",phone,"phone"],["電子郵件",email,"email"],["營業時間",hours,"hours"]].map(([label, val, key]) => (
           <div key={label} style={{ marginBottom: "2rem" }}>
@@ -140,7 +140,7 @@ export function ContactSection({ colors }: ContactSectionProps) {
           </div>
       </div>
       <div className="resp-contact-right flex flex-col justify-start" style={{ background: colors.footer_bg, padding: "6rem" }}>
-        <p style={{ fontSize: "0.65rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Send Message</p>
+        <p aria-hidden="true" className="select-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", fontWeight: 600, lineHeight: 1, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.09)", marginLeft: "-2px", marginBottom: "0.35rem" }}>Send Message</p>
         <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ marginBottom: "2.5rem", color: colors.footer_text }}>預約諮詢</h2>
         <ContactForm colors={colors} />
       </div>

@@ -83,7 +83,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
         {/* Header */}
         <div className="mb-12 flex flex-wrap items-end justify-between gap-5 border-b pb-5 md:mb-14" style={{ borderColor: colors.strengths_card_border }}>
           <div>
-            <span className="mb-2 block text-[0.65rem] font-light uppercase tracking-[0.35em]" style={{ color: colors.portfolio_accent }}>Portfolio</span>
+            <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Portfolio</span>
             <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ color: colors.portfolio_heading }}>精選作品</h2>
           </div>
           <div className="flex items-center gap-6">
