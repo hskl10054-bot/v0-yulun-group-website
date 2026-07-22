@@ -62,7 +62,7 @@ export function StrengthsSection({ colors }: StrengthsSectionProps) {
             {"集團實力"}
           </h2>
           <div className="h-px w-16" style={{ backgroundColor: colors.strengths_accent }} />
-          <p className="max-w-lg text-sm font-light leading-relaxed" style={{ color: colors.strengths_text }}>
+          <p className="max-w-lg text-[1.05rem] font-light leading-relaxed md:text-[1.15rem]" style={{ color: colors.strengths_text }}>
             {"以穩健的經營與職人精神，為每一位客戶守護家的品質"}
           </p>
         </div>
@@ -129,7 +129,7 @@ export function StrengthsSection({ colors }: StrengthsSectionProps) {
                 </h3>
                 <p
                   data-strength-desc
-                  className="text-sm font-light leading-relaxed transition-colors duration-500"
+                  className="text-[1.05rem] font-light leading-relaxed transition-colors duration-500 md:text-[1.15rem]"
                   style={{
                     color: isActive ? colors.strengths_bg : colors.strengths_text,
                     opacity: isActive ? 0.8 : 1,
