@@ -151,12 +151,12 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                     )}
                   </h3>
                   {seoTags(c).length > 0 && (
-                    <p className="mt-2 truncate text-[0.92rem] font-light tracking-wide" style={{ color: colors.portfolio_accent }}>
+                    <p className="mt-2 truncate text-[1.05rem] font-normal tracking-wide" style={{ color: colors.portfolio_accent }}>
                       {seoTags(c).join("　｜　")}
                     </p>
                   )}
                   {c.story && (
-                    <p className="mt-3 line-clamp-2 text-[0.95rem] font-light leading-[2]" style={{ color: colors.portfolio_heading, opacity: 0.72 }}>
+                    <p className="mt-3 line-clamp-2 text-[1.05rem] font-light leading-[1.95]" style={{ color: colors.portfolio_heading, opacity: 0.72 }}>
                       {c.story}
                     </p>
                   )}
