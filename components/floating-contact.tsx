@@ -17,6 +17,7 @@ const FAQS = [
 export function FloatingContact() {
   const [showTop, setShowTop] = useState(false)
   const [faqOpen, setFaqOpen] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 300)
@@ -25,15 +26,22 @@ export function FloatingContact() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  // 點問題 → 若在首頁就直接帶入表單並捲動；其他頁則導到首頁表單並帶入。
+  // 客人進站時，常見問題自動跳出一次（每個瀏覽階段只跳一次）。
+  useEffect(() => {
+    if (sessionStorage.getItem("faqShown")) return
+    const t = setTimeout(() => {
+      setFaqOpen(true)
+      sessionStorage.setItem("faqShown", "1")
+    }, 1200)
+    return () => clearTimeout(t)
+  }, [])
+
+  // 點問題 → 複製問題文字並開啟 Messenger，客人貼上即可送出。
   const askQuestion = (q: string) => {
-    setFaqOpen(false)
-    if (window.location.pathname === "/" && document.getElementById("contact")) {
-      window.dispatchEvent(new CustomEvent("yulun:ask", { detail: q }))
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-    } else {
-      window.location.href = `/?ask=${encodeURIComponent(q)}#contact`
-    }
+    navigator.clipboard?.writeText(q).catch(() => {})
+    window.open(MESSENGER_URL, "_blank", "noopener")
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2600)
   }
 
   return (
@@ -54,7 +62,14 @@ export function FloatingContact() {
               </button>
             ))}
           </div>
-          <p className="mt-4 text-xs leading-snug text-[#A98C78]">點一下 → 幫你帶進預約諮詢表單</p>
+          <p className="mt-4 text-xs leading-snug text-[#A98C78]">點問題 → 複製並開啟 Messenger，貼上即可送出</p>
+        </div>
+      )}
+
+      {/* 已複製提示 */}
+      {copied && (
+        <div className="absolute bottom-full right-0 mb-3 w-[21rem] max-w-[calc(100vw-2rem)] rounded-xl bg-[#2F2F2F] px-4 py-3 text-center text-[13px] text-white shadow-xl">
+          ✓ 問題已複製，請在 Messenger 對話框貼上送出
         </div>
       )}
 
