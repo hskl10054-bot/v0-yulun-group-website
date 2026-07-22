@@ -70,7 +70,11 @@ export function AboutSection({ colors }: AboutSectionProps) {
             <img
               src="/images/about-yulun.jpg"
               alt="關於裕綸集團"
-              className="aspect-[4/3] h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+              className="aspect-[4/3] h-full w-full object-cover hover:scale-[1.03]"
+              style={{
+                filter: visible ? "grayscale(0) contrast(1)" : "grayscale(1) contrast(0.95)",
+                transition: "filter 1.6s ease-out 0.35s, transform 0.7s ease",
+              }}
             />
           </div>
 
