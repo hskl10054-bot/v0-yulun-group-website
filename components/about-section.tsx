@@ -38,10 +38,21 @@ export function AboutSection({ colors }: AboutSectionProps) {
           aria-hidden="true"
           className="pointer-events-none absolute bottom-0 right-0 w-20 opacity-20 md:w-28"
         />
-        {/* Section heading */}
-        <div className="mb-10 border-b pb-5 md:mb-14" style={{ borderColor: "rgba(43,39,34,0.12)" }}>
-          <span className="mb-2 block text-[0.65rem] font-light uppercase tracking-[0.35em]" style={{ color: "#A98C78" }}>About</span>
-          <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ color: "#2F2F2F" }}>關於裕綸</h2>
+        {/* Section heading — 左上「ABOUT」空心描邊浮水印，中文壓在前方，做出層疊現代感 */}
+        <div className="relative mb-10 border-b pb-5 md:mb-14" style={{ borderColor: "rgba(43,39,34,0.12)" }}>
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-2 left-0 select-none font-bold uppercase leading-none"
+            style={{
+              fontSize: "clamp(3rem, 9vw, 6.5rem)",
+              color: "transparent",
+              WebkitTextStroke: "1.2px rgba(169,140,120,0.42)",
+              letterSpacing: "0.04em",
+            }}
+          >
+            About
+          </span>
+          <h2 className="relative pt-12 text-2xl font-light tracking-[0.18em] md:pt-16 md:text-3xl" style={{ color: "#2F2F2F" }}>關於裕綸</h2>
         </div>
 
         {/* Content: image + text */}
