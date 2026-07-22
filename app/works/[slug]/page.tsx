@@ -44,6 +44,9 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ slu
   const hasGallery = c.gallery && c.gallery.length > 0;
   const [feat, ...rest] = hasGallery ? c.gallery : [null];
 
+  const caseUrl = `https://www.yulungroup.com/works/${slug}`;
+  const images = [c.hero, ...(hasGallery ? c.gallery.map((g) => g.src) : [])].filter(Boolean);
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -54,11 +57,32 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ slu
     ],
   };
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${c.zhName} ${c.enName}｜台中室內設計案例`.trim(),
+    description: c.tagline,
+    ...(images.length ? { image: images } : {}),
+    articleSection: c.cat,
+    inLanguage: "zh-TW",
+    mainEntityOfPage: caseUrl,
+    author: { "@type": "Organization", name: "空房子室內設計", url: "https://www.yulungroup.com/design" },
+    publisher: {
+      "@type": "Organization",
+      name: "裕綸集團",
+      logo: { "@type": "ImageObject", url: "https://www.yulungroup.com/icon-512.png" },
+    },
+  };
+
   return (
     <KfzShell>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }}
       />
       <div className="wrap">
         <Link className="back" href="/works">← 回案例列表</Link>

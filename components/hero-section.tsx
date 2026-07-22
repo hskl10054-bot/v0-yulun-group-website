@@ -78,7 +78,7 @@ export function HeroSection({ colors }: HeroSectionProps) {
           <div className="w-full h-full overflow-hidden">
             <img
               src={src}
-              alt={`裕綸集團作品 ${i + 1}`}
+              alt={`台中室內設計與裝修作品 ${i + 1}｜裕綸集團`}
               className="w-full h-full object-cover hero-kenburns"
             />
           </div>

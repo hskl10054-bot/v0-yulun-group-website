@@ -48,7 +48,7 @@ export default function WorksIndexPage() {
                 <div className="thumb">
                   {todo && <span className="badge">準備中</span>}
                   {c.hero ? (
-                    <Image src={c.hero} alt={c.zhName} fill sizes="(max-width:640px) 100vw, 480px" style={{ objectFit: "cover" }} />
+                    <Image src={c.hero} alt={`${c.zhName} ${c.enName}｜台中室內設計案例`} fill sizes="(max-width:640px) 100vw, 480px" style={{ objectFit: "cover" }} />
                   ) : (
                     <span className="ph">{c.zhName}</span>
                   )}
