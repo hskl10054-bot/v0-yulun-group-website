@@ -12,11 +12,22 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const c = await getCaseBySlugServer(slug);
-  if (!c) return { title: "案例｜空房子室內設計" };
+  if (!c) return { title: "案例｜台中室內設計－空房子室內設計" };
+  const url = `https://www.yulungroup.com/works/${slug}`;
+  const description = `${c.tagline}。台中${c.cat}案例，由空房子室內設計 × 裕綸室內裝修打造。`;
   return {
-    title: `${c.zhName} ${c.enName}｜空房子室內設計`,
-    description: c.tagline,
-    openGraph: { title: `${c.zhName}｜空房子室內設計`, description: c.tagline, images: c.hero ? [c.hero] : [] },
+    title: `${c.zhName} ${c.enName}｜台中室內設計案例－空房子室內設計`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      locale: "zh_TW",
+      url,
+      siteName: "裕綸集團 Yulun Group",
+      title: `${c.zhName}｜台中室內設計案例－空房子室內設計`,
+      description,
+      images: c.hero ? [c.hero] : [],
+    },
   };
 }
 
@@ -33,8 +44,22 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ slu
   const hasGallery = c.gallery && c.gallery.length > 0;
   const [feat, ...rest] = hasGallery ? c.gallery : [null];
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "首頁", item: "https://www.yulungroup.com/" },
+      { "@type": "ListItem", position: 2, name: "作品案例", item: "https://www.yulungroup.com/works" },
+      { "@type": "ListItem", position: 3, name: `${c.zhName} ${c.enName}`.trim() },
+    ],
+  };
+
   return (
     <KfzShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
+      />
       <div className="wrap">
         <Link className="back" href="/works">← 回案例列表</Link>
       </div>

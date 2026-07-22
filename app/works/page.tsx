@@ -1,67 +1,22 @@
-"use client";
+import type { Metadata } from "next"
+import WorksIndexPage from "./works-client"
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { KfzShell } from "@/components/kfz-shell";
-import { RESIDENTIAL, COMMERCIAL } from "@/data/cases";
-import { useWorksData, slugify } from "@/lib/use-works-data";
+export const metadata: Metadata = {
+  title: "作品案例｜台中室內設計與裝修實績－裕綸集團",
+  description:
+    "瀏覽裕綸集團台中室內設計與裝修作品案例，涵蓋新成屋設計、預售屋客變、老屋翻新與商業空間。真實完工實績，見證從設計到施工的一站式品質。",
+  alternates: { canonical: "https://www.yulungroup.com/works" },
+  openGraph: {
+    type: "website",
+    locale: "zh_TW",
+    url: "https://www.yulungroup.com/works",
+    siteName: "裕綸集團 Yulun Group",
+    title: "作品案例｜台中室內設計與裝修實績－裕綸集團",
+    description:
+      "裕綸集團台中室內設計與裝修作品案例，涵蓋新成屋、預售屋客變、老屋翻新與商業空間的真實完工實績。",
+  },
+}
 
-export default function WorksIndexPage() {
-  const { cases } = useWorksData();
-  const [filter, setFilter] = useState("全部");
-
-  // Categories present in the data, in a stable order.
-  const cats = useMemo(() => {
-    const present = new Set(cases.map((c) => c.cat));
-    return ["全部", ...[RESIDENTIAL, COMMERCIAL].filter((c) => present.has(c))];
-  }, [cases]);
-
-  return (
-    <KfzShell>
-      <div className="wrap">
-        <section className="works-head reveal">
-          <div className="kicker">WORKS</div>
-          <h1 className="serif">每個空間，都有自己的故事</h1>
-          <p>從住宅到商業，看我們怎麼把使用者的生活，變成可以走進去的空間。</p>
-        </section>
-
-        <div className="filter">
-          {cats.map((c) => (
-            <button key={c} className={filter === c ? "on" : ""} onClick={() => setFilter(c)}>
-              {c}
-            </button>
-          ))}
-        </div>
-
-        <div className="works-grid">
-          {cases.map((c) => {
-            if (filter !== "全部" && c.cat !== filter) return null;
-            const todo = !c.hero;
-            const slug = slugify(c.enName);
-            return (
-              <Link
-                key={slug}
-                href={`/works/${slug}`}
-                className={"card reveal" + (todo ? " todo" : "")}
-              >
-                <div className="thumb">
-                  {todo && <span className="badge">準備中</span>}
-                  {c.hero ? (
-                    <Image src={c.hero} alt={c.zhName} fill sizes="(max-width:640px) 100vw, 480px" style={{ objectFit: "cover" }} />
-                  ) : (
-                    <span className="ph">{c.zhName}</span>
-                  )}
-                </div>
-                <div className="cap">
-                  <div className="en-name">{c.enName}</div>
-                  <h3>{c.zhName}</h3>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    </KfzShell>
-  );
+export default function Page() {
+  return <WorksIndexPage />
 }
