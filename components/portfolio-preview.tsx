@@ -1,116 +1,108 @@
 "use client"
-import { useState } from "react"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { useCmsData, getListItemsBySection, getImageUrl, getListItemStyle } from "@/lib/use-cms-data"
-import { useWorksData, slugify } from "@/lib/use-works-data"
-import { PortfolioModal } from "./portfolio-modal"
 
-const defaultWorks = [
-  { title: "同齊咖吡 西區精忠店", type: "2025", image: "/images/home/portfolio/home-portfolio-01.jpg", span2: true },
-  { title: "壹偲OnlyEase酵素保健茶飲", type: "2025", image: "/images/home/portfolio/home-portfolio-02.JPG", span2: false },
-  { title: "勝麗交響曲", type: "2025", image: "/images/home/portfolio/home-portfolio-03.JPG", span2: false },
-  { title: "清水聯馥悅", type: "2024", image: "/images/home/portfolio/home-portfolio-04.jpg", span2: false },
-  { title: "居家住宅室內設計", type: "2025", image: "/images/home/portfolio/home-portfolio-05.jpg", span2: false },
-]
+import { useRef } from "react"
+import Link from "next/link"
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { useWorksData, slugify } from "@/lib/use-works-data"
 
 interface PortfolioPreviewProps {
   colors: Record<string, string>
 }
 
+// 首頁精選作品 — 案例卡片輪播（拉「案例分享」資料，含分類/坪數/敘述，連到案例內頁）。
 export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
-  const [selectedWork, setSelectedWork] = useState<{ title: string; type: string; image: string; sortOrder: number } | null>(null)
-  const { content, listItems, images } = useCmsData("home")
-
-  // Resolve a homepage tile to its matching /works case page. The case slug
-  // comes from its English name, so we look the case up in the live CMS list
-  // and fall back to the /works list if no match is found (never 404s).
   const { cases } = useWorksData()
-  const caseHref = (title: string): string | null => {
-    const linkTo = (c: typeof cases[number] | undefined) => (c ? `/works/${slugify(c.enName)}` : "/works")
-    if (/onlyease|壹偲/i.test(title)) {
-      return linkTo(cases.find((c) => /壹偲/.test(c.zhName) || /onlyease/i.test(c.enName)))
-    }
-    if (/同齊咖吡|西區精忠/.test(title)) {
-      // Match the 西區精忠店 case specifically — NOT the shared brand name 同齊咖吡,
-      // otherwise it would grab the first 同齊咖吡 case (e.g. 北屯旗艦店). Falls back
-      // to the café brand page if no 西區 case is found, never an unrelated case.
-      const c = cases.find((c) => /西區精忠|西區/.test(c.zhName) || /west\s*district/i.test(c.enName))
-      return c ? `/works/${slugify(c.enName)}` : "/cafe"
-    }
-    if (/勝麗交響曲|勝利交響曲/.test(title)) {
-      return linkTo(cases.find((c) => /墨石/.test(c.zhName) || /smoke/i.test(c.enName)))
-    }
-    if (/居家住宅/.test(title)) {
-      return linkTo(cases.find((c) => /摩卡/.test(c.zhName) || /mocha/i.test(c.enName)))
-    }
-    if (/清水聯馥悅|聯馥悅/.test(title)) {
-      return linkTo(cases.find((c) => /無痕/.test(c.zhName) || /seamless/i.test(c.enName)))
-    }
-    return null
+  const scroller = useRef<HTMLDivElement>(null)
+
+  const items = cases.filter((c) => c.hero).slice(0, 10)
+
+  const scroll = (dir: number) => {
+    const el = scroller.current
+    if (!el) return
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" })
   }
 
-  const cmsPortfolio = getListItemsBySection(listItems, "portfolio")
-  const works = cmsPortfolio.length > 0
-    ? cmsPortfolio.map((li, i) => ({
-        title: li.title,
-        type: li.subtitle,
-        image: getImageUrl(images, "portfolio", li.sort_order) || `/images/home/portfolio/home-portfolio-0${li.sort_order}.jpg`,
-        span2: i === 0,
-        sortOrder: li.sort_order,
-      }))
-    : defaultWorks.map((w, i) => ({ ...w, sortOrder: i + 1 }))
+  if (items.length === 0) return null
 
   return (
     <section className="py-24" style={{ backgroundColor: colors.portfolio_bg }}>
       <div className="mx-auto max-w-6xl px-6">
+        {/* Header */}
         <div className="mb-10 flex items-end justify-between border-b pb-6" style={{ borderColor: colors.strengths_card_border }}>
           <div>
-            <span className="mb-2 block text-[0.65rem] font-light tracking-[0.35em] uppercase" style={{ color: colors.portfolio_accent }}>Portfolio</span>
+            <span className="mb-2 block text-[0.65rem] font-light uppercase tracking-[0.35em]" style={{ color: colors.portfolio_accent }}>Portfolio</span>
             <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ color: colors.portfolio_heading }}>精選作品</h2>
           </div>
-          <Link href="/works" className="group flex items-center gap-2 text-xs tracking-[0.2em] uppercase transition-colors" style={{ color: colors.portfolio_accent }}>
-            更多作品 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => scroll(-1)}
+              aria-label="上一個"
+              className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-black/5"
+              style={{ borderColor: colors.strengths_card_border, color: colors.portfolio_heading }}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scroll(1)}
+              aria-label="下一個"
+              className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-black/5"
+              style={{ borderColor: colors.strengths_card_border, color: colors.portfolio_heading }}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
-        <div className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 md:grid-cols-3 md:[grid-template-rows:260px_260px]">
-          {works.map((w, i) => {
-            // Tiles with a matching case page link straight to it; others open the modal.
-            const href = caseHref(w.title)
-            const cls = `group relative cursor-pointer overflow-hidden aspect-[4/3] md:aspect-auto ${i === 0 ? "sm:row-span-2 sm:aspect-auto" : ""}`
-            const inner = (
-              <>
-                <img
-                  src={w.image}
-                  alt={w.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-5 transition-opacity duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100">
-                  <p className="mb-1 text-xs uppercase tracking-widest text-white/60">{w.type}</p>
-                  <h3 className="text-lg font-light tracking-wider text-white" style={{ fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "portfolio", w.sortOrder, "title", "home") }}>{w.title}</h3>
+
+        {/* Carousel */}
+        <div
+          ref={scroller}
+          className="flex snap-x gap-6 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {items.map((c) => {
+            const slug = slugify(c.enName)
+            return (
+              <Link key={slug} href={`/works/${slug}`} className="group w-[280px] shrink-0 snap-start md:w-[360px]">
+                <div className="overflow-hidden rounded-md">
+                  <img
+                    src={c.hero}
+                    alt={`${c.zhName} ${c.enName}｜台中室內設計案例`}
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
                 </div>
-              </>
-            )
-            return href ? (
-              <Link key={w.title} href={href} className={cls}>{inner}</Link>
-            ) : (
-              <div key={w.title} onClick={() => setSelectedWork(w)} className={cls}>{inner}</div>
+                <div className="mt-4">
+                  <h3 className="text-base font-normal tracking-wide" style={{ color: colors.portfolio_heading }}>
+                    {c.zhName}
+                    {c.enName && (
+                      <span className="ml-2 text-xs font-light tracking-widest" style={{ color: colors.portfolio_accent }}>
+                        {c.enName}
+                      </span>
+                    )}
+                  </h3>
+                  {c.meta.length > 0 && (
+                    <p className="mt-1.5 text-xs font-light tracking-wide" style={{ color: colors.portfolio_accent }}>
+                      {c.meta.slice(0, 2).join("　｜　")}
+                    </p>
+                  )}
+                  {c.story && (
+                    <p className="mt-2 line-clamp-2 text-sm font-light leading-relaxed" style={{ color: colors.portfolio_heading, opacity: 0.65 }}>
+                      {c.story}
+                    </p>
+                  )}
+                </div>
+              </Link>
             )
           })}
         </div>
-      </div>
 
-      {selectedWork && (
-        <PortfolioModal
-          isOpen={true}
-          onClose={() => setSelectedWork(null)}
-          title={selectedWork.title}
-          subtitle={selectedWork.type}
-          coverImage={selectedWork.image}
-          page="home"
-          sortOrder={selectedWork.sortOrder}
-        />
-      )}
+        {/* 更多作品 */}
+        <div className="mt-10 text-center">
+          <Link href="/works" className="group inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] transition-colors" style={{ color: colors.portfolio_accent }}>
+            更多作品 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </div>
     </section>
   )
 }
