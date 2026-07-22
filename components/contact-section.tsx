@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useCmsData, getContentValue, getContentStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
@@ -14,6 +14,21 @@ function ContactForm({ colors }: { colors: Record<string, string> }) {
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+
+  // Pre-fill 需求說明 from a clicked FAQ (same-page event) or ?ask= URL param.
+  useEffect(() => {
+    const prefill = (q: string) => {
+      if (!q) return
+      setSubmitted(false)
+      setFormData((prev) => ({ ...prev, 需求說明: q }))
+      setTimeout(() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }), 60)
+    }
+    const asked = new URLSearchParams(window.location.search).get("ask")
+    if (asked) prefill(asked)
+    const handler = (e: Event) => prefill((e as CustomEvent<string>).detail)
+    window.addEventListener("yulun:ask", handler as EventListener)
+    return () => window.removeEventListener("yulun:ask", handler as EventListener)
+  }, [])
 
   // After a successful submit, replace the form with a clear thank-you message.
   if (submitted) {
