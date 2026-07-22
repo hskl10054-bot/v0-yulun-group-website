@@ -25,7 +25,7 @@ export function TestimonialsSection({ colors }: TestimonialsSectionProps) {
       <div className="mx-auto max-w-[100rem] px-6 md:px-12">
         <div className="mb-12 border-b pb-5 md:mb-14" style={{ borderColor: colors.testimonials_card_border }}>
           <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Testimonials</span>
-          <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ color: colors.testimonials_heading }}>客戶怎麼說</h2>
+          <h2 className="text-3xl font-bold tracking-[0.12em] md:text-4xl" style={{ color: colors.testimonials_heading }}>客戶怎麼說</h2>
         </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {testimonials.map((t) => (

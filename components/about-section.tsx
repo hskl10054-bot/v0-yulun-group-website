@@ -51,7 +51,7 @@ export function AboutSection({ colors }: AboutSectionProps) {
           >
             About
           </span>
-          <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ color: "#2F2F2F" }}>關於裕綸</h2>
+          <h2 className="text-3xl font-bold tracking-[0.12em] md:text-4xl" style={{ color: "#2F2F2F" }}>關於裕綸</h2>
         </div>
 
         {/* Content: image + text */}
