@@ -16,6 +16,15 @@ const CAT_LABEL: Record<string, string> = {
   [COMMERCIAL]: "商業空間",
 }
 
+// 卡片標籤：優先帶出「台中＋區域」地域關鍵字（利於在地 SEO），再補一個風格詞。
+function seoTags(meta: string[]): string[] {
+  if (!meta.length) return []
+  const locIdx = meta.findIndex((m) => m.includes("台中"))
+  const location = locIdx >= 0 ? meta[locIdx] : null
+  const descriptor = meta.find((m, i) => i !== locIdx) ?? null
+  return [location, descriptor].filter((m): m is string => !!m)
+}
+
 // 首頁精選作品 — 案例卡片輪播（分類篩選 + 左右切換 + 敘述），沿用首頁配色風格。
 export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
   const { cases } = useWorksData()
@@ -116,9 +125,9 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                         </span>
                       )}
                     </h3>
-                    {c.meta.length > 0 && (
+                    {seoTags(c.meta).length > 0 && (
                       <span className="text-[0.92rem] font-light tracking-wide" style={{ color: colors.portfolio_accent }}>
-                        {c.meta.slice(0, 2).join("　｜　")}
+                        {seoTags(c.meta).join("　｜　")}
                       </span>
                     )}
                   </div>
