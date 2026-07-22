@@ -31,7 +31,7 @@ export function HomePageClient() {
             >
               Our Services
             </span>
-            <h1 className="whitespace-nowrap text-[clamp(0.85rem,4vw,1.1rem)] font-bold tracking-[0.02em] text-[#2F2F2F] md:text-5xl md:tracking-[0.1em]">
+            <h1 className="whitespace-nowrap text-[clamp(0.8rem,3.8vw,1.05rem)] font-bold tracking-[0.02em] text-[#2F2F2F] md:text-4xl md:tracking-[0.1em]">
               台中室內設計與裝修，一站構築理想家
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-[1.05rem] font-light leading-[2] text-[#6B5D4F] [text-wrap:pretty] md:mt-5 md:text-[1.15rem] md:leading-loose">
