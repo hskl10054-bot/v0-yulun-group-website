@@ -43,7 +43,7 @@ function ContactForm({ colors }: { colors: Record<string, string> }) {
         </p>
         <button
           onClick={() => setSubmitted(false)}
-          style={{ marginTop: "0.5rem", background: "transparent", color: "rgba(255,255,255,0.45)", border: "1px solid rgba(255,255,255,0.2)", padding: "0.75rem 2rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}
+          style={{ marginTop: "0.5rem", background: "transparent", color: "rgba(255,255,255,0.45)", border: "1px solid rgba(255,255,255,0.2)", padding: "0.75rem 2rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}
         >
           再填一筆 →
         </button>
@@ -60,13 +60,13 @@ function ContactForm({ colors }: { colors: Record<string, string> }) {
         { label: "預算金額", placeholder: "例如：100萬 — 300萬", type: "text" },
       ].map(({ label, placeholder, type }) => (
         <div key={label} style={{ marginBottom: "1.5rem" }}>
-          <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
+          <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
           <input type={type} placeholder={placeholder} value={formData[label] || ""} onChange={(e) => { const val = label === "聯絡電話" ? formatPhone(e.target.value) : e.target.value; setFormData(prev => ({ ...prev, [label]: val })) }} className="serif w-full bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem" }} />
           <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0", width: "100%" }} />
         </div>
       ))}
       <div style={{ marginBottom: "1.5rem" }}>
-        <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
+        <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
         <textarea placeholder="請簡單描述您的空間需求或想法..." rows={1} value={formData["需求說明"] || ""} onChange={(e) => setFormData(prev => ({ ...prev, "需求說明": e.target.value }))} className="serif w-full resize-none bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem", display: "block", borderBottom: "none", width: "100%", margin: "0" }} />
         <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0", width: "100%" }} />
       </div>
@@ -81,7 +81,7 @@ function ContactForm({ colors }: { colors: Record<string, string> }) {
           } catch { /* ignore */ }
           setSubmitting(false)
         }}
-        style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: submitting ? "not-allowed" : "pointer", width: "fit-content", opacity: submitting ? 0.6 : 1 }}>
+        style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: submitting ? "not-allowed" : "pointer", width: "fit-content", opacity: submitting ? 0.6 : 1 }}>
         {submitting ? "送出中..." : submitted ? "已送出 ✓" : "立即報價 →"}
       </button>
     </div>
@@ -104,7 +104,7 @@ export function ContactSection({ colors }: ContactSectionProps) {
         <h2 className="text-3xl font-bold tracking-[0.12em] md:text-4xl" style={{ lineHeight: 1.2, marginBottom: "3rem", color: colors.contact_heading }}>聯絡裕綸集團</h2>
         {[["地址",address,"address"],["電話",phone,"phone"],["電子郵件",email,"email"],["營業時間",hours,"hours"]].map(([label, val, key]) => (
           <div key={label} style={{ marginBottom: "2rem" }}>
-            <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
+            <p style={{ fontSize: "0.9rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
             {key === "address" ? (
               <a
                 href="https://maps.app.goo.gl/Ya3FoWUXz36Rh5vj6"
