@@ -59,7 +59,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                     key={c}
                     type="button"
                     onClick={() => changeFilter(c)}
-                    className="text-xs tracking-[0.15em] transition-colors"
+                    className="text-sm tracking-[0.15em] transition-colors"
                     style={{ color: colors.portfolio_heading, fontWeight: filter === c ? 500 : 300, opacity: filter === c ? 1 : 0.55 }}
                   >
                     {CAT_LABEL[c] ?? c}
@@ -98,7 +98,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
           {items.map((c) => {
             const slug = slugify(c.enName)
             return (
-              <Link key={slug} href={`/works/${slug}`} className="group w-[88vw] shrink-0 snap-start sm:w-[72vw] md:w-[calc(50%-1rem)]">
+              <Link key={slug} href={`/works/${slug}`} className="group w-[88vw] shrink-0 snap-start sm:w-[70vw] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)]">
                 <div className="overflow-hidden rounded-2xl">
                   <img
                     src={c.hero}
@@ -107,23 +107,23 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                   />
                 </div>
                 <div className="mt-6">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <h3 className="text-xl font-normal tracking-wide md:text-2xl" style={{ color: colors.portfolio_heading }}>
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
+                    <h3 className="text-2xl font-normal tracking-wide md:text-[1.7rem]" style={{ color: colors.portfolio_heading }}>
                       {c.zhName}
                       {c.enName && (
-                        <span className="ml-2 text-base font-light tracking-widest" style={{ color: colors.portfolio_accent }}>
+                        <span className="ml-2 text-lg font-light tracking-widest" style={{ color: colors.portfolio_accent }}>
                           {c.enName}
                         </span>
                       )}
                     </h3>
                     {c.meta.length > 0 && (
-                      <span className="text-[0.82rem] font-light tracking-wide" style={{ color: colors.portfolio_accent }}>
+                      <span className="text-[0.92rem] font-light tracking-wide" style={{ color: colors.portfolio_accent }}>
                         {c.meta.slice(0, 2).join("　｜　")}
                       </span>
                     )}
                   </div>
                   {c.story && (
-                    <p className="mt-3 line-clamp-2 text-[0.95rem] font-light leading-relaxed" style={{ color: colors.portfolio_heading, opacity: 0.6 }}>
+                    <p className="mt-3.5 line-clamp-3 text-[1.02rem] font-light leading-[1.9]" style={{ color: colors.portfolio_heading, opacity: 0.72 }}>
                       {c.story}
                     </p>
                   )}
@@ -135,8 +135,8 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
 
         {/* 更多作品 */}
         <div className="mt-14 text-center">
-          <Link href="/works" className="group inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] transition-colors" style={{ color: colors.portfolio_accent }}>
-            更多作品 <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+          <Link href="/works" className="group inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] transition-colors" style={{ color: colors.portfolio_accent }}>
+            更多作品 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>
