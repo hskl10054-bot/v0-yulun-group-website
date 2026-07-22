@@ -142,23 +142,21 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                   />
                 </div>
                 <div className="mt-6">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5">
-                    <h3 className="text-2xl font-normal tracking-wide md:text-[1.7rem]" style={{ color: colors.portfolio_heading }}>
-                      {c.zhName}
-                      {c.enName && (
-                        <span className="ml-2 text-lg font-light tracking-widest" style={{ color: colors.portfolio_accent }}>
-                          {c.enName}
-                        </span>
-                      )}
-                    </h3>
-                    {seoTags(c).length > 0 && (
-                      <span className="text-[0.92rem] font-light tracking-wide" style={{ color: colors.portfolio_accent }}>
-                        {seoTags(c).join("　｜　")}
+                  <h3 className="flex items-baseline gap-2 text-2xl font-normal tracking-wide md:text-[1.7rem]" style={{ color: colors.portfolio_heading }}>
+                    <span className="shrink-0">{c.zhName}</span>
+                    {c.enName && (
+                      <span className="min-w-0 truncate text-lg font-light tracking-widest" style={{ color: colors.portfolio_accent }}>
+                        {c.enName}
                       </span>
                     )}
-                  </div>
+                  </h3>
+                  {seoTags(c).length > 0 && (
+                    <p className="mt-2 truncate text-[0.92rem] font-light tracking-wide" style={{ color: colors.portfolio_accent }}>
+                      {seoTags(c).join("　｜　")}
+                    </p>
+                  )}
                   {c.story && (
-                    <p className="mt-3.5 line-clamp-3 text-[1.02rem] font-light leading-[1.9]" style={{ color: colors.portfolio_heading, opacity: 0.72 }}>
+                    <p className="mt-3 line-clamp-2 text-[1.02rem] font-light leading-[1.9]" style={{ color: colors.portfolio_heading, opacity: 0.72 }}>
                       {c.story}
                     </p>
                   )}
