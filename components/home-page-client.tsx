@@ -24,7 +24,7 @@ export function HomePageClient() {
         <HomeNavbar />
         <HeroSection colors={colors} />
         <section className="bg-[#F7F4EF] px-6 py-24 text-center md:py-32" aria-label="服務引言">
-          <div className="mx-auto max-w-2xl">
+          <div className="mx-auto max-w-5xl">
             <span
               className="mb-4 block text-[0.7rem] font-light uppercase tracking-[0.35em] md:text-xs md:tracking-[0.4em]"
               style={{ color: "#A98C78" }}
