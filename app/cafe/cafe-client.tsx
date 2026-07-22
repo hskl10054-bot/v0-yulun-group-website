@@ -152,10 +152,10 @@ export default function CafePage() {
       {/* FOOTER */}
       <footer className="resp-footer" style={{ background: "#1A1510", padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
         <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>同齊咖啡</span>
-        <p style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 同齊咖啡・裕綸集團</p>
+        <p style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 同齊咖啡・裕綸集團</p>
         <div style={{ display: "flex", gap: "2rem" }}>
           {[{name:"Instagram",href:"https://www.instagram.com/human_design.space/"}].map(s => (
-            <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase" }}>{s.name}</a>
+            <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase" }}>{s.name}</a>
           ))}
         </div>
       </footer>

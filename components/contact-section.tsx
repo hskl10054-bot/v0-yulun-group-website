@@ -147,10 +147,10 @@ export function ContactSection({ colors }: ContactSectionProps) {
     </section>
     <footer style={{ background: colors.footer_bg, padding: "2.5rem 1.5rem" }}>
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 text-center">
-        <p style={{ fontSize: "0.72rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.45)" }}>
+        <p style={{ fontSize: "0.9rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.45)" }}>
           Copyright © 裕綸集團 Yulun Group All Rights Reserved.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1" style={{ fontSize: "0.72rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.4)" }}>
+        <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1" style={{ fontSize: "0.9rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.4)" }}>
           <span>台中室內設計</span>
           <span style={{ opacity: 0.45 }}>｜</span>
           <span>台中室內裝修</span>
