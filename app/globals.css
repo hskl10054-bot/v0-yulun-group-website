@@ -86,6 +86,10 @@
   * {
     @apply border-border outline-ring/50;
   }
+  /* 全站字型整體微調放大（rem 為基準，等比例放大所有文字）。 */
+  html {
+    font-size: 17px;
+  }
   body {
     @apply bg-background text-foreground;
     letter-spacing: 0.03em;
