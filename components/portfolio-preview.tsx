@@ -78,13 +78,13 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
   if (withHero.length === 0) return null
 
   return (
-    <section className="py-28 md:py-36" style={{ backgroundColor: colors.portfolio_bg }}>
+    <section className="py-24 md:py-32" style={{ backgroundColor: colors.portfolio_bg }}>
       <div className="mx-auto max-w-[105rem] px-6 md:px-12 lg:px-16">
         {/* Header */}
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-5 border-b pb-7" style={{ borderColor: colors.strengths_card_border }}>
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-5 border-b pb-5 md:mb-14" style={{ borderColor: colors.strengths_card_border }}>
           <div>
-            <span className="mb-3 block text-[0.7rem] font-light uppercase tracking-[0.4em]" style={{ color: colors.portfolio_accent }}>Portfolio</span>
-            <h2 className="text-3xl font-light tracking-[0.2em] md:text-5xl" style={{ color: colors.portfolio_heading }}>精選作品</h2>
+            <span className="mb-2 block text-[0.65rem] font-light uppercase tracking-[0.35em]" style={{ color: colors.portfolio_accent }}>Portfolio</span>
+            <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ color: colors.portfolio_heading }}>精選作品</h2>
           </div>
           <div className="flex items-center gap-6">
             {cats.length > 1 && (
@@ -156,7 +156,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                     </p>
                   )}
                   {c.story && (
-                    <p className="mt-3 line-clamp-2 text-[1.02rem] font-light leading-[1.9]" style={{ color: colors.portfolio_heading, opacity: 0.72 }}>
+                    <p className="mt-3 line-clamp-2 text-[0.95rem] font-light leading-[2]" style={{ color: colors.portfolio_heading, opacity: 0.72 }}>
                       {c.story}
                     </p>
                   )}

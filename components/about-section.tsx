@@ -29,7 +29,7 @@ export function AboutSection({ colors }: AboutSectionProps) {
   }, [])
 
   return (
-    <section className="px-6 py-20 md:px-12 md:py-28" style={{ backgroundColor: "#F4F1EC" }}>
+    <section className="px-6 py-24 md:px-12 md:py-32" style={{ backgroundColor: "#F4F1EC" }}>
       <div className="relative mx-auto max-w-6xl">
         {/* 右下角浮水印 logo */}
         <img
