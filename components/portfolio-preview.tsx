@@ -16,13 +16,39 @@ const CAT_LABEL: Record<string, string> = {
   [COMMERCIAL]: "商業空間",
 }
 
-// 卡片標籤：優先帶出「台中＋區域」地域關鍵字（利於在地 SEO），再補一個風格詞。
-function seoTags(meta: string[]): string[] {
-  if (!meta.length) return []
-  const locIdx = meta.findIndex((m) => m.includes("台中"))
-  const location = locIdx >= 0 ? meta[locIdx] : null
-  const descriptor = meta.find((m, i) => i !== locIdx) ?? null
-  return [location, descriptor].filter((m): m is string => !!m)
+// 台中行政區（用來從案件資料判斷在地關鍵字）。
+const TC_DISTRICTS = [
+  "中區", "東區", "南區", "西區", "北區", "北屯", "西屯", "南屯", "太平", "大里",
+  "霧峰", "烏日", "豐原", "后里", "石岡", "東勢", "新社", "潭子", "大雅", "神岡",
+  "大肚", "沙鹿", "龍井", "梧棲", "清水", "大甲", "外埔", "大安", "和平",
+]
+const pickDistrict = (text: string) => TC_DISTRICTS.find((d) => text.includes(d)) ?? null
+
+// 挑一個風格詞（排除地名／屋型／類別等非風格用語），讓卡片有辨識度。
+const NON_STYLE = /台中|新竹|新成屋|老屋|翻新|客變|建案|商業空間|餐飲|店舖|咖啡|咖吡|早午餐|飲料|OnlyEase|同齊/i
+const pickStyle = (meta: string[]) => meta.find((m) => !NON_STYLE.test(m) && !m.includes("・")) ?? null
+
+// 依每個案子的實際資料，產生「高設計需求」的在地 SEO 標籤。
+// 住宅預設為台中新成屋設計、老屋案標老屋翻新；商空依型態（咖啡廳／早午餐／飲料店）與城市區域。
+function seoTags(c: { zhName: string; enName: string; cat: string; meta: string[] }): string[] {
+  const hay = [c.zhName, c.enName, ...c.meta].join(" ")
+
+  if (c.cat === COMMERCIAL) {
+    const city = /新竹/.test(hay) ? "新竹" : "台中"
+    const district = city === "台中" ? pickDistrict(hay) : null
+    const place = district ? `${city}${district}` : city
+    let type = "商業空間設計"
+    if (/同齊|咖啡|咖吡/.test(hay)) type = "咖啡廳設計"
+    else if (/伍宅|早午餐|brunch/i.test(hay)) type = "早午餐店設計"
+    else if (/壹偲|OnlyEase|酵境|Catalyst|飲料/i.test(hay)) type = "飲料店設計"
+    return [`${place}・${type}`]
+  }
+
+  const district = pickDistrict(hay)
+  const kind = /老屋|翻新/.test(hay) ? "老屋翻新" : "新成屋設計"
+  const seo = district ? `台中${district}・${kind}` : `台中${kind}`
+  const style = pickStyle(c.meta)
+  return style ? [seo, style] : [seo]
 }
 
 // 首頁精選作品 — 案例卡片輪播（分類篩選 + 左右切換 + 敘述），沿用首頁配色風格。
@@ -125,9 +151,9 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                         </span>
                       )}
                     </h3>
-                    {seoTags(c.meta).length > 0 && (
+                    {seoTags(c).length > 0 && (
                       <span className="text-[0.92rem] font-light tracking-wide" style={{ color: colors.portfolio_accent }}>
-                        {seoTags(c.meta).join("　｜　")}
+                        {seoTags(c).join("　｜　")}
                       </span>
                     )}
                   </div>
