@@ -86,7 +86,7 @@ export function AboutSection({ colors }: AboutSectionProps) {
               裕綸集團，深耕台中超過 14 年
             </h3>
             <p
-              className="text-[1rem] font-light leading-[2] [text-wrap:pretty] md:text-[1.05rem]"
+              className="text-[1.08rem] font-light leading-[2] [text-wrap:pretty] md:text-[1.15rem]"
               style={{ color: "#5B5349", textAlign: "justify" }}
             >
               從室內設計、裝修工程到生活場域，裕綸集團以職人精神，整合「空房子室內設計」的美學提案與「裕綸室內裝修」的專業施工。我們堅持自有工班、絕不外包，工程保固一年，從設計到完工一站到位，為每一位客戶守護家的品質。

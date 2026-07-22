@@ -30,7 +30,7 @@ export function TestimonialsSection({ colors }: TestimonialsSectionProps) {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
             <div key={t.name} className="p-8 transition-colors duration-500" style={{ borderWidth: "1px", borderStyle: "solid", borderColor: colors.testimonials_card_border }}>
-              <p className="mb-6 font-light leading-relaxed" style={{ color: colors.testimonials_text, fontSize: "1.05rem", lineHeight: 2, ...getListItemStyle(content, "testimonials", t.sortOrder, "description", "home") }}>「{t.quote}」</p>
+              <p className="mb-6 font-light leading-relaxed" style={{ color: colors.testimonials_text, fontSize: "1.15rem", lineHeight: 2, ...getListItemStyle(content, "testimonials", t.sortOrder, "description", "home") }}>「{t.quote}」</p>
               <p className="text-xs tracking-[0.2em] uppercase" style={{ color: colors.testimonials_accent, ...getListItemStyle(content, "testimonials", t.sortOrder, "title", "home") }}>{t.name}</p>
               <p className="mt-1 text-xs tracking-wide" style={{ color: colors.contact_text, ...getListItemStyle(content, "testimonials", t.sortOrder, "subtitle", "home") }}>{t.info}</p>
             </div>
