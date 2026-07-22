@@ -12,8 +12,8 @@ interface PortfolioPreviewProps {
 
 const CAT_LABEL: Record<string, string> = {
   全部: "全部",
-  [RESIDENTIAL]: "RESIDENTIAL",
-  [COMMERCIAL]: "COMMERCIAL",
+  [RESIDENTIAL]: "住宅設計",
+  [COMMERCIAL]: "商業空間",
 }
 
 // 首頁精選作品 — 案例卡片輪播（分類篩選 + 左右切換 + 敘述），沿用首頁配色風格。
