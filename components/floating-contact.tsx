@@ -40,21 +40,21 @@ export function FloatingContact() {
     <div className="fixed bottom-5 right-4 z-[9990] flex flex-col items-center gap-3">
       {/* 常見問題面板（浮在上方，靠右對齊，不影響按鈕位置） */}
       {faqOpen && (
-        <div className="absolute bottom-full right-0 mb-3 w-[17rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-white p-4 shadow-xl ring-1 ring-black/5">
-          <p className="mb-2 text-xs font-semibold tracking-wider text-[#6B4E31]">常見問題</p>
+        <div className="absolute bottom-full right-0 mb-3 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-white p-5 shadow-xl ring-1 ring-black/5">
+          <p className="mb-3 text-sm font-semibold tracking-wider text-[#6B4E31]">常見問題</p>
           <div className="flex flex-col">
             {FAQS.map((q) => (
               <button
                 key={q}
                 type="button"
                 onClick={() => askQuestion(q)}
-                className="border-b border-black/5 py-2.5 text-left text-[13px] leading-snug text-[#4A4A4A] transition-colors last:border-0 hover:text-[#E2A4AB]"
+                className="border-b border-black/5 py-3 text-left text-[15px] leading-relaxed text-[#4A4A4A] transition-colors last:border-0 hover:text-[#E2A4AB]"
               >
                 {q}
               </button>
             ))}
           </div>
-          <p className="mt-3 text-[11px] leading-snug text-[#A98C78]">點一下 → 幫你帶進預約諮詢表單</p>
+          <p className="mt-4 text-xs leading-snug text-[#A98C78]">點一下 → 幫你帶進預約諮詢表單</p>
         </div>
       )}
 
