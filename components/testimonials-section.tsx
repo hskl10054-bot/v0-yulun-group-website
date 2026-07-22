@@ -22,7 +22,7 @@ export function TestimonialsSection({ colors }: TestimonialsSectionProps) {
 
   return (
     <section className="py-24 md:py-32" style={{ backgroundColor: colors.testimonials_bg }}>
-      <div className="mx-auto max-w-6xl px-6 md:px-12">
+      <div className="mx-auto max-w-[100rem] px-6 md:px-12">
         <div className="mb-12 border-b pb-5 md:mb-14" style={{ borderColor: colors.testimonials_card_border }}>
           <span className="mb-2 block text-[0.65rem] font-light tracking-[0.35em] uppercase" style={{ color: colors.testimonials_accent }}>Testimonials</span>
           <h2 className="text-2xl font-light tracking-[0.18em] md:text-3xl" style={{ color: colors.testimonials_heading }}>客戶怎麼說</h2>
