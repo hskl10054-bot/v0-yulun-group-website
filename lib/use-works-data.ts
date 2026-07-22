@@ -33,11 +33,16 @@ function asArray(v: unknown): unknown[] {
   return []
 }
 
+// 內容修正：CMS 裡個別案子的英文名有誤時，在讀取層統一校正（全站生效）。
+const EN_NAME_FIX: Record<string, string> = {
+  伍宅: "WU ZHAI",
+}
+
 function mapRow(row: DbCase): CaseStudy {
   return {
     cat: row.cat as CaseStudy["cat"],
     zhName: row.zh_name,
-    enName: row.en_name,
+    enName: EN_NAME_FIX[row.zh_name?.trim()] ?? row.en_name,
     tagline: row.tagline,
     hero: row.hero,
     meta: asArray(row.meta).map(String),

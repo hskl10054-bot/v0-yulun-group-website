@@ -79,7 +79,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
 
   return (
     <section className="py-24 md:py-32" style={{ backgroundColor: colors.portfolio_bg }}>
-      <div className="mx-auto max-w-[105rem] px-6 md:px-12 lg:px-16">
+      <div className="mx-auto max-w-6xl px-6 md:px-12">
         {/* Header */}
         <div className="mb-12 flex flex-wrap items-end justify-between gap-5 border-b pb-5 md:mb-14" style={{ borderColor: colors.strengths_card_border }}>
           <div>
