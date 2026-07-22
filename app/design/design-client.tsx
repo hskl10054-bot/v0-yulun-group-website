@@ -189,14 +189,14 @@ export default function DesignPage() {
 
       {/* NAV */}
       <nav className="resp-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.5rem 4rem", background: "rgba(250,248,244,0.92)", backdropFilter: "blur(12px)", borderBottom: `0.5px solid ${colors.services_card_border}` }}>
-        <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.85rem", letterSpacing: "0.2em", textTransform: "uppercase", color: colors.hero_text, textDecoration: "none", transition: "color 0.3s" }}>
-          <ArrowLeft size={14} /> 裕綸集團
+        <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.95rem", letterSpacing: "0.2em", textTransform: "uppercase", color: colors.hero_text, textDecoration: "none", transition: "color 0.3s" }}>
+          <ArrowLeft size={16} /> 裕綸集團
         </Link>
         <Link href="/design" className="resp-nav-brand" style={{ display: "flex", alignItems: "center", gap: "0.55rem", textDecoration: "none" }}>
           <img src="/images/hds-mark.png" alt="空房子室內設計" style={{ height: "60px", width: "auto" }} />
-          <span style={{ fontSize: "1.3rem", fontWeight: 300, letterSpacing: "0.15em", color: colors.hero_heading }}>空房子・室內設計</span>
+          <span style={{ fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.15em", color: colors.hero_heading }}>空房子・室內設計</span>
         </Link>
-        <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.85rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>預約諮詢</a>
+        <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>預約諮詢</a>
       </nav>
 
       {/* HERO */}

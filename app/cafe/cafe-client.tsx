@@ -74,11 +74,11 @@ export default function CafePage() {
 
       {/* NAV */}
       <nav className="resp-nav" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.5rem 4rem", background: "rgba(250,248,244,0.92)", backdropFilter: "blur(12px)", borderBottom: "0.5px solid #E8E3DA" }}>
-        <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C8479", textDecoration: "none", transition: "color 0.3s" }}>
-          <ArrowLeft size={14} /> 裕綸集團
+        <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.95rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C8479", textDecoration: "none", transition: "color 0.3s" }}>
+          <ArrowLeft size={16} /> 裕綸集團
         </Link>
-        <span className="serif resp-nav-brand" style={{ fontSize: "1.3rem", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>同齊咖啡</span>
-        <a href="#stores" className="resp-nav-cta" style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#6B4E31", textDecoration: "none" }}>門市資訊</a>
+        <span className="serif resp-nav-brand" style={{ fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>同齊咖啡</span>
+        <a href="#stores" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#6B4E31", textDecoration: "none" }}>門市資訊</a>
       </nav>
 
       {/* HERO */}
