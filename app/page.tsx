@@ -97,6 +97,7 @@ export const metadata: Metadata = {
     title: "台中室內設計公司｜設計裝修一站式、自有工班－裕綸集團",
     description:
       "裕綸集團深耕台中超過14年，整合室內設計與專業裝修工程，提供台中屋主一站式服務。",
+    images: [{ url: "/images/hero-bg.jpg", width: 1567, height: 1045, alt: "裕綸集團｜台中室內設計與裝修" }],
   },
 }
 

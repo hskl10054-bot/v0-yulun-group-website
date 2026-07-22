@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     title: "空房子室內設計｜台中室內設計｜新成屋、預售屋客變、老屋翻新",
     description:
       "空房子室內設計深耕台中，專精新成屋設計、預售屋客變、老屋翻新與商業空間規劃，為台中屋主構築理想生活空間。",
+    images: [{ url: "/images/hero-bg.jpg", width: 1567, height: 1045, alt: "空房子室內設計｜台中室內設計" }],
   },
 }
 

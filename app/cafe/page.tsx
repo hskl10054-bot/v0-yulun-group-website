@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     title: "同齊咖啡 tâng tsê｜台中咖啡廳空間設計案例－裕綸集團",
     description:
       "同齊咖啡由裕綸集團打造，兼具美學與營運機能的台中咖啡廳商業空間設計實例。",
+    images: [{ url: "/images/hero-bg.jpg", width: 1567, height: 1045, alt: "同齊咖啡｜台中咖啡廳空間設計" }],
   },
 }
 

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
     title: "裕綸室內裝修｜台中室內裝修工程｜自有工班、透明報價",
     description:
       "台中室內裝修工程，自有工班不外包、標準化 SOP 施工、工程保固一年、透明報價，從拆除到完工一站到位。",
+    images: [{ url: "/images/hero-bg.jpg", width: 1567, height: 1045, alt: "裕綸室內裝修｜台中室內裝修工程" }],
   },
 }
 
