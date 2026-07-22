@@ -70,8 +70,8 @@ export function HomeNavbar() {
             style={{
               position: "absolute",
               left: "3rem",
-              fontSize: "0.65rem",
-              letterSpacing: "0.3em",
+              fontSize: "0.9rem",
+              letterSpacing: "0.28em",
               textTransform: "uppercase",
               color: atTop ? "#FAFAF8" : "#2F2F2F",
               textDecoration: "none",
