@@ -10,11 +10,11 @@ interface ServiceItemsProps {
 // 服務項目 — 圖示 + 名稱，沿用首頁浮水印標題與暖色系。建築設計已移除。
 const ITEMS = [
   { label: "預售客變", en: "Pre-sale Customization", Icon: PencilRuler },
-  { label: "新屋裝修", en: "New Home Interior", Icon: Home },
-  { label: "老屋翻新", en: "Old House Renewal", Icon: RefreshCw },
+  { label: "新屋裝修", en: "New Home Renovation", Icon: Home },
+  { label: "老屋翻新", en: "Renovation", Icon: RefreshCw },
   { label: "家居設計", en: "Residential Design", Icon: Sofa },
-  { label: "商業空間", en: "Commercial Space", Icon: Building2 },
-  { label: "店面設計", en: "Storefront Design", Icon: Store },
+  { label: "商業空間", en: "Commercial Design", Icon: Building2 },
+  { label: "店面設計", en: "Retail Design", Icon: Store },
   { label: "裝潢施工", en: "Interior Construction", Icon: Hammer },
 ]
 
