@@ -21,6 +21,10 @@ const ITEMS = [
 export function ServiceItems({ colors }: ServiceItemsProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
+  const [hovered, setHovered] = useState<number | null>(null)
+
+  const GRAY = "#B7AEA3"
+  const HOT = "#6B4E31"
 
   useEffect(() => {
     const el = ref.current
@@ -58,28 +62,48 @@ export function ServiceItems({ colors }: ServiceItemsProps) {
 
         {/* Items grid */}
         <div ref={ref} className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
-          {ITEMS.map((it, i) => (
-            <div
-              key={it.label}
-              className="group flex flex-col items-center gap-4 text-center"
-              style={{
-                opacity: visible ? 1 : 0,
-                transform: visible ? "translateY(0)" : "translateY(22px)",
-                transition: `opacity 0.7s ease-out ${i * 0.08}s, transform 0.7s ease-out ${i * 0.08}s`,
-              }}
-            >
-              <it.Icon
-                strokeWidth={1.2}
-                className="h-9 w-9 transition-transform duration-300 group-hover:-translate-y-1 md:h-10 md:w-10"
-                style={{ color: accent }}
-                aria-hidden="true"
-              />
-              <span className="flex flex-col items-center gap-1.5">
-                <span className="text-[1.05rem] tracking-[0.05em] md:text-[1.18rem]" style={{ color: heading }}>{it.label}</span>
-                <span className="text-[0.6rem] font-light uppercase tracking-[0.18em] md:text-[0.66rem]" style={{ color: accent }}>{it.en}</span>
-              </span>
-            </div>
-          ))}
+          {ITEMS.map((it, i) => {
+            const active = hovered === i
+            const iconColor = active ? HOT : visible ? accent : GRAY
+            return (
+              <div
+                key={it.label}
+                className="flex cursor-default flex-col items-center gap-4 text-center"
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered((h) => (h === i ? null : h))}
+                style={{
+                  opacity: visible ? 1 : 0,
+                  transform: visible ? "translateY(0)" : "translateY(22px)",
+                  transition: `opacity 0.7s ease-out ${i * 0.08}s, transform 0.7s ease-out ${i * 0.08}s`,
+                }}
+              >
+                <it.Icon
+                  strokeWidth={1.2}
+                  className="h-9 w-9 md:h-10 md:w-10"
+                  style={{
+                    color: iconColor,
+                    transform: active ? "translateY(-5px)" : "translateY(0)",
+                    transition: "color 0.45s ease, transform 0.3s ease",
+                  }}
+                  aria-hidden="true"
+                />
+                <span className="flex flex-col items-center gap-1.5">
+                  <span
+                    className="text-[1.05rem] tracking-[0.05em] md:text-[1.18rem]"
+                    style={{ color: active ? HOT : heading, transition: "color 0.45s ease" }}
+                  >
+                    {it.label}
+                  </span>
+                  <span
+                    className="text-[0.6rem] font-light uppercase tracking-[0.18em] md:text-[0.66rem]"
+                    style={{ color: iconColor, transition: "color 0.45s ease" }}
+                  >
+                    {it.en}
+                  </span>
+                </span>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>
