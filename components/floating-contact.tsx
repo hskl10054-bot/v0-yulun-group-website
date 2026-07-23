@@ -49,7 +49,17 @@ export function FloatingContact() {
       {/* 常見問題面板（浮在上方，靠右對齊，不影響按鈕位置） */}
       {faqOpen && (
         <div className="absolute bottom-full right-0 mb-3 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-white p-5 shadow-xl ring-1 ring-black/5">
-          <p className="mb-3 text-sm font-semibold tracking-wider text-[#6B4E31]">常見問題</p>
+          <button
+            type="button"
+            onClick={() => setFaqOpen(false)}
+            aria-label="關閉常見問題"
+            className="absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full text-[#A98C78] transition-colors hover:bg-black/5 hover:text-[#6B4E31]"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden="true">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+          <p className="mb-3 pr-7 text-sm font-semibold tracking-wider text-[#6B4E31]">常見問題</p>
           <div className="flex flex-col">
             {FAQS.map((q) => (
               <button
