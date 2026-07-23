@@ -53,13 +53,13 @@ export function FloatingContact() {
             type="button"
             onClick={() => setFaqOpen(false)}
             aria-label="關閉常見問題"
-            className="absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full text-[#A98C78] transition-colors hover:bg-black/5 hover:text-[#6B4E31]"
+            className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#F1EAE2] text-[#6B4E31] transition-colors hover:bg-[#E6D9CC]"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" aria-hidden="true">
               <path d="M6 6l12 12M18 6 6 18" />
             </svg>
           </button>
-          <p className="mb-3 pr-7 text-sm font-semibold tracking-wider text-[#6B4E31]">常見問題</p>
+          <p className="mb-3 pr-9 text-sm font-semibold tracking-wider text-[#6B4E31]">常見問題</p>
           <div className="flex flex-col">
             {FAQS.map((q) => (
               <button
