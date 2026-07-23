@@ -6,6 +6,7 @@ import { BrandSplit } from "@/components/brand-split"
 import { StrengthsSection } from "@/components/strengths-section"
 import { AboutSection } from "@/components/about-section"
 import { PortfolioPreview } from "@/components/portfolio-preview"
+import { ServiceItems } from "@/components/service-items"
 import { ServiceProcess } from "@/components/service-process"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { ContactSection } from "@/components/contact-section"
@@ -44,6 +45,7 @@ export function HomePageClient() {
         <StrengthsSection colors={colors} />
         <AboutSection colors={colors} />
         <PortfolioPreview colors={colors} />
+        <ServiceItems colors={colors} />
         <ServiceProcess colors={colors} />
         <TestimonialsSection colors={colors} />
         <ContactSection colors={colors} />
