@@ -111,7 +111,7 @@ export default function ConstructionPage() {
     <div className={`transition-opacity duration-700 ease-in-out ${loading ? "opacity-0" : "opacity-100"}`} style={{ fontFamily: "'Josefin Sans', sans-serif", background: colors.hero_bg, color: colors.hero_heading, letterSpacing: "0.05em" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+TC:wght@300;400&family=Josefin+Sans:wght@200;300;400&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @layer base { * { margin: 0; padding: 0; box-sizing: border-box; } }
         .serif { font-family: 'Cormorant Garamond', 'Noto Sans TC', sans-serif; }
         .noto { font-family: 'Noto Serif TC', serif; }
         .service-card:hover { border-color: ${colors.services_accent} !important; background: ${colors.strengths_bg} !important; }

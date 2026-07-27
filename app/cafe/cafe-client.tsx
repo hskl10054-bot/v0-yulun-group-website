@@ -40,7 +40,7 @@ export default function CafePage() {
     <div style={{ fontFamily: "'Josefin Sans', sans-serif", background: "#FAF8F4", color: "#2A2520", letterSpacing: "0.05em" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Serif+TC:wght@300;400&family=Josefin+Sans:wght@200;300;400&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @layer base { * { margin: 0; padding: 0; box-sizing: border-box; } }
         .serif { font-family: 'Cormorant Garamond', 'Noto Sans TC', sans-serif; }
         .noto { font-family: 'Noto Serif TC', serif; }
         .store-card:hover { border-color: #6B4E31 !important; background: #F5F0E8 !important; }
