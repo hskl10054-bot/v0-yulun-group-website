@@ -120,9 +120,12 @@ export default function ConstructionPage() {
         @media (hover: none) {
           .portfolio-overlay { opacity: 1 !important; }
         }
-        .strength-card:hover { border-color: ${colors.strengths_icon} !important; }
-        .strength-card:hover .strength-icon { background: ${colors.strengths_icon} !important; border-color: ${colors.strengths_icon} !important; }
-        .strength-card:hover .strength-icon svg { color: ${colors.hero_bg} !important; }
+        .strength-card h3, .strength-card p { transition: color 0.4s, opacity 0.4s; }
+        .strength-card:hover { background: ${colors.strengths_icon} !important; border-color: ${colors.strengths_icon} !important; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .strength-card:hover .strength-icon { background: #FFFFFF !important; border-color: rgba(255,255,255,0.4) !important; }
+        .strength-card:hover .strength-icon svg { color: ${colors.strengths_icon} !important; }
+        .strength-card:hover h3 { color: #FFFFFF !important; }
+        .strength-card:hover p { color: #FFFFFF !important; opacity: 0.9; }
         .back-link:hover { color: ${colors.hero_accent} !important; }
         .cta-link:hover { color: ${colors.hero_accent} !important; border-color: ${colors.hero_accent} !important; }
         .form-input { background: transparent; border: none; border-bottom: 0.5px solid rgba(255,255,255,0.2); padding: 0.7rem 0; width: 100%; font-family: 'Cormorant Garamond','Noto Serif TC',serif; font-size: 1.05rem; font-weight: 300; letter-spacing: 0.1em; color: ${colors.contact_btn_text}; outline: none; transition: border-color 0.3s; }
@@ -201,7 +204,7 @@ export default function ConstructionPage() {
           <div style={{ width: 48, height: 1, background: colors.strengths_icon, margin: "0 auto 4rem" }} />
           <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
             {strengths.map((s, i) => (
-              <div key={s.title} className="strength-card" ref={addRef(6 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "3rem 2rem", border: `0.5px solid ${colors.strengths_card_border}`, background: colors.strengths_card_bg, transition: "border-color 0.4s", textAlign: "center" }}>
+              <div key={s.title} className="strength-card" ref={addRef(6 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "3rem 2rem", border: `0.5px solid ${colors.strengths_card_border}`, background: colors.strengths_card_bg, transition: "background 0.4s, border-color 0.4s, box-shadow 0.4s", textAlign: "center" }}>
                 <div className="strength-icon" style={{ width: 64, height: 64, border: `0.5px solid ${colors.strengths_card_border}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem", transition: "background 0.4s, border-color 0.4s" }}>
                   <s.icon size={28} style={{ color: colors.strengths_icon, transition: "color 0.4s" }} />
                 </div>
