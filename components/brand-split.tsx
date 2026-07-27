@@ -21,12 +21,12 @@ function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href, tit
         <Image src={imageSrc} alt={imageAlt} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" quality={85} />
       )}
       <div className="absolute inset-0 transition-colors duration-500" style={{ backgroundColor: colors.brands_overlay }} />
-      <div className="relative z-10 flex flex-col items-center gap-4 px-6 text-center">
-        <span className="text-xs font-light tracking-[0.3em] uppercase" style={{ color: colors.brands_text, opacity: 0.7, ...subtitleStyle }}>{subtitle}</span>
-        <h2 className="text-2xl font-bold tracking-wider md:text-3xl lg:text-4xl" style={{ color: colors.brands_heading, ...titleStyle }}>{title}</h2>
-        <div className="h-px w-12 transition-all duration-500 group-hover:w-20" style={{ backgroundColor: colors.brands_accent }} />
-        <p className="max-w-xs text-[1.05rem] font-light leading-relaxed text-justify md:text-[1.15rem]" style={{ color: colors.brands_text, opacity: 0.7, textAlignLast: "center", ...descriptionStyle }}>{description}</p>
-        <div className="mt-4 flex items-center gap-2 px-6 py-3 text-sm tracking-widest transition-all duration-500 group-hover:border-[#fff1a8] group-hover:bg-[#fff1a8] group-hover:!text-[#2A2520]" style={{ borderWidth: "1px", borderStyle: "solid", borderColor: `${colors.brands_heading}4D`, color: colors.brands_heading }}>
+      <div className="relative z-10 flex max-w-md flex-col items-center px-8 text-center">
+        <span className="mb-4 text-[0.7rem] font-light uppercase tracking-[0.35em]" style={{ color: colors.brands_text, opacity: 0.8, ...subtitleStyle }}>{subtitle}</span>
+        <h2 className="text-[1.7rem] font-bold leading-tight tracking-[0.08em] md:text-4xl" style={{ color: colors.brands_heading, textShadow: "0 1px 18px rgba(0,0,0,0.35)", ...titleStyle }}>{title}</h2>
+        <div className="my-6 h-px w-12 transition-all duration-500 group-hover:w-24" style={{ backgroundColor: colors.brands_accent }} />
+        <p className="text-[1.02rem] font-light leading-[2] [text-wrap:pretty] md:text-[1.1rem]" style={{ color: colors.brands_text, opacity: 0.9, textShadow: "0 1px 12px rgba(0,0,0,0.3)", ...descriptionStyle }}>{description}</p>
+        <div className="mt-9 inline-flex items-center gap-2 rounded-full px-7 py-3 text-[0.8rem] tracking-[0.2em] transition-all duration-500 group-hover:!border-[#B5956A] group-hover:bg-[#B5956A] group-hover:!text-white" style={{ borderWidth: "1px", borderStyle: "solid", borderColor: `${colors.brands_heading}55`, color: colors.brands_heading }}>
           進入品牌官網 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>
       </div>
