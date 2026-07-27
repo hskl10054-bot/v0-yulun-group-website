@@ -6,6 +6,7 @@ import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getI
 import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
 import { PortfolioPreview } from "@/components/portfolio-preview"
+import { CountUp } from "@/components/count-up"
 
 const defaultServices = [
   { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
@@ -190,10 +191,19 @@ export default function DesignPage() {
             {aboutDesc || "空房子設計致力於打破格局束縛，以人為本，透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。我們不做複製品，每一個案子都從屋主的生活習慣、個性與夢想出發，打造獨一無二的空間故事。"}
           </p>
           <div ref={addRef(7)} className="resp-stats" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "flex", gap: "3rem" }}>
-            {[["150+","完成案例"],["8","年品牌經驗"],["98%","客戶滿意度"]].map(([num, label]) => (
-              <div key={label}>
-                <span className="serif" style={{ fontSize: "2.5rem", fontWeight: 300, color: colors.about_heading, display: "block" }}>{num}</span>
-                <span style={{ fontSize: "0.78rem", letterSpacing: "0.2em", color: colors.about_text, textTransform: "uppercase" }}>{label}</span>
+            {[
+              { target: 150, suffix: "+", label: "完成案例" },
+              { target: 8, suffix: "", label: "年品牌經驗" },
+              { target: 98, suffix: "%", label: "客戶滿意度" },
+            ].map((s) => (
+              <div key={s.label}>
+                <CountUp
+                  target={s.target}
+                  suffix={s.suffix}
+                  className="serif"
+                  style={{ fontSize: "2.5rem", fontWeight: 300, color: colors.about_heading, display: "block" }}
+                />
+                <span style={{ fontSize: "0.78rem", letterSpacing: "0.2em", color: colors.about_text, textTransform: "uppercase" }}>{s.label}</span>
               </div>
             ))}
           </div>
