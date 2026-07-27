@@ -125,6 +125,7 @@ export default function DesignPage() {
           .resp-contact { grid-template-columns: 1fr !important; min-height: auto !important; }
           .resp-contact-left, .resp-contact-right { padding: 4rem 2.5rem !important; }
           .resp-footer { padding: 2rem 2.5rem !important; flex-direction: column !important; gap: 1rem !important; text-align: center !important; }
+          .resp-brand { grid-template-columns: 1fr !important; gap: 3rem !important; }
         }
         @media (max-width: 640px) {
           .resp-nav { padding: 1rem 1.2rem !important; }
@@ -206,6 +207,41 @@ export default function DesignPage() {
                 <span style={{ fontSize: "0.78rem", letterSpacing: "0.2em", color: colors.about_text, textTransform: "uppercase" }}>{s.label}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BRAND IDENTITY — 空房子 專屬 LOGO 識別故事 */}
+      <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.hero_bg }}>
+        <div style={{ marginBottom: "4rem", borderBottom: `0.5px solid ${colors.services_card_border}`, paddingBottom: "2rem" }}>
+          <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Identity</span>
+          <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.hero_heading }}>品牌識別</h2>
+        </div>
+        <div className="resp-brand" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
+          <div ref={addRef(30)} style={{ ...fadeStyle, display: "flex", justifyContent: "center" }}>
+            <img src="/images/hds-mark.png" alt="空房子室內設計 品牌識別標誌" style={{ width: "min(65%, 340px)", height: "auto" }} />
+          </div>
+          <div>
+            <p ref={addRef(31)} className="noto" style={{ ...fadeStyle, fontSize: "1.2rem", lineHeight: 2.1, color: colors.hero_heading, fontWeight: 300, marginBottom: "0.9rem" }}>
+              圓，開口向外——喻示客戶的宅邸，承接魔法，氣象更新。
+            </p>
+            <p ref={addRef(32)} style={{ ...fadeStyle, transitionDelay: "0.12s", fontSize: "0.8rem", letterSpacing: "0.32em", textTransform: "uppercase", color: colors.hero_accent, marginBottom: "2.5rem" }}>
+              Human · Design · Space
+            </p>
+            <div ref={addRef(33)} style={{ ...fadeStyle, transitionDelay: "0.24s", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.75rem 2.5rem" }}>
+              {[
+                { en: "Design", zh: "設計美學", desc: "以比例與留白，構築空間的靈魂。" },
+                { en: "Human", zh: "以人為本", desc: "從屋主的生活與夢想出發。" },
+                { en: "New", zh: "煥然一新", desc: "為老屋與新居注入嶄新氣象。" },
+                { en: "Engineering", zh: "專業工程", desc: "自有工班，落實每一處細節。" },
+              ].map((c) => (
+                <div key={c.en}>
+                  <p style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, marginBottom: "0.45rem" }}>{c.en}</p>
+                  <p style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "1.12rem", fontWeight: 600, color: colors.hero_heading, marginBottom: "0.35rem" }}>{c.zh}</p>
+                  <p className="noto" style={{ fontSize: "0.92rem", lineHeight: 1.8, color: colors.hero_text, fontWeight: 300 }}>{c.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
