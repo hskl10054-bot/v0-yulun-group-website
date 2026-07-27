@@ -5,8 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
-import { PortfolioModal } from "@/components/portfolio-modal"
-import { useWorksData, slugify } from "@/lib/use-works-data"
+import { PortfolioPreview } from "@/components/portfolio-preview"
 
 const defaultServices = [
   { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
@@ -14,14 +13,6 @@ const defaultServices = [
   { num: "03", name: "老屋翻新空間重整", desc: "保留空間記憶的同時，注入現代設計語彙。舊屋新生，讓老房子重新散發獨特魅力。" },
   { num: "04", name: "商業空間美學配置", desc: "咖啡廳、辦公室、品牌門市等商業空間，以品牌精神為核心，設計吸引人且具功能性的環境。" },
   { num: "05", name: "軟裝設計與風格諮詢", desc: "家具挑選、燈光配置、藝術品與植栽搭配，用軟裝語彙讓硬體設計更有生命力。" },
-]
-
-const defaultPortfolios = [
-  { title: "現代簡約｜光感餐廚", image: "/images/design/portfolio/design-work-01.jpg" },
-  { title: "暖色侘寂｜圓弧玄關", image: "/images/design/portfolio/design-work-02.jpg" },
-  { title: "輕奢現代｜石紋客餐廳", image: "/images/design/portfolio/design-work-03.jpg" },
-  { title: "極簡北歐｜純白入戶", image: "/images/design/portfolio/design-work-04.jpg" },
-  { title: "日式和風｜日光臥榻", image: "/images/design/portfolio/design-work-05.jpg" },
 ]
 
 const defaultTestimonials = [
@@ -34,26 +25,9 @@ export default function DesignPage() {
   const { content, listItems, images, loading } = useCmsData("design")
   const colors = usePageColors(content, "design")
 
-  // Resolve a portfolio tile to its matching /works case page. Each style tile
-  // maps to a specific case (by zh/en name) looked up in the live CMS list;
-  // returns null when no case is found, so the tile keeps its lightbox.
-  const { cases } = useWorksData()
-  const caseHref = (title: string): string | null => {
-    const link = (zhRe: RegExp, enRe: RegExp) => {
-      const c = cases.find((c) => zhRe.test(c.zhName) || enRe.test(c.enName))
-      return c ? `/works/${slugify(c.enName)}` : null
-    }
-    if (/現代簡約|光感餐廚/.test(title)) return link(/木格/, /lattice/i)
-    if (/暖色侘寂|圓弧玄關/.test(title)) return link(/無痕/, /seamless/i)
-    if (/輕奢現代|石紋客餐廳/.test(title)) return link(/^曜$|曜/, /onyx/i)
-    if (/極簡北歐|純白入戶/.test(title)) return link(/常日/, /everyday/i)
-    if (/日式和風|日光臥榻/.test(title)) return link(/和風/, /wafu|japan/i)
-    return null
-  }
   const [formData, setFormData] = useState<Record<string, string>>({})
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [selectedPortfolio, setSelectedPortfolio] = useState<{ title: string; image: string; sortOrder: number } | null>(null)
   const [aboutVisible, setAboutVisible] = useState(false)
   const aboutColRef = useRef<HTMLDivElement>(null)
 
@@ -62,24 +36,6 @@ export default function DesignPage() {
   const services = cmsServices.length > 0
     ? cmsServices.map((li) => ({ num: li.subtitle || String(li.sort_order).padStart(2, "0"), name: li.title, desc: li.description, sortOrder: li.sort_order }))
     : defaultServices.map((s, i) => ({ ...s, sortOrder: i + 1 }))
-
-  // Portfolios from CMS or fallback
-  const cmsPortfolios = getListItemsBySection(listItems, "portfolio")
-  const portfolios = cmsPortfolios.length > 0
-    ? cmsPortfolios.map((li) => ({
-        title: li.title,
-        image: getImageUrl(images, "portfolio", li.sort_order) || `/images/design/portfolio/design-work-0${li.sort_order}.jpg`,
-      }))
-    : defaultPortfolios
-
-  // Portfolios sort_order for style
-  const portfoliosWithOrder = cmsPortfolios.length > 0
-    ? cmsPortfolios.map((li) => ({
-        title: li.title,
-        image: getImageUrl(images, "portfolio", li.sort_order) || `/images/design/portfolio/design-work-0${li.sort_order}.jpg`,
-        sortOrder: li.sort_order,
-      }))
-    : defaultPortfolios.map((p, i) => ({ ...p, sortOrder: i + 1 }))
 
   // Testimonials from CMS or fallback
   const cmsTestimonials = getListItemsBySection(listItems, "testimonials")
@@ -264,48 +220,10 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* PORTFOLIO */}
-      <section id="portfolio" style={{ padding: "6rem 0", background: colors.portfolio_bg }}>
-        <div className="resp-section-inner" style={{ padding: "0 6rem", marginBottom: "3rem", display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div>
-            <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.portfolio_accent, marginBottom: "0.5rem" }}>Portfolio</p>
-            <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.portfolio_heading }}>精選作品</h2>
-          </div>
-          <Link href="/works" className="cta-link" style={{ fontSize: "0.82rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.portfolio_heading, textDecoration: "none", borderBottom: `1px solid ${colors.portfolio_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>查看所有案例 →</Link>
-        </div>
-        <div className="resp-portfolio" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gridTemplateRows: "300px 300px", gap: "2px" }}>
-          {portfoliosWithOrder.map((p, i) => {
-            // Tiles with a matching case page link straight to it; others open the lightbox.
-            const href = caseHref(p.title)
-            const itemStyle = { position: "relative" as const, overflow: "hidden", gridRow: i === 0 ? "span 2" : undefined, cursor: "pointer" }
-            const inner = (
-              <>
-                <img src={p.image} alt={p.title} className="portfolio-bg" style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s ease" }} />
-                <div className="portfolio-overlay" style={{ position: "absolute", inset: 0, background: `linear-gradient(to top, ${colors.portfolio_overlay} 0%, transparent 60%)`, display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: "2rem", opacity: 0, transition: "opacity 0.4s" }}>
-                  <h3 className="serif" style={{ fontSize: "1.3rem", fontWeight: 300, color: "#fff", ...getListItemStyle(content, "portfolio", p.sortOrder, "title", "design") }}>{p.title}</h3>
-                </div>
-              </>
-            )
-            return href ? (
-              <Link key={p.title} href={href} className="portfolio-item" style={itemStyle}>{inner}</Link>
-            ) : (
-              <div key={p.title} className="portfolio-item" onClick={() => setSelectedPortfolio(p)} style={itemStyle}>{inner}</div>
-            )
-          })}
-        </div>
-      </section>
-
-      {selectedPortfolio && (
-        <PortfolioModal
-          isOpen={true}
-          onClose={() => setSelectedPortfolio(null)}
-          title={selectedPortfolio.title}
-          subtitle=""
-          coverImage={selectedPortfolio.image}
-          page="design"
-          sortOrder={selectedPortfolio.sortOrder}
-        />
-      )}
+      {/* PORTFOLIO — 沿用首頁的案例卡片輪播（分類篩選＋左右切換＋敘述） */}
+      <div id="portfolio">
+        <PortfolioPreview colors={colors} />
+      </div>
 
       {/* TESTIMONIALS */}
       <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.testimonials_bg }}>

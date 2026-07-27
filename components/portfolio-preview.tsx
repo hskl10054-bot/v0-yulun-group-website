@@ -77,11 +77,14 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
 
   if (withHero.length === 0) return null
 
+  // 邊框色：首頁用 strengths_card_border，其他頁（如 /design）改抓對應的卡片邊框色。
+  const border = colors.strengths_card_border || colors.services_card_border || colors.testimonials_card_border || "#E5E0DB"
+
   return (
     <section className="py-24 md:py-32" style={{ backgroundColor: colors.portfolio_bg }}>
       <div className="mx-auto max-w-[100rem] px-6 md:px-12">
         {/* Header */}
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-5 border-b pb-5 md:mb-14" style={{ borderColor: colors.strengths_card_border }}>
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-5 border-b pb-5 md:mb-14" style={{ borderColor: border }}>
           <div>
             <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Portfolio</span>
             <h2 className="text-3xl font-bold tracking-[0.12em] md:text-4xl" style={{ color: colors.portfolio_heading }}>精選作品</h2>
@@ -108,7 +111,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                 onClick={() => scroll(-1)}
                 aria-label="上一個"
                 className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-black/5"
-                style={{ borderColor: colors.strengths_card_border, color: colors.portfolio_heading }}
+                style={{ borderColor: border, color: colors.portfolio_heading }}
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
@@ -117,7 +120,7 @@ export function PortfolioPreview({ colors }: PortfolioPreviewProps) {
                 onClick={() => scroll(1)}
                 aria-label="下一個"
                 className="flex h-10 w-10 items-center justify-center rounded-full border transition-colors hover:bg-black/5"
-                style={{ borderColor: colors.strengths_card_border, color: colors.portfolio_heading }}
+                style={{ borderColor: border, color: colors.portfolio_heading }}
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
