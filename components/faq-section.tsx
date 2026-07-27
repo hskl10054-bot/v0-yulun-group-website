@@ -43,8 +43,13 @@ export function FaqSection({ colors }: FaqSectionProps) {
                   aria-expanded={isOpen}
                   className="flex w-full items-center justify-between gap-5 py-6 text-left"
                 >
-                  <span className="text-[1.1rem] font-medium leading-snug md:text-[1.25rem]" style={{ color: isOpen ? accent : heading, transition: "color 0.3s" }}>
-                    {f.q}
+                  <span className="flex items-baseline gap-4">
+                    <span className="text-[0.95rem] font-semibold [font-variant-numeric:tabular-nums] md:text-[1.05rem]" style={{ color: accent }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[1.1rem] font-medium leading-snug md:text-[1.25rem]" style={{ color: isOpen ? accent : heading, transition: "color 0.3s" }}>
+                      {f.q}
+                    </span>
                   </span>
                   <span
                     aria-hidden="true"
