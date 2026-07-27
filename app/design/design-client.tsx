@@ -247,8 +247,8 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* SERVICES — 與裕綸集團首頁的「服務項目」統一（同一個 ServiceItems 元件） */}
-      <ServiceItems colors={colors} />
+      {/* SERVICES — 詳細卡片版（含 SEO 敘述） */}
+      <ServiceItems colors={colors} detailed />
 
       {/* PORTFOLIO — 沿用首頁的案例卡片輪播（分類篩選＋左右切換＋敘述） */}
       <div id="portfolio">
