@@ -6,6 +6,7 @@ import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getI
 import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
 import { PortfolioPreview } from "@/components/portfolio-preview"
+import { ServiceItems } from "@/components/service-items"
 import { CountUp } from "@/components/count-up"
 
 const defaultServices = [
@@ -235,25 +236,8 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.services_bg }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "4rem", borderBottom: `0.5px solid ${colors.services_card_border}`, paddingBottom: "2rem" }}>
-          <div>
-            <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Services</span>
-            <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.services_heading }}>服務項目</h2>
-          </div>
-          <a href="#contact" className="cta-link" style={{ fontSize: "0.82rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.services_heading, textDecoration: "none", borderBottom: `1px solid ${colors.services_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>諮詢方案 →</a>
-        </div>
-        <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.5rem" }}>
-          {services.map((s, i) => (
-            <div key={s.num} className="service-card" ref={addRef(8 + i)} style={{ ...fadeStyle, transitionDelay: `${(i % 3) * 0.15}s`, padding: "2.5rem", border: `0.5px solid ${colors.services_card_border}`, transition: "border-color 0.3s, background 0.3s", cursor: "default" }}>
-              <span style={{ fontSize: "2.49rem", color: colors.services_accent, marginBottom: "1.5rem", display: "block", fontFamily: "'Cormorant Garamond', serif", ...getListItemStyle(content, "services", s.sortOrder, "subtitle", "design") }}>{s.num}</span>
-              <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", color: colors.services_heading, ...getListItemStyle(content, "services", s.sortOrder, "title", "design") }}>{s.name}</h3>
-              <p className="noto" style={{ fontSize: "0.95rem", lineHeight: 2, color: colors.services_text, fontWeight: 300, ...getListItemStyle(content, "services", s.sortOrder, "description", "design") }}>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* SERVICES — 與裕綸集團首頁的「服務項目」統一（同一個 ServiceItems 元件） */}
+      <ServiceItems colors={colors} />
 
       {/* PORTFOLIO — 沿用首頁的案例卡片輪播（分類篩選＋左右切換＋敘述） */}
       <div id="portfolio">
