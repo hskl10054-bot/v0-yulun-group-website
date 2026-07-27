@@ -104,8 +104,8 @@ export default function CafePage() {
       {/* FEATURES */}
       <section className="resp-section" style={{ padding: "8rem 6rem", background: "#F5F0E8" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#6B4E31", marginBottom: "1rem" }}>Features</p>
-          <h2 ref={addRef(5)} className="serif resp-heading" style={{ ...fadeStyle, transitionDelay: "0.15s", fontSize: "2.8rem", fontWeight: 300, marginBottom: "1.5rem" }}>品牌特色</h2>
+          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#B5956A", marginBottom: "1rem" }}>Features</p>
+          <h2 ref={addRef(5)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", marginBottom: "1.5rem", color: "#2A2520" }}>品牌特色</h2>
           <div style={{ width: 48, height: 1, background: "#6B4E31", margin: "0 auto 4rem" }} />
           <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
             {features.map((f, i) => (
@@ -125,8 +125,8 @@ export default function CafePage() {
       <section id="stores" className="resp-section" style={{ padding: "8rem 6rem", background: "#FAF8F4" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "4rem", borderBottom: "0.5px solid #E8E3DA", paddingBottom: "2rem" }}>
           <div>
-            <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "#6B4E31", marginBottom: "0.5rem" }}>Stores</p>
-            <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300 }}>門市資訊</h2>
+            <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Stores</span>
+            <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: "#2A2520" }}>門市資訊</h2>
           </div>
         </div>
         <div className="resp-grid2" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "1.5rem" }}>
