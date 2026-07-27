@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { HomePageClient } from "@/components/home-page-client"
+import { FAQS } from "@/data/faqs"
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -46,40 +47,11 @@ const localBusinessSchema = {
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "台中室內設計費用？",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "台中室內設計費用依坪數、格局與需求而定。空房子室內設計全估裝修 88 萬起、包套全裝每坪最低 5 萬起，歡迎預約免費諮詢取得專屬報價。",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "設計到完工多久？",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "一般 15–25 坪約 2 個月完工、26–40 坪約 3 個月交屋，實際依施工項目調整。裕綸自有工班、標準化 SOP 管理，進度全程可追蹤。",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "如何預約免費的空間格局諮詢？",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "可透過官網預約表單或 Facebook Messenger 私訊，留下坪數與需求，專人將與您聯繫安排免費的空間格局諮詢。",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "請問裝修預算與進度怎麼做到透明？",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "裕綸室內裝修採逐項清單報價、標準化 SOP 工程管理，自有工班不外包、工程保固一年，預算與進度全程公開可追蹤。",
-      },
-    },
-  ],
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
 }
 
 export const metadata: Metadata = {
