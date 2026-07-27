@@ -13,9 +13,24 @@ import { ContactSection } from "@/components/contact-section"
 import { SplashScreen } from "@/components/splash-screen"
 import { useCmsData, usePageColors } from "@/lib/use-cms-data"
 
+// 金色點綴（空房子副色）—— 強制套用到首頁的 accent／icon／line，
+// 避免被 CMS 舊有的深棕值覆蓋，讓全站點綴色一致。
+const GOLD = "#B5956A"
+const GOLD_ACCENTS = [
+  "hero_accent",
+  "brands_accent",
+  "strengths_accent",
+  "strengths_icon",
+  "portfolio_accent",
+  "testimonials_accent",
+  "contact_accent",
+  "footer_accent",
+]
+
 export function HomePageClient() {
   const { content, loading } = useCmsData("home")
-  const colors = usePageColors(content, "home")
+  const baseColors = usePageColors(content, "home")
+  const colors = { ...baseColors, ...Object.fromEntries(GOLD_ACCENTS.map((k) => [k, GOLD])) }
 
   return (
     <>
