@@ -204,8 +204,8 @@ export default function DesignPage() {
       <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.services_bg }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "4rem", borderBottom: `0.5px solid ${colors.services_card_border}`, paddingBottom: "2rem" }}>
           <div>
-            <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.services_accent, marginBottom: "0.5rem" }}>Services</p>
-            <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.services_heading }}>服務項目</h2>
+            <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Services</span>
+            <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.services_heading }}>服務項目</h2>
           </div>
           <a href="#contact" className="cta-link" style={{ fontSize: "0.82rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.services_heading, textDecoration: "none", borderBottom: `1px solid ${colors.services_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>諮詢方案 →</a>
         </div>
@@ -227,8 +227,8 @@ export default function DesignPage() {
 
       {/* TESTIMONIALS */}
       <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.testimonials_bg }}>
-        <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.testimonials_accent, marginBottom: "1rem" }}>Testimonials</p>
-        <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.testimonials_heading, marginBottom: "4rem" }}>客戶怎麼說</h2>
+        <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Testimonials</span>
+        <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.testimonials_heading, marginBottom: "3.5rem" }}>客戶怎麼說</h2>
         <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
           {testimonials.map((t, i) => (
             <div key={t.name} ref={addRef(20 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "2.5rem", border: `0.5px solid ${colors.testimonials_card_border}` }}>
@@ -243,8 +243,8 @@ export default function DesignPage() {
       {/* CONTACT */}
       <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
         <div className="resp-contact-left" style={{ background: colors.contact_bg, padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-          <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Contact</p>
-          <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, lineHeight: 1.2, marginBottom: "3rem" }}>開始你的<br />空間對話</h2>
+          <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Contact</span>
+          <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", lineHeight: 1.3, color: colors.contact_heading, marginBottom: "3rem" }}>開始你的空間對話</h2>
           {[["地址",contactAddress,"address"],["電話",contactPhone,"phone"],["Email",contactEmail,"email"],["營業時間",contactHours,"hours"]].map(([label, val, key]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
               <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
@@ -283,8 +283,8 @@ export default function DesignPage() {
           </div>
         </div>
         <div className="resp-contact-right" style={{ background: colors.contact_heading, padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-          <p style={{ fontSize: "1.245rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "1rem" }}>Send Message</p>
-          <h2 className="serif resp-heading" style={{ fontSize: "2.8rem", fontWeight: 300, color: colors.contact_btn_text, marginBottom: "2.5rem" }}>預約諮詢</h2>
+          <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(255,255,255,0.09)", letterSpacing: "0.08em" }}>Send Message</span>
+          <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.contact_btn_text, marginBottom: "2.5rem" }}>預約諮詢</h2>
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["案件類型","新成屋 / 老屋翻新 / 商業空間","text"],["預算金額","例如：100萬 — 300萬","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
               <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
