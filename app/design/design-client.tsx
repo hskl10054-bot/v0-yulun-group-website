@@ -217,32 +217,21 @@ export default function DesignPage() {
           <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Identity</span>
           <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.hero_heading }}>品牌識別</h2>
         </div>
-        <div className="resp-brand" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
-          <div ref={addRef(30)} style={{ ...fadeStyle, display: "flex", justifyContent: "center" }}>
-            <img src="/images/hds-mark.png" alt="空房子室內設計 品牌識別標誌" style={{ width: "min(65%, 340px)", height: "auto" }} />
-          </div>
-          <div>
-            <p ref={addRef(31)} className="noto" style={{ ...fadeStyle, fontSize: "1.2rem", lineHeight: 2.1, color: colors.hero_heading, fontWeight: 300, marginBottom: "0.9rem" }}>
-              圓，開口向外——喻示客戶的宅邸，承接魔法，氣象更新。
-            </p>
-            <p ref={addRef(32)} style={{ ...fadeStyle, transitionDelay: "0.12s", fontSize: "0.8rem", letterSpacing: "0.32em", textTransform: "uppercase", color: colors.hero_accent, marginBottom: "2.5rem" }}>
-              Human · Design · Space
-            </p>
-            <div ref={addRef(33)} style={{ ...fadeStyle, transitionDelay: "0.24s", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.75rem 2.5rem" }}>
-              {[
-                { en: "Design", zh: "設計美學", desc: "以比例與留白，構築空間的靈魂。" },
-                { en: "Human", zh: "以人為本", desc: "從屋主的生活與夢想出發。" },
-                { en: "New", zh: "煥然一新", desc: "為老屋與新居注入嶄新氣象。" },
-                { en: "Engineering", zh: "專業工程", desc: "自有工班，落實每一處細節。" },
-              ].map((c) => (
-                <div key={c.en}>
-                  <p style={{ fontSize: "0.68rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, marginBottom: "0.45rem" }}>{c.en}</p>
-                  <p style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "1.12rem", fontWeight: 600, color: colors.hero_heading, marginBottom: "0.35rem" }}>{c.zh}</p>
-                  <p className="noto" style={{ fontSize: "0.92rem", lineHeight: 1.8, color: colors.hero_text, fontWeight: 300 }}>{c.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <p ref={addRef(30)} className="noto" style={{ ...fadeStyle, maxWidth: 660, fontSize: "1.2rem", lineHeight: 2.1, color: colors.hero_heading, fontWeight: 300, marginBottom: "0.9rem" }}>
+          以「家」為形、以「魔法」為念——圓，開口向外，喻示客戶的宅邸，承接魔法，氣象更新。
+        </p>
+        <p ref={addRef(31)} style={{ ...fadeStyle, transitionDelay: "0.1s", fontSize: "0.8rem", letterSpacing: "0.32em", textTransform: "uppercase", color: colors.hero_accent, marginBottom: "3.5rem" }}>
+          Human · Design · Space
+        </p>
+        <div className="resp-brand" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3.5rem", alignItems: "start" }}>
+          <figure ref={addRef(32)} style={{ ...fadeStyle, transitionDelay: "0.15s", margin: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <img src="/images/hds-concept-house.png" alt="空房子 logo 意象：House 家的輪廓、Magic 魔法星芒、空 天際線" style={{ width: "100%", maxWidth: 400, height: "auto", display: "block" }} />
+            <figcaption style={{ marginTop: "1.25rem", textAlign: "center", fontSize: "0.85rem", letterSpacing: "0.14em", color: colors.hero_text }}>House ＋ Magic ＋ 空 — 家的魔法</figcaption>
+          </figure>
+          <figure ref={addRef(33)} style={{ ...fadeStyle, transitionDelay: "0.28s", margin: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <img src="/images/hds-concept-circle.png" alt="空房子圓標意象：Design 設計、Human 以人為本、New 煥然一新、Engineering 工程" style={{ width: "100%", maxWidth: 400, height: "auto", display: "block" }} />
+            <figcaption style={{ marginTop: "1.25rem", textAlign: "center", fontSize: "0.85rem", letterSpacing: "0.14em", color: colors.hero_text }}>Design · Human · New · Engineering</figcaption>
+          </figure>
         </div>
       </section>
 
