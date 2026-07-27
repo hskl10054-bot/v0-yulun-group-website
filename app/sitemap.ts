@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next"
 import { caseSlugs } from "@/data/cases"
+import { POSTS } from "@/data/blog"
 
 const baseUrl = "https://www.yulungroup.com"
 
@@ -11,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/design`, lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/construction`, lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/works`, lastModified, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${baseUrl}/blog`, lastModified, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/process`, lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/cafe`, lastModified, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/privacy`, lastModified, changeFrequency: "yearly", priority: 0.2 },
@@ -23,5 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  return [...staticPages, ...casePages]
+  const blogPages: MetadataRoute.Sitemap = POSTS.map((p) => ({
+    url: `${baseUrl}/blog/${p.slug}`,
+    lastModified: new Date(p.date),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }))
+
+  return [...staticPages, ...casePages, ...blogPages]
 }

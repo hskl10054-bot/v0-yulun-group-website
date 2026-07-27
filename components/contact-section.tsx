@@ -168,6 +168,8 @@ export function ContactSection({ colors }: ContactSectionProps) {
           <span style={{ opacity: 0.45 }}>｜</span>
           <span>台中室內裝修</span>
           <span style={{ opacity: 0.45 }}>｜</span>
+          <Link href="/blog" className="hover:opacity-70 transition-opacity" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>裝修知識</Link>
+          <span style={{ opacity: 0.45 }}>｜</span>
           <Link href="/privacy" className="hover:opacity-70 transition-opacity" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>隱私權政策</Link>
         </div>
       </div>
