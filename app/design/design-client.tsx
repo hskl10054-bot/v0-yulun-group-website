@@ -1,10 +1,8 @@
 "use client"
 import Link from "next/link"
-import { ArrowLeft, ArrowRight, Facebook, Instagram } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
-import { submitForm } from "@/lib/submit-form"
-import { formatPhone } from "@/lib/utils"
 import { PortfolioPreview } from "@/components/portfolio-preview"
 import { ServiceItems } from "@/components/service-items"
 import { DesignProcess } from "@/components/design-process"
@@ -289,23 +287,8 @@ export default function DesignPage() {
         </div>
       </section>
 
-      {/* CONTACT — 聯絡資訊（表單已移至 /booking） */}
-      <ContactInfo showCta bg="#F5F0E8" />
-
-      {/* FOOTER */}
-      <footer className="resp-footer" style={{ background: colors.footer_bg, padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
-        <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>空房子室內設計</span>
-        <p style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 空房子室內設計・裕綸集團</p>
-        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
-          <a href="https://www.instagram.com/human_design.space/" target="_blank" rel="noopener noreferrer" aria-label="空房子 Instagram" style={{ color: "#B5956A", display: "flex" }}>
-            <Instagram size={20} />
-          </a>
-          <a href="https://www.facebook.com/p/%E7%A9%BA%E6%88%BF%E5%AD%90%E8%A8%AD%E8%A8%88-61564720748448/" target="_blank" rel="noopener noreferrer" aria-label="空房子 Facebook" style={{ color: "#B5956A", display: "flex" }}>
-            <Facebook size={20} />
-          </a>
-          <a href="/" style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase", transition: "color 0.3s" }}>裕綸集團</a>
-        </div>
-      </footer>
+      {/* CONTACT — 精簡深色 footer（聯絡資訊 ＋ 版權；表單已移至 /booking） */}
+      <ContactInfo showCta />
     </div>
   )
 }

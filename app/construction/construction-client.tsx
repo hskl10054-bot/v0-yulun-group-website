@@ -285,17 +285,8 @@ export default function ConstructionPage() {
         </div>
       </section>
 
-      {/* CONTACT — 聯絡資訊（表單已移至 /booking） */}
-      <ContactInfo showCta bg="#F0EBE3" />
-
-      {/* FOOTER */}
-      <footer className="resp-footer" style={{ background: colors.footer_bg, padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
-        <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>裕綸室內裝修</span>
-        <p style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 裕綸室內裝修・裕綸集團</p>
-        <div style={{ display: "flex", gap: "2rem" }}>
-          <a href="/" style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase" }}>裕綸集團</a>
-        </div>
-      </footer>
+      {/* CONTACT — 精簡深色 footer（聯絡資訊 ＋ 版權；表單已移至 /booking） */}
+      <ContactInfo showCta />
     </div>
   )
 }
