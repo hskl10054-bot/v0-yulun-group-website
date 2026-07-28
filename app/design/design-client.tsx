@@ -287,7 +287,7 @@ export default function DesignPage() {
           <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", lineHeight: 1.3, color: colors.contact_heading, marginBottom: "3rem" }}>開始你的空間對話</h2>
           {[["地址",contactAddress,"address"],["電話",contactPhone,"phone"],["Email",contactEmail,"email"],["營業時間",contactHours,"hours"]].map(([label, val, key]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
-              <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
+              <p style={{ fontSize: "0.9rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
               {key === "address" ? (
                 <a
                   href="https://maps.app.goo.gl/Ya3FoWUXz36Rh5vj6"
@@ -327,12 +327,12 @@ export default function DesignPage() {
           <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.contact_btn_text, marginBottom: "2.5rem" }}>預約諮詢</h2>
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["案件類型","新成屋 / 老屋翻新 / 商業空間","text"],["預算金額","例如：100萬 — 300萬","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
-              <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
+              <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
               <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => { const val = String(label) === "聯絡電話" ? formatPhone(e.target.value) : e.target.value; setFormData(prev => ({ ...prev, [String(label)]: val })) }} className="form-input" />
             </div>
           ))}
           <div style={{ marginBottom: "1.5rem" }}>
-            <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
+            <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
             <textarea placeholder="簡單描述您的空間與想法..." value={formData["需求說明"] || ""} onChange={(e) => setFormData(prev => ({ ...prev, "需求說明": e.target.value }))} className="form-input" />
           </div>
           <button
