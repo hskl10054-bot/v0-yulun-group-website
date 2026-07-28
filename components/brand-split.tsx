@@ -21,7 +21,7 @@ function BrandCard({ title, subtitle, description, imageSrc, imageAlt, href, tit
         <Image src={imageSrc} alt={imageAlt} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" quality={85} />
       )}
       <div className="absolute inset-0 transition-colors duration-500" style={{ backgroundColor: colors.brands_overlay }} />
-      <div className="relative z-10 flex max-w-md flex-col items-center px-8 text-center">
+      <div className="relative z-10 flex max-w-sm flex-col items-center px-10 text-center">
         <span className="mb-4 text-[0.7rem] font-light uppercase tracking-[0.35em]" style={{ color: colors.brands_text, opacity: 0.8, ...subtitleStyle }}>{subtitle}</span>
         <h2 className="text-[1.7rem] font-bold leading-tight tracking-[0.08em] md:text-4xl" style={{ color: colors.brands_heading, textShadow: "0 1px 18px rgba(0,0,0,0.35)", ...titleStyle }}>{title}</h2>
         <div className="my-6 h-px w-12 transition-all duration-500 group-hover:w-24" style={{ backgroundColor: colors.brands_accent }} />
