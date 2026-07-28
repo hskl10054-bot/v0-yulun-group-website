@@ -19,7 +19,7 @@ export function KfzShell({ children }: { children: ReactNode }) {
         <nav className="navlinks" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <Link href="/design#process">合作流程</Link>
           <span className="sep">·</span>
-          <Link href="/design#contact" className="accent">預約諮詢</Link>
+          <Link href="/booking" className="accent">預約諮詢</Link>
           <SiteMenu color="#2A2520" />
         </nav>
       </header>

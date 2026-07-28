@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList } from "lucide-react"
 import { ServiceItems } from "@/components/service-items"
 import { SiteMenu } from "@/components/site-menu"
+import { ContactInfo } from "@/components/contact-info"
 
 // 工程服務的英文小標（對應中文名稱）
 const SERVICE_EN: Record<string, string> = {
@@ -189,7 +190,7 @@ export default function ConstructionPage() {
         </Link>
         <span className="serif resp-nav-brand" style={{ fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.15em", color: colors.hero_heading }}>裕綸・室內裝修</span>
         <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
-          <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>免費估價</a>
+          <a href="/booking" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>免費估價</a>
           <SiteMenu color={colors.hero_heading} />
         </div>
       </nav>
@@ -284,77 +285,8 @@ export default function ConstructionPage() {
         </div>
       </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-        <div className="resp-contact-left" style={{ background: colors.contact_bg, padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-          <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Contact</span>
-          <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", lineHeight: 1.3, marginBottom: "3rem", color: colors.contact_heading }}>免費丈量估價諮詢</h2>
-          {[["地址",contactAddress,"address"],["電話",contactPhone,"phone"],["Email",contactEmail,"email"],["營業時間",contactHours,"hours"]].map(([label, val, key]) => (
-            <div key={label} style={{ marginBottom: "2rem" }}>
-              <p style={{ fontSize: "0.9rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
-              {key === "address" ? (
-                <a
-                  href="https://maps.app.goo.gl/Ya3FoWUXz36Rh5vj6"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="serif inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity"
-                  style={{ fontSize: "1.05rem", color: colors.contact_heading, textDecoration: "none", ...getContentStyle(content, "contact", key, "construction") }}
-                >
-                  {val}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, flexShrink: 0 }}>
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                    <polyline points="15 3 21 3 21 9" />
-                    <line x1="10" y1="14" x2="21" y2="3" />
-                  </svg>
-                </a>
-              ) : (
-                <p className="serif" style={{ fontSize: "1.05rem", color: colors.contact_heading, ...getContentStyle(content, "contact", key, "construction") }}>{val}</p>
-              )}
-            </div>
-          ))}
-          {/* Google Maps Embed */}
-          <div style={{ marginTop: "1rem", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
-            <iframe
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(contactAddress)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
-              width="100%"
-              height="220"
-              style={{ border: 0, display: "block" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="裕綸室內裝修 — 台中市北屯區瀋陽北路73號"
-            />
-          </div>
-        </div>
-        <div className="resp-contact-right" style={{ background: colors.contact_heading, padding: "6rem", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-          <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(255,255,255,0.09)", letterSpacing: "0.08em" }}>Free Estimate</span>
-          <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.contact_btn_text, marginBottom: "2.5rem" }}>申請估價</h2>
-          {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["工程類型","全室裝修 / 局部工程 / 商業空間","text"],["坪數（選填）","例：30坪","text"],["預算金額","例如：100萬 — 300萬","text"]].map(([label, ph, type]) => (
-            <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
-              <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-              <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => { const val = String(label) === "聯絡電話" ? formatPhone(e.target.value) : e.target.value; setFormData(prev => ({ ...prev, [String(label)]: val })) }} className="form-input" />
-            </div>
-          ))}
-          <div style={{ marginBottom: "1.5rem" }}>
-            <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>工程說明</label>
-            <textarea placeholder="請簡單描述您的裝修需求..." value={formData["工程說明"] || ""} onChange={(e) => setFormData(prev => ({ ...prev, "工程說明": e.target.value }))} className="form-input" />
-          </div>
-          <button
-            disabled={submitting}
-            onClick={async () => {
-              setSubmitting(true)
-              try {
-                await submitForm(formData, "裝修工程")
-                setSubmitted(true)
-                setFormData({})
-              } catch { /* ignore */ }
-              setSubmitting(false)
-            }}
-            style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.7rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: submitting ? "not-allowed" : "pointer", width: "fit-content", opacity: submitting ? 0.6 : 1 }}>
-            {submitting ? "送出中..." : submitted ? "已送出 ✓" : "立即報價 →"}
-          </button>
-        </div>
-      </section>
+      {/* CONTACT — 聯絡資訊（表單已移至 /booking） */}
+      <ContactInfo showCta bg="#F0EBE3" />
 
       {/* FOOTER */}
       <footer className="resp-footer" style={{ background: colors.footer_bg, padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>

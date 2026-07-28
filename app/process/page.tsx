@@ -94,7 +94,7 @@ export default function ProcessPage() {
         <div className="wrap">
           <h2 className="serif">準備好聊聊了嗎？</h2>
           <p>不用先想好所有答案，也不用先準備設計圖。你只要願意把對家的想像說出來，我們就能開始。</p>
-          <Link className="btn" href="/design">預約免費初談</Link>
+          <Link className="btn" href="/booking">預約免費初談</Link>
         </div>
       </section>
     </KfzShell>

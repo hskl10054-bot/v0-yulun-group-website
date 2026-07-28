@@ -74,7 +74,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <Link href="/blog" className="text-sm tracking-[0.2em]" style={{ color: "#8C8479", textDecoration: "none" }}>← 裝修知識</Link>
         <Link href="/" className="text-sm font-medium tracking-[0.2em]" style={{ color: "#2A2520", textDecoration: "none" }}>裕綸集團</Link>
         <div className="flex items-center gap-4">
-          <Link href="/#contact" className="text-sm tracking-[0.2em]" style={{ color: "#B5956A", textDecoration: "none" }}>預約諮詢</Link>
+          <Link href="/booking" className="text-sm tracking-[0.2em]" style={{ color: "#B5956A", textDecoration: "none" }}>預約諮詢</Link>
           <SiteMenu color="#2A2520" />
         </div>
       </nav>
@@ -116,7 +116,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <div className="mt-14 rounded-2xl border p-8 text-center md:p-10" style={{ borderColor: "#E8E3DA", backgroundColor: "#FFFFFF" }}>
           <p className="text-[1.15rem] font-medium" style={{ color: "#2A2520" }}>想把家交給專業團隊規劃？</p>
           <p className="mt-2 text-[0.98rem] font-light leading-relaxed" style={{ color: "#6B5D4F" }}>空房子室內設計 × 裕綸室內裝修，台中設計裝修一站式服務。</p>
-          <Link href="/#contact" className="mt-6 inline-flex items-center gap-2 rounded-full px-8 py-3 text-[0.85rem] tracking-[0.2em]" style={{ backgroundColor: "#B5956A", color: "#FFFFFF", textDecoration: "none" }}>
+          <Link href="/booking" className="mt-6 inline-flex items-center gap-2 rounded-full px-8 py-3 text-[0.85rem] tracking-[0.2em]" style={{ backgroundColor: "#B5956A", color: "#FFFFFF", textDecoration: "none" }}>
             預約免費諮詢 →
           </Link>
         </div>

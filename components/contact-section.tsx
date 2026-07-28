@@ -1,11 +1,6 @@
-"use client"
-
-import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Facebook, Instagram } from "lucide-react"
-import { useCmsData, getContentValue, getContentStyle } from "@/lib/use-cms-data"
-import { submitForm } from "@/lib/submit-form"
-import { formatPhone } from "@/lib/utils"
+import { ContactInfo } from "@/components/contact-info"
 
 // 空房子社群平台
 const FB_URL = "https://www.facebook.com/p/%E7%A9%BA%E6%88%BF%E5%AD%90%E8%A8%AD%E8%A8%88-61564720748448/"
@@ -15,165 +10,35 @@ interface ContactSectionProps {
   colors: Record<string, string>
 }
 
-function ContactForm({ colors }: { colors: Record<string, string> }) {
-  const [formData, setFormData] = useState<Record<string, string>>({})
-  const [submitting, setSubmitting] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
-
-  // Pre-fill 需求說明 from a clicked FAQ (same-page event) or ?ask= URL param.
-  useEffect(() => {
-    const prefill = (q: string) => {
-      if (!q) return
-      setSubmitted(false)
-      setFormData((prev) => ({ ...prev, 需求說明: q }))
-      setTimeout(() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }), 60)
-    }
-    const asked = new URLSearchParams(window.location.search).get("ask")
-    if (asked) prefill(asked)
-    const handler = (e: Event) => prefill((e as CustomEvent<string>).detail)
-    window.addEventListener("yulun:ask", handler as EventListener)
-    return () => window.removeEventListener("yulun:ask", handler as EventListener)
-  }, [])
-
-  // After a successful submit, replace the form with a clear thank-you message.
-  if (submitted) {
-    return (
-      <div className="flex flex-col gap-5" style={{ paddingTop: "1rem" }}>
-        <div style={{ fontSize: "2.5rem", lineHeight: 1, color: colors.contact_btn_bg }}>✓</div>
-        <h3 className="serif" style={{ fontSize: "1.8rem", fontWeight: 300, color: colors.footer_text }}>已收到您的諮詢</h3>
-        <p className="serif font-light" style={{ fontSize: "1.05rem", lineHeight: 1.9, color: "rgba(255,255,255,0.6)" }}>
-          感謝您的來信，專人將於 3 個工作天內與您聯繫。<br />
-          若有急件，歡迎直撥{" "}
-          <a href="tel:+886-918-230-603" style={{ color: colors.footer_text, textDecoration: "underline" }}>0918-230-603</a>。
-        </p>
-        <button
-          onClick={() => setSubmitted(false)}
-          style={{ marginTop: "0.5rem", background: "transparent", color: "rgba(255,255,255,0.45)", border: "1px solid rgba(255,255,255,0.2)", padding: "0.75rem 2rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: "pointer", width: "fit-content" }}
-        >
-          再填一筆 →
-        </button>
-      </div>
-    )
-  }
-
-  return (
-    <div className="flex flex-col gap-5">
-      {[
-        { label: "姓名", placeholder: "您的大名", type: "text" },
-        { label: "聯絡電話", placeholder: "0900-000-000", type: "tel" },
-        { label: "有興趣的服務", placeholder: "室內設計 / 裝修工程 / 兩者皆是", type: "text" },
-        { label: "預算金額", placeholder: "例如：100萬 — 300萬", type: "text" },
-      ].map(({ label, placeholder, type }) => (
-        <div key={label} style={{ marginBottom: "1.5rem" }}>
-          <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
-          <input type={type} placeholder={placeholder} value={formData[label] || ""} onChange={(e) => { const val = label === "聯絡電話" ? formatPhone(e.target.value) : e.target.value; setFormData(prev => ({ ...prev, [label]: val })) }} className="serif w-full bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem" }} />
-          <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0", width: "100%" }} />
-        </div>
-      ))}
-      <div style={{ marginBottom: "1.5rem" }}>
-        <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>需求說明</label>
-        <textarea placeholder="請簡單描述您的空間需求或想法..." rows={1} value={formData["需求說明"] || ""} onChange={(e) => setFormData(prev => ({ ...prev, "需求說明": e.target.value }))} className="serif w-full resize-none bg-transparent font-light tracking-wide placeholder:text-white/25 outline-none" style={{ fontSize: "1.05rem", color: colors.footer_text, border: "none", boxShadow: "none", paddingBottom: "0.5rem", paddingTop: "0.25rem", display: "block", borderBottom: "none", width: "100%", margin: "0" }} />
-        <hr style={{ border: "none", height: "1px", background: "rgba(255,255,255,0.15)", marginTop: "0", width: "100%" }} />
-      </div>
-      <button
-        disabled={submitting}
-        onClick={async () => {
-          setSubmitting(true)
-          try {
-            await submitForm(formData, "首頁")
-            setSubmitted(true)
-            setFormData({})
-          } catch { /* ignore */ }
-          setSubmitting(false)
-        }}
-        style={{ marginTop: "1rem", background: colors.contact_btn_bg, color: colors.contact_btn_text, border: "none", padding: "1rem 2.5rem", fontFamily: "'Josefin Sans',sans-serif", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", cursor: submitting ? "not-allowed" : "pointer", width: "fit-content", opacity: submitting ? 0.6 : 1 }}>
-        {submitting ? "送出中..." : submitted ? "已送出 ✓" : "立即報價 →"}
-      </button>
-    </div>
-  )
-}
-
+// 首頁最下方：聯絡資訊（含預約 CTA → /booking）＋ footer。內嵌表單已移到 /booking。
 export function ContactSection({ colors }: ContactSectionProps) {
-  const { content } = useCmsData("home")
-
-  const address = getContentValue(content, "contact", "address") || "台中市北屯區瀋陽北路73號"
-  const phone = getContentValue(content, "contact", "phone") || "04-2247-9068"
-  const email = getContentValue(content, "contact", "email") || "yulun83417215@gmail.com"
-  const hours = getContentValue(content, "contact", "hours") || "週一至週五  09:00 — 18:00"
-
   return (
     <>
-    <section id="contact" className="resp-contact" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-      <div className="resp-contact-left flex flex-col justify-start" style={{ background: colors.contact_bg, padding: "6rem" }}>
-        <p aria-hidden="true" className="select-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", fontWeight: 600, lineHeight: 1, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(107,78,49,0.10)", marginLeft: "-2px", marginBottom: "0.35rem" }}>Contact</p>
-        <h2 className="text-3xl font-bold tracking-[0.12em] md:text-4xl" style={{ lineHeight: 1.2, marginBottom: "3rem", color: colors.contact_heading }}>聯絡裕綸集團</h2>
-        {[["地址",address,"address"],["電話",phone,"phone"],["電子郵件",email,"email"],["營業時間",hours,"hours"]].map(([label, val, key]) => (
-          <div key={label} style={{ marginBottom: "2rem" }}>
-            <p style={{ fontSize: "0.9rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
-            {key === "address" ? (
-              <a
-                href="https://maps.app.goo.gl/Ya3FoWUXz36Rh5vj6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="serif inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity"
-                style={{ fontSize: "1.05rem", color: colors.contact_heading, textDecoration: "none", ...getContentStyle(content, "contact", key, "home") }}
-              >
-                {val}
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, flexShrink: 0 }}>
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
-              </a>
-            ) : (
-              <p className="serif" style={{ fontSize: "1.05rem", color: colors.contact_heading, ...getContentStyle(content, "contact", key, "home") }}>{val}</p>
-            )}
+      <ContactInfo showCta bg={colors.contact_bg || "#F0EAE0"} />
+      <footer style={{ background: colors.footer_bg, padding: "2.5rem 1.5rem" }}>
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 text-center">
+          <div className="flex items-center gap-3">
+            <a href={FB_URL} target="_blank" rel="noopener noreferrer" aria-label="空房子 Facebook" className="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-white/20 transition-colors hover:bg-white/10" style={{ color: "#B5956A" }}>
+              <Facebook className="h-5 w-5" />
+            </a>
+            <a href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label="空房子 Instagram" className="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-white/20 transition-colors hover:bg-white/10" style={{ color: "#B5956A" }}>
+              <Instagram className="h-5 w-5" />
+            </a>
           </div>
-        ))}
-          {/* Google Maps Embed */}
-          <div style={{ marginTop: "1rem", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(0,0,0,0.08)" }}>
-            <iframe
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
-              width="100%"
-              height="220"
-              style={{ border: 0, display: "block" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="裕綸集團 — 台中市北屯區瀋陽北路73號"
-            />
+          <p style={{ fontSize: "0.9rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.45)" }}>
+            Copyright © 裕綸集團 Yulun Group All Rights Reserved.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1" style={{ fontSize: "0.9rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.4)" }}>
+            <span>台中室內設計</span>
+            <span style={{ opacity: 0.45 }}>｜</span>
+            <span>台中室內裝修</span>
+            <span style={{ opacity: 0.45 }}>｜</span>
+            <Link href="/blog" className="hover:opacity-70 transition-opacity" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>裝修知識</Link>
+            <span style={{ opacity: 0.45 }}>｜</span>
+            <Link href="/privacy" className="hover:opacity-70 transition-opacity" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>隱私權政策</Link>
           </div>
-      </div>
-      <div className="resp-contact-right flex flex-col justify-start" style={{ background: colors.footer_bg, padding: "6rem" }}>
-        <p aria-hidden="true" className="select-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", fontWeight: 600, lineHeight: 1, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.09)", marginLeft: "-2px", marginBottom: "0.35rem" }}>Send Message</p>
-        <h2 className="text-3xl font-bold tracking-[0.12em] md:text-4xl" style={{ marginBottom: "2.5rem", color: colors.footer_text }}>預約諮詢</h2>
-        <ContactForm colors={colors} />
-      </div>
-    </section>
-    <footer style={{ background: colors.footer_bg, padding: "2.5rem 1.5rem" }}>
-      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 text-center">
-        <div className="flex items-center gap-3">
-          <a href={FB_URL} target="_blank" rel="noopener noreferrer" aria-label="空房子 Facebook" className="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-white/20 transition-colors hover:bg-white/10" style={{ color: "#B5956A" }}>
-            <Facebook className="h-5 w-5" />
-          </a>
-          <a href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label="空房子 Instagram" className="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-white/20 transition-colors hover:bg-white/10" style={{ color: "#B5956A" }}>
-            <Instagram className="h-5 w-5" />
-          </a>
         </div>
-        <p style={{ fontSize: "0.9rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.45)" }}>
-          Copyright © 裕綸集團 Yulun Group All Rights Reserved.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1" style={{ fontSize: "0.9rem", letterSpacing: "0.06em", color: "rgba(255,255,255,0.4)" }}>
-          <span>台中室內設計</span>
-          <span style={{ opacity: 0.45 }}>｜</span>
-          <span>台中室內裝修</span>
-          <span style={{ opacity: 0.45 }}>｜</span>
-          <Link href="/blog" className="hover:opacity-70 transition-opacity" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>裝修知識</Link>
-          <span style={{ opacity: 0.45 }}>｜</span>
-          <Link href="/privacy" className="hover:opacity-70 transition-opacity" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>隱私權政策</Link>
-        </div>
-      </div>
-    </footer>
+      </footer>
     </>
   )
 }

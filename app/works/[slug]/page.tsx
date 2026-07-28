@@ -165,7 +165,7 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ slu
         <div className="wrap">
           <h2 className="serif">喜歡這個空間的感覺嗎？</h2>
           <p>每個空間都有自己的故事。也來聊聊你的需求，我們一起把它寫出來。</p>
-          <Link className="btn" href="/design">預約免費初談</Link>
+          <Link className="btn" href="/booking">預約免費初談</Link>
         </div>
       </section>
     </KfzShell>
