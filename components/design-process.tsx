@@ -31,7 +31,7 @@ export function DesignProcess({ colors }: DesignProcessProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
   return (
-    <section className="py-24 md:py-32" style={{ backgroundColor: "#F4F1EC" }}>
+    <section id="process" className="scroll-mt-24 py-24 md:py-32" style={{ backgroundColor: "#F4F1EC" }}>
       <div className="mx-auto max-w-[100rem] px-6 md:px-12">
         {/* Heading */}
         <div className="mb-12 border-b pb-6 md:mb-16" style={{ borderColor: "rgba(43,39,34,0.12)" }}>

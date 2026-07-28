@@ -16,7 +16,7 @@ export function KfzShell({ children }: { children: ReactNode }) {
         <Link href="/" className="lead"><ArrowLeft size={14} /> 裕綸集團</Link>
         <Link href="/works" className="center-link">案例作品</Link>
         <nav className="navlinks">
-          <Link href="/process">合作流程</Link>
+          <Link href="/design#process">合作流程</Link>
           <span className="sep">·</span>
           <Link href="/design#contact" className="accent">預約諮詢</Link>
         </nav>
