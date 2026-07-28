@@ -198,7 +198,7 @@ export default function DesignPage() {
         </div>
         <div className="resp-contact-left" style={{ background: colors.about_bg, padding: "6rem 5rem", display: "flex", flexDirection: "column", justifyContent: "center" }}>
           <span ref={addRef(4)} aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ ...fadeStyle, fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>About Us</span>
-          <h2 ref={addRef(5)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", lineHeight: 1.3, marginBottom: "2rem", color: colors.about_heading }}>關於空房子</h2>
+          <h2 ref={addRef(5)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", lineHeight: 1.3, marginBottom: "2rem", color: "#E2A4AB" }}>關於空房子</h2>
           <p ref={addRef(6)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "1.05rem", lineHeight: 2.1, color: colors.about_text, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content,"about", "description", "design") }}>
             {aboutDesc || "空房子設計致力於打破格局束縛，以人為本，透過細膩的動線規劃與美學比例，將居住者的情感與性格注入每一寸留白。我們不做複製品，每一個案子都從屋主的生活習慣、個性與夢想出發，打造獨一無二的空間故事。"}
           </p>
