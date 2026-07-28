@@ -45,7 +45,7 @@ export default function BlogIndex() {
         <Link href="/" className="text-sm tracking-[0.2em]" style={{ color: "#8C8479", textDecoration: "none" }}>← 裕綸集團</Link>
         <span style={{ fontSize: "clamp(1.05rem, 3.5vw, 1.5rem)", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>裝修知識</span>
         <div className="flex items-center gap-4">
-          <Link href="/booking" className="text-sm tracking-[0.2em]" style={{ color: "#B5956A", textDecoration: "none" }}>預約諮詢</Link>
+          <Link href="/booking" className="text-[0.9rem] tracking-[0.25em]" style={{ color: "#B5956A", textDecoration: "none" }}>預約諮詢</Link>
           <SiteMenu color="#2A2520" />
         </div>
       </nav>
