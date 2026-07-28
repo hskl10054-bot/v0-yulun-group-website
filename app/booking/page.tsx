@@ -31,18 +31,19 @@ export default function BookingPage() {
       </nav>
 
       {/* Heading + form */}
-      <section className="mx-auto max-w-5xl px-6 py-20 md:px-12 md:py-28">
-        <div className="mb-12 border-b pb-6" style={{ borderColor: "rgba(43,39,34,0.12)" }}>
-          <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Booking</span>
-          <h1 className="text-3xl font-bold tracking-[0.12em] md:text-4xl">預約諮詢</h1>
-          <p className="mt-5 max-w-2xl text-[1.05rem] font-light leading-loose" style={{ color: "#6B5D4F" }}>
-            不用先想好所有答案，也不用先準備設計圖。留下坪數、需求與預算，專人將於 3 個工作天內與您聯繫，一起把對家的想像實現。初次諮詢完全免費。
+      <section className="mx-auto max-w-4xl px-6 py-20 md:px-12 md:py-28">
+        <div className="mb-12 text-center">
+          <span aria-hidden="true" className="mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "rgba(107,78,49,0.09)", letterSpacing: "0.1em" }}>Booking</span>
+          <p className="mb-4 text-[0.85rem] tracking-[0.35em] uppercase" style={{ color: "#B5956A" }}>Free Consultation</p>
+          <h1 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(2.5rem, 5vw, 3.75rem)", fontWeight: 500, letterSpacing: "0.06em", color: "#2A2520" }}>預約諮詢</h1>
+          <p className="mx-auto mt-6 max-w-2xl text-[1.05rem] font-light leading-loose" style={{ color: "#6B5D4F" }}>
+            不用先想好所有答案，也不用先準備設計圖。留下需求與預算，
+            <span className="whitespace-nowrap" style={{ color: "#B5956A" }}>空房子室內設計 × 裕綸室內裝修</span>
+            專人將於 3 個工作天內與您聯繫，一站式為您規劃理想的家。初次諮詢完全免費。
           </p>
         </div>
 
-        <div className="rounded-3xl p-8 md:p-12" style={{ backgroundColor: "#2A2520" }}>
-          <BookingForm source="預約頁" />
-        </div>
+        <BookingForm source="預約頁" />
       </section>
 
       {/* Contact info + footer */}

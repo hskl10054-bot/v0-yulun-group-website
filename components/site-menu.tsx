@@ -12,6 +12,7 @@ const ITEMS = [
   { label: "案例分享", href: "/works" },
   { label: "裝修知識", href: "/blog" },
   { label: "聯絡我們", href: "/#contact" },
+  { label: "預約諮詢", href: "/booking", cta: true },
 ]
 
 const INK = "#2A2520"
@@ -74,17 +75,27 @@ export function SiteMenu({ color = "#2F2F2F" }: { color?: string }) {
             onClick={() => setOpen(false)}
             style={{
               display: "block",
-              padding: "0.72rem 1.9rem",
+              margin: item.cta ? "0.8rem 1.4rem 0" : undefined,
+              padding: item.cta ? "0.7rem 1.4rem" : "0.72rem 1.9rem",
               fontFamily: "'Noto Sans TC', sans-serif",
               fontSize: "0.95rem",
-              fontWeight: 300,
+              fontWeight: item.cta ? 500 : 300,
               letterSpacing: "0.2em",
-              color: INK,
+              textAlign: item.cta ? "center" : undefined,
+              borderRadius: item.cta ? "999px" : undefined,
+              background: item.cta ? GOLD : undefined,
+              color: item.cta ? "#FFFFFF" : INK,
               textDecoration: "none",
-              transition: "color 0.25s ease, transform 0.25s ease",
+              transition: "color 0.25s ease, transform 0.25s ease, opacity 0.25s ease",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = GOLD; e.currentTarget.style.transform = "translateX(5px)" }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = INK; e.currentTarget.style.transform = "translateX(0)" }}
+            onMouseEnter={(e) => {
+              if (item.cta) { e.currentTarget.style.opacity = "0.88" }
+              else { e.currentTarget.style.color = GOLD; e.currentTarget.style.transform = "translateX(5px)" }
+            }}
+            onMouseLeave={(e) => {
+              if (item.cta) { e.currentTarget.style.opacity = "1" }
+              else { e.currentTarget.style.color = INK; e.currentTarget.style.transform = "translateX(0)" }
+            }}
           >
             {item.label}
           </Link>

@@ -139,8 +139,23 @@ export function HomeNavbar() {
             </span>
           </Link>
 
-          {/* Right - Hamburger Menu (共用側選單) */}
-          <div className="home-nav-menu-btn right-[1.2rem] md:right-[3rem]" style={{ position: "absolute" }}>
+          {/* Right - 預約諮詢 + Hamburger Menu (共用側選單) */}
+          <div className="home-nav-menu-btn right-[1.2rem] md:right-[3rem]" style={{ position: "absolute", display: "flex", alignItems: "center", gap: "1.5rem" }}>
+            <Link
+              href="/booking"
+              className="hidden md:block"
+              style={{
+                fontSize: "0.9rem",
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: atTop ? "#FAFAF8" : "#B5956A",
+                textDecoration: "none",
+                transition: "color 0.3s",
+                fontWeight: 400,
+              }}
+            >
+              預約諮詢
+            </Link>
             <SiteMenu color={atTop ? "#FAFAF8" : "#2F2F2F"} />
           </div>
         </div>
