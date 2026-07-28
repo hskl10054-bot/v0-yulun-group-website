@@ -199,7 +199,7 @@ export default function ConstructionPage() {
       {/* STRENGTHS */}
       <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.strengths_bg }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.strengths_icon, marginBottom: "1rem" }}>Our Strengths</p>
+          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.strengths_icon, marginBottom: "1rem" }}>Our Strengths</p>
           <h2 ref={addRef(5)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", marginBottom: "1.5rem", color: colors.strengths_heading }}>為什麼選擇我們</h2>
           <div style={{ width: 48, height: 1, background: colors.strengths_icon, margin: "0 auto 4rem" }} />
           <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
@@ -294,7 +294,7 @@ export default function ConstructionPage() {
           <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", lineHeight: 1.3, marginBottom: "3rem", color: colors.contact_heading }}>免費丈量估價諮詢</h2>
           {[["地址",contactAddress,"address"],["電話",contactPhone,"phone"],["Email",contactEmail,"email"],["營業時間",contactHours,"hours"]].map(([label, val, key]) => (
             <div key={label} style={{ marginBottom: "2rem" }}>
-              <p style={{ fontSize: "0.62rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
+              <p style={{ fontSize: "0.9rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.contact_accent, marginBottom: "0.4rem" }}>{label}</p>
               {key === "address" ? (
                 <a
                   href="https://maps.app.goo.gl/Ya3FoWUXz36Rh5vj6"
@@ -334,12 +334,12 @@ export default function ConstructionPage() {
           <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.contact_btn_text, marginBottom: "2.5rem" }}>申請估價</h2>
           {[["姓名","您的大名","text"],["聯絡電話","0900-000-000","tel"],["工程類型","全室裝修 / 局部工程 / 商業空間","text"],["坪數（選填）","例：30坪","text"],["預算金額","例如：100萬 — 300萬","text"]].map(([label, ph, type]) => (
             <div key={String(label)} style={{ marginBottom: "1.5rem" }}>
-              <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
+              <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>{label}</label>
               <input type={String(type)} placeholder={String(ph)} value={formData[String(label)] || ""} onChange={(e) => { const val = String(label) === "聯絡電話" ? formatPhone(e.target.value) : e.target.value; setFormData(prev => ({ ...prev, [String(label)]: val })) }} className="form-input" />
             </div>
           ))}
           <div style={{ marginBottom: "1.5rem" }}>
-            <label style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>工程說明</label>
+            <label style={{ display: "block", fontSize: "0.9rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem" }}>工程說明</label>
             <textarea placeholder="請簡單描述您的裝修需求..." value={formData["工程說明"] || ""} onChange={(e) => setFormData(prev => ({ ...prev, "工程說明": e.target.value }))} className="form-input" />
           </div>
           <button
