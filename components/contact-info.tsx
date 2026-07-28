@@ -46,17 +46,6 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
                 <polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
               </svg>
             </a>
-            {/* 空房子・裕綸集團 位置地圖 */}
-            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="mt-4 block overflow-hidden rounded-lg transition-opacity hover:opacity-90" style={{ border: "1px solid rgba(255,255,255,0.12)" }}>
-              <iframe
-                title="空房子室內設計・裕綸集團 位置地圖"
-                src={MAP_EMBED}
-                className="block w-full"
-                style={{ border: "none", height: "128px", filter: "grayscale(0.2) contrast(1.05)" }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </a>
           </div>
 
           {/* 聯繫方式 */}
@@ -66,7 +55,7 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
             <a href={`mailto:${EMAIL}`} className="mt-2 block transition-opacity hover:opacity-70" style={{ fontSize: "0.95rem", color: MUTE, textDecoration: "none" }}>{EMAIL}</a>
           </div>
 
-          {/* 追蹤我們 */}
+          {/* 追蹤我們 + 地圖 */}
           <div>
             <p className="mb-4 text-[0.78rem] uppercase tracking-[0.22em]" style={{ color: GOLD }}>追蹤我們</p>
             <div className="flex items-center gap-3">
@@ -77,6 +66,17 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
                 <Instagram style={{ width: 18, height: 18 }} />
               </a>
             </div>
+            {/* 空房子・裕綸集團 位置地圖 */}
+            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="mt-5 block overflow-hidden rounded-lg transition-opacity hover:opacity-90" style={{ border: "1px solid rgba(255,255,255,0.12)" }}>
+              <iframe
+                title="空房子室內設計・裕綸集團 位置地圖"
+                src={MAP_EMBED}
+                className="block w-full"
+                style={{ border: "none", height: "128px", filter: "grayscale(0.2) contrast(1.05)" }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </a>
           </div>
         </div>
 
