@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import Link from "next/link"
 import { Menu } from "lucide-react"
@@ -17,12 +17,24 @@ const ITEMS = [
 const INK = "#2A2520"
 const GOLD = "#B5956A"
 
-// 共用漢堡選單（☰）。展開為右上角「溫和半透明毛玻璃小卡」，用 Portal 掛到 body。
+// 共用漢堡選單（☰）。展開為右上角「溫和半透明毛玻璃小卡」，位置依按鈕實際座標動態對齊。
 export function SiteMenu({ color = "#2F2F2F" }: { color?: string }) {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [pos, setPos] = useState({ top: 72, right: 18 })
+  const btnRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => setMounted(true), [])
+
+  const place = () => {
+    const r = btnRef.current?.getBoundingClientRect()
+    if (r) setPos({ top: Math.round(r.bottom + 12), right: Math.max(12, Math.round(window.innerWidth - r.right)) })
+  }
+
+  const toggle = () => {
+    if (!open) place()
+    setOpen((v) => !v)
+  }
 
   const overlay = (
     <>
@@ -37,8 +49,8 @@ export function SiteMenu({ color = "#2F2F2F" }: { color?: string }) {
         role="menu"
         style={{
           position: "fixed",
-          top: "4.75rem",
-          right: "1.1rem",
+          top: `${pos.top}px`,
+          right: `${pos.right}px`,
           zIndex: 10000,
           width: "min(248px, 78vw)",
           background: "rgba(250,247,242,0.82)",
@@ -85,8 +97,9 @@ export function SiteMenu({ color = "#2F2F2F" }: { color?: string }) {
   return (
     <>
       <button
+        ref={btnRef}
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggle}
         aria-label="選單"
         aria-expanded={open}
         style={{ background: "none", border: "none", cursor: "pointer", padding: "0.25rem", color, display: "flex", alignItems: "center" }}
