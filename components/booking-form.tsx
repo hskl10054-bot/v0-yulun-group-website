@@ -190,7 +190,36 @@ export function BookingForm({ source = "預約頁" }: { source?: string }) {
           onClick={async () => {
             setSubmitting(true)
             try {
-              await submitForm({ ...formData, 方便聯繫時段: times.join("、") }, source)
+              const svc = formData["想諮詢的服務"] || ""
+              const ping = formData["室內坪數"] || ""
+              const budget = formData["裝修預算"] || ""
+              const timeStr = times.join("、")
+              // 完整詳細內文 — 全部欄位彙整進「需求說明」欄，確保表單資訊對稱、無漏接
+              const detail = ([
+                ["稱謂", formData["稱謂"]],
+                ["想諮詢的服務", svc],
+                ["LINE ID / Email", formData["LINE ID / Email"]],
+                ["方便聯繫時段", timeStr],
+                ["房屋所在地 / 建案名稱", formData["房屋所在地 / 建案名稱"]],
+                ["房屋狀態", formData["房屋狀態"]],
+                ["建物類型", formData["建物類型"]],
+                ["室內坪數", ping],
+                ["裝修預算", budget],
+                ["需求說明", formData["需求說明"]],
+              ] as [string, string | undefined][])
+                .filter(([, v]) => v && v.trim())
+                .map(([k, v]) => `${k}：${v}`)
+                .join("\n")
+              // 對應試算表欄位：服務/案件/工程類型、預算金額、坪數、需求說明（含別名確保命中）
+              const payload: Record<string, string> = {
+                姓名: formData["姓名"] || "",
+                聯絡電話: formData["聯絡電話"] || "",
+                服務: svc, 案件類型: svc, 工程類型: svc,
+                預算金額: budget,
+                坪數: ping, "坪數（選填）": ping,
+                需求說明: detail,
+              }
+              await submitForm(payload, source)
               setSubmitted(true)
               setFormData({})
               setTimes([])
