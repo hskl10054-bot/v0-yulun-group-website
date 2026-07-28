@@ -38,8 +38,8 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
           {/* 公司地址 / 營業時間 + 地圖 */}
           <div>
             <p className="mb-4 text-[0.78rem] uppercase tracking-[0.22em]" style={{ color: GOLD }}>公司地址</p>
-            <p style={{ fontSize: "0.92rem", color: FAINT, marginBottom: "0.6rem" }}>{HOURS}</p>
-            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-1.5 transition-opacity hover:opacity-70" style={{ fontSize: "0.98rem", color: MUTE, textDecoration: "none", lineHeight: 1.7 }}>
+            <p style={{ fontSize: "0.95rem", color: FAINT, marginBottom: "0.6rem" }}>{HOURS}</p>
+            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-1.5 transition-opacity hover:opacity-70" style={{ fontSize: "0.95rem", color: MUTE, textDecoration: "none", lineHeight: 1.7 }}>
               {ADDRESS}
               <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, flexShrink: 0, marginTop: "0.25rem" }}>
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -62,8 +62,8 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
           {/* 聯繫方式 */}
           <div>
             <p className="mb-4 text-[0.78rem] uppercase tracking-[0.22em]" style={{ color: GOLD }}>聯繫我們</p>
-            <a href={`tel:${PHONE.replace(/-/g, "")}`} className="block transition-opacity hover:opacity-70" style={{ fontSize: "1.15rem", color: GOLD, textDecoration: "none", letterSpacing: "0.03em" }}>{PHONE}</a>
-            <a href={`mailto:${EMAIL}`} className="mt-2 block transition-opacity hover:opacity-70" style={{ fontSize: "0.92rem", color: MUTE, textDecoration: "none" }}>{EMAIL}</a>
+            <a href={`tel:${PHONE.replace(/-/g, "")}`} className="block transition-opacity hover:opacity-70" style={{ fontSize: "0.95rem", color: GOLD, textDecoration: "none", letterSpacing: "0.03em" }}>{PHONE}</a>
+            <a href={`mailto:${EMAIL}`} className="mt-2 block transition-opacity hover:opacity-70" style={{ fontSize: "0.95rem", color: MUTE, textDecoration: "none" }}>{EMAIL}</a>
           </div>
 
           {/* 追蹤我們 */}
