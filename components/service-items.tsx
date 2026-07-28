@@ -1,15 +1,24 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type ElementType } from "react"
 import { PencilRuler, Home, RefreshCw, Sofa, Building2, Store, Hammer } from "lucide-react"
+
+export interface ServiceItem {
+  label: string
+  en: string
+  desc: string
+  Icon: ElementType
+}
 
 interface ServiceItemsProps {
   colors: Record<string, string>
   // detailed = 卡片式（含 SEO 敘述，用於 /design）；預設為首頁的簡潔圖示格。
   detailed?: boolean
+  // items = 自訂服務項目（如 /construction 的工程項目）；未提供時使用預設。
+  items?: ServiceItem[]
 }
 
-const ITEMS = [
+const ITEMS: ServiceItem[] = [
   { label: "預售客變", en: "Pre-sale Customization", Icon: PencilRuler, desc: "交屋前調整格局與建材升級，台中預售屋客變提前規劃，省時又省預算。" },
   { label: "新屋裝修", en: "New Home Renovation", Icon: Home, desc: "台中新成屋設計裝修，從空屋到入住，機能與美感一次規劃到位。" },
   { label: "老屋翻新", en: "Renovation", Icon: RefreshCw, desc: "台中老屋翻新改造，重整水電管線與格局，讓老房子重獲新生。" },
@@ -19,7 +28,8 @@ const ITEMS = [
   { label: "裝潢施工", en: "Interior Construction", Icon: Hammer, desc: "自有工班、標準化施工，透明報價、工程保固，品質全程把關。" },
 ]
 
-export function ServiceItems({ colors, detailed = false }: ServiceItemsProps) {
+export function ServiceItems({ colors, detailed = false, items }: ServiceItemsProps) {
+  const list = items ?? ITEMS
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   const [hovered, setHovered] = useState<number | null>(null)
@@ -66,7 +76,7 @@ export function ServiceItems({ colors, detailed = false }: ServiceItemsProps) {
         {detailed ? (
           /* 詳細卡片版（含 SEO 敘述） */
           <div ref={ref} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {ITEMS.map((it, i) => {
+            {list.map((it, i) => {
               const active = hovered === i
               const iconColor = active ? HOT : visible ? accent : GRAY
               return (
@@ -96,7 +106,7 @@ export function ServiceItems({ colors, detailed = false }: ServiceItemsProps) {
         ) : (
           /* 簡潔圖示格（首頁） */
           <div ref={ref} className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7">
-            {ITEMS.map((it, i) => {
+            {list.map((it, i) => {
               const active = hovered === i
               const iconColor = active ? HOT : visible ? accent : GRAY
               return (

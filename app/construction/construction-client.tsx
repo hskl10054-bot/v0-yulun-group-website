@@ -1,6 +1,16 @@
 "use client"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList } from "lucide-react"
+import { ServiceItems } from "@/components/service-items"
+
+// 工程服務的英文小標（對應中文名稱）
+const SERVICE_EN: Record<string, string> = {
+  "拆除與結構加強工程": "Demolition & Structure",
+  "專業水電系統配置": "Plumbing & Electrical",
+  "高標準防水隔音工程": "Waterproof & Soundproof",
+  "木作與細部木裝工程": "Carpentry & Woodwork",
+  "系統家具安裝與整合": "System Furniture",
+}
 import { useEffect, useRef, useState } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
 import { submitForm } from "@/lib/submit-form"
@@ -52,6 +62,9 @@ export default function ConstructionPage() {
   const services = cmsServices.length > 0
     ? cmsServices.map((li, i) => ({ num: li.subtitle || String(li.sort_order).padStart(2, "0"), icon: defaultIcons[i % defaultIcons.length], name: li.title, desc: li.description, sortOrder: li.sort_order }))
     : defaultServices.map((s, i) => ({ ...s, sortOrder: i + 1 }))
+
+  // 轉成 ServiceItems 卡片格式（沿用空房子的呈現樣貌）
+  const serviceItems = services.map((s) => ({ label: s.name, en: SERVICE_EN[s.name] ?? "Construction", desc: s.desc, Icon: s.icon }))
 
   // Projects from CMS or fallback
   const cmsProjects = getListItemsBySection(listItems, "portfolio")
@@ -216,28 +229,8 @@ export default function ConstructionPage() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.services_bg }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "4rem", borderBottom: `0.5px solid ${colors.services_card_border}`, paddingBottom: "2rem" }}>
-          <div>
-            <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Services</span>
-            <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.services_heading }}>服務項目</h2>
-          </div>
-          <a href="#contact" className="cta-link" style={{ fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.services_heading, textDecoration: "none", borderBottom: `1px solid ${colors.services_heading}`, paddingBottom: "0.3rem", transition: "color 0.3s, border-color 0.3s" }}>免費估價 →</a>
-        </div>
-        <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "1.5rem" }}>
-          {services.map((s, i) => (
-            <div key={s.num} className="service-card" ref={addRef(9 + i)} style={{ ...fadeStyle, transitionDelay: `${(i % 3) * 0.15}s`, padding: "2.5rem", border: `0.5px solid ${colors.services_card_border}`, transition: "border-color 0.3s, background 0.3s" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginBottom: "1.5rem" }}>
-                <span className="serif" style={{ fontSize: "0.75rem", color: colors.services_accent, ...getListItemStyle(content, "services", s.sortOrder, "subtitle", "construction") }}>{s.num}</span>
-                <s.icon size={16} style={{ color: colors.services_accent }} />
-              </div>
-              <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "services", s.sortOrder, "title", "construction") }}>{s.name}</h3>
-              <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: colors.services_text, fontWeight: 300, ...getListItemStyle(content, "services", s.sortOrder, "description", "construction") }}>{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* SERVICES — 與空房子同款卡片呈現（保留裝修工程內容） */}
+      <ServiceItems colors={colors} detailed items={serviceItems} />
 
       {/* PROJECTS */}
       <section id="projects" style={{ padding: "6rem 0", background: colors.portfolio_bg }}>
