@@ -95,6 +95,16 @@ export default function DesignPage() {
         :root { --cream:#F5F0E8; --warm-white:#FAF8F4; --charcoal:#2A2520; --stone:#8C8479; --gold:#B5956A; --light-stone:#E8E3DA; }
         .serif { font-family: 'Cormorant Garamond', 'Noto Sans TC', sans-serif; }
         .noto { font-family: 'Noto Serif TC', serif; }
+        .gold-shimmer {
+          background: linear-gradient(100deg, #B5956A 25%, #E9CB93 44%, #F6E7BF 50%, #E9CB93 56%, #B5956A 75%);
+          background-size: 200% auto;
+          -webkit-background-clip: text; background-clip: text;
+          -webkit-text-fill-color: transparent; color: transparent;
+          animation: goldShimmer 6.5s linear infinite;
+          filter: drop-shadow(0 0 8px rgba(220,184,124,0.28));
+        }
+        @keyframes goldShimmer { 0% { background-position: 200% center; } 100% { background-position: -200% center; } }
+        @media (prefers-reduced-motion: reduce) { .gold-shimmer { animation: none; } }
         .service-card:hover { border-color: #B5956A !important; background: #F5F0E8 !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
         .portfolio-item:hover .portfolio-bg { transform: scale(1.04) !important; }
@@ -163,7 +173,7 @@ export default function DesignPage() {
         <div className="resp-hero-text" style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "6rem 4rem 6rem 6rem" }}>
           <p ref={addRef(0)} style={{ ...fadeStyle, fontSize: "1.275rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.hero_accent, marginBottom: "2rem", ...getContentStyle(content,"hero", "en_subtitle", "design") }}>{heroEnSubtitle}</p>
           <h1 ref={addRef(1)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(3rem, 5.5vw, 5rem)", fontWeight: 500, letterSpacing: "0.04em", lineHeight: 1.15, marginBottom: "2rem", color: colors.hero_heading, ...getContentStyle(content,"hero", "title", "design") }}>
-            {heroTitle || "為你的空間"}<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em style={{ fontStyle: "normal", color: colors.hero_accent, ...getContentStyle(content,"hero", "title_italic", "design") }}>{heroTitleItalic || "注入魔法"}</em><img src="/images/sparkle.svg" alt="" width={80} height={80} className="sparkle-twinkle" style={{ flexShrink: 0, marginLeft: "0.1rem" }} /></span>
+            {heroTitle || "為你的空間"}<br /><span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem" }}><em className="gold-shimmer" style={{ fontStyle: "normal", color: colors.hero_accent, ...getContentStyle(content,"hero", "title_italic", "design") }}>{heroTitleItalic || "注入魔法"}</em><img src="/images/sparkle.svg" alt="" width={80} height={80} className="sparkle-twinkle" style={{ flexShrink: 0, marginLeft: "0.1rem" }} /></span>
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "1.05rem", lineHeight: 2, color: colors.hero_text, maxWidth: 420, marginBottom: "3rem", fontWeight: 300, ...getContentStyle(content,"hero", "description", "design") }}>
             {heroDesc || "空房開門，幸福進門。我們相信空間不只是鋼筋水泥，更是承載幸福的容器。當魔法注入空間，家便開始講述屬於你的幸福故事。"}
