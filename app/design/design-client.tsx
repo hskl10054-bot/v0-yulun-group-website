@@ -7,6 +7,7 @@ import { submitForm } from "@/lib/submit-form"
 import { formatPhone } from "@/lib/utils"
 import { PortfolioPreview } from "@/components/portfolio-preview"
 import { ServiceItems } from "@/components/service-items"
+import { ServiceProcess } from "@/components/service-process"
 import { CountUp } from "@/components/count-up"
 
 const defaultServices = [
@@ -259,6 +260,9 @@ export default function DesignPage() {
 
       {/* SERVICES — 詳細卡片版（含 SEO 敘述） */}
       <ServiceItems colors={colors} detailed />
+
+      {/* 合作流程（服務流程時間軸） */}
+      <ServiceProcess colors={colors} />
 
       {/* PORTFOLIO — 沿用首頁的案例卡片輪播（分類篩選＋左右切換＋敘述） */}
       <div id="portfolio">
