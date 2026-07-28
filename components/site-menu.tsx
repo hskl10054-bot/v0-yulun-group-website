@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu } from "lucide-react"
 
 const ITEMS = [
   { label: "首頁", href: "/" },
@@ -14,86 +14,71 @@ const ITEMS = [
   { label: "聯絡我們", href: "/#contact" },
 ]
 
-// 共用的漢堡選單（☰）。遮罩用 Portal 掛到 <body>，避免被導覽列的 backdrop-filter 限制範圍。
+const INK = "#2A2520"
+const GOLD = "#B5956A"
+
+// 共用漢堡選單（☰）。展開為右上角「溫和半透明毛玻璃小卡」，用 Portal 掛到 body。
 export function SiteMenu({ color = "#2F2F2F" }: { color?: string }) {
   const [open, setOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => setMounted(true), [])
 
-  // 開啟時鎖住背景捲動
-  useEffect(() => {
-    if (!open) return
-    const prev = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    return () => {
-      document.body.style.overflow = prev
-    }
-  }, [open])
-
   const overlay = (
     <>
-      {/* 淡背景：點擊關閉，頁面仍隱約可見 */}
+      {/* 透明點擊層：點外面關閉，頁面完全可見 */}
       <div
         onClick={() => setOpen(false)}
         aria-hidden="true"
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 9999,
-          background: "rgba(0,0,0,0.35)",
-          opacity: open ? 1 : 0,
-          pointerEvents: open ? "auto" : "none",
-          transition: "opacity 0.3s ease",
-        }}
+        style={{ position: "fixed", inset: 0, zIndex: 9999, pointerEvents: open ? "auto" : "none" }}
       />
-      {/* 右側滑出面板 */}
-      <aside
+      {/* 浮動選單卡 */}
+      <div
+        role="menu"
         style={{
           position: "fixed",
-          top: 0,
-          right: 0,
-          bottom: 0,
+          top: "4.75rem",
+          right: "1.1rem",
           zIndex: 10000,
-          width: "min(320px, 82vw)",
-          background: "rgba(26,21,16,0.98)",
-          boxShadow: "-8px 0 30px rgba(0,0,0,0.25)",
-          transform: open ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.38s cubic-bezier(.2,.7,.2,1)",
-          display: "flex",
-          flexDirection: "column",
-          padding: "5rem 2rem 2rem",
-          gap: "0.25rem",
+          width: "min(248px, 78vw)",
+          background: "rgba(250,247,242,0.82)",
+          backdropFilter: "blur(18px) saturate(1.1)",
+          WebkitBackdropFilter: "blur(18px) saturate(1.1)",
+          border: "1px solid rgba(43,39,34,0.08)",
+          borderRadius: "18px",
+          boxShadow: "0 18px 50px rgba(43,39,34,0.16)",
+          padding: "0.5rem 0",
+          opacity: open ? 1 : 0,
+          transform: open ? "translateY(0) scale(1)" : "translateY(-10px) scale(0.97)",
+          transformOrigin: "top right",
+          pointerEvents: open ? "auto" : "none",
+          transition: "opacity 0.26s ease, transform 0.28s cubic-bezier(.2,.7,.2,1)",
         }}
       >
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          aria-label="關閉選單"
-          style={{ position: "absolute", top: "1.4rem", right: "1.4rem", background: "none", border: "none", cursor: "pointer", color: "#FAFAF8", display: "flex" }}
-        >
-          <X size={24} />
-        </button>
-        {ITEMS.map((item) => (
+        {ITEMS.map((item, i) => (
           <Link
             key={item.label}
             href={item.href}
             onClick={() => setOpen(false)}
             style={{
+              display: "block",
+              padding: "0.85rem 1.4rem",
               fontFamily: "'Noto Sans TC', sans-serif",
-              fontSize: "1.12rem",
-              fontWeight: 300,
-              letterSpacing: "0.15em",
-              color: "#FAFAF8",
+              fontSize: "1.02rem",
+              fontWeight: 400,
+              letterSpacing: "0.08em",
+              color: INK,
               textDecoration: "none",
-              padding: "1rem 0",
-              borderBottom: "1px solid rgba(255,255,255,0.08)",
+              borderBottom: i < ITEMS.length - 1 ? "1px solid rgba(43,39,34,0.07)" : "none",
+              transition: "color 0.2s, background 0.2s",
             }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = GOLD; e.currentTarget.style.background = "rgba(181,149,106,0.08)" }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = INK; e.currentTarget.style.background = "transparent" }}
           >
             {item.label}
           </Link>
         ))}
-      </aside>
+      </div>
     </>
   )
 

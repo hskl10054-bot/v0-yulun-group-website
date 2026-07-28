@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
 import { useCmsData, getContentValue, getContentStyle } from "@/lib/use-cms-data"
+import { SiteMenu } from "@/components/site-menu"
 
 export function HomeNavbar() {
   const { content } = useCmsData("home")
   const [hidden, setHidden] = useState(false)
   const [atTop, setAtTop] = useState(true)
-  const [menuOpen, setMenuOpen] = useState(false)
   const [show, setShow] = useState(false)
 
   const title = getContentValue(content, "hero", "title") || "裕綸集團"
@@ -140,71 +139,13 @@ export function HomeNavbar() {
             </span>
           </Link>
 
-          {/* Right - Hamburger Menu */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="home-nav-menu-btn right-[1.2rem] md:right-[3rem]"
-            style={{
-              position: "absolute",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: "0.25rem",
-              color: atTop ? "#FAFAF8" : "#2F2F2F",
-              transition: "color 0.3s",
-            }}
-            aria-label="選單"
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Right - Hamburger Menu (共用側選單) */}
+          <div className="home-nav-menu-btn right-[1.2rem] md:right-[3rem]" style={{ position: "absolute" }}>
+            <SiteMenu color={atTop ? "#FAFAF8" : "#2F2F2F"} />
+          </div>
         </div>
       </nav>
 
-      {/* Fullscreen Menu Overlay */}
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          zIndex: 99,
-          background: "rgba(26,21,16,0.95)",
-          backdropFilter: "blur(8px)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "2.5rem",
-          opacity: menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "auto" : "none",
-          transition: "opacity 0.4s ease",
-        }}
-      >
-        {[
-          { label: "首頁", href: "/" },
-          { label: "空房子室內設計", href: "/design" },
-          { label: "裕綸室內裝修", href: "/construction" },
-          { label: "案例分享", href: "/works" },
-          { label: "裝修知識", href: "/blog" },
-          { label: "聯絡我們", href: "#contact" },
-        ].map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            onClick={() => setMenuOpen(false)}
-            style={{
-              fontSize: "1.4rem",
-              fontWeight: 300,
-              letterSpacing: "0.2em",
-              color: "#FAFAF8",
-              textDecoration: "none",
-              transition: "opacity 0.3s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.6")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
     </>
   )
 }
