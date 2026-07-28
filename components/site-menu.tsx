@@ -44,7 +44,7 @@ export function SiteMenu({ color = "#2F2F2F" }: { color?: string }) {
         aria-hidden="true"
         style={{ position: "fixed", inset: 0, zIndex: 9999, pointerEvents: open ? "auto" : "none" }}
       />
-      {/* 浮動選單卡 */}
+      {/* 浮動選單卡 — 半透明毛玻璃、極簡留白 */}
       <div
         role="menu"
         style={{
@@ -52,40 +52,39 @@ export function SiteMenu({ color = "#2F2F2F" }: { color?: string }) {
           top: `${pos.top}px`,
           right: `${pos.right}px`,
           zIndex: 10000,
-          width: "min(248px, 78vw)",
-          background: "rgba(250,247,242,0.82)",
-          backdropFilter: "blur(18px) saturate(1.1)",
-          WebkitBackdropFilter: "blur(18px) saturate(1.1)",
-          border: "1px solid rgba(43,39,34,0.08)",
-          borderRadius: "18px",
-          boxShadow: "0 18px 50px rgba(43,39,34,0.16)",
-          padding: "0.5rem 0",
+          width: "min(232px, 76vw)",
+          background: "rgba(250,248,244,0.62)",
+          backdropFilter: "blur(26px) saturate(1.25)",
+          WebkitBackdropFilter: "blur(26px) saturate(1.25)",
+          border: "1px solid rgba(255,255,255,0.45)",
+          borderRadius: "22px",
+          boxShadow: "0 24px 60px rgba(43,39,34,0.13)",
+          padding: "1.4rem 0",
           opacity: open ? 1 : 0,
-          transform: open ? "translateY(0) scale(1)" : "translateY(-10px) scale(0.97)",
+          transform: open ? "translateY(0) scale(1)" : "translateY(-8px) scale(0.98)",
           transformOrigin: "top right",
           pointerEvents: open ? "auto" : "none",
-          transition: "opacity 0.26s ease, transform 0.28s cubic-bezier(.2,.7,.2,1)",
+          transition: "opacity 0.3s ease, transform 0.34s cubic-bezier(.2,.7,.2,1)",
         }}
       >
-        {ITEMS.map((item, i) => (
+        {ITEMS.map((item) => (
           <Link
             key={item.label}
             href={item.href}
             onClick={() => setOpen(false)}
             style={{
               display: "block",
-              padding: "0.85rem 1.4rem",
+              padding: "0.72rem 1.9rem",
               fontFamily: "'Noto Sans TC', sans-serif",
-              fontSize: "1.02rem",
-              fontWeight: 400,
-              letterSpacing: "0.08em",
+              fontSize: "0.95rem",
+              fontWeight: 300,
+              letterSpacing: "0.2em",
               color: INK,
               textDecoration: "none",
-              borderBottom: i < ITEMS.length - 1 ? "1px solid rgba(43,39,34,0.07)" : "none",
-              transition: "color 0.2s, background 0.2s",
+              transition: "color 0.25s ease, transform 0.25s ease",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = GOLD; e.currentTarget.style.background = "rgba(181,149,106,0.08)" }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = INK; e.currentTarget.style.background = "transparent" }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = GOLD; e.currentTarget.style.transform = "translateX(5px)" }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = INK; e.currentTarget.style.transform = "translateX(0)" }}
           >
             {item.label}
           </Link>
