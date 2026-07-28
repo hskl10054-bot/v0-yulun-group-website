@@ -22,29 +22,18 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
     <footer id="contact" style={{ background: "#1A1510", color: "#FAF8F4" }}>
       <div className="mx-auto max-w-6xl px-6 py-14 md:px-12 md:py-16">
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4 lg:gap-12">
-          {/* 品牌 + 地圖 + 預約 */}
-          <div className="col-span-2 lg:col-span-1">
+          {/* 品牌 + 預約 */}
+          <div>
             <p style={{ fontSize: "1.35rem", fontWeight: 700, letterSpacing: "0.14em" }}>裕綸集團</p>
             <p style={{ fontSize: "0.72rem", letterSpacing: "0.3em", color: FAINT, marginTop: "0.35rem" }}>YULUN GROUP</p>
-            {/* 空房子・裕綸集團 位置地圖 */}
-            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="mt-5 block overflow-hidden rounded-xl transition-opacity hover:opacity-90" style={{ border: "1px solid rgba(255,255,255,0.12)" }}>
-              <iframe
-                title="空房子室內設計・裕綸集團 位置地圖"
-                src={MAP_EMBED}
-                className="block h-36 w-full"
-                style={{ border: "none", filter: "grayscale(0.2) contrast(1.05)" }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </a>
             {showCta && (
-              <Link href="/booking" className="mt-5 inline-flex items-center gap-2 rounded-full px-6 py-3 text-[0.85rem] tracking-[0.2em] transition-transform hover:-translate-y-0.5" style={{ backgroundColor: GOLD, color: "#FFFFFF", textDecoration: "none" }}>
+              <Link href="/booking" className="mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-[0.85rem] tracking-[0.2em] transition-transform hover:-translate-y-0.5" style={{ backgroundColor: GOLD, color: "#FFFFFF", textDecoration: "none" }}>
                 預約諮詢 →
               </Link>
             )}
           </div>
 
-          {/* 公司地址 / 營業時間 */}
+          {/* 公司地址 / 營業時間 + 地圖 */}
           <div>
             <p className="mb-4 text-[0.78rem] uppercase tracking-[0.22em]" style={{ color: GOLD }}>公司地址</p>
             <p style={{ fontSize: "0.92rem", color: FAINT, marginBottom: "0.6rem" }}>{HOURS}</p>
@@ -54,6 +43,17 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                 <polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" />
               </svg>
+            </a>
+            {/* 空房子・裕綸集團 位置地圖 */}
+            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="mt-4 block overflow-hidden rounded-lg transition-opacity hover:opacity-90" style={{ border: "1px solid rgba(255,255,255,0.12)" }}>
+              <iframe
+                title="空房子室內設計・裕綸集團 位置地圖"
+                src={MAP_EMBED}
+                className="block w-full"
+                style={{ border: "none", height: "128px", filter: "grayscale(0.2) contrast(1.05)" }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </a>
           </div>
 
