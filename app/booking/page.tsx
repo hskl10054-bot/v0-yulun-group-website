@@ -26,7 +26,7 @@ export default function BookingPage() {
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 py-6 md:px-12" style={{ borderBottom: "0.5px solid #E8E3DA" }}>
         <Link href="/" className="text-sm tracking-[0.2em]" style={{ color: "#8C8479", textDecoration: "none" }}>← 裕綸集團</Link>
-        <span className="text-sm font-medium tracking-[0.2em]" style={{ color: "#2A2520" }}>預約諮詢</span>
+        <span style={{ fontSize: "clamp(1.05rem, 3.5vw, 1.5rem)", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>預約諮詢</span>
         <SiteMenu color="#2A2520" />
       </nav>
 

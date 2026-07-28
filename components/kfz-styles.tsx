@@ -114,7 +114,7 @@ export function KfzStyles() {
     .kfz .topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:1.5rem 4rem;background:rgba(250,248,244,.92);backdrop-filter:blur(12px);border-bottom:.5px solid var(--line);}
     .kfz .topbar .lead{flex:1;display:flex;align-items:center;gap:.6rem;font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;}
     .kfz .topbar .lead:hover{color:var(--ink);}
-    .kfz .topbar .center-link{flex:0 0 auto;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;letter-spacing:.15em;color:var(--ink);text-decoration:none;white-space:nowrap;transition:color .3s;}
+    .kfz .topbar .center-link{flex:0 0 auto;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;letter-spacing:.15em;color:var(--ink);text-decoration:none;white-space:nowrap;transition:color .3s;}
     .kfz .topbar .center-link:hover{color:var(--clay);}
     .kfz .topbar .navlinks{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:.7rem;}
     .kfz .topbar .navlinks a{font-family:'Josefin Sans',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;white-space:nowrap;}
