@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { POSTS, getPost } from "@/data/blog"
+import { SiteMenu } from "@/components/site-menu"
 
 export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }))
@@ -72,7 +73,10 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       <nav className="flex items-center justify-between px-6 py-6 md:px-12" style={{ borderBottom: "0.5px solid #E8E3DA" }}>
         <Link href="/blog" className="text-sm tracking-[0.2em]" style={{ color: "#8C8479", textDecoration: "none" }}>← 裝修知識</Link>
         <Link href="/" className="text-sm font-medium tracking-[0.2em]" style={{ color: "#2A2520", textDecoration: "none" }}>裕綸集團</Link>
-        <Link href="/#contact" className="text-sm tracking-[0.2em]" style={{ color: "#B5956A", textDecoration: "none" }}>預約諮詢</Link>
+        <div className="flex items-center gap-4">
+          <Link href="/#contact" className="text-sm tracking-[0.2em]" style={{ color: "#B5956A", textDecoration: "none" }}>預約諮詢</Link>
+          <SiteMenu color="#2A2520" />
+        </div>
       </nav>
 
       <article className="mx-auto max-w-3xl px-6 py-16 md:px-8 md:py-24">
