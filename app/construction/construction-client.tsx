@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList } from "lucide-react"
 import { ServiceItems } from "@/components/service-items"
+import { SiteMenu } from "@/components/site-menu"
 
 // 工程服務的英文小標（對應中文名稱）
 const SERVICE_EN: Record<string, string> = {
@@ -187,7 +188,10 @@ export default function ConstructionPage() {
           <ArrowLeft size={16} /> 裕綸集團
         </Link>
         <span className="serif resp-nav-brand" style={{ fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.15em", color: colors.hero_heading }}>裕綸・室內裝修</span>
-        <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>免費估價</a>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>免費估價</a>
+          <SiteMenu color={colors.hero_heading} />
+        </div>
       </nav>
 
       {/* HERO */}

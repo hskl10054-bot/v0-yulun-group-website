@@ -9,6 +9,7 @@ import { PortfolioPreview } from "@/components/portfolio-preview"
 import { ServiceItems } from "@/components/service-items"
 import { DesignProcess } from "@/components/design-process"
 import { CountUp } from "@/components/count-up"
+import { SiteMenu } from "@/components/site-menu"
 
 const defaultServices = [
   { num: "01", name: "預售屋客變規劃", desc: "在交屋前即進行格局調整與建材升級規劃，提前為理想生活做好準備，省時省預算。" },
@@ -166,7 +167,10 @@ export default function DesignPage() {
           <img src="/images/hds-mark.png" alt="空房子室內設計" style={{ height: "60px", width: "auto" }} />
           <span style={{ fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.15em", color: colors.hero_heading }}>空房子・室內設計</span>
         </Link>
-        <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>預約諮詢</a>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <a href="#contact" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: colors.hero_accent, textDecoration: "none" }}>預約諮詢</a>
+          <SiteMenu color={colors.hero_heading} />
+        </div>
       </nav>
 
       {/* HERO */}

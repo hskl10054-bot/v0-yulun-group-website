@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link"
 import { ArrowLeft, MapPin, Clock, Coffee } from "lucide-react"
+import { SiteMenu } from "@/components/site-menu"
 import { useEffect, useRef } from "react"
 
 const stores = [
@@ -78,7 +79,10 @@ export default function CafePage() {
           <ArrowLeft size={16} /> 裕綸集團
         </Link>
         <span className="serif resp-nav-brand" style={{ fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>同齊咖啡</span>
-        <a href="#stores" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#6B4E31", textDecoration: "none" }}>門市資訊</a>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
+          <a href="#stores" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#6B4E31", textDecoration: "none" }}>門市資訊</a>
+          <SiteMenu color="#2A2520" />
+        </div>
       </nav>
 
       {/* HERO */}

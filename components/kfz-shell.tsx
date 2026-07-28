@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { KfzStyles } from "./kfz-styles";
+import { SiteMenu } from "./site-menu";
 
 // Wraps the 空房子室內設計 pages with the shared `.kfz` design system, a
 // fixed three-zone brand topbar (back-link / centered brand / CTA) and a
@@ -15,10 +16,11 @@ export function KfzShell({ children }: { children: ReactNode }) {
       <header className="topbar">
         <Link href="/" className="lead"><ArrowLeft size={14} /> 裕綸集團</Link>
         <Link href="/works" className="center-link">案例作品</Link>
-        <nav className="navlinks">
+        <nav className="navlinks" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
           <Link href="/design#process">合作流程</Link>
           <span className="sep">·</span>
           <Link href="/design#contact" className="accent">預約諮詢</Link>
+          <SiteMenu color="#2A2520" />
         </nav>
       </header>
 
