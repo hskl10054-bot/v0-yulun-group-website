@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/admin", "/api/"],
+      disallow: ["/admin", "/api/", "/seo-report"],
     },
     sitemap: "https://www.yulungroup.com/sitemap.xml",
     host: "https://www.yulungroup.com",

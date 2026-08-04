@@ -4,6 +4,8 @@ import { Analytics } from '@vercel/analytics/next'
 import { MetaPixel } from '@/components/analytics/meta-pixel'
 import { GoogleAnalytics } from '@/components/analytics/google-analytics'
 import { FloatingContact } from '@/components/floating-contact'
+import { SeoTracker } from '@/components/seo-tracker'
+import { Suspense } from 'react'
 import './globals.css'
 
 const _notoSansTC = Noto_Sans_TC({ subsets: ["latin"], weight: ["300", "400", "500", "700", "900"] });
@@ -65,6 +67,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         {children}
+        <Suspense fallback={null}><SeoTracker /></Suspense>
         <FloatingContact />
         <MetaPixel />
         <GoogleAnalytics />
