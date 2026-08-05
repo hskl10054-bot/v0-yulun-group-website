@@ -11,12 +11,30 @@ function b64url(input: Buffer | string): string {
 
 let cachedToken: { token: string; exp: number } | null = null
 
+// 將各種被貼壞的金鑰（含字面 \n、單行、被引號包住、換行遺失）還原成標準 PEM
+function normalizePrivateKey(raw: string): string {
+  let k = raw.trim()
+  // 去除可能誤含的外層引號
+  if ((k.startsWith('"') && k.endsWith('"')) || (k.startsWith("'") && k.endsWith("'"))) k = k.slice(1, -1)
+  // 字面 \n → 真換行
+  k = k.replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n").replace(/\r/g, "")
+  // 以 BEGIN/END 之間的 base64 重新組回乾淨 PEM（可修正換行遺失的情況）
+  const m = k.match(/-----BEGIN ([A-Z0-9 ]*PRIVATE KEY)-----([\s\S]*?)-----END [A-Z0-9 ]*PRIVATE KEY-----/)
+  if (m) {
+    const type = m[1].trim()
+    const body = m[2].replace(/[^A-Za-z0-9+/=]/g, "")
+    const wrapped = body.match(/.{1,64}/g)?.join("\n") ?? body
+    return `-----BEGIN ${type}-----\n${wrapped}\n-----END ${type}-----\n`
+  }
+  return k
+}
+
 // 回傳 access token 或錯誤訊息
 async function getAccessToken(): Promise<{ token: string | null; error: string | null }> {
   const email = process.env.GSC_CLIENT_EMAIL
-  let key = process.env.GSC_PRIVATE_KEY
-  if (!email || !key) return { token: null, error: "缺少 GSC_CLIENT_EMAIL 或 GSC_PRIVATE_KEY" }
-  key = key.replace(/\\n/g, "\n") // Vercel 環境變數常以 \n 儲存換行
+  const rawKey = process.env.GSC_PRIVATE_KEY
+  if (!email || !rawKey) return { token: null, error: "缺少 GSC_CLIENT_EMAIL 或 GSC_PRIVATE_KEY" }
+  const key = normalizePrivateKey(rawKey)
 
   const now = Math.floor(Date.now() / 1000)
   if (cachedToken && cachedToken.exp > now + 60) return { token: cachedToken.token, error: null }
