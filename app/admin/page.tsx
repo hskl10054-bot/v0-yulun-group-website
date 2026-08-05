@@ -5,7 +5,7 @@ import {
   Home, Paintbrush, Hammer, Coffee,
   Save, Plus, Trash2, Upload, X, Check,
   ImageIcon, ChevronRight, Eye, Loader2, RefreshCw,
-  Type, ChevronDown, Palette
+  Type, ChevronDown, Palette, BarChart3
 } from "lucide-react"
 
 import { getDefaultContentFont, getDefaultListFont } from "@/lib/default-fonts"
@@ -1234,6 +1234,10 @@ export default function AdminPage() {
           <a href="/" target="_blank" className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition-colors" title={sidebarCollapsed ? "預覽網站" : undefined}>
             <Eye className="h-[18px] w-[18px] shrink-0" />
             {!sidebarCollapsed && <span>預覽網站</span>}
+          </a>
+          <a href="/seo-report" target="_blank" className="mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 transition-colors" title={sidebarCollapsed ? "SEO 流量報表" : undefined}>
+            <BarChart3 className="h-[18px] w-[18px] shrink-0" />
+            {!sidebarCollapsed && <span>SEO 流量報表</span>}
           </a>
         </div>
       </aside>
