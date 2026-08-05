@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { getSupabaseAdmin } from "@/lib/supabase"
-import { gscQuery, gscConfigured, type GscRow } from "@/lib/gsc"
+import { gscQuery, gscQueryEx, gscConfigured, type GscRow } from "@/lib/gsc"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs"
@@ -135,12 +135,17 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
   let gscKeywords: GscRow[] | null = null
   let gscPages: GscRow[] | null = null
   let gscDaily: GscRow[] | null = null
+  let gscError: string | null = null
   if (gscOn) {
-    ;[gscKeywords, gscPages, gscDaily] = await Promise.all([
-      gscQuery({ startDate: monthStart, endDate: today, dimensions: ["query"], rowLimit: 20 }),
-      gscQuery({ startDate: monthStart, endDate: today, dimensions: ["page"], rowLimit: 20 }),
-      gscQuery({ startDate: sixMonthsAgo, endDate: today, dimensions: ["date"], rowLimit: 500 }),
-    ])
+    const kwRes = await gscQueryEx({ startDate: monthStart, endDate: today, dimensions: ["query"], rowLimit: 20 })
+    gscKeywords = kwRes.rows
+    gscError = kwRes.error
+    if (gscKeywords) {
+      ;[gscPages, gscDaily] = await Promise.all([
+        gscQuery({ startDate: monthStart, endDate: today, dimensions: ["page"], rowLimit: 20 }),
+        gscQuery({ startDate: sixMonthsAgo, endDate: today, dimensions: ["date"], rowLimit: 500 }),
+      ])
+    }
   }
   // 依月份彙整 GSC 每日資料
   const gscByMonth = new Map<string, { clicks: number; impressions: number }>()
@@ -182,6 +187,9 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
         ) : gscKeywords === null ? (
           <div className="rounded-2xl bg-white p-6 text-[0.92rem] font-light leading-loose" style={{ color: "#B5776A", boxShadow: "0 20px 50px -35px rgba(42,37,32,0.3)" }}>
             無法取得 GSC 資料。請確認：① 服務帳戶已加入 Search Console 使用者 ② <code>GSC_SITE_URL</code> 格式正確（<code>sc-domain:yulungroup.com</code> 或 <code>https://www.yulungroup.com/</code>）③ 金鑰正確。
+            {gscError && (
+              <pre className="mt-4 overflow-x-auto rounded-lg p-3 text-[0.75rem] leading-relaxed" style={{ background: "#F5EFE6", color: "#7A5C4E", whiteSpace: "pre-wrap" }}>診斷：{gscError}</pre>
+            )}
           </div>
         ) : (
           <>
