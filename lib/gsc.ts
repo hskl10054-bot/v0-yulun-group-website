@@ -29,11 +29,31 @@ function normalizePrivateKey(raw: string): string {
   return k
 }
 
-// 回傳 access token 或錯誤訊息
-async function getAccessToken(): Promise<{ token: string | null; error: string | null }> {
+// 取得憑證：優先用整包 JSON（GSC_SERVICE_ACCOUNT_JSON），否則用個別的 email + key
+function getCredentials(): { email: string; rawKey: string } | null {
+  const json = process.env.GSC_SERVICE_ACCOUNT_JSON
+  if (json && json.trim()) {
+    try {
+      const parsed = JSON.parse(json.trim()) as { client_email?: string; private_key?: string }
+      if (parsed.client_email && parsed.private_key) {
+        return { email: parsed.client_email, rawKey: parsed.private_key }
+      }
+    } catch { /* 解析失敗則往下用個別變數 */ }
+  }
   const email = process.env.GSC_CLIENT_EMAIL
   const rawKey = process.env.GSC_PRIVATE_KEY
-  if (!email || !rawKey) return { token: null, error: "缺少 GSC_CLIENT_EMAIL 或 GSC_PRIVATE_KEY" }
+  if (email && rawKey) return { email, rawKey }
+  return null
+}
+
+// 回傳 access token 或錯誤訊息
+async function getAccessToken(): Promise<{ token: string | null; error: string | null }> {
+  const creds = getCredentials()
+  if (!creds) return { token: null, error: "缺少憑證：請設定 GSC_SERVICE_ACCOUNT_JSON，或 GSC_CLIENT_EMAIL + GSC_PRIVATE_KEY" }
+  const { email, rawKey } = creds
+  if (!rawKey.includes("PRIVATE KEY")) {
+    return { token: null, error: "金鑰內容不含「BEGIN PRIVATE KEY」，可能貼到錯的欄位（應為 private_key，不是 private_key_id）。建議改用整包 GSC_SERVICE_ACCOUNT_JSON。" }
+  }
   const key = normalizePrivateKey(rawKey)
 
   const now = Math.floor(Date.now() / 1000)
@@ -75,7 +95,8 @@ export interface GscRow {
 }
 
 export function gscConfigured(): boolean {
-  return !!(process.env.GSC_CLIENT_EMAIL && process.env.GSC_PRIVATE_KEY && process.env.GSC_SITE_URL)
+  const hasCreds = !!(process.env.GSC_SERVICE_ACCOUNT_JSON?.trim()) || !!(process.env.GSC_CLIENT_EMAIL && process.env.GSC_PRIVATE_KEY)
+  return !!(hasCreds && process.env.GSC_SITE_URL)
 }
 
 // 回傳資料列或錯誤訊息（錯誤會顯示在內部報表頁以利排查）
