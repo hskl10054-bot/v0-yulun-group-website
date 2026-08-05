@@ -29,16 +29,35 @@ function normalizePrivateKey(raw: string): string {
   return k
 }
 
+// 從字串中擷取第一個成對括號的 JSON 物件（可容忍前後多餘字元、重複貼上）
+function extractFirstJsonObject(s: string): string | null {
+  const start = s.indexOf("{")
+  if (start < 0) return null
+  let depth = 0, inStr = false, esc = false
+  for (let i = start; i < s.length; i++) {
+    const c = s[i]
+    if (inStr) {
+      if (esc) esc = false
+      else if (c === "\\") esc = true
+      else if (c === '"') inStr = false
+    } else if (c === '"') inStr = true
+    else if (c === "{") depth++
+    else if (c === "}") { depth--; if (depth === 0) return s.slice(start, i + 1) }
+  }
+  return null
+}
+
 // 取得憑證：優先用整包 JSON（GSC_SERVICE_ACCOUNT_JSON），否則用個別的 email + key
 function getCredentials(): { email: string; rawKey: string; source: string; dbg: string } | null {
   const json = process.env.GSC_SERVICE_ACCOUNT_JSON
   const jsonPresent = !!(json && json.trim())
   let jsonParseErr = ""
   if (jsonPresent) {
+    const objStr = extractFirstJsonObject(json!) ?? json!.trim()
     try {
-      const parsed = JSON.parse(json!.trim()) as { client_email?: string; private_key?: string }
+      const parsed = JSON.parse(objStr) as { client_email?: string; private_key?: string }
       if (parsed.client_email && parsed.private_key) {
-        return { email: parsed.client_email, rawKey: parsed.private_key, source: "JSON", dbg: `JSON長度=${json!.trim().length}` }
+        return { email: parsed.client_email, rawKey: parsed.private_key, source: "JSON", dbg: `JSON長度=${objStr.length}` }
       }
       jsonParseErr = "JSON 解析成功但缺 client_email 或 private_key"
     } catch (e) {
