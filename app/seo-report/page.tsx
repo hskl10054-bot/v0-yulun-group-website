@@ -132,21 +132,40 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
   const today = tpeDate.format(new Date())
   const monthStart = `${nowMonth}-01`
   const sixMonthsAgo = tpeDate.format(new Date(Date.now() - 183 * 24 * 3600 * 1000))
+  const ninetyDaysAgo = tpeDate.format(new Date(Date.now() - 90 * 24 * 3600 * 1000))
   let gscKeywords: GscRow[] | null = null
   let gscPages: GscRow[] | null = null
   let gscDaily: GscRow[] | null = null
+  let gscOpp: GscRow[] | null = null // 近90天關鍵字，用於機會分析
   let gscError: string | null = null
   if (gscOn) {
-    const kwRes = await gscQueryEx({ startDate: monthStart, endDate: today, dimensions: ["query"], rowLimit: 20 })
+    const kwRes = await gscQueryEx({ startDate: monthStart, endDate: today, dimensions: ["query"], rowLimit: 25 })
     gscKeywords = kwRes.rows
     gscError = kwRes.error
     if (gscKeywords) {
-      ;[gscPages, gscDaily] = await Promise.all([
+      ;[gscPages, gscDaily, gscOpp] = await Promise.all([
         gscQuery({ startDate: monthStart, endDate: today, dimensions: ["page"], rowLimit: 20 }),
         gscQuery({ startDate: sixMonthsAgo, endDate: today, dimensions: ["date"], rowLimit: 500 }),
+        gscQuery({ startDate: ninetyDaysAgo, endDate: today, dimensions: ["query"], rowLimit: 200 }),
       ])
     }
   }
+  // 機會關鍵字（快贏）：已排在前面、再推一把就能衝更前的字，附建議動作
+  type Opp = { kw: string; pos: number; imp: number; clicks: number; ctr: number; action: string; tone: string }
+  const opportunities: Opp[] = (gscOpp ?? [])
+    .filter((r) => r.keys[0] && r.position > 1.3 && r.position <= 20 && r.impressions >= 2)
+    .map((r) => {
+      const pos = r.position, imp = r.impressions, ctr = r.ctr
+      let action = "持續觀察、累積內容", tone = "#8C8479"
+      if (pos <= 3 && ctr < 0.05 && imp >= 5) { action = "已排前3名但點擊偏低 → 優化標題與 meta 描述，讓人更想點", tone = "#B5776A" }
+      else if (pos <= 3) { action = "已排前3名 → 維持，加內部連結鞏固", tone = "#8FA98C" }
+      else if (pos <= 10 && ctr < 0.03 && imp >= 5) { action = "在第1頁但點擊率低 → 改寫標題／描述提升 CTR", tone = "#B5776A" }
+      else if (pos <= 10) { action = "已在第1頁前段 → 內容補強＋內部連結，衝更前面", tone = "#B5956A" }
+      else { action = `接近第1頁（第${Math.round(pos)}名）→ 建議寫一篇主打「${r.keys[0]}」的文章搶進前10`, tone = "#6B8AB0" }
+      return { kw: r.keys[0], pos, imp, clicks: r.clicks, ctr, action, tone }
+    })
+    .sort((a, b) => b.imp - a.imp || a.pos - b.pos)
+    .slice(0, 15)
   // 依月份彙整 GSC 每日資料
   const gscByMonth = new Map<string, { clicks: number; impressions: number }>()
   for (const r of gscDaily ?? []) {
@@ -221,6 +240,42 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
                 </tbody>
               </table>
             </div>
+
+            {/* 🎯 機會關鍵字（快贏）— 每月自動更新，附建議動作 */}
+            <div className="mb-3 mt-10 flex items-baseline gap-3">
+              <h3 className="text-[1.05rem] font-semibold" style={{ letterSpacing: "0.06em" }}>🎯 機會關鍵字（快贏）</h3>
+              <span className="text-[0.78rem] font-light" style={{ color: MUTE }}>近 90 天 · 已排前段、值得推一把的字</span>
+            </div>
+            <div className="overflow-x-auto rounded-2xl bg-white" style={{ boxShadow: "0 20px 50px -35px rgba(42,37,32,0.3)" }}>
+              <table className="w-full border-collapse text-left" style={{ fontSize: "0.9rem" }}>
+                <thead>
+                  <tr style={{ color: MUTE, borderBottom: `1px solid ${LINE}` }}>
+                    <th className="px-5 py-4 font-medium">關鍵字</th>
+                    <th className="px-4 py-4 text-right font-medium">排名</th>
+                    <th className="px-4 py-4 text-right font-medium">曝光</th>
+                    <th className="px-4 py-4 text-right font-medium">點擊</th>
+                    <th className="px-5 py-4 font-medium">建議動作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {opportunities.map((o) => (
+                    <tr key={o.kw} style={{ borderBottom: `1px solid ${LINE}` }}>
+                      <td className="px-5 py-3.5" style={{ color: INK, fontWeight: 500 }}>{o.kw}</td>
+                      <td className="px-4 py-3.5 text-right" style={{ color: INK }}>{fmtPos(o.pos)}</td>
+                      <td className="px-4 py-3.5 text-right" style={{ color: "#6B5D4F" }}>{o.imp}</td>
+                      <td className="px-4 py-3.5 text-right" style={{ color: "#6B5D4F" }}>{o.clicks}</td>
+                      <td className="px-5 py-3.5" style={{ color: o.tone, fontSize: "0.85rem", lineHeight: 1.5 }}>{o.action}</td>
+                    </tr>
+                  ))}
+                  {opportunities.length === 0 && (
+                    <tr><td colSpan={5} className="px-5 py-8 text-center" style={{ color: MUTE }}>暫無明顯機會字（資料累積更多後會自動出現）</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-[0.8rem] font-light leading-relaxed" style={{ color: "#B3AB9E" }}>
+              判讀：排名 4–10 名的字「內容補強＋內部連結」最快見效；11–20 名的字建議「新增一篇主打文章」搶進第 1 頁；排名前段但點擊率低的字，改標題與描述即可提升點擊。
+            </p>
 
             {/* 各頁面自然點擊 */}
             <h3 className="mb-3 mt-10 text-[1.05rem] font-semibold" style={{ letterSpacing: "0.06em" }}>各頁面自然搜尋點擊</h3>
