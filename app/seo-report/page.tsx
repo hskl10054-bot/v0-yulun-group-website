@@ -59,6 +59,22 @@ const monthLabel = (ym: string) => {
 const fmtCtr = (ctr: number) => `${(ctr * 100).toFixed(1)}%`
 const fmtPos = (p: number) => p.toFixed(1)
 
+// 內容藍圖：針對「台中室內設計／裝修」高價值、尚未涵蓋的長尾關鍵字，建議撰寫的文章主題。
+// GSC 只會顯示「已經排名」的字（新站目前只有品牌字），這份清單補上「該主動出擊」的字。
+const CONTENT_BLUEPRINT = [
+  { kw: "台中室內設計費用", why: "高成交意圖，比價中的客人最常搜", title: "台中室內設計費用怎麼算？設計費、監工費、工程費一次看懂" },
+  { kw: "預售屋客變", why: "預售屋族群必經流程，競爭低又精準", title: "預售屋客變是什麼？客變流程、黃金時間點與 5 個常見錯誤" },
+  { kw: "新成屋裝潢流程", why: "剛交屋族群大量搜尋", title: "新成屋裝潢流程全攻略：從丈量到入住要多久、每一步在做什麼" },
+  { kw: "裝潢預算分配", why: "幾乎每位屋主都會查", title: "裝潢預算怎麼抓？各項比例、隱藏費用與不踩雷分配法" },
+  { kw: "系統櫃 vs 木作", why: "決策型關鍵字，帶來精準客", title: "系統櫃還是木作？優缺點、價格與適用情境完整比較" },
+  { kw: "統包 vs 設計師", why: "選服務前必查", title: "找統包還是室內設計師？差別、費用與怎麼選才對" },
+  { kw: "中古屋翻新費用", why: "台中中古屋市場大", title: "中古屋翻新費用一坪多少？影響價格的關鍵與省錢重點" },
+  { kw: "毛胚屋裝潢", why: "利基型、競爭低易排名", title: "毛胚屋裝潢懶人包：從零開始的步驟、預算與注意事項" },
+  { kw: "裝修驗收清單", why: "交屋前必查、易被分享收藏", title: "裝修驗收清單：交屋前一定要檢查的 20 個項目" },
+  { kw: "室內設計風格", why: "靈感型搜尋量大", title: "無印風、日式、現代風…室內設計風格怎麼選最適合你" },
+  { kw: "台中商業空間設計", why: "拓展商業客源", title: "台中商業空間設計：店面、辦公室規劃重點與實例" },
+]
+
 interface Row { created_at: string; path: string; source: string }
 
 const SETUP_SQL = `create table if not exists page_views (
@@ -342,6 +358,38 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
             </div>
           </>
         )}
+
+        {/* 📝 建議內容主題（自然流量藍圖）— 該主動出擊、目前還沒排名的高價值關鍵字 */}
+        <div className="mb-3 mt-14 flex items-baseline gap-3">
+          <h2 className="text-[1.15rem] font-semibold" style={{ letterSpacing: "0.06em" }}>📝 建議內容主題（自然流量藍圖）</h2>
+          <span className="text-[0.78rem] font-light" style={{ color: MUTE }}>該主動撰寫、帶來新客的關鍵字</span>
+        </div>
+        <div className="rounded-2xl p-5 text-[0.86rem] font-light leading-relaxed" style={{ background: "#F3ECE1", color: "#6B5D4F" }}>
+          為什麼上面「搜尋關鍵字」大多只有品牌名？因為 Google 只顯示你<b>已經排名</b>的字 —— 新網站內容還少，所以先出現品牌字。想讓「裝修要知道的事」這類**還不認識你的人**也搜得到你，就要主動針對下列主題發文；發佈後 GSC 會開始收錄，上方「機會關鍵字」也會跟著長出來。
+        </div>
+        <div className="mt-4 overflow-x-auto rounded-2xl bg-white" style={{ boxShadow: "0 20px 50px -35px rgba(42,37,32,0.3)" }}>
+          <table className="w-full border-collapse text-left" style={{ fontSize: "0.9rem" }}>
+            <thead>
+              <tr style={{ color: MUTE, borderBottom: `1px solid ${LINE}` }}>
+                <th className="px-5 py-4 font-medium">目標關鍵字</th>
+                <th className="px-4 py-4 font-medium">為什麼值得寫</th>
+                <th className="px-5 py-4 font-medium" style={{ color: GOLD }}>建議文章題目</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CONTENT_BLUEPRINT.map((b) => (
+                <tr key={b.kw} style={{ borderBottom: `1px solid ${LINE}` }}>
+                  <td className="px-5 py-3.5 whitespace-nowrap" style={{ color: INK, fontWeight: 500 }}>{b.kw}</td>
+                  <td className="px-4 py-3.5" style={{ color: "#8C8479", fontSize: "0.84rem" }}>{b.why}</td>
+                  <td className="px-5 py-3.5" style={{ color: "#4A4237" }}>{b.title}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 text-[0.8rem] font-light leading-relaxed" style={{ color: "#B3AB9E" }}>
+          每月挑 1–3 個主題，寫成部落格文章（文末連到 /design 與 /booking）。持續發佈約 2–3 個月，自然流量會明顯成長。需要撰寫可直接交給我們。
+        </p>
 
         <div className="mt-14 mb-2 border-t pt-8" style={{ borderColor: LINE }}>
           <p className="text-[0.85rem]" style={{ color: MUTE }}>以下為網站第一方統計（含社群、直接、外部連結來源）</p>
