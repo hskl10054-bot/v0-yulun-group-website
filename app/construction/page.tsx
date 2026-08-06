@@ -4,7 +4,7 @@ import ConstructionClient from "./construction-client"
 export const metadata: Metadata = {
   title: "裕綸室內裝修｜台中室內裝修工程｜自有工班、透明報價",
   description:
-    "裕綸室內裝修提供台中室內裝修工程，自有工班不外包、標準化 SOP 施工、工程保固一年、逐項清單透明報價。從拆除到完工一站到位，立即預約現場勘估。",
+    "裕綸室內裝修提供台中室內裝修工程，自有工班不外包、標準化 SOP 施工、工程保固兩年、逐項清單透明報價。從拆除到完工一站到位，立即預約現場勘估。",
   alternates: { canonical: "https://www.yulungroup.com/construction" },
   openGraph: {
     type: "website",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     siteName: "裕綸集團 Yulun Group",
     title: "裕綸室內裝修｜台中室內裝修工程｜自有工班、透明報價",
     description:
-      "台中室內裝修工程，自有工班不外包、標準化 SOP 施工、工程保固一年、透明報價，從拆除到完工一站到位。",
+      "台中室內裝修工程，自有工班不外包、標準化 SOP 施工、工程保固兩年、透明報價，從拆除到完工一站到位。",
     images: [{ url: "/images/hero-bg.jpg", width: 1567, height: 1045, alt: "裕綸室內裝修｜台中室內裝修工程" }],
   },
 }
