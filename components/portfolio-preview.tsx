@@ -25,7 +25,7 @@ const TC_DISTRICTS = [
 const pickDistrict = (text: string) => TC_DISTRICTS.find((d) => text.includes(d)) ?? null
 
 // 挑一個風格詞（排除地名／屋型／類別等非風格用語），讓卡片有辨識度。
-const NON_STYLE = /台中|新竹|新成屋|老屋|翻新|客變|建案|商業空間|餐飲|店舖|咖啡|早午餐|飲料|OnlyEase|同齊/i
+const NON_STYLE = /台中|新竹|新成屋|老屋|翻新|客變|建案|商業空間|餐飲|店舖|咖啡|咖吡|早午餐|飲料|OnlyEase|同齊/i
 const pickStyle = (meta: string[]) => meta.find((m) => !NON_STYLE.test(m) && !m.includes("・")) ?? null
 
 // 依每個案子的實際資料，產生「高設計需求」的在地 SEO 標籤。
@@ -38,7 +38,7 @@ function seoTags(c: { zhName: string; enName: string; cat: string; meta: string[
     const district = city === "台中" ? pickDistrict(hay) : null
     const place = district ? `${city}${district}` : city
     let type = "商業空間設計"
-    if (/同齊|咖啡/.test(hay)) type = "咖啡廳設計"
+    if (/同齊|咖啡|咖吡/.test(hay)) type = "咖啡廳設計"
     else if (/伍宅|早午餐|brunch/i.test(hay)) type = "早午餐店設計"
     else if (/壹偲|OnlyEase|酵境|Catalyst|飲料/i.test(hay)) type = "飲料店設計"
     return [`${place}・${type}`]
