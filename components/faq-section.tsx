@@ -18,6 +18,13 @@ export function FaqSection({ colors }: FaqSectionProps) {
 
   return (
     <section className="py-24 md:py-32" style={{ backgroundColor: "#FFFFFF" }}>
+      <style>{`
+        .faq-scroll { scrollbar-width: thin; scrollbar-color: rgba(181,149,106,0.45) transparent; }
+        .faq-scroll::-webkit-scrollbar { width: 6px; }
+        .faq-scroll::-webkit-scrollbar-track { background: transparent; }
+        .faq-scroll::-webkit-scrollbar-thumb { background: rgba(181,149,106,0.45); border-radius: 999px; }
+        .faq-scroll::-webkit-scrollbar-thumb:hover { background: rgba(181,149,106,0.7); }
+      `}</style>
       <div className="mx-auto max-w-[100rem] px-6 md:px-12">
         {/* Heading */}
         <div className="mb-10 border-b pb-5 md:mb-14" style={{ borderColor: "rgba(43,39,34,0.12)" }}>
@@ -31,8 +38,11 @@ export function FaqSection({ colors }: FaqSectionProps) {
           <h2 className="text-3xl font-bold tracking-[0.12em] md:text-4xl" style={{ color: heading }}>常見問答</h2>
         </div>
 
-        {/* Accordion */}
-        <div className="mx-auto max-w-4xl">
+        {/* Accordion — 固定高度、內部捲動，避免整頁過長 */}
+        <div
+          className="faq-scroll mx-auto max-w-4xl overflow-y-auto pr-3 md:pr-4"
+          style={{ maxHeight: "clamp(24rem, 60vh, 32rem)" }}
+        >
           {FAQS.map((f, i) => {
             const isOpen = open === i
             return (
