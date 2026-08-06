@@ -8,6 +8,9 @@ import { PROCESS_INTRO, PROCESS_STEPS, PROCESS_FAQ, SERVICES, VALUE_ADDS } from 
 export const metadata: Metadata = {
   title: "合作流程｜空房子室內設計",
   description: PROCESS_INTRO.lead,
+  // 內容與 /design#process 相同，指定 canonical 至 /design 並不索引，避免重複內容競爭
+  alternates: { canonical: "https://www.yulungroup.com/design" },
+  robots: { index: false, follow: true },
 };
 
 export default function ProcessPage() {

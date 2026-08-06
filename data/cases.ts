@@ -305,7 +305,7 @@ export const CASES: CaseStudy[] = [
     ],
   },
   {
-    cat: COMMERCIAL, zhName: "同齊咖吡 西區精忠店", enName: "Tongqi West District", tagline: "一杯咖啡，連結深夜裡的每一次對話",
+    cat: COMMERCIAL, zhName: "同齊咖啡 西區精忠店", enName: "Tongqi West District", tagline: "一杯咖啡，連結深夜裡的每一次對話",
     hero: "/images/home/portfolio/home-portfolio-01.jpg",
     meta: ["商業空間", "餐飲店舖", "同齊咖啡", "台中・西區"],
     story: "同齊咖啡從花蓮起家，主打自家烘焙的精品咖啡與不限時的寧靜空間。西區精忠店落腳台中市西區精忠街，是品牌深入市區巷弄的據點。屋主希望這裡不只是喝咖啡的地方，而是讓人放慢腳步、能夠久坐工作、也能與朋友自在對話的交匯點。",

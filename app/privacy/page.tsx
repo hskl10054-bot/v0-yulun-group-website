@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer"
 export const metadata: Metadata = {
   title: "隱私權政策｜裕綸集團 Yulun Group",
   description: "裕綸集團隱私權政策：說明我們如何蒐集、使用與保護您在本網站提供的個人資料。",
+  alternates: { canonical: "https://www.yulungroup.com/privacy" },
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
