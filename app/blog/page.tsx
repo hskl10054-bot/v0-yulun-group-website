@@ -66,15 +66,15 @@ export default function BlogIndex() {
             <Link
               key={p.slug}
               href={`/blog/${p.slug}`}
-              className="group flex flex-col gap-3 rounded-2xl border p-7 transition-colors md:p-9"
-              style={{ borderColor: "#E8E3DA", backgroundColor: "#FFFFFF", textDecoration: "none" }}
+              className="group flex flex-col gap-3 rounded-2xl border border-[#E8E3DA] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#B5956A] hover:shadow-[0_24px_60px_-32px_rgba(42,37,32,0.42)] md:p-9"
+              style={{ backgroundColor: "#FFFFFF", textDecoration: "none" }}
             >
               <div className="flex items-center gap-3 text-[0.8rem] tracking-[0.15em]" style={{ color: "#B5956A" }}>
                 <span>{p.category}</span>
                 <span style={{ opacity: 0.4 }}>|</span>
                 <span style={{ color: "#A99E90" }}>{fmtDate(p.date)}</span>
               </div>
-              <h2 className="text-[1.3rem] font-semibold leading-snug md:text-[1.55rem]" style={{ color: "#2A2520" }}>{p.title}</h2>
+              <h2 className="text-[1.3rem] font-semibold leading-snug text-[#2A2520] transition-colors duration-300 group-hover:text-[#B5956A] md:text-[1.55rem]">{p.title}</h2>
               <p className="text-[1rem] font-light leading-[1.9] [text-wrap:pretty]" style={{ color: "#6B5D4F" }}>{p.description}</p>
               <span className="mt-1 inline-flex items-center gap-2 text-[0.85rem] tracking-[0.2em] uppercase transition-transform group-hover:gap-3" style={{ color: "#B5956A" }}>
                 閱讀更多 →
