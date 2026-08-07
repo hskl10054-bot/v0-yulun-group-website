@@ -117,8 +117,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <div
             className="mt-12 flex flex-col items-start gap-5 rounded-3xl p-7 md:flex-row md:items-center md:justify-between md:p-9"
             style={{
-              background: "linear-gradient(118deg, #B5956A 0%, #C79E6C 46%, #D9A98C 76%, #E2A4AB 100%)",
-              boxShadow: "0 22px 48px -18px rgba(181,149,106,0.65)",
+              background: "linear-gradient(118deg, #A5967E 0%, #B2A290 44%, #BFA9A6 74%, #C4ABAB 100%)",
+              boxShadow: "0 20px 44px -20px rgba(120,105,90,0.42)",
             }}
           >
             <div className="flex items-start gap-4">
@@ -126,7 +126,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><polyline points="9 15 12 18 15 15" /></svg>
               </span>
               <div>
-                <span className="mb-2 inline-block rounded-full px-3 py-0.5 text-[0.7rem] font-semibold tracking-[0.15em]" style={{ background: "rgba(255,255,255,0.9)", color: "#A9743F" }}>免費資源</span>
+                <span className="mb-2 inline-block rounded-full px-3 py-0.5 text-[0.7rem] font-semibold tracking-[0.15em]" style={{ background: "rgba(255,255,255,0.9)", color: "#8B7355" }}>免費資源</span>
                 <p className="text-[1.15rem] font-bold leading-snug" style={{ color: "#FFFFFF" }}>{post.download.label}</p>
                 <p className="mt-1.5 text-[0.92rem] font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.92)" }}>{post.download.note}</p>
               </div>
@@ -137,7 +137,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex flex-none items-center gap-2 rounded-full px-8 py-3.5 text-[0.92rem] font-semibold tracking-[0.12em] shadow-lg transition-transform hover:-translate-y-0.5"
-              style={{ backgroundColor: "#FFFFFF", color: "#A9743F", textDecoration: "none" }}
+              style={{ backgroundColor: "#FFFFFF", color: "#8B7355", textDecoration: "none" }}
             >
               下載 PDF ↓
             </a>
