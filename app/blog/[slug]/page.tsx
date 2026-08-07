@@ -114,17 +114,31 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
         {/* 免費資源下載（若文章有附檔） */}
         {post.download && (
-          <div className="mt-12 flex flex-col items-start gap-4 rounded-2xl border p-7 md:flex-row md:items-center md:justify-between md:p-8" style={{ borderColor: "#B5956A", backgroundColor: "#FBF7F1" }}>
+          <div
+            className="mt-12 flex flex-col items-start gap-5 rounded-3xl p-7 md:flex-row md:items-center md:justify-between md:p-9"
+            style={{
+              background: "linear-gradient(118deg, #B5956A 0%, #C79E6C 46%, #D9A98C 76%, #E2A4AB 100%)",
+              boxShadow: "0 22px 48px -18px rgba(181,149,106,0.65)",
+            }}
+          >
             <div className="flex items-start gap-4">
-              <span className="flex h-12 w-12 flex-none items-center justify-center rounded-xl" style={{ background: "rgba(181,149,106,0.14)" }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B5956A" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><polyline points="9 15 12 18 15 15" /></svg>
+              <span className="flex h-14 w-14 flex-none items-center justify-center rounded-2xl" style={{ background: "rgba(255,255,255,0.22)", boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.35)" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><polyline points="9 15 12 18 15 15" /></svg>
               </span>
               <div>
-                <p className="text-[1.08rem] font-semibold" style={{ color: "#2A2520" }}>{post.download.label}</p>
-                <p className="mt-1 text-[0.92rem] font-light leading-relaxed" style={{ color: "#6B5D4F" }}>{post.download.note}</p>
+                <span className="mb-2 inline-block rounded-full px-3 py-0.5 text-[0.7rem] font-semibold tracking-[0.15em]" style={{ background: "rgba(255,255,255,0.9)", color: "#A9743F" }}>免費資源</span>
+                <p className="text-[1.15rem] font-bold leading-snug" style={{ color: "#FFFFFF" }}>{post.download.label}</p>
+                <p className="mt-1.5 text-[0.92rem] font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.92)" }}>{post.download.note}</p>
               </div>
             </div>
-            <a href={post.download.file} download={post.download.filename} target="_blank" rel="noopener noreferrer" className="inline-flex flex-none items-center gap-2 rounded-full px-7 py-3 text-[0.85rem] tracking-[0.15em] transition-transform hover:-translate-y-0.5" style={{ backgroundColor: "#B5956A", color: "#FFFFFF", textDecoration: "none" }}>
+            <a
+              href={post.download.file}
+              download={post.download.filename}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-none items-center gap-2 rounded-full px-8 py-3.5 text-[0.92rem] font-semibold tracking-[0.12em] shadow-lg transition-transform hover:-translate-y-0.5"
+              style={{ backgroundColor: "#FFFFFF", color: "#A9743F", textDecoration: "none" }}
+            >
               下載 PDF ↓
             </a>
           </div>
