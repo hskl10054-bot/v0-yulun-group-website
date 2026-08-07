@@ -17,10 +17,10 @@ export function BlogList() {
 
   return (
     <div className="flex flex-col gap-10 md:flex-row md:gap-14">
-      {/* 左側主題篩選 */}
-      <aside className="md:w-48 md:flex-none">
-        <p className="mb-4 text-[0.72rem] uppercase tracking-[0.3em]" style={{ color: "#B5956A" }}>Topics · 主題</p>
-        <div className="flex flex-wrap gap-2 md:sticky md:top-24 md:flex-col md:gap-1.5">
+      {/* 左側主題篩選（編輯雜誌式細線清單） */}
+      <aside className="md:w-52 md:flex-none">
+        <p className="mb-2 hidden text-[0.7rem] uppercase tracking-[0.32em] md:block" style={{ color: "#B5956A" }}>主題分類</p>
+        <div className="-mx-1 flex gap-x-6 gap-y-1 overflow-x-auto px-1 pb-1 md:sticky md:top-24 md:mx-0 md:flex-col md:gap-0 md:overflow-visible md:px-0">
           {cats.map((c) => {
             const on = active === c.name
             return (
@@ -28,16 +28,22 @@ export function BlogList() {
                 key={c.name}
                 type="button"
                 onClick={() => setActive(c.name)}
-                className="flex items-center justify-between gap-3 rounded-full px-4 py-2 text-[0.92rem] tracking-wide transition-all md:rounded-xl md:px-4 md:py-2.5"
-                style={{
-                  color: on ? "#FFFFFF" : "#6B5D4F",
-                  backgroundColor: on ? "#B5956A" : "#FFFFFF",
-                  border: `1px solid ${on ? "#B5956A" : "#EAE3D8"}`,
-                  fontWeight: on ? 600 : 400,
-                }}
+                className={
+                  "group relative whitespace-nowrap py-2 text-left transition-colors md:w-full md:border-b md:py-3.5 md:pl-4 " +
+                  (on ? "text-[#B5956A]" : "text-[#6B5D4F] hover:text-[#2A2520]")
+                }
+                style={{ borderColor: "rgba(43,39,34,0.08)" }}
               >
-                <span>{c.name}</span>
-                <span className="text-[0.72rem]" style={{ color: on ? "rgba(255,255,255,0.75)" : "#B3AB9E" }}>{c.count}</span>
+                {/* 桌機版金色指示條 */}
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-1/2 hidden -translate-y-1/2 rounded-full transition-all duration-300 md:block"
+                  style={{ width: 3, height: on ? 18 : 0, backgroundColor: "#B5956A" }}
+                />
+                <span className="flex items-baseline gap-2 md:justify-between">
+                  <span className="text-[0.98rem] tracking-wide" style={{ fontWeight: on ? 600 : 400 }}>{c.name}</span>
+                  <span className="text-[0.7rem] tabular-nums" style={{ color: on ? "#C4A46E" : "#BBB2A4" }}>{c.count}</span>
+                </span>
               </button>
             )
           })}
