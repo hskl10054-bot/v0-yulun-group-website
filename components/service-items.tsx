@@ -79,8 +79,7 @@ export function ServiceItems({ colors, detailed = false, items }: ServiceItemsPr
           <div ref={ref} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {list.map((it, i) => {
               const active = hovered === i
-              const onImg = active && !!it.img // hover 且有背景圖
-              const iconColor = onImg ? "#FFFFFF" : active ? HOT : visible ? accent : GRAY
+              const iconColor = active ? "#FFFFFF" : visible ? accent : GRAY
               return (
                 <article
                   key={it.label}
@@ -88,37 +87,33 @@ export function ServiceItems({ colors, detailed = false, items }: ServiceItemsPr
                   onMouseLeave={() => setHovered((h) => (h === i ? null : h))}
                   className="relative isolate flex flex-col gap-4 overflow-hidden rounded-2xl border p-7 md:p-8"
                   style={{
-                    borderColor: active ? (it.img ? "transparent" : accent) : border,
-                    backgroundColor: active && !it.img ? "rgba(181,149,106,0.05)" : "#FFFFFF",
+                    borderColor: active ? "transparent" : border,
+                    backgroundColor: "#FFFFFF",
                     opacity: visible ? 1 : 0,
-                    transform: visible ? (onImg ? "translateY(-6px)" : "translateY(0)") : "translateY(22px)",
-                    boxShadow: onImg ? "0 30px 60px -30px rgba(42,37,32,0.5)" : "none",
-                    transition: `opacity 0.6s ease-out ${i * 0.07}s, transform 0.45s ease, border-color 0.35s ease, background-color 0.35s ease, box-shadow 0.45s ease`,
+                    transform: visible ? (active ? "translateY(-6px)" : "translateY(0)") : "translateY(22px)",
+                    boxShadow: active ? "0 30px 58px -30px rgba(107,78,49,0.55)" : "none",
+                    transition: `opacity 0.6s ease-out ${i * 0.07}s, transform 0.45s ease, border-color 0.35s ease, box-shadow 0.45s ease`,
                   }}
                 >
-                  {it.img && (
-                    <>
-                      <img
-                        src={it.img}
-                        alt=""
-                        aria-hidden="true"
-                        loading="lazy"
-                        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover"
-                        style={{ opacity: onImg ? 1 : 0, transform: onImg ? "scale(1)" : "scale(1.08)", transition: "opacity 0.55s ease, transform 0.9s ease" }}
-                      />
-                      <span
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 -z-10"
-                        style={{ opacity: onImg ? 1 : 0, transition: "opacity 0.55s ease", background: "linear-gradient(160deg, rgba(30,22,16,0.5), rgba(30,22,16,0.82))" }}
-                      />
-                    </>
-                  )}
+                  {/* 暖色漸層底 */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -z-10"
+                    style={{ opacity: active ? 1 : 0, transition: "opacity 0.5s ease", background: "linear-gradient(150deg, #7A5A38 0%, #9A7A4E 55%, #B5956A 100%)" }}
+                  />
+                  {/* 該工種大型圖示浮水印（永遠切題） */}
+                  <it.Icon
+                    aria-hidden="true"
+                    strokeWidth={1}
+                    className="pointer-events-none absolute -z-10"
+                    style={{ right: "-14px", bottom: "-20px", width: "9.5rem", height: "9.5rem", color: "#FFFFFF", opacity: active ? 0.14 : 0, transform: active ? "rotate(-6deg) scale(1)" : "rotate(-6deg) scale(0.9)", transition: "opacity 0.55s ease, transform 0.7s ease" }}
+                  />
                   <it.Icon strokeWidth={1.2} className="h-9 w-9" style={{ color: iconColor, transition: "color 0.35s ease" }} aria-hidden="true" />
                   <div>
-                    <h3 className="text-[1.25rem] font-semibold tracking-wide md:text-[1.35rem]" style={{ color: onImg ? "#FFFFFF" : active ? HOT : heading, transition: "color 0.35s ease" }}>{it.label}</h3>
-                    <p className="mt-1 text-[0.66rem] font-light uppercase tracking-[0.18em]" style={{ color: onImg ? "#E8D3B8" : accent, transition: "color 0.35s ease" }}>{it.en}</p>
+                    <h3 className="text-[1.25rem] font-semibold tracking-wide md:text-[1.35rem]" style={{ color: active ? "#FFFFFF" : heading, transition: "color 0.35s ease" }}>{it.label}</h3>
+                    <p className="mt-1 text-[0.66rem] font-light uppercase tracking-[0.18em]" style={{ color: active ? "#F0E4D0" : accent, transition: "color 0.35s ease" }}>{it.en}</p>
                   </div>
-                  <p className="text-[0.95rem] font-light leading-[1.9] [text-wrap:pretty]" style={{ color: onImg ? "rgba(255,255,255,0.92)" : text, opacity: onImg ? 1 : 0.85, transition: "color 0.35s ease, opacity 0.35s ease" }}>{it.desc}</p>
+                  <p className="text-[0.95rem] font-light leading-[1.9] [text-wrap:pretty]" style={{ color: active ? "rgba(255,255,255,0.92)" : text, opacity: active ? 1 : 0.85, transition: "color 0.35s ease, opacity 0.35s ease" }}>{it.desc}</p>
                 </article>
               )
             })}

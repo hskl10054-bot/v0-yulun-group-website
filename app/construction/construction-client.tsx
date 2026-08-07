@@ -61,7 +61,7 @@ export default function ConstructionPage() {
     : defaultServices.map((s, i) => ({ ...s, sortOrder: i + 1 }))
 
   // 轉成 ServiceItems 卡片格式（沿用空房子的呈現樣貌）
-  const serviceItems = services.map((s, i) => ({ label: s.name, en: SERVICE_EN[s.name] ?? "Construction", desc: s.desc, Icon: s.icon, img: `/images/construction/portfolio/construction-project-0${(i % 5) + 1}.jpg` }))
+  const serviceItems = services.map((s) => ({ label: s.name, en: SERVICE_EN[s.name] ?? "Construction", desc: s.desc, Icon: s.icon }))
 
   // Projects from CMS or fallback
   const cmsProjects = getListItemsBySection(listItems, "portfolio")
