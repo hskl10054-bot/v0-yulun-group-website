@@ -215,8 +215,70 @@ export default function ConstructionPage() {
       </section>
 
       {/* STRENGTHS */}
-      <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.strengths_bg }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
+      <section className="resp-section" style={{ position: "relative", overflow: "hidden", padding: "8rem 6rem", background: colors.strengths_bg }}>
+        {/* 施工藍圖背景 — 工地平面圖意象（藍圖方格＋樓層平面圖線稿） */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            backgroundImage: `
+              repeating-linear-gradient(0deg, rgba(107,78,49,0.045) 0, rgba(107,78,49,0.045) 1px, transparent 1px, transparent 26px),
+              repeating-linear-gradient(90deg, rgba(107,78,49,0.045) 0, rgba(107,78,49,0.045) 1px, transparent 1px, transparent 26px),
+              repeating-linear-gradient(0deg, rgba(107,78,49,0.07) 0, rgba(107,78,49,0.07) 1px, transparent 1px, transparent 130px),
+              repeating-linear-gradient(90deg, rgba(107,78,49,0.07) 0, rgba(107,78,49,0.07) 1px, transparent 1px, transparent 130px)
+            `,
+            maskImage: "radial-gradient(120% 100% at 70% 50%, #000 55%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(120% 100% at 70% 50%, #000 55%, transparent 100%)",
+          }}
+        />
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 600 420"
+          preserveAspectRatio="xMidYMid meet"
+          style={{ position: "absolute", right: "-3%", bottom: "-8%", width: "min(760px, 60%)", height: "auto", color: "#6B4E31", opacity: 0.15, pointerEvents: "none" }}
+        >
+          <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+            {/* 外牆 */}
+            <rect x="40" y="48" width="520" height="332" strokeWidth="3" />
+            <rect x="50" y="58" width="500" height="312" strokeWidth="1" />
+            {/* 隔間牆 */}
+            <line x1="340" y1="58" x2="340" y2="248" strokeWidth="2" />
+            <line x1="340" y1="248" x2="550" y2="248" strokeWidth="2" />
+            <line x1="50" y1="248" x2="200" y2="248" strokeWidth="2" />
+            <line x1="200" y1="248" x2="200" y2="370" strokeWidth="2" />
+            {/* 門開口與門扇弧線 */}
+            <path d="M150 58 A44 44 0 0 1 194 102" strokeWidth="1.5" />
+            <line x1="150" y1="58" x2="150" y2="102" strokeWidth="1.5" />
+            <path d="M340 170 A38 38 0 0 0 302 208" strokeWidth="1.5" />
+            <line x1="340" y1="170" x2="302" y2="170" strokeWidth="1.5" />
+            {/* 窗（外牆雙線） */}
+            <line x1="240" y1="48" x2="320" y2="48" strokeWidth="1" />
+            <line x1="240" y1="54" x2="320" y2="54" strokeWidth="1" />
+            <line x1="40" y1="150" x2="40" y2="210" strokeWidth="1" />
+            <line x1="46" y1="150" x2="46" y2="210" strokeWidth="1" />
+            {/* 家具符號：圓桌、床、沙發 */}
+            <circle cx="450" cy="150" r="34" strokeWidth="1.5" />
+            <rect x="70" y="96" width="120" height="86" rx="4" strokeWidth="1.5" />
+            <line x1="70" y1="128" x2="190" y2="128" strokeWidth="1" />
+            <rect x="250" y="290" width="130" height="46" rx="6" strokeWidth="1.5" />
+            {/* 樓梯 */}
+            <rect x="430" y="286" width="96" height="74" strokeWidth="1.5" />
+            <line x1="430" y1="300" x2="526" y2="300" strokeWidth="1" />
+            <line x1="430" y1="314" x2="526" y2="314" strokeWidth="1" />
+            <line x1="430" y1="328" x2="526" y2="328" strokeWidth="1" />
+            <line x1="430" y1="342" x2="526" y2="342" strokeWidth="1" />
+            {/* 尺寸標註線 */}
+            <line x1="40" y1="24" x2="560" y2="24" strokeWidth="1" />
+            <line x1="40" y1="16" x2="40" y2="32" strokeWidth="1" />
+            <line x1="340" y1="16" x2="340" y2="32" strokeWidth="1" />
+            <line x1="560" y1="16" x2="560" y2="32" strokeWidth="1" />
+            <text x="180" y="20" fontSize="13" fill="currentColor" stroke="none" textAnchor="middle" letterSpacing="1">3,600</text>
+            <text x="450" y="20" fontSize="13" fill="currentColor" stroke="none" textAnchor="middle" letterSpacing="1">2,200</text>
+          </g>
+        </svg>
+        <div style={{ position: "relative", zIndex: 1, maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.strengths_icon, marginBottom: "1rem" }}>Our Strengths</p>
           <h2 ref={addRef(5)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", marginBottom: "1.5rem", color: colors.strengths_heading }}>為什麼選擇我們</h2>
           <div style={{ width: 48, height: 1, background: colors.strengths_icon, margin: "0 auto 4rem" }} />
