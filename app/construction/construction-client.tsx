@@ -163,12 +163,20 @@ export default function ConstructionPage() {
         @media (hover: none) {
           .portfolio-overlay { opacity: 1 !important; }
         }
-        .strength-card h3, .strength-card p { transition: color 0.4s, opacity 0.4s; }
-        .strength-card:hover { background: ${colors.strengths_icon} !important; border-color: ${colors.strengths_icon} !important; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        .strength-card:hover .strength-icon { background: #FFFFFF !important; border-color: rgba(255,255,255,0.4) !important; }
-        .strength-card:hover .strength-icon svg { color: ${colors.strengths_icon} !important; }
-        .strength-card:hover h3 { color: #FFFFFF !important; }
-        .strength-card:hover p { color: #FFFFFF !important; opacity: 0.9; }
+        /* 與首頁「集團實力」同款：金→玫瑰粉質感 hover */
+        .strength-card { position: relative; overflow: hidden; border-radius: 22px !important; box-shadow: 0 12px 30px -26px rgba(42,37,32,.3); transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease, border-color .5s ease !important; }
+        .strength-card::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .55s ease; background: radial-gradient(125% 80% at 50% 120%, rgba(226,164,171,.22), rgba(181,149,106,.12) 44%, transparent 74%); }
+        .strength-card::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; transform: scaleX(0); transition: transform .55s ease; background: linear-gradient(90deg, #B5956A, #E2A4AB); }
+        .strength-card:hover { transform: translateY(-9px) !important; border-color: transparent !important; box-shadow: 0 36px 66px -32px rgba(181,149,106,.55); }
+        .strength-card:hover::before { opacity: 1; }
+        .strength-card:hover::after { transform: scaleX(1); }
+        .strength-card h3, .strength-card p, .strength-card .strength-icon { position: relative; z-index: 1; }
+        .strength-card h3 { transition: color .5s ease; }
+        .strength-card .strength-icon { background: rgba(181,149,106,0.10) !important; border-color: rgba(181,149,106,0.20) !important; border-radius: 18px !important; transition: background .5s ease, border-color .5s ease, transform .5s ease, box-shadow .5s ease; }
+        .strength-card:hover .strength-icon { background: linear-gradient(135deg, #B5956A, #E2A4AB) !important; border-color: transparent !important; transform: translateY(-2px) scale(1.06); box-shadow: 0 14px 26px -12px rgba(181,149,106,.55); }
+        .strength-card:hover .strength-icon svg { color: #FFFFFF !important; }
+        .strength-card:hover h3 { color: #B5956A !important; }
+        @media (prefers-reduced-motion: reduce) { .strength-card:hover { transform: none !important; } }
         .back-link:hover { color: ${colors.hero_accent} !important; }
         .cta-link:hover { color: ${colors.hero_accent} !important; border-color: ${colors.hero_accent} !important; }
         .form-input { background: transparent; border: none; border-bottom: 0.5px solid rgba(255,255,255,0.2); padding: 0.7rem 0; width: 100%; font-family: 'Cormorant Garamond','Noto Serif TC',serif; font-size: 1.05rem; font-weight: 300; letter-spacing: 0.1em; color: ${colors.contact_btn_text}; outline: none; transition: border-color 0.3s; }

@@ -11,13 +11,11 @@ const ROSE = "#E2A4AB"
 const defaultStrengths = [
   { icon: HardHat, title: "自有工班", description: "擁有專屬施工團隊，確保品質與進度全程掌控，減少外包風險。" },
   { icon: ShieldCheck, title: "專業執照", description: "持有政府核定之室內裝修專業技術人員證照，合法合規、安心保障。" },
-  { icon: FileText, title: "透明報價", description: "逐項清單式報價，無隱藏費用，讓每一分預算都花在刀口上。", href: "/design#process" },
+  { icon: FileText, title: "透明報價", description: "逐項清單式報價，無隱藏費用，讓每一分預算都花在刀口上。" },
 ]
 
-// Map strength titles to internal links (applies to CMS-driven items too)
-const strengthLinks: Record<string, string> = {
-  透明報價: "/design#process",
-}
+// 目前不設任何卡片連結（點擊不跳頁）
+const strengthLinks: Record<string, string> = {}
 
 const defaultIcons = [HardHat, ShieldCheck, FileText]
 
