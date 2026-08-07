@@ -117,18 +117,18 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           <div
             className="mt-12 flex flex-col items-start gap-5 rounded-3xl p-7 md:flex-row md:items-center md:justify-between md:p-9"
             style={{
-              background: "linear-gradient(118deg, #A5967E 0%, #B2A290 44%, #BFA9A6 74%, #C4ABAB 100%)",
-              boxShadow: "0 20px 44px -20px rgba(120,105,90,0.42)",
+              background: "linear-gradient(118deg, #FBE3B8 0%, #F8CFA6 42%, #F7C0BE 74%, #F6B6C6 100%)",
+              boxShadow: "0 20px 46px -18px rgba(230,164,171,0.55)",
             }}
           >
             <div className="flex items-start gap-4">
-              <span className="flex h-14 w-14 flex-none items-center justify-center rounded-2xl" style={{ background: "rgba(255,255,255,0.22)", boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.35)" }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><polyline points="9 15 12 18 15 15" /></svg>
+              <span className="flex h-14 w-14 flex-none items-center justify-center rounded-2xl" style={{ background: "#FFFFFF", boxShadow: "0 6px 16px -6px rgba(150,110,70,0.4)" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B5956A" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><polyline points="9 15 12 18 15 15" /></svg>
               </span>
               <div>
-                <span className="mb-2 inline-block rounded-full px-3 py-0.5 text-[0.7rem] font-semibold tracking-[0.15em]" style={{ background: "rgba(255,255,255,0.9)", color: "#8B7355" }}>免費資源</span>
-                <p className="text-[1.15rem] font-bold leading-snug" style={{ color: "#FFFFFF" }}>{post.download.label}</p>
-                <p className="mt-1.5 text-[0.92rem] font-light leading-relaxed" style={{ color: "rgba(255,255,255,0.92)" }}>{post.download.note}</p>
+                <span className="mb-2 inline-block rounded-full px-3 py-0.5 text-[0.7rem] font-bold tracking-[0.15em]" style={{ background: "#B5956A", color: "#FFFFFF" }}>免費資源</span>
+                <p className="text-[1.18rem] font-bold leading-snug" style={{ color: "#3A2E22" }}>{post.download.label}</p>
+                <p className="mt-1.5 text-[0.92rem] font-normal leading-relaxed" style={{ color: "#6B5140" }}>{post.download.note}</p>
               </div>
             </div>
             <a
@@ -136,8 +136,8 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               download={post.download.filename}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex flex-none items-center gap-2 rounded-full px-8 py-3.5 text-[0.92rem] font-semibold tracking-[0.12em] shadow-lg transition-transform hover:-translate-y-0.5"
-              style={{ backgroundColor: "#FFFFFF", color: "#8B7355", textDecoration: "none" }}
+              className="inline-flex flex-none items-center gap-2 rounded-full px-8 py-3.5 text-[0.92rem] font-bold tracking-[0.12em] transition-transform hover:-translate-y-0.5"
+              style={{ backgroundColor: "#6B4E31", color: "#FFFFFF", textDecoration: "none", boxShadow: "0 10px 22px -8px rgba(107,78,49,0.6)" }}
             >
               下載 PDF ↓
             </a>
