@@ -29,13 +29,13 @@ const GOLD_ACCENTS = [
 ]
 
 export function HomePageClient({ initialHero }: { initialHero?: string[] }) {
-  const { content, loading } = useCmsData("home")
+  const { content } = useCmsData("home")
   const baseColors = usePageColors(content, "home")
   const colors = { ...baseColors, ...Object.fromEntries(GOLD_ACCENTS.map((k) => [k, GOLD])) }
 
   return (
     <>
-      <SplashScreen loading={loading} />
+      <SplashScreen />
       {/* 內容一開始就顯示（首圖已於 SSR 直出），不再等待前端抓取 CMS，改善 LCP */}
       <main>
         <HomeNavbar />

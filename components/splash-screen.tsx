@@ -1,39 +1,32 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-// Full-screen splash shown briefly on first load, then fades into the page.
-// Displays /logo-icon.png centered; falls back to brand text if it's missing.
-export function SplashScreen({ loading: _loading }: { loading: boolean }) {
-  const [done, setDone] = useState(false)
-  const [minElapsed, setMinElapsed] = useState(false)
+// 開場過場：以「純 CSS 動畫」淡出（跟隨瀏覽器繪製時間軸，約 1.2 秒），
+// 不依賴 JavaScript hydration，避免在慢速裝置上長時間遮住首圖（拖垮 LCP）。
+export function SplashScreen() {
   const [imgError, setImgError] = useState(false)
-
-  // 只以短暫計時控制（不再等前端抓取 CMS），避免拖慢首圖顯示（LCP）。
-  useEffect(() => {
-    const t = setTimeout(() => setMinElapsed(true), 650)
-    return () => clearTimeout(t)
-  }, [])
-
-  const hide = minElapsed
-
-  // Unmount after the fade-out finishes.
-  useEffect(() => {
-    if (hide) {
-      const t = setTimeout(() => setDone(true), 650)
-      return () => clearTimeout(t)
-    }
-  }, [hide])
-
-  if (done) return null
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex items-center justify-center transition-opacity duration-700 ${
-        hide ? "opacity-0 pointer-events-none" : "opacity-100"
-      }`}
-      style={{ backgroundColor: "#F5EFE6" }}
+      className="yl-splash"
+      aria-hidden="true"
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 9999,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#F5EFE6",
+        pointerEvents: "none",
+      }}
     >
+      <style>{`
+        @keyframes ylSplashOut { 0%,40% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+        .yl-splash { animation: ylSplashOut 1.25s ease-in forwards; will-change: opacity; }
+        @media (prefers-reduced-motion: reduce) { .yl-splash { animation-duration: .5s; } }
+      `}</style>
       {imgError ? (
         <div className="text-center animate-pulse">
           <div className="text-3xl font-bold tracking-[0.2em] text-[#2F2F2F] md:text-4xl">裕綸集團</div>
