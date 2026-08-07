@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { HomePageClient } from "@/components/home-page-client"
 import { FAQS } from "@/data/faqs"
+import { getHeroImagesServer } from "@/lib/home-server"
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -73,9 +74,17 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Home() {
+// 每 10 分鐘重新驗證，讓後台改圖會反映，同時保持靜態般的速度。
+export const revalidate = 600
+
+export default async function Home() {
+  const heroImages = await getHeroImagesServer()
   return (
     <>
+      {/* 預先載入首圖，改善行動版 LCP */}
+      {heroImages[0] && (
+        <link rel="preload" as="image" href={heroImages[0]} fetchPriority="high" />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -88,7 +97,7 @@ export default function Home() {
           __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
         }}
       />
-      <HomePageClient />
+      <HomePageClient initialHero={heroImages} />
     </>
   )
 }

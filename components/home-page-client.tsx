@@ -28,7 +28,7 @@ const GOLD_ACCENTS = [
   "footer_accent",
 ]
 
-export function HomePageClient() {
+export function HomePageClient({ initialHero }: { initialHero?: string[] }) {
   const { content, loading } = useCmsData("home")
   const baseColors = usePageColors(content, "home")
   const colors = { ...baseColors, ...Object.fromEntries(GOLD_ACCENTS.map((k) => [k, GOLD])) }
@@ -36,11 +36,10 @@ export function HomePageClient() {
   return (
     <>
       <SplashScreen loading={loading} />
-      <main
-        className={`transition-opacity duration-700 ease-in-out ${loading ? "opacity-0" : "opacity-100"}`}
-      >
+      {/* 內容一開始就顯示（首圖已於 SSR 直出），不再等待前端抓取 CMS，改善 LCP */}
+      <main>
         <HomeNavbar />
-        <HeroSection colors={colors} />
+        <HeroSection colors={colors} initialHero={initialHero} />
         <section className="bg-[#F7F4EF] px-6 py-24 text-center md:py-32" aria-label="服務引言">
           <div className="mx-auto max-w-5xl">
             <span

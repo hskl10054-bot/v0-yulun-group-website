@@ -6,12 +6,14 @@ import { useCmsData, getImageUrl, getImagesBySection } from "@/lib/use-cms-data"
 
 interface HeroSectionProps {
   colors: Record<string, string>
+  // 伺服器端預先取得的 hero 圖，讓首圖在 SSR 就直出（改善 LCP）
+  initialHero?: string[]
 }
 
 const AUTOPLAY_INTERVAL = 5000 // 5 seconds per slide
 const FALLBACK_IMAGES = ["/images/hero-bg.jpg"]
 
-export function HeroSection({ colors }: HeroSectionProps) {
+export function HeroSection({ colors, initialHero }: HeroSectionProps) {
   const { images } = useCmsData("home")
   const [show, setShow] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -23,6 +25,7 @@ export function HeroSection({ colors }: HeroSectionProps) {
     if (cmsImages.length > 0) return cmsImages.map((img) => img.url)
     const singleImage = getImageUrl(images, "hero")
     if (singleImage) return [singleImage]
+    if (initialHero && initialHero.length > 0) return initialHero // 伺服器端先給的圖
     return FALLBACK_IMAGES
   })()
 

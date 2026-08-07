@@ -4,18 +4,18 @@ import { useEffect, useState } from "react"
 
 // Full-screen splash shown briefly on first load, then fades into the page.
 // Displays /logo-icon.png centered; falls back to brand text if it's missing.
-export function SplashScreen({ loading }: { loading: boolean }) {
+export function SplashScreen({ loading: _loading }: { loading: boolean }) {
   const [done, setDone] = useState(false)
   const [minElapsed, setMinElapsed] = useState(false)
   const [imgError, setImgError] = useState(false)
 
-  // Keep the splash up for at least a moment so it doesn't just flash.
+  // 只以短暫計時控制（不再等前端抓取 CMS），避免拖慢首圖顯示（LCP）。
   useEffect(() => {
-    const t = setTimeout(() => setMinElapsed(true), 700)
+    const t = setTimeout(() => setMinElapsed(true), 650)
     return () => clearTimeout(t)
   }, [])
 
-  const hide = !loading && minElapsed
+  const hide = minElapsed
 
   // Unmount after the fade-out finishes.
   useEffect(() => {
