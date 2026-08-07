@@ -98,24 +98,27 @@ export function DesignProcess({ colors }: DesignProcessProps) {
         </div>
 
         {/* Process FAQ */}
-        <div className="mx-auto mt-16 max-w-3xl">
-          <h3 className="mb-4 text-[0.85rem] uppercase tracking-[0.25em]" style={{ color: accent }}>合作前的常見問題</h3>
-          {PROCESS_FAQ.map((f, i) => {
-            const open = openFaq === i
-            return (
-              <div key={f.q} className="border-b" style={{ borderColor: border }}>
-                <button type="button" onClick={() => setOpenFaq(open ? null : i)} aria-expanded={open} className="flex w-full items-center justify-between gap-5 py-5 text-left">
-                  <span className="text-[1.05rem] font-medium leading-snug md:text-[1.15rem]" style={{ color: open ? accent : heading, transition: "color 0.3s" }}>{f.q}</span>
-                  <span aria-hidden="true" className="flex h-6 w-6 flex-none items-center justify-center rounded-full border text-base leading-none" style={{ borderColor: accent, color: accent, transform: open ? "rotate(45deg)" : "rotate(0)", transition: "transform 0.3s" }}>+</span>
-                </button>
-                <div className="grid transition-all duration-500 ease-out" style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0 }}>
-                  <div className="overflow-hidden">
-                    <p className="pb-6 pr-8 text-[0.98rem] font-light leading-[1.95] [text-wrap:pretty]" style={{ color: text }}>{f.a}</p>
+        <div className="mx-auto mt-24 max-w-3xl">
+          <h3 className="mb-10 text-center text-[0.8rem] uppercase tracking-[0.35em]" style={{ color: accent }}>合作前的常見問題</h3>
+          <div style={{ borderTop: `1px solid ${border}` }}>
+            {PROCESS_FAQ.map((f, i) => {
+              const open = openFaq === i
+              return (
+                <div key={f.q} className="border-b" style={{ borderColor: border }}>
+                  <button type="button" onClick={() => setOpenFaq(open ? null : i)} aria-expanded={open} className="flex w-full items-start gap-4 py-7 text-left md:gap-8 md:py-8">
+                    <span className="flex-none pt-0.5 text-[0.85rem] font-semibold tracking-wider [font-variant-numeric:tabular-nums] md:text-[0.95rem]" style={{ color: accent }}>Q{i + 1}.</span>
+                    <span className="flex-1 text-[1.05rem] font-medium leading-snug md:text-[1.2rem]" style={{ color: open ? accent : heading, transition: "color 0.3s" }}>{f.q}</span>
+                    <span aria-hidden="true" className="flex-none pt-1 text-xl font-light leading-none" style={{ color: accent, transform: open ? "rotate(45deg)" : "rotate(0)", transition: "transform 0.3s" }}>+</span>
+                  </button>
+                  <div className="grid transition-all duration-500 ease-out" style={{ gridTemplateRows: open ? "1fr" : "0fr", opacity: open ? 1 : 0 }}>
+                    <div className="overflow-hidden">
+                      <p className="pb-8 pl-8 pr-8 text-[0.98rem] font-light leading-[1.95] [text-wrap:pretty] md:pl-[3.75rem]" style={{ color: text }}>{f.a}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>
