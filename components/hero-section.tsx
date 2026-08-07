@@ -80,6 +80,10 @@ export function HeroSection({ colors }: HeroSectionProps) {
               src={src}
               alt={`台中室內設計與裝修作品 ${i + 1}｜裕綸集團`}
               className="w-full h-full object-cover hero-kenburns"
+              loading={i === 0 ? "eager" : "lazy"}
+              // @ts-expect-error fetchPriority 為有效 HTML 屬性
+              fetchpriority={i === 0 ? "high" : "low"}
+              decoding="async"
             />
           </div>
         </div>

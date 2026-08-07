@@ -5,7 +5,6 @@
 export function KfzStyles() {
   return (
     <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;500;700&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Josefin+Sans:wght@200;300;400&display=swap');
     .kfz { --cream:#FFFFFF; --paper:#FFFDF9; --ink:#2B2722; --muted:#8A8074; --line:#E5DCCD; --clay:#A8744F; --clay-soft:#C9A487;
            font-family:'Noto Sans TC',sans-serif; color:var(--ink); background:var(--cream); line-height:1.8; }
     .kfz *{box-sizing:border-box;}
