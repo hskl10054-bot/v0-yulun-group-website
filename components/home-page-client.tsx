@@ -9,7 +9,6 @@ import { PortfolioPreview } from "@/components/portfolio-preview"
 import { ServiceItems } from "@/components/service-items"
 import { ServiceProcess } from "@/components/service-process"
 import { FaqSection } from "@/components/faq-section"
-import { TestimonialsSection } from "@/components/testimonials-section"
 import { ContactSection } from "@/components/contact-section"
 import { SplashScreen } from "@/components/splash-screen"
 import { useCmsData, usePageColors } from "@/lib/use-cms-data"
@@ -63,7 +62,6 @@ export function HomePageClient({ initialHero }: { initialHero?: string[] }) {
         <ServiceItems colors={colors} />
         <ServiceProcess colors={colors} />
         <FaqSection colors={colors} />
-        <TestimonialsSection colors={colors} />
         <ContactSection colors={colors} />
       </main>
     </>

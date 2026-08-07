@@ -18,11 +18,6 @@ const defaultServices = [
   { num: "05", name: "軟裝設計與風格諮詢", desc: "家具挑選、燈光配置、藝術品與植栽搭配，用軟裝語彙讓硬體設計更有生命力。" },
 ]
 
-const defaultTestimonials = [
-  { quote: "從第一次諮詢到完工，整個過程都讓我感受到設計師對細節的堅持。現在每天回到家都像是回到一個懂我的地方。", name: "李小姐", info: "台中北區・三房兩廳・2024" },
-  { quote: "我只是說了幾個關鍵字，設計師就把我腦海裡模糊的想像變成了真實的空間。太神奇了。", name: "黃先生", info: "台中西區・老屋翻新・2023" },
-  { quote: "咖啡廳開幕後不斷有客人說空間很有質感，生意比預期好很多。設計真的是最值得投資的事。", name: "吳老闆", info: "台中南區・商業空間・2023" },
-]
 
 export default function DesignPage() {
   const { content, listItems, images, loading } = useCmsData("design")
@@ -39,12 +34,6 @@ export default function DesignPage() {
   const services = cmsServices.length > 0
     ? cmsServices.map((li) => ({ num: li.subtitle || String(li.sort_order).padStart(2, "0"), name: li.title, desc: li.description, sortOrder: li.sort_order }))
     : defaultServices.map((s, i) => ({ ...s, sortOrder: i + 1 }))
-
-  // Testimonials from CMS or fallback
-  const cmsTestimonials = getListItemsBySection(listItems, "testimonials")
-  const testimonials = cmsTestimonials.length > 0
-    ? cmsTestimonials.map((li) => ({ quote: li.description, name: li.title, info: li.subtitle, sortOrder: li.sort_order }))
-    : defaultTestimonials.map((t, i) => ({ ...t, sortOrder: i + 1 }))
 
   // Content from CMS
   const heroImg = getImageUrl(images, "hero") || "/images/design/hero/design-hero.jpg"
@@ -270,21 +259,6 @@ export default function DesignPage() {
       <div id="portfolio">
         <PortfolioPreview colors={colors} />
       </div>
-
-      {/* TESTIMONIALS */}
-      <section className="resp-section" style={{ padding: "8rem 6rem", background: colors.testimonials_bg }}>
-        <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Testimonials</span>
-        <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.testimonials_heading, marginBottom: "3.5rem" }}>客戶怎麼說</h2>
-        <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
-          {testimonials.map((t, i) => (
-            <div key={t.name} ref={addRef(20 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "2.5rem", border: `0.5px solid ${colors.testimonials_card_border}` }}>
-              <p className="serif" style={{ fontSize: "1.05rem", fontStyle: "italic", color: colors.testimonials_text, lineHeight: 1.9, marginBottom: "2rem", fontWeight: 300, ...getListItemStyle(content, "testimonials", t.sortOrder, "description", "design") }}>「{t.quote}」</p>
-              <p style={{ fontSize: "0.82rem", letterSpacing: "0.2em", textTransform: "uppercase", color: colors.testimonials_accent, ...getListItemStyle(content, "testimonials", t.sortOrder, "title", "design") }}>{t.name}</p>
-              <p style={{ fontSize: "0.78rem", color: colors.testimonials_text, marginTop: "0.3rem", letterSpacing: "0.1em", ...getListItemStyle(content, "testimonials", t.sortOrder, "subtitle", "design") }}>{t.info}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* CONTACT — 精簡深色 footer（聯絡資訊 ＋ 版權；表單已移至 /booking） */}
       <ContactInfo showCta />
