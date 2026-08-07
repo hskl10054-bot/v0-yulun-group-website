@@ -47,16 +47,21 @@ export function KfzStyles() {
     .kfz .filter button{font-family:'Noto Serif TC';font-size:21px;background:none;border:none;cursor:pointer;color:var(--muted);padding:10px 20px;border-radius:999px;transition:.2s;position:relative;letter-spacing:.04em;}
     .kfz .filter button.on{color:var(--ink);}
     .kfz .filter button.on:after{content:"";position:absolute;left:20px;right:20px;bottom:2px;height:2px;background:var(--clay);}
-    .kfz .works-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px 28px;padding:4px 0 110px;}
-    .kfz .card{cursor:pointer;position:relative;text-decoration:none;color:inherit;display:block;}
-    .kfz .card .thumb{width:100%;aspect-ratio:16/10;overflow:hidden;background:#EFE7D9;display:flex;align-items:center;justify-content:center;border-radius:2px;position:relative;}
-    .kfz .card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1);}
-    .kfz .card:hover .thumb img{transform:scale(1.045);}
+    .kfz .works-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px 44px;padding:8px 0 120px;}
+    .kfz .card{cursor:pointer;position:relative;text-decoration:none;color:inherit;display:block;background:#FBF8F3;border:1px solid #EFE7DA;border-radius:20px;padding:14px 14px 6px;box-shadow:0 14px 34px -28px rgba(43,39,34,.42);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s ease,border-color .5s ease;}
+    .kfz .card:hover{transform:translateY(-8px);border-color:#E4D5C0;box-shadow:0 42px 72px -34px rgba(43,39,34,.5);}
+    .kfz .card .thumb{width:100%;aspect-ratio:16/11;overflow:hidden;background:#EFE7D9;display:flex;align-items:center;justify-content:center;border-radius:14px;position:relative;}
+    .kfz .card .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1);}
+    .kfz .card:hover .thumb img{transform:scale(1.06);}
+    .kfz .card .thumb:after{content:"查看案例 →";position:absolute;left:0;right:0;bottom:0;padding:46px 18px 16px;color:#fff;font-family:'Noto Serif TC',serif;font-size:13.5px;letter-spacing:.14em;text-align:center;background:linear-gradient(transparent,rgba(28,22,16,.62));opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease;pointer-events:none;}
+    .kfz .card:hover .thumb:after{opacity:1;transform:translateY(0);}
+    .kfz .card.todo .thumb:after{display:none;}
     .kfz .card .thumb .ph{font-family:'Noto Serif TC',serif;color:var(--clay-soft);font-size:34px;}
     .kfz .card.todo .thumb{background:repeating-linear-gradient(45deg,#F1E9DB,#F1E9DB 14px,#EFE6D6 14px,#EFE6D6 28px);}
-    .kfz .card .cap{text-align:center;padding:18px 10px 0;}
+    .kfz .card .cap{text-align:center;padding:18px 10px 12px;}
     .kfz .card .cap .en-name{font-family:'Cormorant Garamond',serif;color:var(--clay);letter-spacing:.16em;font-size:14px;}
-    .kfz .card .cap h3{font-family:'Noto Serif TC',serif;font-size:22px;font-weight:500;margin:3px 0 0;letter-spacing:.05em;}
+    .kfz .card .cap h3{font-family:'Noto Serif TC',serif;font-size:22px;font-weight:500;margin:3px 0 0;letter-spacing:.05em;transition:color .4s ease;}
+    .kfz .card:hover .cap h3{color:var(--clay);}
     .kfz .badge{position:absolute;top:0;left:0;margin:12px;z-index:2;background:var(--clay);color:#fff;font-size:11px;letter-spacing:.1em;padding:3px 10px;border-radius:999px;}
     .kfz .back{display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;color:var(--clay);font-family:'Noto Sans TC';font-size:14px;padding:18px 0;text-decoration:none;}
     .kfz .case-hero{height:72vh;min-height:460px;background:var(--ink);display:flex;align-items:flex-end;position:relative;overflow:hidden;}
