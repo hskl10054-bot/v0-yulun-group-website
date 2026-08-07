@@ -19,8 +19,8 @@ const VALUE_ADDS = [
 
 const FEES = [
   "初談完全免費，不會在第一次見面就要你付任何錢。",
-  "設計與工程分兩階段簽約：先簽設計、確認滿意，再進工程估價與簽約，每一步你都清楚、也保留喊停的主導權。",
-  "付款分階段、跟著進度走，而不是一次付清。",
+  "採逐項清單式報價，每一筆材料與花費都寫清楚，讓你知道錢花在哪、也方便比較。",
+  "付款分階段、跟著工程進度走，而不是一次付清，你隨時清楚進度與金額。",
 ]
 
 export function DesignProcess({ colors }: DesignProcessProps) {
@@ -70,14 +70,26 @@ export function DesignProcess({ colors }: DesignProcessProps) {
 
         {/* Value adds */}
         <div className="mt-20">
+          <style>{`
+            .va-card { transition: transform .38s cubic-bezier(.2,.7,.2,1), box-shadow .38s ease, border-color .38s ease; box-shadow: 0 10px 30px -24px rgba(42,37,32,0.28); }
+            .va-card:hover { transform: translateY(-6px); border-color: ${accent}; box-shadow: 0 28px 54px -30px rgba(42,37,32,0.38); }
+            .va-badge { transition: background-color .38s ease, transform .38s ease; }
+            .va-card:hover .va-badge { background-color: ${accent}; transform: scale(1.06) rotate(-3deg); }
+            .va-icn { transition: color .38s ease; }
+            .va-card:hover .va-icn { color: #FFFFFF; }
+            .va-title { transition: color .38s ease; }
+            .va-card:hover .va-title { color: ${accent}; }
+          `}</style>
           <h3 className="mb-8 text-[0.85rem] uppercase tracking-[0.25em]" style={{ color: accent }}>我們的承諾</h3>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {VALUE_ADDS.map((v) => (
-              <div key={v.t} className="flex items-start gap-4 rounded-2xl border p-6" style={{ borderColor: border, backgroundColor: "#FFFFFF" }}>
-                <v.Icon strokeWidth={1.3} className="mt-0.5 h-7 w-7 flex-none" style={{ color: accent }} aria-hidden="true" />
+              <div key={v.t} className="va-card flex items-start gap-4 rounded-2xl border p-6 md:p-7" style={{ borderColor: border, backgroundColor: "#FFFFFF", cursor: "default" }}>
+                <span className="va-badge flex h-12 w-12 flex-none items-center justify-center rounded-2xl" style={{ backgroundColor: "rgba(181,149,106,0.12)" }}>
+                  <v.Icon strokeWidth={1.4} className="va-icn h-6 w-6" style={{ color: accent }} aria-hidden="true" />
+                </span>
                 <div>
-                  <p className="text-[1.05rem] font-semibold" style={{ color: heading }}>{v.t}</p>
-                  <p className="mt-1 text-[0.92rem] font-light leading-relaxed" style={{ color: text }}>{v.d}</p>
+                  <p className="va-title text-[1.08rem] font-semibold tracking-wide" style={{ color: heading }}>{v.t}</p>
+                  <p className="mt-1.5 text-[0.92rem] font-light leading-relaxed" style={{ color: text }}>{v.d}</p>
                 </div>
               </div>
             ))}
@@ -85,12 +97,13 @@ export function DesignProcess({ colors }: DesignProcessProps) {
         </div>
 
         {/* Fees */}
-        <div className="mt-16 rounded-2xl border p-8 md:p-10" style={{ borderColor: border, backgroundColor: "#FFFFFF" }}>
-          <h3 className="mb-5 text-[1.35rem] font-bold tracking-wide" style={{ color: heading }}>關於費用，我們說清楚</h3>
-          <ul className="flex flex-col gap-3">
+        <div className="mt-16 overflow-hidden rounded-3xl p-8 md:p-11" style={{ backgroundColor: "#FFFFFF", borderTop: `3px solid ${accent}`, boxShadow: "0 24px 60px -34px rgba(42,37,32,0.32)" }}>
+          <h3 className="text-[1.4rem] font-bold tracking-wide" style={{ color: heading }}>關於費用，我們說清楚</h3>
+          <span aria-hidden="true" className="mt-3 mb-6 block h-[2px] w-12 rounded-full" style={{ backgroundColor: accent }} />
+          <ul className="flex flex-col gap-4">
             {FEES.map((f) => (
-              <li key={f} className="flex gap-3 text-[1rem] font-light leading-[1.95] [text-wrap:pretty]" style={{ color: text }}>
-                <span aria-hidden="true" style={{ color: accent }}>—</span>
+              <li key={f} className="flex items-start gap-3.5 text-[1rem] font-light leading-[1.95] [text-wrap:pretty]" style={{ color: text }}>
+                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 flex-none rounded-full" style={{ backgroundColor: accent }} />
                 <span>{f}</span>
               </li>
             ))}
