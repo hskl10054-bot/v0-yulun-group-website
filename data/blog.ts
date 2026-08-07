@@ -12,6 +12,8 @@ export interface Post {
   category: string
   keywords: string[]
   content: Block[]
+  // 可選：文章下方的免費資源下載（例如檢核表 PDF）
+  download?: { label: string; note: string; file: string; filename: string }
 }
 
 export const POSTS: Post[] = [
@@ -54,6 +56,12 @@ export const POSTS: Post[] = [
     date: "2026-07-27",
     category: "設計觀念",
     keywords: ["預售屋客變", "客變流程", "預售屋", "格局變更", "台中室內設計"],
+    download: {
+      label: "免費下載：預售屋客變 32 項檢核表",
+      note: "涵蓋「先退、再加、別踩雷」的完整清單，開客變會議前先逐項打勾，一次到位不遺漏。",
+      file: "/downloads/presale-customization-checklist.pdf",
+      filename: "預售屋客變32項檢核表-空房子室內設計.pdf",
+    },
     content: [
       { p: "買了預售屋，最不該錯過的就是「客變」這個黃金機會。趁著房子還沒蓋好，先把格局、管線、插座調整到最適合你的樣子，能省下未來大筆的打除與重做費用。這篇帶你搞懂預售屋客變的流程、時間點與地雷。" },
       { h: "什麼是預售屋客變？" },

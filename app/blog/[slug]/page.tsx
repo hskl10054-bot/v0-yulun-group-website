@@ -112,8 +112,26 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           })}
         </div>
 
+        {/* 免費資源下載（若文章有附檔） */}
+        {post.download && (
+          <div className="mt-12 flex flex-col items-start gap-4 rounded-2xl border p-7 md:flex-row md:items-center md:justify-between md:p-8" style={{ borderColor: "#B5956A", backgroundColor: "#FBF7F1" }}>
+            <div className="flex items-start gap-4">
+              <span className="flex h-12 w-12 flex-none items-center justify-center rounded-xl" style={{ background: "rgba(181,149,106,0.14)" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B5956A" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><polyline points="9 15 12 18 15 15" /></svg>
+              </span>
+              <div>
+                <p className="text-[1.08rem] font-semibold" style={{ color: "#2A2520" }}>{post.download.label}</p>
+                <p className="mt-1 text-[0.92rem] font-light leading-relaxed" style={{ color: "#6B5D4F" }}>{post.download.note}</p>
+              </div>
+            </div>
+            <a href={post.download.file} download={post.download.filename} target="_blank" rel="noopener noreferrer" className="inline-flex flex-none items-center gap-2 rounded-full px-7 py-3 text-[0.85rem] tracking-[0.15em] transition-transform hover:-translate-y-0.5" style={{ backgroundColor: "#B5956A", color: "#FFFFFF", textDecoration: "none" }}>
+              下載 PDF ↓
+            </a>
+          </div>
+        )}
+
         {/* CTA */}
-        <div className="mt-14 rounded-2xl border p-8 text-center md:p-10" style={{ borderColor: "#E8E3DA", backgroundColor: "#FFFFFF" }}>
+        <div className="mt-8 rounded-2xl border p-8 text-center md:p-10" style={{ borderColor: "#E8E3DA", backgroundColor: "#FFFFFF" }}>
           <p className="text-[1.15rem] font-medium" style={{ color: "#2A2520" }}>想把家交給專業團隊規劃？</p>
           <p className="mt-2 text-[0.98rem] font-light leading-relaxed" style={{ color: "#6B5D4F" }}>空房子室內設計 × 裕綸室內裝修，台中設計裝修一站式服務。</p>
           <Link href="/booking" className="mt-6 inline-flex items-center gap-2 rounded-full px-8 py-3 text-[0.85rem] tracking-[0.2em]" style={{ backgroundColor: "#B5956A", color: "#FFFFFF", textDecoration: "none" }}>
