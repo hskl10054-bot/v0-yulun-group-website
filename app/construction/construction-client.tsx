@@ -122,6 +122,17 @@ export default function ConstructionPage() {
   const fadeStyle = { opacity: 0, transform: "translateY(28px)", transition: "opacity 0.8s ease, transform 0.8s ease" }
   const addRef = (i: number) => (el: HTMLElement | null) => { fadeRefs.current[i] = el }
 
+  // 施工藍圖：滑進畫面時觸發線稿描繪動畫
+  const bpRef = useRef<HTMLDivElement>(null)
+  const [bpIn, setBpIn] = useState(false)
+  useEffect(() => {
+    const el = bpRef.current
+    if (!el) return
+    const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setBpIn(true); io.disconnect() } }, { threshold: 0.2 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
     <div className={`transition-opacity duration-700 ease-in-out ${loading ? "opacity-0" : "opacity-100"}`} style={{ fontFamily: "'Josefin Sans', sans-serif", background: colors.hero_bg, color: colors.hero_heading, letterSpacing: "0.05em" }}>
       <style>{`
@@ -129,6 +140,35 @@ export default function ConstructionPage() {
         @layer base { * { margin: 0; padding: 0; box-sizing: border-box; } }
         .serif { font-family: 'Cormorant Garamond', 'Noto Sans TC', sans-serif; }
         .noto { font-family: 'Noto Serif TC', serif; }
+        /* 施工藍圖背景動畫 */
+        .bp-grid { position: absolute; inset: 0; pointer-events: none;
+          -webkit-mask-image: radial-gradient(120% 100% at 70% 50%, #000 55%, transparent 100%);
+          mask-image: radial-gradient(120% 100% at 70% 50%, #000 55%, transparent 100%); }
+        .bp-grid-a { background-image:
+          repeating-linear-gradient(0deg, rgba(107,78,49,0.05) 0 1px, transparent 1px 26px),
+          repeating-linear-gradient(90deg, rgba(107,78,49,0.05) 0 1px, transparent 1px 26px);
+          animation: bpDriftA 24s linear infinite; }
+        .bp-grid-b { background-image:
+          repeating-linear-gradient(0deg, rgba(107,78,49,0.08) 0 1px, transparent 1px 130px),
+          repeating-linear-gradient(90deg, rgba(107,78,49,0.08) 0 1px, transparent 1px 130px);
+          animation: bpDriftB 38s linear infinite; }
+        @keyframes bpDriftA { from { background-position: 0 0, 0 0; } to { background-position: 26px 26px, 26px 26px; } }
+        @keyframes bpDriftB { from { background-position: 0 0, 0 0; } to { background-position: -130px 130px, -130px 130px; } }
+        .bp-plan :is(line,rect,circle,path) { stroke-dasharray: 2600; stroke-dashoffset: 2600; }
+        .bp-plan text { opacity: 0; }
+        .bp-wrap.in-view .bp-plan :is(line,rect,circle,path) { animation: bpDraw 1.7s ease forwards; }
+        .bp-wrap.in-view .bp-plan text { animation: bpFade 1s ease 1s forwards; }
+        @keyframes bpDraw { to { stroke-dashoffset: 0; } }
+        @keyframes bpFade { to { opacity: 1; } }
+        .bp-wrap.in-view .bp-plan g > :nth-child(-n+5) { animation-delay: 0.05s; }
+        .bp-wrap.in-view .bp-plan g > :nth-child(n+6):nth-child(-n+11) { animation-delay: 0.35s; }
+        .bp-wrap.in-view .bp-plan g > :nth-child(n+12):nth-child(-n+17) { animation-delay: 0.6s; }
+        .bp-wrap.in-view .bp-plan g > :nth-child(n+18) { animation-delay: 0.85s; }
+        @media (prefers-reduced-motion: reduce) {
+          .bp-grid { animation: none; }
+          .bp-plan :is(line,rect,circle,path) { stroke-dashoffset: 0; animation: none; }
+          .bp-plan text { opacity: 1; animation: none; }
+        }
         .service-card:hover { border-color: ${colors.services_accent} !important; background: ${colors.strengths_bg} !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
         .portfolio-item:hover .portfolio-bg { transform: scale(1.04) !important; }
@@ -216,30 +256,17 @@ export default function ConstructionPage() {
 
       {/* STRENGTHS */}
       <section className="resp-section" style={{ position: "relative", overflow: "hidden", padding: "8rem 6rem", background: colors.strengths_bg }}>
-        {/* 施工藍圖背景 — 工地平面圖意象（藍圖方格＋樓層平面圖線稿） */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
-            backgroundImage: `
-              repeating-linear-gradient(0deg, rgba(107,78,49,0.045) 0, rgba(107,78,49,0.045) 1px, transparent 1px, transparent 26px),
-              repeating-linear-gradient(90deg, rgba(107,78,49,0.045) 0, rgba(107,78,49,0.045) 1px, transparent 1px, transparent 26px),
-              repeating-linear-gradient(0deg, rgba(107,78,49,0.07) 0, rgba(107,78,49,0.07) 1px, transparent 1px, transparent 130px),
-              repeating-linear-gradient(90deg, rgba(107,78,49,0.07) 0, rgba(107,78,49,0.07) 1px, transparent 1px, transparent 130px)
-            `,
-            maskImage: "radial-gradient(120% 100% at 70% 50%, #000 55%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(120% 100% at 70% 50%, #000 55%, transparent 100%)",
-          }}
-        />
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 600 420"
-          preserveAspectRatio="xMidYMid meet"
-          style={{ position: "absolute", right: "-3%", bottom: "-8%", width: "min(760px, 60%)", height: "auto", color: "#6B4E31", opacity: 0.15, pointerEvents: "none" }}
-        >
-          <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+        {/* 施工藍圖背景 — 滑進畫面時線稿描繪 ＋ 雙向格線流動 */}
+        <div ref={bpRef} aria-hidden="true" className={`bp-wrap${bpIn ? " in-view" : ""}`} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+          <div className="bp-grid bp-grid-a" />
+          <div className="bp-grid bp-grid-b" />
+          <svg
+            className="bp-plan"
+            viewBox="0 0 600 420"
+            preserveAspectRatio="xMidYMid meet"
+            style={{ position: "absolute", right: "-3%", bottom: "-8%", width: "min(760px, 60%)", height: "auto", color: "#6B4E31", opacity: 0.18 }}
+          >
+            <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
             {/* 外牆 */}
             <rect x="40" y="48" width="520" height="332" strokeWidth="3" />
             <rect x="50" y="58" width="500" height="312" strokeWidth="1" />
@@ -276,8 +303,9 @@ export default function ConstructionPage() {
             <line x1="560" y1="16" x2="560" y2="32" strokeWidth="1" />
             <text x="180" y="20" fontSize="13" fill="currentColor" stroke="none" textAnchor="middle" letterSpacing="1">3,600</text>
             <text x="450" y="20" fontSize="13" fill="currentColor" stroke="none" textAnchor="middle" letterSpacing="1">2,200</text>
-          </g>
-        </svg>
+            </g>
+          </svg>
+        </div>
         <div style={{ position: "relative", zIndex: 1, maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.strengths_icon, marginBottom: "1rem" }}>Our Strengths</p>
           <h2 ref={addRef(5)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", marginBottom: "1.5rem", color: colors.strengths_heading }}>為什麼選擇我們</h2>
