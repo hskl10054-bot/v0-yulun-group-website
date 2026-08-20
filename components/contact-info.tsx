@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Facebook, Instagram } from "lucide-react"
+import { Facebook, Instagram, Youtube } from "lucide-react"
 
 const ADDRESS = "台中市北屯區瀋陽北路73號"
 const PHONE = "04-2247-9068"
@@ -10,6 +10,7 @@ const BIZ_QUERY = "空房子室內設計 台中市北屯區瀋陽北路73號"
 const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(BIZ_QUERY)}`
 const FB_URL = "https://www.facebook.com/p/%E7%A9%BA%E6%88%BF%E5%AD%90%E8%A8%AD%E8%A8%88-61564720748448/"
 const IG_URL = "https://www.instagram.com/human_design.space/"
+const YT_URL = "https://www.youtube.com/@%E8%A3%95%E7%B6%B8"
 
 const GOLD = "#B5956A"
 const MUTE = "rgba(255,255,255,0.55)"
@@ -65,6 +66,9 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
               <a href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label="空房子 Instagram" className="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-white/20 transition-colors hover:bg-white/10" style={{ color: GOLD }}>
                 <Instagram style={{ width: 18, height: 18 }} />
               </a>
+              <a href={YT_URL} target="_blank" rel="noopener noreferrer" aria-label="裕綸 YouTube" className="flex h-10 w-10 items-center justify-center rounded-full ring-1 ring-white/20 transition-colors hover:bg-white/10" style={{ color: GOLD }}>
+                <Youtube style={{ width: 19, height: 19 }} />
+              </a>
             </div>
             {/* 空房子・裕綸集團 位置地圖 */}
             <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="mt-5 block overflow-hidden rounded-lg transition-opacity hover:opacity-90" style={{ border: "1px solid rgba(255,255,255,0.12)" }}>
@@ -84,10 +88,6 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t pt-6 md:flex-row" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
           <p style={{ fontSize: "0.82rem", letterSpacing: "0.05em", color: FAINT }}>Copyright © 裕綸集團 Yulun Group All Rights Reserved.</p>
           <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1" style={{ fontSize: "0.82rem", color: FAINT }}>
-            <span>台中室內設計</span>
-            <span style={{ opacity: 0.45 }}>｜</span>
-            <span>台中室內裝修</span>
-            <span style={{ opacity: 0.45 }}>｜</span>
             <Link href="/blog" className="transition-opacity hover:opacity-70" style={{ color: MUTE, textDecoration: "none" }}>裝修知識</Link>
             <span style={{ opacity: 0.45 }}>｜</span>
             <Link href="/privacy" className="transition-opacity hover:opacity-70" style={{ color: MUTE, textDecoration: "none" }}>隱私權政策</Link>
