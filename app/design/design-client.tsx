@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
 import { useCmsData, usePageColors, getContentValue, getListItemsBySection, getImageUrl, getContentStyle, getListItemStyle } from "@/lib/use-cms-data"
 import { PortfolioPreview } from "@/components/portfolio-preview"
 import { ServiceItems } from "@/components/service-items"
@@ -19,7 +19,7 @@ const defaultServices = [
 ]
 
 
-export default function DesignPage() {
+export default function DesignPage({ journal }: { journal?: ReactNode } = {}) {
   const { content, listItems, images, loading } = useCmsData("design")
   const colors = usePageColors(content, "design")
 
@@ -259,6 +259,9 @@ export default function DesignPage() {
       <div id="portfolio">
         <PortfolioPreview colors={colors} />
       </div>
+
+      {/* 延伸閱讀：最新裝修知識（內部連結，助 SEO 收錄與排名） */}
+      {journal}
 
       {/* CONTACT — 精簡深色 footer（聯絡資訊 ＋ 版權；表單已移至 /booking） */}
       <ContactInfo showCta />

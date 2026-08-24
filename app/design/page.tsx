@@ -1,5 +1,9 @@
 import type { Metadata } from "next"
 import DesignClient from "./design-client"
+import { LatestArticles } from "@/components/latest-articles"
+
+// 每小時重新驗證，讓排程文章到期後自動出現在「延伸閱讀」
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "空房子室內設計｜台中室內設計｜新成屋、預售屋客變、老屋翻新",
@@ -19,5 +23,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <DesignClient />
+  return <DesignClient journal={<LatestArticles bg="#F5F0E8" />} />
 }

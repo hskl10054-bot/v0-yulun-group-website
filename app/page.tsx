@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { HomePageClient } from "@/components/home-page-client"
+import { LatestArticles } from "@/components/latest-articles"
 import { FAQS } from "@/data/faqs"
 import { getHeroImagesServer } from "@/lib/home-server"
 
@@ -97,7 +98,7 @@ export default async function Home() {
           __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
         }}
       />
-      <HomePageClient initialHero={heroImages} />
+      <HomePageClient initialHero={heroImages} journal={<LatestArticles />} />
     </>
   )
 }

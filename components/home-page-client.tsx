@@ -1,5 +1,6 @@
 "use client"
 
+import type { ReactNode } from "react"
 import { HomeNavbar } from "@/components/home-navbar"
 import { HeroSection } from "@/components/hero-section"
 import { BrandSplit } from "@/components/brand-split"
@@ -27,7 +28,7 @@ const GOLD_ACCENTS = [
   "footer_accent",
 ]
 
-export function HomePageClient({ initialHero }: { initialHero?: string[] }) {
+export function HomePageClient({ initialHero, journal }: { initialHero?: string[]; journal?: ReactNode }) {
   const { content } = useCmsData("home")
   const baseColors = usePageColors(content, "home")
   const colors = { ...baseColors, ...Object.fromEntries(GOLD_ACCENTS.map((k) => [k, GOLD])) }
@@ -62,6 +63,7 @@ export function HomePageClient({ initialHero }: { initialHero?: string[] }) {
         <ServiceItems colors={colors} />
         <ServiceProcess colors={colors} />
         <FaqSection colors={colors} />
+        {journal}
         <ContactSection colors={colors} />
       </main>
     </>
