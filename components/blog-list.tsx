@@ -2,18 +2,18 @@
 
 import { useMemo, useState } from "react"
 import Link from "next/link"
-import { POSTS } from "@/data/blog"
+import type { Post } from "@/data/blog"
 
 const fmtDate = (d: string) => d.replace(/-/g, ".")
 
-export function BlogList() {
+export function BlogList({ posts }: { posts: Post[] }) {
   const cats = useMemo(() => {
     const counts = new Map<string, number>()
-    for (const p of POSTS) counts.set(p.category, (counts.get(p.category) ?? 0) + 1)
-    return [{ name: "全部", count: POSTS.length }, ...Array.from(counts, ([name, count]) => ({ name, count }))]
-  }, [])
+    for (const p of posts) counts.set(p.category, (counts.get(p.category) ?? 0) + 1)
+    return [{ name: "全部", count: posts.length }, ...Array.from(counts, ([name, count]) => ({ name, count }))]
+  }, [posts])
   const [active, setActive] = useState("全部")
-  const list = active === "全部" ? POSTS : POSTS.filter((p) => p.category === active)
+  const list = active === "全部" ? posts : posts.filter((p) => p.category === active)
 
   return (
     <div className="flex flex-col gap-10 md:flex-row md:gap-14">

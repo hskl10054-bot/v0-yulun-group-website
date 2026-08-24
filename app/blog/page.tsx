@@ -1,8 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { POSTS } from "@/data/blog"
+import { getPublishedPosts } from "@/data/blog"
 import { SiteMenu } from "@/components/site-menu"
 import { BlogList } from "@/components/blog-list"
+
+// 每小時重新驗證，讓排程文章到發佈日會自動出現
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "裝修知識｜台中室內設計與裝修部落格－裕綸集團",
@@ -22,12 +25,13 @@ export const metadata: Metadata = {
 
 
 export default function BlogIndex() {
+  const posts = getPublishedPosts()
   const listSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "裕綸集團 裝修知識",
     url: "https://www.yulungroup.com/blog",
-    blogPost: POSTS.map((p) => ({
+    blogPost: posts.map((p) => ({
       "@type": "BlogPosting",
       headline: p.title,
       description: p.description,
@@ -61,7 +65,7 @@ export default function BlogIndex() {
         </div>
 
         {/* 左側主題篩選 ＋ 文章列表 */}
-        <BlogList />
+        <BlogList posts={posts} />
       </div>
     </main>
   )

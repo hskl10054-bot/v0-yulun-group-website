@@ -1,8 +1,11 @@
 import type { MetadataRoute } from "next"
 import { caseSlugs } from "@/data/cases"
-import { POSTS } from "@/data/blog"
+import { getPublishedPosts } from "@/data/blog"
 
 const baseUrl = "https://www.yulungroup.com"
+
+// 每小時更新，排程文章到發佈日才會進 sitemap
+export const revalidate = 3600
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
@@ -25,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  const blogPages: MetadataRoute.Sitemap = POSTS.map((p) => ({
+  const blogPages: MetadataRoute.Sitemap = getPublishedPosts().map((p) => ({
     url: `${baseUrl}/blog/${p.slug}`,
     lastModified: new Date(p.date),
     changeFrequency: "monthly",

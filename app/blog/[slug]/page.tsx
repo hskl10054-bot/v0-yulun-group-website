@@ -1,17 +1,21 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { POSTS, getPost } from "@/data/blog"
+import { getPublishedPosts, getPost, isPublished } from "@/data/blog"
 import { SiteMenu } from "@/components/site-menu"
 
+// 每小時重新驗證，讓排程文章到發佈日會自動可讀
+export const revalidate = 3600
+
 export function generateStaticParams() {
-  return POSTS.map((p) => ({ slug: p.slug }))
+  // 只預先產生「已發佈」的文章；排程文章到日期後才會被產生
+  return getPublishedPosts().map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const post = getPost(slug)
-  if (!post) return { title: "文章｜裝修知識－裕綸集團" }
+  if (!post || !isPublished(post)) return { title: "文章｜裝修知識－裕綸集團", robots: { index: false, follow: false } }
   const url = `https://www.yulungroup.com/blog/${post.slug}`
   return {
     title: `${post.title}｜裕綸集團`,
@@ -36,7 +40,7 @@ const fmtDate = (d: string) => d.replace(/-/g, ".")
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const post = getPost(slug)
-  if (!post) notFound()
+  if (!post || !isPublished(post)) notFound()
 
   const url = `https://www.yulungroup.com/blog/${post.slug}`
   const articleSchema = {
@@ -62,7 +66,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     ],
   }
 
-  const related = POSTS.filter((p) => p.slug !== post.slug).slice(0, 2)
+  const related = getPublishedPosts().filter((p) => p.slug !== post.slug).slice(0, 2)
 
   return (
     <main style={{ backgroundColor: "#FAF8F4", color: "#2A2520", minHeight: "100vh" }}>
