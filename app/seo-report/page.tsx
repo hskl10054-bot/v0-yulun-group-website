@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { getSupabaseAdmin } from "@/lib/supabase"
 import { gscQuery, gscQueryEx, gscConfigured, type GscRow } from "@/lib/gsc"
+import { getPublishedPosts } from "@/data/blog"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs"
@@ -142,6 +143,28 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
 
   const curOrganic = cur.src.organic ?? 0
   const pct = (n: number, d: number) => (d > 0 ? Math.round((n / d) * 100) : 0)
+
+  // ── 裝修知識（部落格）各篇文章點閱 ──
+  const blogAllTime = new Map<string, number>()
+  for (const r of rows) {
+    if (r.path === "/blog" || r.path.startsWith("/blog/")) blogAllTime.set(r.path, (blogAllTime.get(r.path) ?? 0) + 1)
+  }
+  const blogThisMonth = new Map<string, number>()
+  for (const [path, s] of cur.pages) {
+    if (path === "/blog" || path.startsWith("/blog/")) blogThisMonth.set(path, Object.values(s).reduce((a, b) => a + b, 0))
+  }
+  const blogHub = { path: "/blog", label: "裝修知識（列表頁）", month: blogThisMonth.get("/blog") ?? 0, total: blogAllTime.get("/blog") ?? 0 }
+  const blogArticles = getPublishedPosts()
+    .map((p) => ({
+      path: `/blog/${p.slug}`,
+      label: p.title,
+      month: blogThisMonth.get(`/blog/${p.slug}`) ?? 0,
+      total: blogAllTime.get(`/blog/${p.slug}`) ?? 0,
+    }))
+    .sort((a, b) => b.total - a.total || b.month - a.month)
+  const blogRows = [blogHub, ...blogArticles]
+  const blogTotalMonth = blogRows.reduce((a, r) => a + r.month, 0)
+  const blogTotalAll = blogRows.reduce((a, r) => a + r.total, 0)
 
   // ── Google Search Console（真實關鍵字級自然搜尋資料）──
   const gscOn = gscConfigured()
@@ -456,6 +479,38 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
             </tbody>
           </table>
         </div>
+
+        {/* 📖 裝修知識・各篇文章點閱 */}
+        <h2 className="mb-1 mt-14 text-[1.1rem] font-semibold" style={{ letterSpacing: "0.06em" }}>📖 裝修知識・各篇文章點閱</h2>
+        <p className="mb-4 text-[0.82rem] font-light" style={{ color: MUTE }}>
+          每篇文章被瀏覽的次數（含所有來源）。本月共 <b style={{ color: GOLD }}>{blogTotalMonth}</b> 次 · 累計 <b style={{ color: INK }}>{blogTotalAll}</b> 次。
+        </p>
+        <div className="overflow-x-auto rounded-2xl bg-white" style={{ boxShadow: "0 20px 50px -35px rgba(42,37,32,0.3)" }}>
+          <table className="w-full border-collapse text-left" style={{ fontSize: "0.92rem" }}>
+            <thead>
+              <tr style={{ color: MUTE, borderBottom: `1px solid ${LINE}` }}>
+                <th className="px-5 py-4 font-medium">文章</th>
+                <th className="px-4 py-4 text-right font-medium" style={{ color: GOLD }}>本月點閱</th>
+                <th className="px-5 py-4 text-right font-medium">累計點閱</th>
+              </tr>
+            </thead>
+            <tbody>
+              {blogRows.map((r) => (
+                <tr key={r.path} style={{ borderBottom: `1px solid ${LINE}` }}>
+                  <td className="px-5 py-3.5" style={{ color: INK }}>
+                    {r.label}
+                    <span className="ml-2 text-[0.75rem]" style={{ color: "#C0B8AB" }}>{r.path}</span>
+                  </td>
+                  <td className="px-4 py-3.5 text-right" style={{ color: GOLD, fontWeight: 600 }}>{r.month}</td>
+                  <td className="px-5 py-3.5 text-right" style={{ color: "#6B5D4F" }}>{r.total}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 text-[0.8rem] font-light leading-relaxed" style={{ color: "#B3AB9E" }}>
+          此為第一方點閱統計（含自然搜尋、社群、直接與站內點擊），與上方 Google Search Console 的「自然搜尋點擊」不同。排程中、尚未發佈的文章不會列入。
+        </p>
 
         {/* 近 6 個月趨勢 */}
         <h2 className="mb-4 mt-14 text-[1.1rem] font-semibold" style={{ letterSpacing: "0.06em" }}>近 6 個月趨勢</h2>
