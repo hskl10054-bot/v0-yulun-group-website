@@ -334,7 +334,7 @@ export default function ConstructionPage() {
               透過影片，帶你認識裕綸的施工實力與服務。
             </p>
           </div>
-          <YoutubeEmbed id="-H2Nowy2BoE" title="裕綸室內裝修 品牌影片" />
+          <YoutubeEmbed id="kzPW1-jJYwM" title="裕綸室內裝修 品牌影片" />
         </div>
       </section>
 
