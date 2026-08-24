@@ -13,7 +13,7 @@ const VALUE_ADDS = [
   { Icon: Images, t: "線上施工相簿", d: "隨時掌握台中工地的施工進度。" },
   { Icon: ClipboardList, t: "條列式報價", d: "施作前看清每一筆花費，透明無隱藏。" },
   { Icon: Users, t: "自有工班", d: "設計施工同一團隊，不外包、不脫節。" },
-  { Icon: ShieldCheck, t: "保固兩年", d: "設計與工程，交屋後持續負責。" },
+  { Icon: ShieldCheck, t: "保固一年", d: "設計與工程，交屋後持續負責。" },
   { Icon: Camera, t: "完工專業拍攝", d: "為你的空間留下最美的紀錄。" },
 ]
 
