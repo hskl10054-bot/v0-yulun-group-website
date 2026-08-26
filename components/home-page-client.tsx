@@ -11,6 +11,7 @@ import { ServiceItems } from "@/components/service-items"
 import { ServiceProcess } from "@/components/service-process"
 import { FaqSection } from "@/components/faq-section"
 import { ContactSection } from "@/components/contact-section"
+import { ClientTestimonial } from "@/components/client-testimonial"
 import { SplashScreen } from "@/components/splash-screen"
 import { useCmsData, usePageColors } from "@/lib/use-cms-data"
 
@@ -60,6 +61,7 @@ export function HomePageClient({ initialHero, journal }: { initialHero?: string[
         <StrengthsSection colors={colors} />
         <AboutSection colors={colors} />
         <PortfolioPreview colors={colors} />
+        <ClientTestimonial />
         <ServiceItems colors={colors} />
         <ServiceProcess colors={colors} />
         <FaqSection colors={colors} />
