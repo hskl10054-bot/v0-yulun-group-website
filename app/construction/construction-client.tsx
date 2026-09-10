@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, Clipboar
 import { ServiceItems } from "@/components/service-items"
 import { YoutubeEmbed } from "@/components/youtube-embed"
 import { ShortsGallery } from "@/components/shorts-gallery"
+import { FloorPlanArt } from "@/components/floor-plan-art"
 import { SiteMenu } from "@/components/site-menu"
 import { ContactInfo } from "@/components/contact-info"
 
@@ -261,22 +262,18 @@ export default function ConstructionPage() {
         <div ref={bpRef} aria-hidden="true" className={`bp-wrap${bpIn ? " in-view" : ""}`} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
           <div className="bp-grid bp-grid-a" />
           <div className="bp-grid bp-grid-b" />
-          {/* 真實平面圖（空房子案場）作為似有似無的藝術底圖 */}
-          <img
-            src="/images/construction/floorplan-watermark.png"
-            alt=""
-            aria-hidden="true"
+          {/* 精緻手繪平面圖（純線稿）作為底圖 */}
+          <FloorPlanArt
             className="bp-plan-img"
             style={{
               position: "absolute",
               inset: 0,
               width: "100%",
               height: "100%",
-              objectFit: "cover",
-              objectPosition: "center",
+              color: "#6B4E31",
               pointerEvents: "none",
-              WebkitMaskImage: "radial-gradient(125% 125% at 50% 50%, #000 68%, transparent 100%)",
-              maskImage: "radial-gradient(125% 125% at 50% 50%, #000 68%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(125% 125% at 50% 50%, #000 66%, transparent 100%)",
+              maskImage: "radial-gradient(125% 125% at 50% 50%, #000 66%, transparent 100%)",
             }}
           />
         </div>
