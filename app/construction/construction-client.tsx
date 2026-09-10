@@ -149,7 +149,7 @@ export default function ConstructionPage() {
         .bp-plan text { opacity: 0; }
         .bp-plan-img { opacity: 0; transition: opacity 1.6s ease; }
         .bp-plan-img path, .bp-plan-img rect, .bp-plan-img circle { vector-effect: non-scaling-stroke; }
-        .bp-wrap.in-view .bp-plan-img { opacity: 0.34; }
+        .bp-wrap.in-view .bp-plan-img { opacity: 0.24; }
         .bp-wrap.in-view .bp-plan :is(line,rect,circle,path) { animation: bpDraw 1.7s ease forwards; }
         .bp-wrap.in-view .bp-plan text { animation: bpFade 1s ease 1s forwards; }
         @keyframes bpDraw { to { stroke-dashoffset: 0; } }
@@ -162,7 +162,7 @@ export default function ConstructionPage() {
           .bp-grid { animation: none; }
           .bp-plan :is(line,rect,circle,path) { stroke-dashoffset: 0; animation: none; }
           .bp-plan text { opacity: 1; animation: none; }
-          .bp-plan-img { opacity: 0.34; transition: none; }
+          .bp-plan-img { opacity: 0.24; transition: none; }
         }
         .service-card:hover { border-color: ${colors.services_accent} !important; background: ${colors.strengths_bg} !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
