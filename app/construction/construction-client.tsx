@@ -66,6 +66,12 @@ export default function ConstructionPage() {
   // 轉成 ServiceItems 卡片格式（沿用空房子的呈現樣貌）
   const serviceItems = services.map((s) => ({ label: s.name, en: SERVICE_EN[s.name] ?? "Construction", desc: s.desc, Icon: s.icon }))
 
+  const videos = [
+    { id: "kzPW1-jJYwM", title: "新屋木作 CP 值最高怎麼做？" },
+    { id: "y5lWfTdHLEY", title: "系統櫃還是木作？怎麼選才省錢" },
+    { id: "A-JATjSxQJc", title: "逛到眼花！磁磚店到底要怎麼挑？" },
+  ]
+
   // Projects from CMS or fallback
   const cmsProjects = getListItemsBySection(listItems, "portfolio")
   const projects = cmsProjects.length > 0
@@ -302,15 +308,22 @@ export default function ConstructionPage() {
 
       {/* VIDEO — 品牌影片（輕量內嵌，點擊才載入） */}
       <section style={{ padding: "6rem 0 3rem", background: "#EFE7D8" }}>
-        <div className="mx-auto max-w-2xl px-6 md:px-12">
-          <div className="mb-8 text-center">
+        <div className="mx-auto max-w-5xl px-6 md:px-12">
+          <div className="mb-9 text-center">
             <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Video</span>
             <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.portfolio_heading }}>影片介紹</h2>
             <p className="mx-auto mt-3 max-w-xl text-[1rem] font-light leading-relaxed" style={{ color: colors.about_text || "#5B5349" }}>
               透過影片，帶你認識裕綸的施工實力與服務。
             </p>
           </div>
-          <YoutubeEmbed id="kzPW1-jJYwM" title="裕綸室內裝修 品牌影片" />
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+            {videos.map((v) => (
+              <div key={v.id}>
+                <YoutubeEmbed id={v.id} title={v.title} />
+                <p className="mt-3 text-center text-[0.92rem] font-medium leading-snug" style={{ color: colors.portfolio_heading }}>{v.title}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
