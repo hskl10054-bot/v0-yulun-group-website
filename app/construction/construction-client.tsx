@@ -5,6 +5,7 @@ import { ServiceItems } from "@/components/service-items"
 import { YoutubeEmbed } from "@/components/youtube-embed"
 import { ShortsGallery } from "@/components/shorts-gallery"
 import { FloorPlanArt } from "@/components/floor-plan-art"
+import { SITE_VIDEOS } from "@/data/videos"
 import { SiteMenu } from "@/components/site-menu"
 import { ContactInfo } from "@/components/contact-info"
 
@@ -66,11 +67,7 @@ export default function ConstructionPage() {
   // 轉成 ServiceItems 卡片格式（沿用空房子的呈現樣貌）
   const serviceItems = services.map((s) => ({ label: s.name, en: SERVICE_EN[s.name] ?? "Construction", desc: s.desc, Icon: s.icon }))
 
-  const videos = [
-    { id: "kzPW1-jJYwM", title: "新屋木作 CP 值最高怎麼做？" },
-    { id: "y5lWfTdHLEY", title: "系統櫃還是木作？怎麼選才省錢" },
-    { id: "A-JATjSxQJc", title: "逛到眼花！磁磚店到底要怎麼挑？" },
-  ]
+  const videos = SITE_VIDEOS
 
   // Projects from CMS or fallback
   const cmsProjects = getListItemsBySection(listItems, "portfolio")

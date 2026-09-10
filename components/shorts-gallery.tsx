@@ -1,14 +1,12 @@
 "use client"
 
 import { useState } from "react"
+import { SITE_SHORTS } from "@/data/videos"
+import { trackVideoPlay } from "@/lib/track-video"
 
 // 頻道 Shorts 短片牆 — 輕量內嵌：平常只載入封面縮圖，點擊才載入影片，對頁面速度幾乎零影響。
 // 要新增 Shorts：把影片 ID（youtube.com/shorts/XXXXXXXXXXX 的 XXXXXXXXXXX）加進下面陣列即可。
-const SHORTS: { id: string; title: string }[] = [
-  { id: "-8aCes467M4", title: "奇奇妙妙屋 · 裝修短片" },
-  { id: "ewYtT1FIF6k", title: "奇奇妙妙屋 · 裝修短片" },
-  { id: "hc5rrl90qvE", title: "奇奇妙妙屋 · 裝修短片" },
-]
+const SHORTS = SITE_SHORTS
 
 const CHANNEL_SHORTS_URL = "https://www.youtube.com/@%E8%A3%95%E7%B6%B8/shorts"
 const GOLD = "#B5956A"
@@ -27,7 +25,7 @@ function ShortCard({ id, title }: { id: string; title: string }) {
           style={{ border: 0 }}
         />
       ) : (
-        <button type="button" onClick={() => setPlay(true)} aria-label={`播放：${title}`} className="group absolute inset-0 h-full w-full cursor-pointer">
+        <button type="button" onClick={() => { setPlay(true); trackVideoPlay("short", id) }} aria-label={`播放：${title}`} className="group absolute inset-0 h-full w-full cursor-pointer">
           <img
             src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
             onError={(e) => {

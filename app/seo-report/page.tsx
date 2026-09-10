@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { getSupabaseAdmin } from "@/lib/supabase"
 import { gscQuery, gscQueryEx, gscConfigured, type GscRow } from "@/lib/gsc"
 import { getPublishedPosts } from "@/data/blog"
+import { SITE_VIDEOS, SITE_SHORTS } from "@/data/videos"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs"
@@ -115,6 +116,8 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
   // 各月統計
   const byMonth = new Map<string, { total: number; src: Record<string, number>; pages: Map<string, Record<string, number>> }>()
   for (const r of rows) {
+    // 影片／短片點擊事件不計入頁面流量統計（另計於影片點擊區）
+    if (r.path.startsWith("/__video/") || r.path.startsWith("/__short/")) continue
     const ym = tpeMonth.format(new Date(r.created_at))
     if (!byMonth.has(ym)) byMonth.set(ym, { total: 0, src: {}, pages: new Map() })
     const bucket = byMonth.get(ym)!
@@ -165,6 +168,23 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
   const blogRows = [blogHub, ...blogArticles]
   const blogTotalMonth = blogRows.reduce((a, r) => a + r.month, 0)
   const blogTotalAll = blogRows.reduce((a, r) => a + r.total, 0)
+
+  // ── 影片／短片點擊 ──
+  const videoAllTime = new Map<string, number>()
+  const videoMonth = new Map<string, number>()
+  for (const r of rows) {
+    if (!(r.path.startsWith("/__video/") || r.path.startsWith("/__short/"))) continue
+    const id = r.path.split("/")[2] ?? ""
+    if (!id) continue
+    videoAllTime.set(id, (videoAllTime.get(id) ?? 0) + 1)
+    if (tpeMonth.format(new Date(r.created_at)) === nowMonth) videoMonth.set(id, (videoMonth.get(id) ?? 0) + 1)
+  }
+  const videoClickRows = [
+    ...SITE_VIDEOS.map((v) => ({ ...v, kind: "影片" })),
+    ...SITE_SHORTS.map((v) => ({ ...v, kind: "短片" })),
+  ].map((v) => ({ ...v, month: videoMonth.get(v.id) ?? 0, total: videoAllTime.get(v.id) ?? 0 }))
+  const videoTotalMonth = videoClickRows.reduce((a, r) => a + r.month, 0)
+  const videoTotalAll = videoClickRows.reduce((a, r) => a + r.total, 0)
 
   // ── Google Search Console（真實關鍵字級自然搜尋資料）──
   const gscOn = gscConfigured()
@@ -510,6 +530,37 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
         </div>
         <p className="mt-3 text-[0.8rem] font-light leading-relaxed" style={{ color: "#B3AB9E" }}>
           此為第一方點閱統計（含自然搜尋、社群、直接與站內點擊），與上方 Google Search Console 的「自然搜尋點擊」不同。排程中、尚未發佈的文章不會列入。
+        </p>
+
+        {/* 🎬 影片・短片點擊 */}
+        <h2 className="mb-1 mt-14 text-[1.1rem] font-semibold" style={{ letterSpacing: "0.06em" }}>🎬 影片・短片點擊次數</h2>
+        <p className="mb-4 text-[0.82rem] font-light" style={{ color: MUTE }}>
+          訪客在網站上按下「播放」的次數。本月共 <b style={{ color: GOLD }}>{videoTotalMonth}</b> 次 · 累計 <b style={{ color: INK }}>{videoTotalAll}</b> 次。
+        </p>
+        <div className="overflow-x-auto rounded-2xl bg-white" style={{ boxShadow: "0 20px 50px -35px rgba(42,37,32,0.3)" }}>
+          <table className="w-full border-collapse text-left" style={{ fontSize: "0.92rem" }}>
+            <thead>
+              <tr style={{ color: MUTE, borderBottom: `1px solid ${LINE}` }}>
+                <th className="px-5 py-4 font-medium">影片</th>
+                <th className="px-4 py-4 font-medium">類型</th>
+                <th className="px-4 py-4 text-right font-medium" style={{ color: GOLD }}>本月點擊</th>
+                <th className="px-5 py-4 text-right font-medium">累計點擊</th>
+              </tr>
+            </thead>
+            <tbody>
+              {videoClickRows.map((v) => (
+                <tr key={v.id} style={{ borderBottom: `1px solid ${LINE}` }}>
+                  <td className="px-5 py-3.5" style={{ color: INK }}>{v.title}</td>
+                  <td className="px-4 py-3.5" style={{ color: "#B3AB9E", fontSize: "0.82rem" }}>{v.kind}</td>
+                  <td className="px-4 py-3.5 text-right" style={{ color: GOLD, fontWeight: 600 }}>{v.month}</td>
+                  <td className="px-5 py-3.5 text-right" style={{ color: "#6B5D4F" }}>{v.total}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 text-[0.8rem] font-light leading-relaxed" style={{ color: "#B3AB9E" }}>
+          每有訪客在網站上點播一次影片就 +1（同一人多次點播會分開計算）。此為網站內的播放點擊，與 YouTube 後台的觀看次數是分開的兩套數字。
         </p>
 
         {/* 近 6 個月趨勢 */}

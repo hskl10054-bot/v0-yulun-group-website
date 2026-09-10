@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { trackVideoPlay } from "@/lib/track-video"
 
 // 輕量 YouTube 內嵌：平常只載入一張封面縮圖（幾十 KB），
 // 訪客按下播放後才真正載入 YouTube 影片 iframe —— 對頁面初始載入速度幾乎零影響。
@@ -24,7 +25,7 @@ export function YoutubeEmbed({ id, title }: { id: string; title: string }) {
       ) : (
         <button
           type="button"
-          onClick={() => setPlay(true)}
+          onClick={() => { setPlay(true); trackVideoPlay("video", id) }}
           aria-label={`播放影片：${title}`}
           className="group absolute inset-0 h-full w-full cursor-pointer"
         >
