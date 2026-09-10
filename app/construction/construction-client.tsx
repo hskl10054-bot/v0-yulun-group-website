@@ -302,7 +302,7 @@ export default function ConstructionPage() {
       <ServiceItems colors={colors} detailed items={serviceItems} />
 
       {/* VIDEO — 品牌影片（輕量內嵌，點擊才載入） */}
-      <section style={{ padding: "5rem 0 6rem", background: colors.services_bg || "#F4F1EC" }}>
+      <section style={{ padding: "6rem 0 3rem", background: "#EFE7D8" }}>
         <div className="mx-auto max-w-2xl px-6 md:px-12">
           <div className="mb-8 text-center">
             <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Video</span>

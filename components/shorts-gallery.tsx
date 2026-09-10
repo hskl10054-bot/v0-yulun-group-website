@@ -28,10 +28,10 @@ function ShortCard({ id, title }: { id: string; title: string }) {
       ) : (
         <button type="button" onClick={() => setPlay(true)} aria-label={`播放：${title}`} className="group absolute inset-0 h-full w-full cursor-pointer">
           <img
-            src={`https://i.ytimg.com/vi/${id}/oardefault.jpg`}
+            src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
             onError={(e) => {
               const im = e.currentTarget as HTMLImageElement
-              if (!im.dataset.fb) { im.dataset.fb = "1"; im.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg` }
+              if (!im.dataset.fb) { im.dataset.fb = "1"; im.src = `https://i.ytimg.com/vi/${id}/mqdefault.jpg` }
             }}
             alt={title}
             loading="lazy"
@@ -51,7 +51,7 @@ function ShortCard({ id, title }: { id: string; title: string }) {
 export function ShortsGallery() {
   if (SHORTS.length === 0) return null
   return (
-    <section style={{ background: "#FFFFFF", padding: "5rem 0 6rem" }}>
+    <section style={{ background: "#EFE7D8", padding: "3rem 0 6rem" }}>
       <div className="mx-auto max-w-6xl px-6 md:px-12">
         <div className="mb-9 text-center">
           <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Shorts</span>
