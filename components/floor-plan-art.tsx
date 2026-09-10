@@ -8,7 +8,7 @@ export function FloorPlanArt({ className, style }: { className?: string; style?:
       className={className}
       style={style}
       viewBox="0 0 1200 780"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio="xMidYMid meet"
       fill="none"
       stroke="currentColor"
       strokeLinecap="round"
@@ -16,15 +16,15 @@ export function FloorPlanArt({ className, style }: { className?: string; style?:
       aria-hidden="true"
     >
       {/* 外牆（雙線） */}
-      <g strokeWidth="8">
+      <g strokeWidth="2.6">
         <path d="M60 70 H1140 V710 H60 Z" />
       </g>
-      <g strokeWidth="1.4">
+      <g strokeWidth="0.9">
         <path d="M74 84 H1126 V696 H74 Z" />
       </g>
 
       {/* 隔間牆（留門洞） */}
-      <g strokeWidth="4.5">
+      <g strokeWidth="1.7">
         {/* 左中直牆 x=470 */}
         <path d="M470 70 V250" />
         <path d="M470 330 V430" />
@@ -45,7 +45,7 @@ export function FloorPlanArt({ className, style }: { className?: string; style?:
       </g>
 
       {/* 門扇開闔弧線 */}
-      <g strokeWidth="1.4">
+      <g strokeWidth="0.9">
         <path d="M470 250 A80 80 0 0 1 550 330" /><path d="M470 250 V330" opacity="0" />
         <path d="M830 210 A80 80 0 0 0 750 290" />
         <path d="M830 560 A80 80 0 0 1 750 640" />
@@ -56,7 +56,7 @@ export function FloorPlanArt({ className, style }: { className?: string; style?:
       </g>
 
       {/* 窗（外牆三平行線） */}
-      <g strokeWidth="1.2">
+      <g strokeWidth="0.9">
         <path d="M200 70 H340 M200 76 H340 M200 82 H340" />
         <path d="M900 70 H1050 M900 76 H1050 M900 82 H1050" />
         <path d="M60 250 V380 M66 250 V380 M72 250 V380" />
@@ -65,7 +65,7 @@ export function FloorPlanArt({ className, style }: { className?: string; style?:
       </g>
 
       {/* 家具與設備（細線） */}
-      <g strokeWidth="1.6">
+      <g strokeWidth="1">
         {/* 廚房：檯面＋水槽＋爐 */}
         <path d="M84 92 H430 V150 H84 Z" />
         <rect x="150" y="104" width="70" height="34" rx="4" />
