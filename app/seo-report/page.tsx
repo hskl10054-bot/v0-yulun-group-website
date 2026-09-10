@@ -193,14 +193,20 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
     const mm = videoByMonth.get(ym)!
     mm.set(id, (mm.get(id) ?? 0) + 1)
   }
-  // 近 6 個月欄位（含本月，新到舊）
-  const monthsBack = (ym: string, n: number): string[] => {
-    let [y, m] = ym.split("-").map(Number)
+  // 月份欄位：從追蹤啟用月（2026-09）到本月，新到舊
+  const VIDEO_TRACK_START = "2026-09"
+  const videoMonthsCols: string[] = (() => {
+    if (nowMonth < VIDEO_TRACK_START) return [nowMonth]
     const out: string[] = []
-    for (let i = 0; i < n; i++) { out.push(`${y}-${String(m).padStart(2, "0")}`); m--; if (m === 0) { m = 12; y-- } }
+    let [y, m] = nowMonth.split("-").map(Number)
+    for (let i = 0; i < 36; i++) {
+      const cur = `${y}-${String(m).padStart(2, "0")}`
+      out.push(cur)
+      if (cur === VIDEO_TRACK_START) break
+      m--; if (m === 0) { m = 12; y-- }
+    }
     return out
-  }
-  const videoMonthsCols = monthsBack(nowMonth, 6)
+  })()
   const shortMonth = (ym: string) => `${Number(ym.split("-")[1])}月`
   const videoDefs = [
     ...SITE_VIDEOS.map((v) => ({ ...v, kind: "影片" })),
