@@ -273,7 +273,7 @@ export default function ConstructionPage() {
               height: "100%",
               color: "#6B4E31",
               pointerEvents: "none",
-              transform: "translateX(-6%)",
+              transform: "translateX(-6%) scale(1.2)",
               WebkitMaskImage: "radial-gradient(125% 125% at 50% 50%, #000 66%, transparent 100%)",
               maskImage: "radial-gradient(125% 125% at 50% 50%, #000 66%, transparent 100%)",
             }}
