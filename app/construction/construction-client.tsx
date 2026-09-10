@@ -269,14 +269,14 @@ export default function ConstructionPage() {
             className="bp-plan-img"
             style={{
               position: "absolute",
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%) rotate(-8deg)",
-              width: "min(1500px, 112%)",
-              height: "auto",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center",
               pointerEvents: "none",
-              WebkitMaskImage: "radial-gradient(150% 135% at 50% 50%, #000 76%, transparent 100%)",
-              maskImage: "radial-gradient(150% 135% at 50% 50%, #000 76%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(125% 125% at 50% 50%, #000 68%, transparent 100%)",
+              maskImage: "radial-gradient(125% 125% at 50% 50%, #000 68%, transparent 100%)",
             }}
           />
         </div>
