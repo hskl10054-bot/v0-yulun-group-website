@@ -255,7 +255,7 @@ export default function ConstructionPage() {
       </section>
 
       {/* STRENGTHS */}
-      <section className="resp-section" style={{ position: "relative", overflow: "hidden", padding: "8rem 6rem", background: colors.strengths_bg }}>
+      <section className="resp-section" style={{ position: "relative", overflow: "hidden", padding: "9.5rem 6rem", background: colors.strengths_bg }}>
         {/* 施工藍圖背景 — 滑進畫面時線稿描繪 ＋ 雙向格線流動 */}
         <div ref={bpRef} aria-hidden="true" className={`bp-wrap${bpIn ? " in-view" : ""}`} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
           <div className="bp-grid bp-grid-a" />
@@ -279,18 +279,18 @@ export default function ConstructionPage() {
             }}
           />
         </div>
-        <div style={{ position: "relative", zIndex: 1, maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.strengths_icon, marginBottom: "1rem" }}>Our Strengths</p>
-          <h2 ref={addRef(5)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", marginBottom: "1.5rem", color: colors.strengths_heading }}>為什麼選擇我們</h2>
-          <div style={{ width: 48, height: 1, background: colors.strengths_icon, margin: "0 auto 4rem" }} />
-          <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2rem" }}>
+        <div style={{ position: "relative", zIndex: 1, maxWidth: 1240, margin: "0 auto", textAlign: "center" }}>
+          <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.8rem", letterSpacing: "0.4em", textTransform: "uppercase", color: colors.strengths_icon, marginBottom: "1.25rem" }}>Our Strengths</p>
+          <h2 ref={addRef(5)} style={{ ...fadeStyle, transitionDelay: "0.15s", fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(2.2rem, 4.6vw, 3.1rem)", fontWeight: 700, letterSpacing: "0.14em", marginBottom: "1.75rem", color: colors.strengths_heading }}>為什麼選擇我們</h2>
+          <div style={{ width: 64, height: 2, background: colors.strengths_icon, margin: "0 auto 5rem" }} />
+          <div className="resp-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "2.75rem" }}>
             {strengths.map((s, i) => (
-              <div key={s.title} className="strength-card" ref={addRef(6 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "3rem 2rem", border: `0.5px solid ${colors.strengths_card_border}`, background: colors.strengths_card_bg, transition: "background 0.4s, border-color 0.4s, box-shadow 0.4s", textAlign: "center" }}>
-                <div className="strength-icon" style={{ width: 64, height: 64, border: `0.5px solid ${colors.strengths_card_border}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem", transition: "background 0.4s, border-color 0.4s" }}>
-                  <s.icon size={28} style={{ color: colors.strengths_icon, transition: "color 0.4s" }} />
+              <div key={s.title} className="strength-card" ref={addRef(6 + i)} style={{ ...fadeStyle, transitionDelay: `${i * 0.15}s`, padding: "4.25rem 2.75rem", border: `0.5px solid ${colors.strengths_card_border}`, background: colors.strengths_card_bg, transition: "background 0.4s, border-color 0.4s, box-shadow 0.4s", textAlign: "center" }}>
+                <div className="strength-icon" style={{ width: 84, height: 84, border: `0.5px solid ${colors.strengths_card_border}`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 2rem", transition: "background 0.4s, border-color 0.4s" }}>
+                  <s.icon size={38} style={{ color: colors.strengths_icon, transition: "color 0.4s" }} />
                 </div>
-                <h3 className="serif" style={{ fontSize: "1.4rem", fontWeight: 400, marginBottom: "1rem", ...getListItemStyle(content, "strengths", s.sortOrder, "title", "construction") }}>{s.title}</h3>
-                <p className="noto" style={{ fontSize: "0.82rem", lineHeight: 2, color: colors.strengths_text, fontWeight: 300, ...getListItemStyle(content, "strengths", s.sortOrder, "description", "construction") }}>{s.desc}</p>
+                <h3 className="serif" style={{ fontSize: "1.85rem", fontWeight: 400, marginBottom: "1.25rem", ...getListItemStyle(content, "strengths", s.sortOrder, "title", "construction") }}>{s.title}</h3>
+                <p className="noto" style={{ fontSize: "1rem", lineHeight: 2, color: colors.strengths_text, fontWeight: 300, ...getListItemStyle(content, "strengths", s.sortOrder, "description", "construction") }}>{s.desc}</p>
               </div>
             ))}
           </div>
