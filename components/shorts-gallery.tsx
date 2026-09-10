@@ -7,6 +7,7 @@ import { useState } from "react"
 const SHORTS: { id: string; title: string }[] = [
   { id: "-8aCes467M4", title: "奇奇妙妙屋 · 裝修短片" },
   { id: "ewYtT1FIF6k", title: "奇奇妙妙屋 · 裝修短片" },
+  { id: "hc5rrl90qvE", title: "奇奇妙妙屋 · 裝修短片" },
 ]
 
 const CHANNEL_SHORTS_URL = "https://www.youtube.com/@%E8%A3%95%E7%B6%B8/shorts"
@@ -28,10 +29,10 @@ function ShortCard({ id, title }: { id: string; title: string }) {
       ) : (
         <button type="button" onClick={() => setPlay(true)} aria-label={`播放：${title}`} className="group absolute inset-0 h-full w-full cursor-pointer">
           <img
-            src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
+            src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
             onError={(e) => {
               const im = e.currentTarget as HTMLImageElement
-              if (!im.dataset.fb) { im.dataset.fb = "1"; im.src = `https://i.ytimg.com/vi/${id}/mqdefault.jpg` }
+              if (!im.dataset.fb) { im.dataset.fb = "1"; im.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg` }
             }}
             alt={title}
             loading="lazy"
@@ -58,8 +59,12 @@ export function ShortsGallery() {
           <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: "#2A2520" }}>精選短片</h2>
           <p className="mx-auto mt-3 max-w-xl text-[1rem] font-light leading-relaxed" style={{ color: "#5B5349" }}>一分鐘看懂裝修大小事</p>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-6">
-          {SHORTS.map((s) => <ShortCard key={s.id} id={s.id} title={s.title} />)}
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
+          {SHORTS.map((s) => (
+            <div key={s.id} className="w-[44%] max-w-[190px]">
+              <ShortCard id={s.id} title={s.title} />
+            </div>
+          ))}
         </div>
         <div className="mt-9 text-center">
           <a href={CHANNEL_SHORTS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[0.85rem] tracking-[0.2em] transition-opacity hover:opacity-70" style={{ color: GOLD, textDecoration: "none" }}>
