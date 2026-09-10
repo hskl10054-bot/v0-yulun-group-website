@@ -169,22 +169,35 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
   const blogTotalMonth = blogRows.reduce((a, r) => a + r.month, 0)
   const blogTotalAll = blogRows.reduce((a, r) => a + r.total, 0)
 
-  // ── 影片／短片點擊 ──
+  // ── 影片／短片點擊（含每月紀錄）──
   const videoAllTime = new Map<string, number>()
-  const videoMonth = new Map<string, number>()
+  const videoByMonth = new Map<string, Map<string, number>>()
   for (const r of rows) {
     if (!(r.path.startsWith("/__video/") || r.path.startsWith("/__short/"))) continue
     const id = r.path.split("/")[2] ?? ""
     if (!id) continue
     videoAllTime.set(id, (videoAllTime.get(id) ?? 0) + 1)
-    if (tpeMonth.format(new Date(r.created_at)) === nowMonth) videoMonth.set(id, (videoMonth.get(id) ?? 0) + 1)
+    const ym = tpeMonth.format(new Date(r.created_at))
+    if (!videoByMonth.has(ym)) videoByMonth.set(ym, new Map())
+    const mm = videoByMonth.get(ym)!
+    mm.set(id, (mm.get(id) ?? 0) + 1)
   }
-  const videoClickRows = [
+  // 近 6 個月欄位（含本月，新到舊）
+  const monthsBack = (ym: string, n: number): string[] => {
+    let [y, m] = ym.split("-").map(Number)
+    const out: string[] = []
+    for (let i = 0; i < n; i++) { out.push(`${y}-${String(m).padStart(2, "0")}`); m--; if (m === 0) { m = 12; y-- } }
+    return out
+  }
+  const videoMonthsCols = monthsBack(nowMonth, 6)
+  const shortMonth = (ym: string) => `${Number(ym.split("-")[1])}月`
+  const videoDefs = [
     ...SITE_VIDEOS.map((v) => ({ ...v, kind: "影片" })),
     ...SITE_SHORTS.map((v) => ({ ...v, kind: "短片" })),
-  ].map((v) => ({ ...v, month: videoMonth.get(v.id) ?? 0, total: videoAllTime.get(v.id) ?? 0 }))
-  const videoTotalMonth = videoClickRows.reduce((a, r) => a + r.month, 0)
-  const videoTotalAll = videoClickRows.reduce((a, r) => a + r.total, 0)
+  ]
+  const videoCount = (ym: string, id: string) => videoByMonth.get(ym)?.get(id) ?? 0
+  const videoTotalMonth = videoDefs.reduce((a, v) => a + videoCount(nowMonth, v.id), 0)
+  const videoTotalAll = videoDefs.reduce((a, v) => a + (videoAllTime.get(v.id) ?? 0), 0)
 
   // ── Google Search Console（真實關鍵字級自然搜尋資料）──
   const gscOn = gscConfigured()
@@ -538,29 +551,38 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
           訪客在網站上按下「播放」的次數。本月共 <b style={{ color: GOLD }}>{videoTotalMonth}</b> 次 · 累計 <b style={{ color: INK }}>{videoTotalAll}</b> 次。
         </p>
         <div className="overflow-x-auto rounded-2xl bg-white" style={{ boxShadow: "0 20px 50px -35px rgba(42,37,32,0.3)" }}>
-          <table className="w-full border-collapse text-left" style={{ fontSize: "0.92rem" }}>
+          <table className="w-full border-collapse text-left" style={{ fontSize: "0.9rem" }}>
             <thead>
               <tr style={{ color: MUTE, borderBottom: `1px solid ${LINE}` }}>
-                <th className="px-5 py-4 font-medium">影片</th>
-                <th className="px-4 py-4 font-medium">類型</th>
-                <th className="px-4 py-4 text-right font-medium" style={{ color: GOLD }}>本月點擊</th>
-                <th className="px-5 py-4 text-right font-medium">累計點擊</th>
+                <th className="whitespace-nowrap px-5 py-4 font-medium">影片</th>
+                <th className="px-3 py-4 font-medium">類型</th>
+                {videoMonthsCols.map((ym) => (
+                  <th key={ym} className="whitespace-nowrap px-3 py-4 text-right font-medium" style={{ color: ym === nowMonth ? GOLD : MUTE }}>
+                    {shortMonth(ym)}{ym === nowMonth && <span className="ml-1 text-[0.68rem]">本月</span>}
+                  </th>
+                ))}
+                <th className="px-5 py-4 text-right font-medium" style={{ color: INK }}>累計</th>
               </tr>
             </thead>
             <tbody>
-              {videoClickRows.map((v) => (
+              {videoDefs.map((v) => (
                 <tr key={v.id} style={{ borderBottom: `1px solid ${LINE}` }}>
                   <td className="px-5 py-3.5" style={{ color: INK }}>{v.title}</td>
-                  <td className="px-4 py-3.5" style={{ color: "#B3AB9E", fontSize: "0.82rem" }}>{v.kind}</td>
-                  <td className="px-4 py-3.5 text-right" style={{ color: GOLD, fontWeight: 600 }}>{v.month}</td>
-                  <td className="px-5 py-3.5 text-right" style={{ color: "#6B5D4F" }}>{v.total}</td>
+                  <td className="px-3 py-3.5" style={{ color: "#B3AB9E", fontSize: "0.8rem" }}>{v.kind}</td>
+                  {videoMonthsCols.map((ym) => {
+                    const n = videoCount(ym, v.id)
+                    return (
+                      <td key={ym} className="px-3 py-3.5 text-right" style={{ color: n === 0 ? "#C9C0B2" : ym === nowMonth ? GOLD : "#6B5D4F", fontWeight: ym === nowMonth ? 600 : 400 }}>{n}</td>
+                    )
+                  })}
+                  <td className="px-5 py-3.5 text-right" style={{ color: INK, fontWeight: 600 }}>{videoAllTime.get(v.id) ?? 0}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
         <p className="mt-3 text-[0.8rem] font-light leading-relaxed" style={{ color: "#B3AB9E" }}>
-          每有訪客在網站上點播一次影片就 +1（同一人多次點播會分開計算）。此為網站內的播放點擊，與 YouTube 後台的觀看次數是分開的兩套數字。
+          每欄為該月份在網站上被點播的次數（同一人多次點播分開計算）。此為網站內的播放點擊，與 YouTube 後台的觀看次數是分開的兩套數字。
         </p>
 
         {/* 近 6 個月趨勢 */}
