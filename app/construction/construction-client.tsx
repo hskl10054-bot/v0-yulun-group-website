@@ -146,7 +146,7 @@ export default function ConstructionPage() {
         .bp-plan :is(line,rect,circle,path) { stroke-dasharray: 2600; stroke-dashoffset: 2600; }
         .bp-plan text { opacity: 0; }
         .bp-plan-img { opacity: 0; transition: opacity 1.6s ease; }
-        .bp-wrap.in-view .bp-plan-img { opacity: 0.2; }
+        .bp-wrap.in-view .bp-plan-img { opacity: 0.42; }
         .bp-wrap.in-view .bp-plan :is(line,rect,circle,path) { animation: bpDraw 1.7s ease forwards; }
         .bp-wrap.in-view .bp-plan text { animation: bpFade 1s ease 1s forwards; }
         @keyframes bpDraw { to { stroke-dashoffset: 0; } }
@@ -159,7 +159,7 @@ export default function ConstructionPage() {
           .bp-grid { animation: none; }
           .bp-plan :is(line,rect,circle,path) { stroke-dashoffset: 0; animation: none; }
           .bp-plan text { opacity: 1; animation: none; }
-          .bp-plan-img { opacity: 0.2; transition: none; }
+          .bp-plan-img { opacity: 0.42; transition: none; }
         }
         .service-card:hover { border-color: ${colors.services_accent} !important; background: ${colors.strengths_bg} !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
@@ -270,12 +270,12 @@ export default function ConstructionPage() {
               position: "absolute",
               right: "-6%",
               top: "50%",
-              transform: "translateY(-50%)",
-              width: "min(760px, 66%)",
+              transform: "translateY(-50%) rotate(-9deg)",
+              width: "min(1120px, 90%)",
               height: "auto",
               pointerEvents: "none",
-              WebkitMaskImage: "radial-gradient(115% 100% at 62% 50%, #000 48%, transparent 90%)",
-              maskImage: "radial-gradient(115% 100% at 62% 50%, #000 48%, transparent 90%)",
+              WebkitMaskImage: "radial-gradient(140% 120% at 58% 50%, #000 64%, transparent 97%)",
+              maskImage: "radial-gradient(140% 120% at 58% 50%, #000 64%, transparent 97%)",
             }}
           />
         </div>
