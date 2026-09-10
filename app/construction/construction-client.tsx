@@ -145,6 +145,8 @@ export default function ConstructionPage() {
         @keyframes bpDriftB { from { background-position: 0 0, 0 0; } to { background-position: -130px 130px, -130px 130px; } }
         .bp-plan :is(line,rect,circle,path) { stroke-dasharray: 2600; stroke-dashoffset: 2600; }
         .bp-plan text { opacity: 0; }
+        .bp-plan-img { opacity: 0; transition: opacity 1.6s ease; }
+        .bp-wrap.in-view .bp-plan-img { opacity: 0.2; }
         .bp-wrap.in-view .bp-plan :is(line,rect,circle,path) { animation: bpDraw 1.7s ease forwards; }
         .bp-wrap.in-view .bp-plan text { animation: bpFade 1s ease 1s forwards; }
         @keyframes bpDraw { to { stroke-dashoffset: 0; } }
@@ -157,6 +159,7 @@ export default function ConstructionPage() {
           .bp-grid { animation: none; }
           .bp-plan :is(line,rect,circle,path) { stroke-dashoffset: 0; animation: none; }
           .bp-plan text { opacity: 1; animation: none; }
+          .bp-plan-img { opacity: 0.2; transition: none; }
         }
         .service-card:hover { border-color: ${colors.services_accent} !important; background: ${colors.strengths_bg} !important; }
         .portfolio-item:hover .portfolio-overlay { opacity: 1 !important; }
@@ -257,51 +260,24 @@ export default function ConstructionPage() {
         <div ref={bpRef} aria-hidden="true" className={`bp-wrap${bpIn ? " in-view" : ""}`} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
           <div className="bp-grid bp-grid-a" />
           <div className="bp-grid bp-grid-b" />
-          <svg
-            className="bp-plan"
-            viewBox="0 0 600 420"
-            preserveAspectRatio="xMidYMid meet"
-            style={{ position: "absolute", right: "-3%", bottom: "-8%", width: "min(760px, 60%)", height: "auto", color: "#6B4E31", opacity: 0.18 }}
-          >
-            <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
-            {/* 外牆 */}
-            <rect x="40" y="48" width="520" height="332" strokeWidth="3" />
-            <rect x="50" y="58" width="500" height="312" strokeWidth="1" />
-            {/* 隔間牆 */}
-            <line x1="340" y1="58" x2="340" y2="248" strokeWidth="2" />
-            <line x1="340" y1="248" x2="550" y2="248" strokeWidth="2" />
-            <line x1="50" y1="248" x2="200" y2="248" strokeWidth="2" />
-            <line x1="200" y1="248" x2="200" y2="370" strokeWidth="2" />
-            {/* 門開口與門扇弧線 */}
-            <path d="M150 58 A44 44 0 0 1 194 102" strokeWidth="1.5" />
-            <line x1="150" y1="58" x2="150" y2="102" strokeWidth="1.5" />
-            <path d="M340 170 A38 38 0 0 0 302 208" strokeWidth="1.5" />
-            <line x1="340" y1="170" x2="302" y2="170" strokeWidth="1.5" />
-            {/* 窗（外牆雙線） */}
-            <line x1="240" y1="48" x2="320" y2="48" strokeWidth="1" />
-            <line x1="240" y1="54" x2="320" y2="54" strokeWidth="1" />
-            <line x1="40" y1="150" x2="40" y2="210" strokeWidth="1" />
-            <line x1="46" y1="150" x2="46" y2="210" strokeWidth="1" />
-            {/* 家具符號：圓桌、床、沙發 */}
-            <circle cx="450" cy="150" r="34" strokeWidth="1.5" />
-            <rect x="70" y="96" width="120" height="86" rx="4" strokeWidth="1.5" />
-            <line x1="70" y1="128" x2="190" y2="128" strokeWidth="1" />
-            <rect x="250" y="290" width="130" height="46" rx="6" strokeWidth="1.5" />
-            {/* 樓梯 */}
-            <rect x="430" y="286" width="96" height="74" strokeWidth="1.5" />
-            <line x1="430" y1="300" x2="526" y2="300" strokeWidth="1" />
-            <line x1="430" y1="314" x2="526" y2="314" strokeWidth="1" />
-            <line x1="430" y1="328" x2="526" y2="328" strokeWidth="1" />
-            <line x1="430" y1="342" x2="526" y2="342" strokeWidth="1" />
-            {/* 尺寸標註線 */}
-            <line x1="40" y1="24" x2="560" y2="24" strokeWidth="1" />
-            <line x1="40" y1="16" x2="40" y2="32" strokeWidth="1" />
-            <line x1="340" y1="16" x2="340" y2="32" strokeWidth="1" />
-            <line x1="560" y1="16" x2="560" y2="32" strokeWidth="1" />
-            <text x="180" y="20" fontSize="13" fill="currentColor" stroke="none" textAnchor="middle" letterSpacing="1">3,600</text>
-            <text x="450" y="20" fontSize="13" fill="currentColor" stroke="none" textAnchor="middle" letterSpacing="1">2,200</text>
-            </g>
-          </svg>
+          {/* 真實平面圖（空房子案場）作為似有似無的藝術底圖 */}
+          <img
+            src="/images/construction/floorplan-watermark.png"
+            alt=""
+            aria-hidden="true"
+            className="bp-plan-img"
+            style={{
+              position: "absolute",
+              right: "-6%",
+              top: "50%",
+              transform: "translateY(-50%)",
+              width: "min(760px, 66%)",
+              height: "auto",
+              pointerEvents: "none",
+              WebkitMaskImage: "radial-gradient(115% 100% at 62% 50%, #000 48%, transparent 90%)",
+              maskImage: "radial-gradient(115% 100% at 62% 50%, #000 48%, transparent 90%)",
+            }}
+          />
         </div>
         <div style={{ position: "relative", zIndex: 1, maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <p ref={addRef(4)} style={{ ...fadeStyle, fontSize: "0.75rem", letterSpacing: "0.35em", textTransform: "uppercase", color: colors.strengths_icon, marginBottom: "1rem" }}>Our Strengths</p>
