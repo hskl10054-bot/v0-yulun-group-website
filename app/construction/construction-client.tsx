@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, HardHat, ShieldCheck, FileText, Wrench, ClipboardList } from "lucide-react"
 import { ServiceItems } from "@/components/service-items"
 import { YoutubeEmbed } from "@/components/youtube-embed"
+import { ShortsGallery } from "@/components/shorts-gallery"
 import { SiteMenu } from "@/components/site-menu"
 import { ContactInfo } from "@/components/contact-info"
 
@@ -302,7 +303,7 @@ export default function ConstructionPage() {
 
       {/* VIDEO — 品牌影片（輕量內嵌，點擊才載入） */}
       <section style={{ padding: "5rem 0 6rem", background: colors.services_bg || "#F4F1EC" }}>
-        <div className="mx-auto max-w-4xl px-6 md:px-12">
+        <div className="mx-auto max-w-2xl px-6 md:px-12">
           <div className="mb-8 text-center">
             <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Video</span>
             <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.portfolio_heading }}>影片介紹</h2>
@@ -313,6 +314,9 @@ export default function ConstructionPage() {
           <YoutubeEmbed id="kzPW1-jJYwM" title="裕綸室內裝修 品牌影片" />
         </div>
       </section>
+
+      {/* SHORTS — 頻道短片牆（有資料才顯示；輕量點擊才載入） */}
+      <ShortsGallery />
 
       {/* PROJECTS */}
       <section id="projects" style={{ padding: "6rem 0", background: colors.portfolio_bg }}>
