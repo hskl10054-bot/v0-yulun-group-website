@@ -56,9 +56,18 @@ export function useCmsData(page: string): CmsData {
   return { content, listItems, images, loading, page }
 }
 
+// 保固正規化：不論後台舊資料存的是「2年／兩年保固」，一律顯示「1年工程保固」，
+// 確保全站不會出現與實際不符的保固年限。
+function normalizeWarranty(v: string): string {
+  return v
+    .replace(/(?:2|２|兩)\s*年保固/g, "1年工程保固")
+    .replace(/保固\s*(?:2|２|兩)\s*年/g, "保固1年")
+}
+
 // Helper: get a content value by section + key
 export function getContentValue(content: ContentRow[], section: string, key: string): string {
-  return content.find((c) => c.section === section && c.key === key)?.value || ""
+  const v = content.find((c) => c.section === section && c.key === key)?.value || ""
+  return v ? normalizeWarranty(v) : ""
 }
 
 // Helper: get list items for a section, sorted

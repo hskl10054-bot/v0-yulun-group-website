@@ -73,7 +73,7 @@ insert into page_content (page, section, key, value) values
 ('construction', 'hero', 'title', '匠心傳承'),
 ('construction', 'hero', 'title_line2', '穩健工程'),
 ('construction', 'hero', 'title_line3', '構築世代安居'),
-('construction', 'hero', 'description', '裕綸裝修擁有政府核可專業施工證照，秉持標準化 SOP 工程管理。我們重視隱蔽工程細節，從水電配置、防水工法到結構強化，皆由具備資深執照的職人團隊把關。2年保固，安心無憂。'),
+('construction', 'hero', 'description', '裕綸裝修擁有政府核可專業施工證照，秉持標準化 SOP 工程管理。我們重視隱蔽工程細節，從水電配置、防水工法到結構強化，皆由具備資深執照的職人團隊把關。1年工程保固，安心無憂。'),
 ('construction', 'contact', 'address', '台中市北屯區瀋陽北路73號'),
 ('construction', 'contact', 'phone', '04-2247-9068'),
 ('construction', 'contact', 'email', 'yulun83417215@gmail.com'),
