@@ -205,7 +205,7 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
       if (cur === VIDEO_TRACK_START) break
       m--; if (m === 0) { m = 12; y-- }
     }
-    return out
+    return out.reverse() // 由舊到新：9月 → 10月 → 11月 …
   })()
   const shortMonth = (ym: string) => `${Number(ym.split("-")[1])}月`
   const videoDefs = [
