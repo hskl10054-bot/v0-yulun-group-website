@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 import { getSupabaseAdmin } from "@/lib/supabase"
 import { gscQuery, gscQueryEx, gscConfigured, type GscRow } from "@/lib/gsc"
-import { getPublishedPosts } from "@/data/blog"
+import { getPublishedPosts, POSTS } from "@/data/blog"
 import { SITE_VIDEOS, SITE_SHORTS } from "@/data/videos"
+import { CASES, slugify } from "@/data/cases"
 
 export const dynamic = "force-dynamic"
 export const runtime = "nodejs"
@@ -17,22 +18,32 @@ const INK = "#2A2520"
 const MUTE = "#8C8479"
 const LINE = "#E4DED4"
 
-const PATH_LABELS: Record<string, string> = {
-  "/": "首頁",
-  "/design": "空房子室內設計",
-  "/construction": "裕綸室內裝修",
-  "/works": "案例分享",
-  "/blog": "裝修知識",
-  "/booking": "預約諮詢",
-  "/process": "合作流程",
-  "/cafe": "同齊咖啡",
-  "/privacy": "隱私權政策",
+const PAGE_META: Record<string, { icon: string; label: string }> = {
+  "/": { icon: "🏠", label: "首頁" },
+  "/design": { icon: "🎨", label: "空房子室內設計" },
+  "/construction": { icon: "🔨", label: "裕綸室內裝修" },
+  "/works": { icon: "🏆", label: "案例分享" },
+  "/blog": { icon: "📝", label: "裝修知識" },
+  "/booking": { icon: "📅", label: "預約諮詢" },
+  "/process": { icon: "📋", label: "合作流程" },
+  "/cafe": { icon: "☕", label: "同齊咖啡" },
+  "/privacy": { icon: "🔒", label: "隱私權政策" },
 }
-function labelFor(path: string): string {
-  if (PATH_LABELS[path]) return PATH_LABELS[path]
-  if (path.startsWith("/blog/")) return "文章：" + decodeURIComponent(path.replace("/blog/", ""))
-  if (path.startsWith("/works/")) return "案例：" + decodeURIComponent(path.replace("/works/", ""))
-  return path
+// 英文網址 → 中文名稱對應
+const CASE_ZH: Record<string, string> = Object.fromEntries(CASES.map((c) => [slugify(c.enName), c.zhName]))
+const POST_TITLE: Record<string, string> = Object.fromEntries(POSTS.map((p) => [p.slug, p.title]))
+
+function pageInfo(path: string): { icon: string; label: string } {
+  if (PAGE_META[path]) return PAGE_META[path]
+  if (path.startsWith("/works/")) {
+    const slug = path.replace("/works/", "").replace(/\/$/, "")
+    return { icon: "📐", label: `案例：${CASE_ZH[slug] ?? decodeURIComponent(slug)}` }
+  }
+  if (path.startsWith("/blog/")) {
+    const slug = path.replace("/blog/", "").replace(/\/$/, "")
+    return { icon: "📄", label: `文章：${POST_TITLE[slug] ?? decodeURIComponent(slug)}` }
+  }
+  return { icon: "🔗", label: path }
 }
 
 const SOURCES = ["organic", "social", "referral", "direct", "internal"] as const
@@ -366,7 +377,7 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
                   {(gscPages ?? []).map((r) => (
                     <tr key={r.keys[0]} style={{ borderBottom: `1px solid ${LINE}` }}>
                       <td className="px-5 py-3.5" style={{ color: INK }}>
-                        {labelFor(gscPagePath(r.keys[0]))}
+                        <span className="mr-1.5">{pageInfo(gscPagePath(r.keys[0])).icon}</span>{pageInfo(gscPagePath(r.keys[0])).label}
                         <span className="ml-2 text-[0.75rem]" style={{ color: "#C0B8AB" }}>{gscPagePath(r.keys[0])}</span>
                       </td>
                       <td className="px-4 py-3.5 text-right" style={{ color: GOLD, fontWeight: 600 }}>{r.clicks}</td>
@@ -496,7 +507,7 @@ export default async function SeoReport({ searchParams }: { searchParams: Promis
               {pageRows.map((p) => (
                 <tr key={p.path} style={{ borderBottom: `1px solid ${LINE}` }}>
                   <td className="px-5 py-3.5" style={{ color: INK }}>
-                    {labelFor(p.path)}
+                    <span className="mr-1.5">{pageInfo(p.path).icon}</span>{pageInfo(p.path).label}
                     <span className="ml-2 text-[0.75rem]" style={{ color: "#C0B8AB" }}>{p.path}</span>
                   </td>
                   <td className="px-4 py-3.5 text-right" style={{ color: GOLD, fontWeight: 600 }}>{p.organic}</td>
