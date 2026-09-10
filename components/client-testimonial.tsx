@@ -20,6 +20,11 @@ export function ClientTestimonial() {
         .tm-0 { transform: rotate(-1.6deg); background: #FFFFFF; }
         .tm-1 { transform: rotate(1.4deg); background: #FBF6ED; }
         .tm-2 { transform: rotate(-0.7deg); background: #FBF2F1; }
+        /* 上上下下錯落，像便利貼牆 */
+        @media (min-width: 640px) {
+          .tm-1 { margin-top: 38px; }
+          .tm-2 { margin-top: 16px; }
+        }
         @media (prefers-reduced-motion: reduce) { .tm-card, .tm-card:hover { transform: none !important; } }
       `}</style>
       <div className="mx-auto max-w-6xl px-6 md:px-12">
