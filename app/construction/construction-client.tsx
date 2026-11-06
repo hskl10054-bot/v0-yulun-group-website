@@ -310,7 +310,7 @@ export default function ConstructionPage() {
             <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Video</span>
             <h2 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(1.875rem, 4vw, 2.25rem)", fontWeight: 700, letterSpacing: "0.12em", color: colors.portfolio_heading }}>影片介紹</h2>
             <p className="mx-auto mt-3 max-w-xl text-[1rem] font-light leading-relaxed" style={{ color: colors.about_text || "#5B5349" }}>
-              透過影片，帶你認識裕綸的施工實力與服務。
+              「奇奇妙妙屋」是裕綸的 YouTube 頻道 —— 透過影片，帶你認識我們的施工實力與服務。
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
