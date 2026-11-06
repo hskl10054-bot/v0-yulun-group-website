@@ -12,7 +12,7 @@ const PLACE_NAME = "空房子室內設計"
 const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("空房子室內設計 台中市北屯區")}`
 const FB_URL = "https://www.facebook.com/p/%E7%A9%BA%E6%88%BF%E5%AD%90%E8%A8%AD%E8%A8%88-61564720748448/"
 const IG_URL = "https://www.instagram.com/human_design.space/"
-const YT_URL = "https://www.youtube.com/@%E8%A3%95%E7%B6%B8"
+const YT_URL = "https://www.youtube.com/@%E5%A5%87%E5%A5%87%E5%A6%99%E5%A6%99%E5%B1%8B"
 
 const GOLD = "#B5956A"
 const MUTE = "rgba(255,255,255,0.55)"

@@ -20,3 +20,7 @@ export const SITE_SHORTS: SiteVideo[] = [
 export const VIDEO_TITLES: Record<string, string> = Object.fromEntries(
   [...SITE_VIDEOS, ...SITE_SHORTS].map((v) => [v.id, v.title]),
 )
+
+// YouTube 頻道「奇奇妙妙屋」—— 點進去永遠看得到最新上傳的影片。
+export const YT_CHANNEL_URL = "https://www.youtube.com/@%E5%A5%87%E5%A5%87%E5%A6%99%E5%A6%99%E5%B1%8B"
+export const YT_CHANNEL_SHORTS_URL = `${YT_CHANNEL_URL}/shorts`

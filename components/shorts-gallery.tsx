@@ -1,14 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { SITE_SHORTS } from "@/data/videos"
+import { SITE_SHORTS, YT_CHANNEL_SHORTS_URL } from "@/data/videos"
 import { trackVideoPlay } from "@/lib/track-video"
 
 // 頻道 Shorts 短片牆 — 輕量內嵌：平常只載入封面縮圖，點擊才載入影片，對頁面速度幾乎零影響。
 // 要新增 Shorts：把影片 ID（youtube.com/shorts/XXXXXXXXXXX 的 XXXXXXXXXXX）加進下面陣列即可。
 const SHORTS = SITE_SHORTS
 
-const CHANNEL_SHORTS_URL = "https://www.youtube.com/@%E8%A3%95%E7%B6%B8/shorts"
+const CHANNEL_SHORTS_URL = YT_CHANNEL_SHORTS_URL
 const GOLD = "#B5956A"
 
 function ShortCard({ id, title }: { id: string; title: string }) {

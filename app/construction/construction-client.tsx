@@ -5,7 +5,7 @@ import { ServiceItems } from "@/components/service-items"
 import { YoutubeEmbed } from "@/components/youtube-embed"
 import { ShortsGallery } from "@/components/shorts-gallery"
 import { FloorPlanArt } from "@/components/floor-plan-art"
-import { SITE_VIDEOS } from "@/data/videos"
+import { SITE_VIDEOS, YT_CHANNEL_URL } from "@/data/videos"
 import { SiteMenu } from "@/components/site-menu"
 import { ContactInfo } from "@/components/contact-info"
 
@@ -321,10 +321,19 @@ export default function ConstructionPage() {
               </div>
             ))}
           </div>
+          <div className="mt-10 text-center">
+            <a
+              href={YT_CHANNEL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-[0.9rem] font-medium tracking-[0.12em] transition-transform hover:-translate-y-0.5"
+              style={{ background: "#B5956A", color: "#FFFFFF", textDecoration: "none", boxShadow: "0 16px 34px -18px rgba(181,149,106,0.7)" }}
+            >
+              ▶ 訂閱「奇奇妙妙屋」看更多影片
+            </a>
+          </div>
         </div>
       </section>
-
-      {/* SHORTS — 頻道短片牆（有資料才顯示；輕量點擊才載入） */}
       <ShortsGallery />
 
       {/* PROJECTS */}
