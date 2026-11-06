@@ -78,7 +78,7 @@ export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
                 title="空房子室內設計・裕綸集團 位置地圖"
                 src={MAP_EMBED}
                 className="block w-full"
-                style={{ border: "none", height: "128px", filter: "grayscale(0.2) contrast(1.05)" }}
+                style={{ border: "none", height: "128px", filter: "grayscale(0.2) contrast(1.05)", pointerEvents: "none" }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
