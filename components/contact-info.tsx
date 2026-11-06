@@ -5,10 +5,10 @@ const ADDRESS = "台中市北屯區瀋陽北路73號"
 const PHONE = "04-2247-9068"
 const EMAIL = "yulun83417215@gmail.com"
 const HOURS = "週一至週五　09:00 — 18:00"
-// 地圖以「完整門牌地址」直接定位 —— 用 ?q=地址（而非搜尋清單），點進去是乾淨的單一大頭針，
-// 直接落在瀋陽北路73號這棟建物，不會出現搜尋結果清單或競業廣告、也避開位置不準的重複商家標記。
+// 地圖：縮圖用純門牌精準落在建物；點擊用「商家名＋完整地址」並以 ?q= 直接開啟「空房子室內設計」商家卡。
 const BIZ_QUERY = "台中市北屯區瀋陽北路73號"
-const MAP_URL = `https://www.google.com/maps?q=${encodeURIComponent(BIZ_QUERY)}`
+const PLACE_QUERY = "空房子室內設計 台中市北屯區瀋陽北路73號"
+const MAP_URL = `https://www.google.com/maps?q=${encodeURIComponent(PLACE_QUERY)}`
 const FB_URL = "https://www.facebook.com/p/%E7%A9%BA%E6%88%BF%E5%AD%90%E8%A8%AD%E8%A8%88-61564720748448/"
 const IG_URL = "https://www.instagram.com/human_design.space/"
 const YT_URL = "https://www.youtube.com/@%E8%A3%95%E7%B6%B8"
