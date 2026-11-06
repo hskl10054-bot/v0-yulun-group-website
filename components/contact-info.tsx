@@ -9,7 +9,7 @@ const HOURS = "週一至週五　09:00 — 18:00"
 const GEO_LAT = "24.177687"
 const GEO_LNG = "120.672438"
 const PLACE_NAME = "空房子室內設計"
-const MAP_URL = `https://www.google.com/maps/place/${encodeURIComponent(PLACE_NAME)}/@${GEO_LAT},${GEO_LNG},18z`
+const MAP_URL = `https://www.google.com/maps?q=${GEO_LAT},${GEO_LNG}(${encodeURIComponent(PLACE_NAME)})`
 const FB_URL = "https://www.facebook.com/p/%E7%A9%BA%E6%88%BF%E5%AD%90%E8%A8%AD%E8%A8%88-61564720748448/"
 const IG_URL = "https://www.instagram.com/human_design.space/"
 const YT_URL = "https://www.youtube.com/@%E8%A3%95%E7%B6%B8"
@@ -19,7 +19,7 @@ const MUTE = "rgba(255,255,255,0.55)"
 const FAINT = "rgba(255,255,255,0.4)"
 
 // Google 地圖嵌入（免金鑰）— 以精確座標釘點，z=18 貼近建物。
-const MAP_EMBED = `https://maps.google.com/maps?q=${GEO_LAT},${GEO_LNG}&z=18&output=embed`
+const MAP_EMBED = `https://maps.google.com/maps?q=${GEO_LAT},${GEO_LNG}(${encodeURIComponent(PLACE_NAME)})&z=18&output=embed`
 
 // 精簡深色 footer — 品牌／地址・營業時間／電話／社群 分欄 ＋ 版權列。全站共用。
 export function ContactInfo({ showCta = true }: { showCta?: boolean }) {

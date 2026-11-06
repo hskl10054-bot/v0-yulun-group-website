@@ -23,7 +23,7 @@ export function SiteFooter() {
             <MapPin className="h-5 w-5 text-[#6B4E31]" />
             <p className="text-sm font-light leading-relaxed">
               <a
-                href="https://www.google.com/maps/place/空房子室內設計/@24.177687,120.672438,18z"
+                href="https://www.google.com/maps?q=24.177687,120.672438(%E7%A9%BA%E6%88%BF%E5%AD%90%E5%AE%A4%E5%85%A7%E8%A8%AD%E8%A8%88)"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-[#6B4E31]"
