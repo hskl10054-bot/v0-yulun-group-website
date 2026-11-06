@@ -23,7 +23,7 @@ export function SiteFooter() {
             <MapPin className="h-5 w-5 text-[#6B4E31]" />
             <p className="text-sm font-light leading-relaxed">
               <a
-                href="https://www.google.com/maps?q=空房子室內設計%20台中市北屯區瀋陽北路73號"
+                href="https://www.google.com/maps/place/空房子室內設計/@24.177687,120.672438,18z"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-[#6B4E31]"

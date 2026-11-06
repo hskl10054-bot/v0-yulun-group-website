@@ -5,10 +5,11 @@ const ADDRESS = "台中市北屯區瀋陽北路73號"
 const PHONE = "04-2247-9068"
 const EMAIL = "yulun83417215@gmail.com"
 const HOURS = "週一至週五　09:00 — 18:00"
-// 地圖：縮圖用純門牌精準落在建物；點擊用「商家名＋完整地址」並以 ?q= 直接開啟「空房子室內設計」商家卡。
-const BIZ_QUERY = "台中市北屯區瀋陽北路73號"
-const PLACE_QUERY = "空房子室內設計 台中市北屯區瀋陽北路73號"
-const MAP_URL = `https://www.google.com/maps?q=${encodeURIComponent(PLACE_QUERY)}`
+// 地圖：以 Plus Code(5MHC+3X) 反推之精確座標釘點；點擊用 /maps/place/ 地點卡格式開啟「空房子室內設計」。
+const GEO_LAT = "24.177687"
+const GEO_LNG = "120.672438"
+const PLACE_NAME = "空房子室內設計"
+const MAP_URL = `https://www.google.com/maps/place/${encodeURIComponent(PLACE_NAME)}/@${GEO_LAT},${GEO_LNG},18z`
 const FB_URL = "https://www.facebook.com/p/%E7%A9%BA%E6%88%BF%E5%AD%90%E8%A8%AD%E8%A8%88-61564720748448/"
 const IG_URL = "https://www.instagram.com/human_design.space/"
 const YT_URL = "https://www.youtube.com/@%E8%A3%95%E7%B6%B8"
@@ -17,8 +18,8 @@ const GOLD = "#B5956A"
 const MUTE = "rgba(255,255,255,0.55)"
 const FAINT = "rgba(255,255,255,0.4)"
 
-// Google 地圖嵌入（免金鑰）— 以完整門牌精準定位，z=18 貼近建物；點擊可開啟 Google 地圖導航。
-const MAP_EMBED = `https://maps.google.com/maps?q=${encodeURIComponent(BIZ_QUERY)}&z=18&output=embed`
+// Google 地圖嵌入（免金鑰）— 以精確座標釘點，z=18 貼近建物。
+const MAP_EMBED = `https://maps.google.com/maps?q=${GEO_LAT},${GEO_LNG}&z=18&output=embed`
 
 // 精簡深色 footer — 品牌／地址・營業時間／電話／社群 分欄 ＋ 版權列。全站共用。
 export function ContactInfo({ showCta = true }: { showCta?: boolean }) {
