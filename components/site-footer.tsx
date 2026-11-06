@@ -23,7 +23,7 @@ export function SiteFooter() {
             <MapPin className="h-5 w-5 text-[#6B4E31]" />
             <p className="text-sm font-light leading-relaxed">
               <a
-                href="https\:\/\/www\.google\.com\/maps\/search\/\?api\=1\&query\=\ç\©\º\æ\ˆ\¿\å\­\\å\®\¤\å\…\§\è\¨\­\è\¨\ˆ\%20\å\\°\ä\¸\­\å\¸\‚\å\Œ\—\å\±\¯\å\\€"
+                href="https://www.google.com/maps/search/?api=1&query=ç©ºæˆ¿å­å®¤å…§è¨­è¨ˆ%20å°ä¸­å¸‚åŒ—å±¯å€"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-colors hover:text-[#6B4E31]"

@@ -77,7 +77,7 @@ export default function BookingPage() {
             </a>
 
             {/* é–€å¸‚åœ°å€ */}
-            <a href="https\:\/\/www\.google\.com\/maps\/search\/\?api\=1\&query\=\ç\©\º\æ\ˆ\¿\å\­\\å\®\¤\å\…\§\è\¨\­\è\¨\ˆ\%20\å\\°\ä\¸\­\å\¸\‚\å\Œ\—\å\±\¯\å\\€" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 rounded-2xl bg-white px-5 py-8 text-center transition-transform hover:-translate-y-1" style={{ textDecoration: "none", boxShadow: "0 20px 50px -30px rgba(42,37,32,0.3)" }}>
+            <a href="https://www.google.com/maps/search/?api=1&query=ç©ºæˆ¿å­å®¤å…§è¨­è¨ˆ%20å°ä¸­å¸‚åŒ—å±¯å€" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-3 rounded-2xl bg-white px-5 py-8 text-center transition-transform hover:-translate-y-1" style={{ textDecoration: "none", boxShadow: "0 20px 50px -30px rgba(42,37,32,0.3)" }}>
               <span className="flex h-12 w-12 items-center justify-center rounded-full" style={{ background: "rgba(181,149,106,0.12)" }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B5956A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
               </span>
