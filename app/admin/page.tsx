@@ -28,7 +28,7 @@ const DEFAULT_LIST_ITEMS: Record<string, Record<string, DefaultListItem[]>> = {
       { title: "透明報價", subtitle: "", description: "逐項清單式報價，無隱藏費用，讓每一分預算都花在刀口上。", extra: "" },
     ],
     portfolio: [
-      { title: "同齊咖啡 西區精忠店", subtitle: "2025", description: "", extra: "" },
+      { title: "同齊咖吡 西區精忠店", subtitle: "2025", description: "", extra: "" },
       { title: "壹偲OnlyEase酵素保健茶飲", subtitle: "2025", description: "", extra: "" },
       { title: "勝麗交響曲", subtitle: "2025", description: "", extra: "" },
       { title: "清水聯馥悅", subtitle: "2024", description: "", extra: "" },
@@ -567,7 +567,7 @@ const pageNav: { key: PageKey; label: string; icon: typeof Home }[] = [
   { key: "home", label: "首頁", icon: Home },
   { key: "design", label: "空房子設計", icon: Paintbrush },
   { key: "construction", label: "裕綸裝修", icon: Hammer },
-  { key: "cafe", label: "同齊咖啡", icon: Coffee },
+  { key: "cafe", label: "同齊咖吡", icon: Coffee },
   { key: "works", label: "案例作品", icon: ImageIcon },
 ]
 

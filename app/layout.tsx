@@ -14,14 +14,14 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.yulungroup.com'),
   title: '裕綸集團 Yulun Group',
-  description: '裕綸集團｜台中室內設計與裝修的一站式服務。整合空房子室內設計、裕綸室內裝修與同齊咖啡，以職人精神為您構築理想生活空間。',
+  description: '裕綸集團｜台中室內設計與裝修的一站式服務。整合空房子室內設計、裕綸室內裝修與同齊咖吡，以職人精神為您構築理想生活空間。',
   generator: 'v0.app',
   openGraph: {
     type: 'website',
     locale: 'zh_TW',
     siteName: '裕綸集團 Yulun Group',
     title: '裕綸集團 Yulun Group｜台中室內設計與裝修',
-    description: '裕綸集團｜台中室內設計與裝修一站式服務。整合空房子室內設計、裕綸室內裝修與同齊咖啡，以職人精神為您構築理想生活空間。',
+    description: '裕綸集團｜台中室內設計與裝修一站式服務。整合空房子室內設計、裕綸室內裝修與同齊咖吡，以職人精神為您構築理想生活空間。',
     images: [{ url: '/images/hero-bg.jpg', width: 1567, height: 1045, alt: '裕綸集團｜台中室內設計與裝修' }],
   },
   twitter: {

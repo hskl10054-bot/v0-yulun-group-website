@@ -58,7 +58,7 @@ const localBusinessSchema = {
   subOrganization: [
     { "@type": "Organization", "@id": "https://www.yulungroup.com/design#org", name: "空房子室內設計", url: "https://www.yulungroup.com/design" },
     { "@type": "Organization", "@id": "https://www.yulungroup.com/construction#org", name: "裕綸室內裝修", url: "https://www.yulungroup.com/construction" },
-    { "@type": "CafeOrCoffeeShop", name: "同齊咖啡", url: "https://www.yulungroup.com/cafe" },
+    { "@type": "CafeOrCoffeeShop", name: "同齊咖吡", url: "https://www.yulungroup.com/cafe" },
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",

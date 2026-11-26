@@ -26,7 +26,7 @@ const PAGE_META: Record<string, { icon: string; label: string }> = {
   "/blog": { icon: "📝", label: "裝修知識" },
   "/booking": { icon: "📅", label: "預約諮詢" },
   "/process": { icon: "📋", label: "合作流程" },
-  "/cafe": { icon: "☕", label: "同齊咖啡" },
+  "/cafe": { icon: "☕", label: "同齊咖吡" },
   "/privacy": { icon: "🔒", label: "隱私權政策" },
 }
 // 英文網址 → 中文名稱對應

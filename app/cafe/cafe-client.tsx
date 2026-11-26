@@ -77,7 +77,7 @@ export default function CafePage() {
         <Link href="/" className="back-link" style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.95rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#8C8479", textDecoration: "none", transition: "color 0.3s" }}>
           <ArrowLeft size={16} /> 裕綸集團
         </Link>
-        <span className="serif resp-nav-brand" style={{ fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>同齊咖啡</span>
+        <span className="serif resp-nav-brand" style={{ fontSize: "1.5rem", fontWeight: 300, letterSpacing: "0.15em", color: "#2A2520" }}>同齊咖吡</span>
         <div style={{ display: "flex", alignItems: "center", gap: "1.5rem" }}>
           <a href="#stores" className="resp-nav-cta" style={{ fontSize: "0.9rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#6B4E31", textDecoration: "none" }}>門市資訊</a>
           <SiteMenu color="#2A2520" />
@@ -92,7 +92,7 @@ export default function CafePage() {
             一杯咖啡<br /><em style={{ fontStyle: "normal", color: "#8C8479" }}>千種連結</em>
           </h1>
           <p ref={addRef(2)} className="noto" style={{ ...fadeStyle, transitionDelay: "0.3s", fontSize: "0.88rem", lineHeight: 2, color: "#8C8479", maxWidth: 400, marginBottom: "3rem", fontWeight: 300 }}>
-            在同齊，咖啡是空間的媒介，連結著人與人之間的對話。我們提供自家烘焙的精品咖啡豆，並在舒適的空間中創造不限時的寧靜時刻。無論是尋求靈感的商務洽公，或是好友聚會，同齊咖啡都是你生活中最溫暖的交匯點。
+            在同齊，咖啡是空間的媒介，連結著人與人之間的對話。我們提供自家烘焙的精品咖啡豆，並在舒適的空間中創造不限時的寧靜時刻。無論是尋求靈感的商務洽公，或是好友聚會，同齊咖吡都是你生活中最溫暖的交匯點。
           </p>
           <a ref={addRef(3)} href="#stores" style={{ ...fadeStyle, transitionDelay: "0.45s", display: "inline-flex", alignItems: "center", gap: "1rem", fontSize: "0.7rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#2A2520", textDecoration: "none", borderBottom: "1px solid #2A2520", paddingBottom: "0.3rem", width: "fit-content", transition: "color 0.3s, border-color 0.3s" }}>
             查看門市資訊
@@ -154,8 +154,8 @@ export default function CafePage() {
 
       {/* FOOTER */}
       <footer className="resp-footer" style={{ background: "#1A1510", padding: "2.5rem 6rem", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "0.5px solid rgba(255,255,255,0.05)" }}>
-        <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>同齊咖啡</span>
-        <p style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 同齊咖啡・裕綸集團</p>
+        <span className="serif" style={{ fontSize: "1.1rem", fontWeight: 300, letterSpacing: "0.15em", color: "rgba(255,255,255,0.45)" }}>同齊咖吡</span>
+        <p style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.2)", textTransform: "uppercase" }}>© 2026 同齊咖吡・裕綸集團</p>
         <div style={{ display: "flex", gap: "2rem" }}>
           {[{name:"Instagram",href:"https://www.instagram.com/human_design.space/"}].map(s => (
             <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.9rem", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textDecoration: "none", textTransform: "uppercase" }}>{s.name}</a>
