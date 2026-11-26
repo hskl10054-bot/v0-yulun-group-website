@@ -35,7 +35,7 @@ export default function BookingPage() {
         <div className="mb-12 text-center">
           <span aria-hidden="true" className="mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", color: "rgba(107,78,49,0.09)", letterSpacing: "0.1em" }}>Booking</span>
           <p className="mb-4 text-[0.85rem] tracking-[0.35em] uppercase" style={{ color: "#B5956A" }}>Free Consultation</p>
-          <h1 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(2.5rem, 5vw, 3.75rem)", fontWeight: 500, letterSpacing: "0.06em", color: "#2A2520" }}>預約諮詢</h1>
+          <h1 style={{ fontFamily: "'Noto Sans TC', sans-serif", fontSize: "clamp(2.5rem, 5vw, 3.75rem)", fontWeight: 500, letterSpacing: "0.06em", color: "#2A2520" }}>預約台中室內設計與裝修免費諮詢</h1>
           <p className="mx-auto mt-6 max-w-2xl text-[1.05rem] font-light leading-loose" style={{ color: "#6B5D4F" }}>
             不用先想好所有答案，也不用先準備設計圖。留下需求與預算，
             <span className="whitespace-nowrap" style={{ color: "#B5956A" }}>空房子室內設計 × 裕綸室內裝修</span>

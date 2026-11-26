@@ -22,8 +22,8 @@ export default function WorksIndexPage() {
       <div className="wrap">
         <section className="works-head reveal">
           <div className="kicker">WORKS</div>
-          <h1 className="serif">每個空間，都有自己的故事</h1>
-          <p>從住宅到商業，看我們怎麼把使用者的生活，變成可以走進去的空間。</p>
+          <h1 className="serif">台中室內設計與裝修作品案例</h1>
+          <p>每個空間，都有自己的故事。從住宅到商業，看我們怎麼把使用者的生活，變成可以走進去的空間。</p>
         </section>
 
         <div className="filter">

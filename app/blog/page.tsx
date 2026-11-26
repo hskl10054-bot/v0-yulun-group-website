@@ -58,7 +58,7 @@ export default function BlogIndex() {
         {/* Heading */}
         <div className="mb-14 border-b pb-6" style={{ borderColor: "rgba(43,39,34,0.12)" }}>
           <span aria-hidden="true" className="-ml-0.5 mb-1 block select-none font-semibold uppercase leading-none" style={{ fontSize: "clamp(2rem, 5.5vw, 4rem)", color: "rgba(107,78,49,0.10)", letterSpacing: "0.08em" }}>Journal</span>
-          <h1 className="text-3xl font-bold tracking-[0.12em] md:text-4xl">裝修知識</h1>
+          <h1 className="text-3xl font-bold tracking-[0.12em] md:text-4xl">台中裝修知識：費用、流程與避雷攻略</h1>
           <p className="mt-4 text-[1.05rem] font-light leading-loose" style={{ color: "#6B5D4F" }}>
             台中室內設計與裝修的實用觀念、案例與避雷指南，陪你把家打造得更理想。
           </p>
