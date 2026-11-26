@@ -3,6 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getPublishedPosts, getPost, isPublished, BLOG_SEO } from "@/data/blog"
 import { SiteMenu } from "@/components/site-menu"
+import { Breadcrumb } from "@/components/breadcrumb"
 
 // 每小時重新驗證，讓排程文章到發佈日會自動可讀
 export const revalidate = 3600
@@ -86,6 +87,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       </nav>
 
       <article className="mx-auto max-w-3xl px-6 py-16 md:px-8 md:py-24">
+        <div className="mb-6">
+          <Breadcrumb items={[{ name: "首頁", href: "/" }, { name: "裝修知識", href: "/blog" }, { name: post.title }]} />
+        </div>
         {/* Header */}
         <div className="mb-10">
           <div className="mb-5 flex items-center gap-3 text-[0.8rem] tracking-[0.15em]" style={{ color: "#B5956A" }}>

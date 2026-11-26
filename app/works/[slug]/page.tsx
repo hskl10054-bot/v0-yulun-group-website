@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { KfzShell } from "@/components/kfz-shell";
+import { Breadcrumb } from "@/components/breadcrumb";
 import { TODO, WORKS_SEO } from "@/data/cases";
 import { getCaseBySlugServer } from "@/lib/works-server";
 
@@ -87,6 +88,7 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ slu
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }}
       />
       <div className="wrap">
+        <Breadcrumb items={[{ name: "首頁", href: "/" }, { name: "作品案例", href: "/works" }, { name: c.zhName }]} />
         <Link className="back" href="/works">← 回案例列表</Link>
       </div>
 

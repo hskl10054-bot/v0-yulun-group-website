@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { SiteMenu } from "@/components/site-menu"
 import { ContactInfo } from "@/components/contact-info"
+import { Breadcrumb } from "@/components/breadcrumb"
 
 const URL = "https://www.yulungroup.com/services/old-house-renovation"
 
@@ -100,6 +101,10 @@ export default function OldHouseRenovationPage() {
         <span style={{ fontSize: "clamp(1.05rem, 3.5vw, 1.5rem)", fontWeight: 300, letterSpacing: "0.15em", color: INK }}>台中老屋翻新</span>
         <SiteMenu color={INK} />
       </nav>
+
+      <div className="mx-auto max-w-5xl px-6 pt-5 md:px-12">
+        <Breadcrumb items={[{ name: "首頁", href: "/" }, { name: "台中老屋翻新" }]} />
+      </div>
 
       {/* Hero */}
       <section className="mx-auto max-w-4xl px-6 pb-4 pt-20 text-center md:px-12 md:pt-28">
