@@ -533,3 +533,19 @@ export function getPublishedPosts(): Post[] {
   const today = todayTaipei()
   return POSTS.filter((p) => p.date <= today).sort((a, b) => b.date.localeCompare(a.date))
 }
+
+// 文章 SEO 覆寫（slug → 較短的 <title> 或改寫的 meta description）；
+// 僅影響搜尋結果的標題／描述，不改動文章頁上的 H1（維持完整標題）。
+export const BLOG_SEO: Record<string, { title?: string; description?: string }> = {
+  "new-home-renovation-process": { title: "新成屋裝潢流程全攻略：從交屋到入住要多久？" },
+  "presale-house-customization": { title: "預售屋客變是什麼？流程、時間點與 5 個常見錯誤" },
+  "taichung-interior-design-cost": { title: "2026 台中室內設計費用：設計費、監工費一坪多少？" },
+  "who-needs-interior-designer": { title: "什麼人適合找室內設計師？小坪數反而更需要" },
+  "old-house-renovation-cost": { title: "2026 台中老屋翻新費用一坪多少？屋齡行情與省錢重點" },
+  "taichung-nantun-old-house-living-room": {
+    description: "台中南屯 30 年老屋翻新實錄：用花磚、木質元素與格局改造，把侷限的客廳變成寬敞的生活重心，附施工前後對照與費用重點。",
+  },
+  "pre-renovation-details": {
+    description: "裝修前最容易忽略的 3 個細節：插座位置、門的開啟方向、燈光規劃。台中設計師教你施工前怎麼檢查，避免入住後才後悔。",
+  },
+}

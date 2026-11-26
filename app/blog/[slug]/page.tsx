@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { getPublishedPosts, getPost, isPublished } from "@/data/blog"
+import { getPublishedPosts, getPost, isPublished, BLOG_SEO } from "@/data/blog"
 import { SiteMenu } from "@/components/site-menu"
 
 // 每小時重新驗證，讓排程文章到發佈日會自動可讀
@@ -17,9 +17,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = getPost(slug)
   if (!post || !isPublished(post)) return { title: "文章｜裝修知識－裕綸集團", robots: { index: false, follow: false } }
   const url = `https://www.yulungroup.com/blog/${post.slug}`
+  const metaTitle = BLOG_SEO[slug]?.title ?? post.title
+  const metaDesc = BLOG_SEO[slug]?.description ?? post.description
   return {
-    title: `${post.title}｜裕綸集團`,
-    description: post.description,
+    title: `${metaTitle}｜裕綸集團`,
+    description: metaDesc,
     keywords: post.keywords,
     alternates: { canonical: url },
     openGraph: {
@@ -27,8 +29,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       locale: "zh_TW",
       url,
       siteName: "裕綸集團 Yulun Group",
-      title: post.title,
-      description: post.description,
+      title: metaTitle,
+      description: metaDesc,
       publishedTime: post.date,
       images: [{ url: "/images/hero-bg.jpg", width: 1567, height: 1045, alt: post.title }],
     },

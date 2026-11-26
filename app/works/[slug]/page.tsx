@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { KfzShell } from "@/components/kfz-shell";
-import { TODO } from "@/data/cases";
+import { TODO, WORKS_SEO } from "@/data/cases";
 import { getCaseBySlugServer } from "@/lib/works-server";
 
 // Read fresh from the CMS on each request so backend edits show immediately.
@@ -14,9 +14,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const c = await getCaseBySlugServer(slug);
   if (!c) return { title: "案例｜台中室內設計－空房子室內設計" };
   const url = `https://www.yulungroup.com/works/${slug}`;
-  const description = `${c.tagline}。台中${c.cat}案例，由空房子室內設計 × 裕綸室內裝修打造。`;
+  const seo = WORKS_SEO[slug];
+  const description = seo?.description ?? `${c.tagline}。台中${c.cat}案例，由空房子室內設計 × 裕綸室內裝修打造。`;
   return {
-    title: `${c.zhName} ${c.enName}｜台中室內設計案例－空房子室內設計`,
+    title: seo?.title ?? `${c.zhName} ${c.enName}｜台中室內設計案例－空房子室內設計`,
     description,
     alternates: { canonical: url },
     openGraph: {
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       locale: "zh_TW",
       url,
       siteName: "裕綸集團 Yulun Group",
-      title: `${c.zhName}｜台中室內設計案例－空房子室內設計`,
+      title: seo?.title ?? `${c.zhName}｜台中室內設計案例－空房子室內設計`,
       description,
       images: c.hero ? [c.hero] : [],
     },
@@ -40,6 +41,7 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ slu
   const { slug } = await params;
   const c = await getCaseBySlugServer(slug);
   if (!c) notFound();
+  const seo = WORKS_SEO[slug];
 
   const hasGallery = c.gallery && c.gallery.length > 0;
   const [feat, ...rest] = hasGallery ? c.gallery : [null];
@@ -96,7 +98,7 @@ export default async function CaseDetailPage({ params }: { params: Promise<{ slu
         )}
         <div className="cap">
           <div className="en-name">{c.enName}</div>
-          <h1>{c.zhName}</h1>
+          <h1>{seo?.h1 ?? c.zhName}</h1>
           <div className="tag">{c.tagline}</div>
         </div>
       </section>

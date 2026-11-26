@@ -45,7 +45,11 @@ export async function getCasesServer(): Promise<CaseStudy[]> {
     const supabase = getSupabaseAdmin()
     const { data, error } = await supabase.from("cases").select("*").order("sort_order")
     if (error || !data || data.length === 0) return FALLBACK_CASES
-    return (data as DbCase[]).map(mapRow)
+    const dbCases = (data as DbCase[]).map(mapRow)
+    // 補上「程式碼裡有、但資料庫沒有」的案例，避免 sitemap／首頁連到卻 404。
+    const dbSlugs = new Set(dbCases.map((c) => slugify(c.enName)))
+    const missing = FALLBACK_CASES.filter((c) => !dbSlugs.has(slugify(c.enName)))
+    return [...dbCases, ...missing]
   } catch {
     return FALLBACK_CASES
   }

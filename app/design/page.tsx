@@ -18,6 +18,52 @@ export const metadata: Metadata = {
   },
 }
 
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.yulungroup.com/design#org",
+  name: "空房子室內設計",
+  url: "https://www.yulungroup.com/design",
+  parentOrganization: { "@id": "https://www.yulungroup.com/#localbusiness" },
+}
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://www.yulungroup.com/design#service",
+  name: "台中室內設計",
+  serviceType: "室內設計",
+  provider: { "@id": "https://www.yulungroup.com/design#org" },
+  areaServed: { "@type": "City", name: "台中市" },
+  description: "新成屋設計、預售屋客變、老屋翻新與商業空間規劃，含現場會勘、平面配置與 3D 渲染提案。",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "室內設計服務",
+    itemListElement: [
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "預售屋客變" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "新成屋室內設計" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "老屋翻新設計" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "商業空間設計" } },
+    ],
+  },
+}
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "首頁", item: "https://www.yulungroup.com/" },
+    { "@type": "ListItem", position: 2, name: "台中室內設計", item: "https://www.yulungroup.com/design" },
+  ],
+}
+
 export default function Page() {
-  return <DesignClient />
+  return (
+    <>
+      {[orgSchema, serviceSchema, breadcrumbSchema].map((s, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(s).replace(/</g, "\\u003c") }} />
+      ))}
+      <DesignClient />
+    </>
+  )
 }
