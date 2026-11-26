@@ -6,26 +6,60 @@ import { getHeroImagesServer } from "@/lib/home-server"
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": "HomeAndConstructionBusiness",
   "@id": "https://www.yulungroup.com/#localbusiness",
   name: "裕綸集團",
-  alternateName: "Yulun Group",
+  alternateName: ["Yulun Group", "空房子室內設計", "裕綸室內裝修"],
+  description:
+    "台中室內設計與裝修一站式服務，整合空房子室內設計與裕綸室內裝修，自有工班、透明報價。",
   url: "https://www.yulungroup.com/",
   logo: "https://www.yulungroup.com/icon-512.png",
   image: "https://www.yulungroup.com/images/hero-bg.jpg",
   telephone: "+886-4-2247-9068",
   email: "yulun83417215@gmail.com",
+  priceRange: "$$",
   address: {
     "@type": "PostalAddress",
     streetAddress: "瀋陽北路73號",
     addressLocality: "北屯區",
     addressRegion: "台中市",
+    postalCode: "406",
     addressCountry: "TW",
   },
-  areaServed: {
-    "@type": "City",
-    name: "台中市",
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "24.177687",
+    longitude: "120.672438",
   },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
+  areaServed: [
+    { "@type": "City", name: "台中市" },
+    { "@type": "AdministrativeArea", name: "北屯區" },
+    { "@type": "AdministrativeArea", name: "南屯區" },
+    { "@type": "AdministrativeArea", name: "西屯區" },
+    { "@type": "AdministrativeArea", name: "太平區" },
+    { "@type": "AdministrativeArea", name: "豐原區" },
+    { "@type": "AdministrativeArea", name: "沙鹿區" },
+    { "@type": "AdministrativeArea", name: "清水區" },
+    { "@type": "AdministrativeArea", name: "梧棲區" },
+  ],
+  sameAs: [
+    "https://www.facebook.com/p/%E7%A9%BA%E6%88%BF%E5%AD%90%E8%A8%AD%E8%A8%88-61564720748448/",
+    "https://www.instagram.com/human_design.space/",
+    "https://www.youtube.com/@%E5%A5%87%E5%A5%87%E5%A6%99%E5%A6%99%E5%B1%8B",
+  ],
+  subOrganization: [
+    { "@type": "Organization", "@id": "https://www.yulungroup.com/design#org", name: "空房子室內設計", url: "https://www.yulungroup.com/design" },
+    { "@type": "Organization", "@id": "https://www.yulungroup.com/construction#org", name: "裕綸室內裝修", url: "https://www.yulungroup.com/construction" },
+    { "@type": "CafeOrCoffeeShop", name: "同齊咖啡", url: "https://www.yulungroup.com/cafe" },
+  ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "室內設計與裝修服務",

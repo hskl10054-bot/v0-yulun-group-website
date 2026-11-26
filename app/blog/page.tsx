@@ -8,7 +8,7 @@ import { BlogList } from "@/components/blog-list"
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: "裝修知識｜台中室內設計與裝修部落格－裕綸集團",
+  title: "台中裝修知識｜費用、老屋翻新、客變攻略－裕綸集團",
   description:
     "裕綸集團裝修知識部落格：台中室內設計、老屋翻新、預售屋客變、裝潢避雷與收納規劃等實用文章，陪你少走冤枉路，打造理想的家。",
   alternates: { canonical: "https://www.yulungroup.com/blog" },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     locale: "zh_TW",
     url: "https://www.yulungroup.com/blog",
     siteName: "裕綸集團 Yulun Group",
-    title: "裝修知識｜台中室內設計與裝修部落格－裕綸集團",
+    title: "台中裝修知識｜費用、老屋翻新、客變攻略－裕綸集團",
     description: "台中室內設計、老屋翻新、裝潢避雷與收納規劃等實用文章。",
     images: [{ url: "/images/hero-bg.jpg", width: 1567, height: 1045, alt: "裕綸集團 裝修知識" }],
   },
